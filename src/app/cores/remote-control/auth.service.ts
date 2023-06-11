@@ -9,13 +9,49 @@ type Credentials = {
   providedIn: 'root',
 })
 export class AuthService {
-  credentials: Credentials | null = null;
+  private remoteAddress: string | null = null;
+  private authentication: string | null = null;
 
-  setCredentials(credentials: Credentials) {
-    this.credentials = credentials;
+  constructor() {
+    const remoteAddress = localStorage.getItem('remoteAddress');
+    if (remoteAddress) {
+      this.remoteAddress = remoteAddress;
+    }
+
+    const authentication = localStorage.getItem('authentication');
+    if (authentication) {
+      this.authentication = authentication;
+    }
   }
 
-  getCredentials(): Credentials | null {
-    return this.credentials;
+  setRemoteAddress(remoteAddress: string, save = false) {
+    this.remoteAddress = remoteAddress;
+    if (save) {
+      localStorage.setItem('remoteAddress', this.remoteAddress);
+    }
+  }
+
+  getRemoteAddress() {
+    return this.remoteAddress;
+  }
+
+  setCredentials(credentials: Credentials, save = false) {
+    this.authentication = btoa(
+      `${credentials.username}:${credentials.password}`
+    );
+    if (save) {
+      localStorage.setItem('authentication', this.authentication);
+    }
+  }
+
+  getBasicAuthorization(): string | null {
+    return this.authentication;
+  }
+
+  clear() {
+    this.remoteAddress = null;
+    this.authentication = null;
+    localStorage.removeItem('remoteAddress');
+    localStorage.removeItem('authentication');
   }
 }
