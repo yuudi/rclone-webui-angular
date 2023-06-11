@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "johnpapa.angular2",
+        "angular.ng-template",
+        "streetsidesoftware.code-spell-checker",
+        "esbenp.prettier-vscode"
+    ]
+}

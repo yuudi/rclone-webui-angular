@@ -1,0 +1,15 @@
+{
+	"name": "rclone-webui-angular",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"johnpapa.Angular2",
+				"Angular.ng-template",
+				"streetsidesoftware.code-spell-checker",
+				"esbenp.prettier-vscode"
+			]
+		}
+	}
+}
