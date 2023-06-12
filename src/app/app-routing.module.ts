@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './cores/not-found/not-found.component';
-import { DashboardModule } from './features/dashboard/dashboard.module';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', loadChildren: () => DashboardModule },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
   {
     path: '**',
     component: NotFoundComponent,
