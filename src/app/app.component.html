@@ -1,25 +1,26 @@
 <div class="app__container">
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <h1>Rclone WebUI</h1>
-  <span class="spacer"></span>
-  <button mat-icon-button>
-    <mat-icon>translate</mat-icon>
-  </button>
-</mat-toolbar>
+  <mat-toolbar color="primary">
+    <button mat-icon-button matTooltip="Menu" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Rclone WebUI</h1>
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Select Language">
+      <mat-icon>translate</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Connections">
+      <mat-icon>settings_remote</mat-icon>
+    </button>
+  </mat-toolbar>
 
-<mat-sidenav-container class="sidenav__container">
-  <mat-sidenav #sidenav>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <mat-sidenav-container class="sidenav__container">
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a mat-list-item routerLink="dashboard" i18n>Dashboard</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

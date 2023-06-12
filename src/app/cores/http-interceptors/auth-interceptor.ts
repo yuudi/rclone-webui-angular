@@ -5,14 +5,14 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 
-import { AuthService } from 'src/app/cores/remote-control/auth.service';
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService) {}
+  constructor(private connectionService: ConnectionService) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler) {
-    const remoteAddress = this.auth.getRemoteAddress();
+    const remoteAddress = this.connectionService.getRemoteAddress();
     // If remote address is not set, don't modify this request
     if (!remoteAddress) {
       return next.handle(req);
@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const authentication = this.auth.getBasicAuthorization();
+    const authentication = this.connectionService.getBasicAuthorization();
     if (authentication === null) {
       return next.handle(req);
     }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { AuthService } from './auth.service';
+import { ConnectionService } from './connection.service';
 
 type ErrorResponse = {
   error: string;
@@ -14,8 +14,11 @@ type ErrorResponse = {
   providedIn: 'root',
 })
 export class RemoteControlService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: ConnectionService) {}
 
+  /**
+   * call remote rclone instance, see: https://rclone.org/rc/
+   */
   call<T, R>(operation: string, params: T): Observable<R> {
     const remoteAddress = this.auth.getRemoteAddress();
 
@@ -23,11 +26,11 @@ export class RemoteControlService {
       throw new Error('Remote address is not set');
     }
     return this.http
-      .post<R>(remoteAddress + operation, params)
+      .post<R>(remoteAddress + '/' + operation, params)
       .pipe(catchError(this.handleError));
   }
 
-  handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred
       console.error('An error occurred:', error.error);
