@@ -1,6 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
+
 import { ConnectionService } from './connection.service';
 
 type ErrorResponse = {
@@ -28,6 +33,47 @@ export class RemoteControlService {
     return this.http
       .post<R>(remoteAddress + '/' + operation, params)
       .pipe(catchError(this.handleError));
+  }
+
+  testConnection(
+    connection?: {
+      remoteAddress: string;
+      credential: {
+        username: string;
+        password: string;
+      } | null;
+    },
+    testAuth = false
+  ): Observable<boolean> {
+    const remoteAddress = connection
+      ? connection.remoteAddress
+      : this.auth.getRemoteAddress();
+    if (!remoteAddress) {
+      return of(false);
+    }
+
+    const authentication = connection
+      ? connection.credential
+        ? btoa(
+            connection.credential.username +
+              ':' +
+              connection.credential.password
+          )
+        : null
+      : this.auth.getBasicAuthorization();
+
+    return this.http
+      .post(
+        remoteAddress + (testAuth ? '/rc/noopauth' : '/rc/noop'),
+        undefined,
+        {
+          headers: authentication
+            ? { Authorization: `Basic ${authentication}` }
+            : undefined,
+          observe: 'response',
+        }
+      )
+      .pipe(map((response) => response.status === 200));
   }
 
   private handleError(error: HttpErrorResponse) {

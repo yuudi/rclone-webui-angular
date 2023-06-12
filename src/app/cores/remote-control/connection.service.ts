@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 
-// interface Credentials {
-//   username: string;
-//   password: string;
-// }
+interface Credentials {
+  username: string;
+  password: string;
+}
 
 interface Connection {
   displayName: string;
   remoteAddress: string;
-  authentication?: string;
+  /** null means no authentication, undefined means not saved */
+  authentication?: string | null;
 }
 
 interface ConnectionWithAuthentication extends Connection {
-  authentication: string;
+  authentication: string | null;
 }
 
 @Injectable({
@@ -28,19 +29,25 @@ export class ConnectionService {
   addConnection(
     displayName: string,
     remoteAddress: string,
-    username: string,
-    password: string,
+    credentials: Credentials | null,
     saveAuthentication = false
   ) {
-    const authentication = btoa(`${username}:${password}`);
-    const connection: ConnectionWithAuthentication = {
+    if (this.checkNameExists(displayName)) {
+      throw new Error('Name already exists');
+    }
+
+    const authentication = credentials
+      ? btoa(`${credentials.username}:${credentials.password}`)
+      : null;
+
+    this.activeConnection = {
       displayName,
       remoteAddress,
       authentication,
     };
 
-    this.connections.push(connection);
     if (saveAuthentication) {
+      this.connections.push(this.activeConnection);
       localStorage.setItem(
         'rwa_authentication',
         JSON.stringify(this.connections)
@@ -73,6 +80,12 @@ export class ConnectionService {
 
   getBasicAuthorization(): string | null {
     return this.activeConnection?.authentication ?? null;
+  }
+
+  checkNameExists(name: string): boolean {
+    return this.connections.some(
+      (connection) => connection.displayName === name
+    );
   }
 
   clear() {

@@ -1,0 +1,36 @@
+<form [formGroup]="connectionForm" class="connection__container">
+  <mat-form-field class="connection__field">
+    <mat-label i18n>Remote Address</mat-label>
+    <input matInput formControlName="remoteAddress" />
+    <mat-error *ngIf="!connectionForm.controls.remoteAddress.valid">
+      Please enter a valid address
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="connection__field">
+    <mat-label i18n>Username</mat-label>
+    <input matInput formControlName="username" />
+  </mat-form-field>
+  <mat-form-field class="connection__field">
+    <mat-label i18n>Password</mat-label>
+    <input matInput formControlName="password" />
+  </mat-form-field>
+  <mat-checkbox i18n class="connection__field">Remember Password</mat-checkbox>
+
+  <button
+    mat-raised-button
+    (click)="testConnectionClicked()"
+    i18n
+    class="connection__button"
+  >
+    Test Connection
+  </button>
+  <button
+    mat-raised-button
+    (click)="addConnection()"
+    color="primary"
+    i18n
+    class="connection__button"
+  >
+    Connect
+  </button>
+</form>
