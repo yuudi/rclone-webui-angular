@@ -23,6 +23,20 @@ export class ConnectionService {
   private connections: Connection[] = [];
   private activeConnection: ConnectionWithAuthentication | null = null;
 
+  constructor() {
+    const connections = localStorage.getItem('rwa_authentication');
+    if (connections) {
+      this.connections = JSON.parse(connections);
+      if (this.connections.length === 1) {
+        this.activeConnection = this
+          .connections[0] as ConnectionWithAuthentication;
+        //TODO: if the only connection has no authentication, navigate to authentication page
+      }
+
+      //TODO: if there is more than one connection, navigate to connection selection page
+    }
+  }
+
   /**
    * @param remoteAddress address for remote rclone instance, without trailing slash
    */

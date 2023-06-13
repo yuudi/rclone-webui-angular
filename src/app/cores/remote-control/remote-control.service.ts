@@ -1,8 +1,4 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
@@ -24,7 +20,7 @@ export class RemoteControlService {
   /**
    * call remote rclone instance, see: https://rclone.org/rc/
    */
-  call<T, R>(operation: string, params: T): Observable<R> {
+  call<R>(operation: string, params?: unknown): Observable<R> {
     const remoteAddress = this.auth.getRemoteAddress();
 
     if (!remoteAddress) {

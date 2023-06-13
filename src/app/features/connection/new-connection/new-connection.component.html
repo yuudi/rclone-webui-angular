@@ -12,9 +12,11 @@
   </mat-form-field>
   <mat-form-field class="connection__field">
     <mat-label i18n>Password</mat-label>
-    <input matInput formControlName="password" />
+    <input type="password" matInput formControlName="password" />
   </mat-form-field>
-  <mat-checkbox i18n class="connection__field">Remember Password</mat-checkbox>
+  <mat-checkbox i18n class="connection__field" formControlName="remember">
+    Remember Password
+  </mat-checkbox>
 
   <button
     mat-raised-button

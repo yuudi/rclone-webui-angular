@@ -1,0 +1,49 @@
+<mat-card>
+  <mat-card-title> {{ backendName }} </mat-card-title>
+  <mat-card-subtitle> {{ backend.type }} </mat-card-subtitle>
+  <mat-card-content class="backend-info__content">
+    <mat-progress-spinner
+      color="accent"
+      mode="determinate"
+      [value]="usage ? (1 - usage.free / usage.total) * 100 : 0"
+    >
+    </mat-progress-spinner>
+    <ng-container *ngIf="usage">
+      <p class="backend-info__description">
+        <span>
+          <ng-container i18n="Already Used Space">Used</ng-container>:
+          {{ usage.used | bytes }}
+          <br />
+        </span>
+        <span *ngIf="usage.trashed">
+          <ng-container i18n="Space used by trash">Trashed</ng-container>:
+          {{ usage.trashed | bytes }}
+          <br />
+        </span>
+        <span *ngIf="usage.other">
+          <ng-container i18n="Space used by other">Other</ng-container>:
+          {{ usage.other | bytes }}
+          <br />
+        </span>
+        <span>
+          <ng-container i18n="Available Space">Free</ng-container>:
+          {{ usage.free | bytes }}
+        </span>
+      </p>
+    </ng-container>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>
+      Browse <mat-icon fontIcon="folder_open"> </mat-icon>
+    </button>
+    <button mat-button [matMenuTriggerFor]="actions">
+      Actions
+      <mat-icon fontIcon="expand_more"></mat-icon>
+    </button>
+    <mat-menu #actions="matMenu">
+      <button mat-menu-item>Mount</button>
+      <button mat-menu-item>Serve</button>
+      <button mat-menu-item color="danger">Delete</button>
+    </mat-menu>
+  </mat-card-actions>
+</mat-card>

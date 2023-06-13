@@ -1,0 +1,12 @@
+.backends__container {
+  margin: 3em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.backends__item {
+  width: 18em;
+  display: inline-block;
+  margin: 2em;
+}

@@ -54,17 +54,17 @@ export class NewConnectionComponent {
     this.testConnection().subscribe({
       next: (success) => {
         if (success) {
-          this.snackBar.open('Connection successful', 'OK', {
+          this.snackBar.open($localize`Connection successful`, 'OK', {
             duration: 3000,
           });
         } else {
-          this.snackBar.open('Connection failed', 'OK', {
+          this.snackBar.open($localize`Connection failed`, 'OK', {
             duration: 3000,
           });
         }
       },
       error: () => {
-        this.snackBar.open('Connection failed', 'OK', {
+        this.snackBar.open($localize`Connection failed`, 'OK', {
           duration: 3000,
         });
       },
@@ -96,7 +96,7 @@ export class NewConnectionComponent {
         this.addConnection();
         this.router.navigate(['/dashboard']);
       } else {
-        this.snackBar.open('Connection failed', 'OK', {
+        this.snackBar.open($localize`Connection failed`, 'OK', {
           duration: 3000,
         });
       }

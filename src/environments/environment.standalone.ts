@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  pwa: false,
+  pwa: true,
   apiUrl: '/',
 };

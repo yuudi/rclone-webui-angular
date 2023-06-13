@@ -1,0 +1,9 @@
+<div *ngIf="backendList" class="backends__container">
+  <app-backend-info
+    *ngFor="let backend of backendList"
+    class="backends__item"
+    [backendName]="backend.id"
+    [backend]="backend.config"
+    [usage]="backend.usage"
+  ></app-backend-info>
+</div>
