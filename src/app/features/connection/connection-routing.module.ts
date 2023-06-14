@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ConnectionComponent } from './connection.component';
-import { NewConnectionComponent } from './new-connection/new-connection.component';
+import { ConnectionEditorComponent } from './connection-editor/connection-editor.component';
 
 const routes: Routes = [
   {
@@ -12,7 +12,11 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: NewConnectionComponent,
+    component: ConnectionEditorComponent,
+  },
+  {
+    path: 'edit/:id',
+    component: ConnectionEditorComponent,
   },
 ];
 

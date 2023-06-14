@@ -12,10 +12,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ConnectionRoutingModule } from './connection-routing.module';
 import { ConnectionComponent } from './connection.component';
-import { NewConnectionComponent } from './new-connection/new-connection.component';
+import { ConnectionEditorComponent } from './connection-editor/connection-editor.component';
 
 @NgModule({
-  declarations: [NewConnectionComponent, ConnectionComponent],
+  declarations: [ConnectionEditorComponent, ConnectionComponent],
   imports: [
     CommonModule,
     ConnectionRoutingModule,
@@ -29,6 +29,6 @@ import { NewConnectionComponent } from './new-connection/new-connection.componen
     MatListModule,
     MatDividerModule,
   ],
-  exports: [NewConnectionComponent],
+  exports: [ConnectionEditorComponent],
 })
 export class ConnectionModule {}

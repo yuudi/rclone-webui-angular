@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import {
   Connection,
   ConnectionService,
-  ConnectionWithAuthentication,
 } from 'src/app/cores/remote-control/connection.service';
 
 @Component({
@@ -15,7 +16,11 @@ import {
 export class ConnectionComponent implements OnInit {
   connections$?: Observable<Connection[]>;
 
-  constructor(private connectionService: ConnectionService) {}
+  constructor(
+    private route: Router,
+    private connectionService: ConnectionService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.connections$ = this.connectionService.getConnections();
@@ -23,15 +28,14 @@ export class ConnectionComponent implements OnInit {
 
   onConnectionClicked(connection: Connection) {
     if (connection.authentication === undefined) {
-      connection.authentication = this.promptForAuthentication();
+      this.route.navigate(['connection', 'edit', connection.id]);
+      return;
     }
-    // the type of connection is now ConnectionWithAuthentication
-    this.connectionService.activateConnection(
-      connection as ConnectionWithAuthentication
-    );
-  }
-
-  private promptForAuthentication(): string | null {
-    return null;
+    const result = this.connectionService.activateConnection(connection.id);
+    if (result.ok) {
+      this.route.navigate(['']);
+      return;
+    }
+    this.snackBar.open(result.error, 'Dismiss');
   }
 }

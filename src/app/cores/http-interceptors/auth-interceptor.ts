@@ -12,11 +12,13 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private connectionService: ConnectionService) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler) {
-    const remoteAddress = this.connectionService.getRemoteAddress();
+    const connection = this.connectionService.getActiveConnection();
     // If remote address is not set, don't modify this request
-    if (!remoteAddress) {
+    if (!connection) {
       return next.handle(req);
     }
+
+    const { remoteAddress, authentication } = connection;
 
     // If this request is not going to our API, don't modify it
     if (!req.url.startsWith(remoteAddress)) {
@@ -28,7 +30,6 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const authentication = this.connectionService.getBasicAuthorization();
     if (authentication === null) {
       return next.handle(req);
     }

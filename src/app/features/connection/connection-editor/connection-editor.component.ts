@@ -1,25 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of, tap } from 'rxjs';
 
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { Err, Result } from 'src/app/shared/result';
 
 @Component({
-  selector: 'app-new-connection',
-  templateUrl: './new-connection.component.html',
-  styleUrls: ['./new-connection.component.scss'],
+  selector: 'app-connection-editor',
+  templateUrl: './connection-editor.component.html',
+  styleUrls: ['./connection-editor.component.scss'],
 })
-export class NewConnectionComponent {
+export class ConnectionEditorComponent implements OnInit {
+  connectionId: string | null = null;
   connectionForm = this.fb.nonNullable.group({
     displayName: [
       'New Connection',
       [Validators.required, this.uniqueNameValidator()],
     ],
     remoteAddress: [
-      NewConnectionComponent.getCurrentHost(),
+      ConnectionEditorComponent.getCurrentHost(),
       [Validators.required, Validators.pattern(/^(http|https):\/\//)],
     ],
     username: [''],
@@ -35,11 +37,18 @@ export class NewConnectionComponent {
 
   constructor(
     private fb: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private connectionService: ConnectionService,
     private rc: RemoteControlService
   ) {}
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.connectionId = params['id'] ?? null;
+    });
+  }
 
   uniqueNameValidator(): ValidatorFn {
     return (control) => {
@@ -90,10 +99,15 @@ export class NewConnectionComponent {
     );
   }
 
-  addConnectionClicked() {
+  connectButtonClicked() {
     this.testConnection().subscribe((success) => {
       if (success) {
-        const result = this.addConnection();
+        let result: Result<null, string>;
+        if (this.connectionId) {
+          result = this.updateConnection();
+        } else {
+          result = this.addConnection();
+        }
         if (result.ok) {
           this.router.navigate(['/dashboard']);
         } else {
@@ -120,10 +134,27 @@ export class NewConnectionComponent {
     const credential = username === '' ? null : { username, password };
 
     return this.connectionService.addConnection(
-      displayName,
-      remoteAddress,
+      { displayName, remoteAddress },
       credential,
       remember
+    );
+  }
+
+  updateConnection() {
+    const { displayName, remoteAddress, username, password, remember } =
+      this.connectionForm.getRawValue();
+
+    const id = this.connectionId;
+    if (!id) {
+      return new Err('Connection ID is null');
+    }
+
+    const credential = username === '' ? null : { username, password };
+
+    return this.connectionService.updateConnection(
+      id,
+      { displayName, remoteAddress },
+      remember ? credential : undefined
     );
   }
 }

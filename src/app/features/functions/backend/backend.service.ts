@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { Backend, BackendUsage } from './backend.model';
 
@@ -6,7 +9,9 @@ import { Backend, BackendUsage } from './backend.model';
   providedIn: 'root',
 })
 export class BackendService {
-  constructor(private rc: RemoteControlService) {}
+  constructor(
+    private rc: RemoteControlService
+  ) {}
 
   listBackends() {
     return this.rc.call<string[]>('config/listremotes');
@@ -17,7 +22,7 @@ export class BackendService {
   }
 
   getBackendById(id: string) {
-    return this.rc.call<Backend>('config/get', id);
+    return this.rc.call<Backend>('config/get', { name: id });
   }
 
   getBackendUsage(id: string) {

@@ -20,14 +20,17 @@ export class RemoteControlService {
   /**
    * call remote rclone instance, see: https://rclone.org/rc/
    */
-  call<R>(operation: string, params?: unknown): Observable<R> {
-    const remoteAddress = this.auth.getRemoteAddress();
+  call<R>(
+    operation: string,
+    params?: { [key: string]: string | number }
+  ): Observable<R> {
+    const remote = this.auth.getActiveConnection();
 
-    if (!remoteAddress) {
-      throw new Error('Remote address is not set');
+    if (!remote) {
+      return throwError(() => 'Remote address is not set');
     }
     return this.http
-      .post<R>(remoteAddress + '/' + operation, params)
+      .post<R>(remote.remoteAddress + '/' + operation, params)
       .pipe(catchError(this.handleError));
   }
 
@@ -41,22 +44,24 @@ export class RemoteControlService {
     },
     testAuth = false
   ): Observable<boolean> {
-    const remoteAddress = connection
-      ? connection.remoteAddress
-      : this.auth.getRemoteAddress();
-    if (!remoteAddress) {
-      return of(false);
-    }
-
-    const authentication = connection
-      ? connection.credential
+    let remoteAddress: string, authentication: string | null;
+    if (connection) {
+      remoteAddress = connection.remoteAddress;
+      authentication = connection.credential
         ? btoa(
             connection.credential.username +
               ':' +
               connection.credential.password
           )
-        : null
-      : this.auth.getBasicAuthorization();
+        : null;
+    } else {
+      const remote = this.auth.getActiveConnection();
+      if (!remote) {
+        return of(false);
+      }
+      remoteAddress = remote.remoteAddress;
+      authentication = remote.authentication;
+    }
 
     return this.http
       .post(

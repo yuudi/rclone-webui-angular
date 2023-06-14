@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import { v4 as uuid } from 'uuid';
 
 import { Err, Ok } from 'src/app/shared/result';
 
@@ -9,6 +11,7 @@ interface Credentials {
 }
 
 export interface Connection {
+  id: string;
   displayName: string;
   remoteAddress: string;
   /** null means no authentication, undefined means not saved */
@@ -51,59 +54,112 @@ export class ConnectionService {
    * @param remoteAddress address for remote rclone instance, without trailing slash
    */
   addConnection(
-    displayName: string,
-    remoteAddress: string,
+    connection: Omit<Connection, 'id' | 'authentication'>,
     credentials: Credentials | null,
     saveAuthentication = false
   ) {
+    const { displayName, remoteAddress } = connection;
+
     if (this.checkNameExists(displayName)) {
       return new Err($localize`Name already exists`);
     }
 
     const authentication = credentials
-      ? btoa(`${credentials.username}:${credentials.password}`)
+      ? btoa(credentials.username + ':' + credentials.password)
       : null;
 
     this.activeConnection = {
+      id: uuid(),
       displayName,
       remoteAddress,
       authentication,
     };
 
+    let savedConnection: Connection;
     if (saveAuthentication) {
-      const connections = this.connections$.getValue();
-      connections.push(this.activeConnection);
-      this.connections$.next(connections);
-      localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+      savedConnection = this.activeConnection;
+    } else {
+      savedConnection = {
+        ...this.activeConnection,
+        authentication: undefined,
+      };
+    }
+    const connections = this.connections$.getValue();
+    connections.push(savedConnection);
+    this.connections$.next(connections);
+    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+
+    return new Ok(null);
+  }
+
+  getConnection(id: string) {
+    return this.connections$.getValue().find((c) => c.id === id) ?? null;
+  }
+
+  updateConnection(
+    id: string,
+    connection: Partial<Omit<Connection, 'id' | 'authentication'>>,
+    credentials?: Credentials | null
+  ) {
+    const connections = this.connections$.getValue();
+    const index = connections.findIndex((c) => c.id === id);
+    if (index === -1) {
+      return new Err($localize`Connection not found`);
+    }
+
+    const updatedConnection = {
+      ...connections[index],
+      ...connection,
+    };
+
+    if (credentials) {
+      updatedConnection.authentication = btoa(
+        credentials.username + ':' + credentials.password
+      );
+    }
+
+    this.activeConnection = updatedConnection as ConnectionWithAuthentication; //TODO: prompt for authentication if not saved
+
+    connections[index] = updatedConnection;
+    this.connections$.next(connections);
+    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+
+    return new Ok(null);
+  }
+
+  activateConnection(id: string) {
+    const connection = this.connections$.getValue().find((c) => c.id === id);
+    if (!connection) {
+      return new Err($localize`Connection not found`);
+    }
+
+    if (connection.authentication === undefined) {
+      return new Err($localize`Connection has no authentication`);
     }
 
     return new Ok(null);
   }
 
-  activateConnection(connection: ConnectionWithAuthentication) {
-    this.activeConnection = connection;
-  }
-
-  deleteConnection(connection: Connection) {
+  deleteConnection(id: string) {
     const connections = this.connections$.getValue();
-    const index = connections.indexOf(connection);
-    if (index > -1) {
-      connections.splice(index, 1);
+    const index = connections.findIndex((c) => c.id === id);
+    if (index === -1) {
+      return new Err($localize`Connection not found`);
     }
+
+    connections.splice(index, 1);
     this.connections$.next(connections);
     localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+
+    return new Ok(null);
   }
 
-  getConnections() {
-    return this.connections$.asObservable();
+  getConnections(): Observable<Connection[]> {
+    return this.connections$;
   }
 
-  getRemoteAddress() {
-    return this.activeConnection?.remoteAddress ?? null;
-  }
-
-  getBasicAuthorization(): string | null {
-    return this.activeConnection?.authentication ?? null;
+  getActiveConnection() {
+    return this.activeConnection;
   }
 
   checkNameExists(name: string): boolean {
