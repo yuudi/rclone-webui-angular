@@ -93,8 +93,18 @@ export class NewConnectionComponent {
   addConnectionClicked() {
     this.testConnection().subscribe((success) => {
       if (success) {
-        this.addConnection();
-        this.router.navigate(['/dashboard']);
+        const result = this.addConnection();
+        if (result.ok) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.snackBar.open(
+            $localize`Connection failed:` + result.error,
+            'OK',
+            {
+              duration: 3000,
+            }
+          );
+        }
       } else {
         this.snackBar.open($localize`Connection failed`, 'OK', {
           duration: 3000,
@@ -109,7 +119,7 @@ export class NewConnectionComponent {
 
     const credential = username === '' ? null : { username, password };
 
-    this.connectionService.addConnection(
+    return this.connectionService.addConnection(
       displayName,
       remoteAddress,
       credential,

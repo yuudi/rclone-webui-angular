@@ -33,17 +33,17 @@
     </ng-container>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>
+    <button mat-button i18n>
       Browse <mat-icon fontIcon="folder_open"> </mat-icon>
     </button>
-    <button mat-button [matMenuTriggerFor]="actions">
+    <button mat-button [matMenuTriggerFor]="actions" i18n>
       Actions
       <mat-icon fontIcon="expand_more"></mat-icon>
     </button>
     <mat-menu #actions="matMenu">
-      <button mat-menu-item>Mount</button>
-      <button mat-menu-item>Serve</button>
-      <button mat-menu-item color="danger">Delete</button>
+      <button i18n mat-menu-item>Mount</button>
+      <button i18n mat-menu-item>Serve</button>
+      <button i18n mat-menu-item color="danger">Delete</button>
     </mat-menu>
   </mat-card-actions>
 </mat-card>

@@ -6,7 +6,7 @@ import { FunctionsComponent } from './functions.component';
 const routes: Routes = [
   { path: '', component: FunctionsComponent, pathMatch: 'full' },
   {
-    path: 'backend',
+    path: 'drive',
     loadChildren: () =>
       import('./backend/backend.module').then((m) => m.BackendModule),
   },

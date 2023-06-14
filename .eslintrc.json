@@ -15,6 +15,12 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "sort-imports": [
+          "off",
+          {
+            "allowSeparatedGroups": true
+          }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -41,7 +47,15 @@
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility"
       ],
-      "rules": {}
+      "rules": {
+        "@angular-eslint/template/i18n": [
+          "warn",
+          {
+            "checkId": false,
+            "checkAttributes": false
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,15 +1,15 @@
 <div class="app__container">
   <mat-toolbar color="primary">
     <button mat-icon-button matTooltip="Menu" (click)="sidenav.toggle()">
-      <mat-icon>menu</mat-icon>
+      <mat-icon fontIcon="menu"></mat-icon>
     </button>
-    <h1>Rclone WebUI</h1>
+    <h1 i18n>Rclone WebUI</h1>
     <span class="spacer"></span>
     <button mat-icon-button matTooltip="Select Language">
-      <mat-icon>translate</mat-icon>
+      <mat-icon fontIcon="translate"></mat-icon>
     </button>
     <button mat-icon-button matTooltip="Connections">
-      <mat-icon>settings_remote</mat-icon>
+      <mat-icon fontIcon="settings_remote"></mat-icon>
     </button>
   </mat-toolbar>
 
@@ -19,7 +19,12 @@
         <a mat-list-item routerLink="/dashboard" i18n>Dashboard</a>
         <a mat-list-item routerLink="/connection" i18n>Connection</a>
         <a mat-list-item routerLink="/rclone" i18n>Functions</a>
-        <a mat-list-item routerLink="/rclone/backend" i18n>Backends</a>
+        <a
+          mat-list-item
+          routerLink="/rclone/drive"
+          i18n="Cloud or physical drive"
+          >Drives</a
+        >
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

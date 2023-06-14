@@ -2,7 +2,7 @@
   <mat-form-field class="connection__field">
     <mat-label i18n>Remote Address</mat-label>
     <input matInput formControlName="remoteAddress" />
-    <mat-error *ngIf="!connectionForm.controls.remoteAddress.valid">
+    <mat-error i18n *ngIf="!connectionForm.controls.remoteAddress.valid">
       Please enter a valid address
     </mat-error>
   </mat-form-field>
@@ -28,7 +28,7 @@
   </button>
   <button
     mat-raised-button
-    (click)="addConnection()"
+    (click)="addConnectionClicked()"
     color="primary"
     i18n
     class="connection__button"

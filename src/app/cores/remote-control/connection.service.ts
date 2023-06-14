@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+import { Err, Ok } from 'src/app/shared/result';
 
 interface Credentials {
   username: string;
   password: string;
 }
 
-interface Connection {
+export interface Connection {
   displayName: string;
   remoteAddress: string;
   /** null means no authentication, undefined means not saved */
   authentication?: string | null;
 }
 
-interface ConnectionWithAuthentication extends Connection {
+export interface ConnectionWithAuthentication extends Connection {
   authentication: string | null;
 }
 
@@ -20,17 +23,24 @@ interface ConnectionWithAuthentication extends Connection {
   providedIn: 'root',
 })
 export class ConnectionService {
-  private connections: Connection[] = [];
+  private connections$ = new BehaviorSubject<Connection[]>([]);
   private activeConnection: ConnectionWithAuthentication | null = null;
 
   constructor() {
-    const connections = localStorage.getItem('rwa_authentication');
-    if (connections) {
-      this.connections = JSON.parse(connections);
-      if (this.connections.length === 1) {
-        this.activeConnection = this
-          .connections[0] as ConnectionWithAuthentication;
-        //TODO: if the only connection has no authentication, navigate to authentication page
+    const connectionsJson = localStorage.getItem('rwa_authentication');
+    if (connectionsJson) {
+      const connections: Connection[] = JSON.parse(connectionsJson);
+      this.connections$.next(connections);
+      if (connections.length === 1) {
+        const onlyConnection = connections[0];
+
+        if (onlyConnection.authentication === undefined) {
+          //TODO: if the only connection has no authentication, navigate to authentication page
+          //navigate()
+          return;
+        }
+
+        this.activeConnection = onlyConnection as ConnectionWithAuthentication;
       }
 
       //TODO: if there is more than one connection, navigate to connection selection page
@@ -47,7 +57,7 @@ export class ConnectionService {
     saveAuthentication = false
   ) {
     if (this.checkNameExists(displayName)) {
-      throw new Error('Name already exists');
+      return new Err($localize`Name already exists`);
     }
 
     const authentication = credentials
@@ -61,12 +71,13 @@ export class ConnectionService {
     };
 
     if (saveAuthentication) {
-      this.connections.push(this.activeConnection);
-      localStorage.setItem(
-        'rwa_authentication',
-        JSON.stringify(this.connections)
-      );
+      const connections = this.connections$.getValue();
+      connections.push(this.activeConnection);
+      this.connections$.next(connections);
+      localStorage.setItem('rwa_authentication', JSON.stringify(connections));
     }
+
+    return new Ok(null);
   }
 
   activateConnection(connection: ConnectionWithAuthentication) {
@@ -74,18 +85,17 @@ export class ConnectionService {
   }
 
   deleteConnection(connection: Connection) {
-    const index = this.connections.indexOf(connection);
+    const connections = this.connections$.getValue();
+    const index = connections.indexOf(connection);
     if (index > -1) {
-      this.connections.splice(index, 1);
+      connections.splice(index, 1);
     }
-    localStorage.setItem(
-      'rwa_authentication',
-      JSON.stringify(this.connections)
-    );
+    this.connections$.next(connections);
+    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
   }
 
-  getConnections(): Connection[] {
-    return this.connections;
+  getConnections() {
+    return this.connections$.asObservable();
   }
 
   getRemoteAddress() {
@@ -97,13 +107,14 @@ export class ConnectionService {
   }
 
   checkNameExists(name: string): boolean {
-    return this.connections.some(
-      (connection) => connection.displayName === name
-    );
+    return this.connections$
+      .getValue()
+      .some((connection) => connection.displayName === name);
   }
 
   clear() {
-    this.connections = [];
+    this.connections$.next([]);
+    this.activeConnection = null;
     localStorage.removeItem('rwa_authentication');
   }
 }

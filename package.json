@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint:prettier": "prettier ./src --write",
-    "lint": "ng lint --fix"
+    "lint:eslint": "ng lint --fix",
+    "lint": "npm run lint:prettier && npm run lint:eslint"
   },
   "private": true,
   "dependencies": {
