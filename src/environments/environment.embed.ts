@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  embed: false,
-  pwa: true,
+  embed: true,
+  pwa: false,
   apiUrl: '/',
 };

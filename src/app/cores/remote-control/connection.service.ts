@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 import { Err, Ok } from 'src/app/shared/result';
+import { environment } from 'src/environments/environment';
 
 interface Credentials {
   username: string;
@@ -36,23 +37,21 @@ export class ConnectionService {
   constructor() {
     const connectionsJson = localStorage.getItem('rwa_authentication');
     if (!connectionsJson) {
+      //first time user
+      if (environment.embed) {
+        this.connections$.next([
+          {
+            id: uuid(),
+            displayName: 'This PC',
+            remoteAddress: window.location.origin,
+            authentication: NotSaved,
+          },
+        ]);
+      }
       return;
     }
     const connections: Connection[] = JSON.parse(connectionsJson);
     this.connections$.next(connections);
-    if (connections.length === 1) {
-      const onlyConnection = connections[0];
-
-      if (onlyConnection.authentication === undefined) {
-        //TODO: if the only connection has no authentication, navigate to authentication page
-        //navigate()
-        return;
-      }
-
-      this.activeConnection = onlyConnection as ConnectionWithAuthentication;
-    }
-
-    //TODO: if there is more than one connection, navigate to connection selection page
   }
 
   saveConnection(
