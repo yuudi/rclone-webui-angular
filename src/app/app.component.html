@@ -1,14 +1,19 @@
 <div class="app__container">
   <mat-toolbar color="primary">
-    <button mat-icon-button matTooltip="Menu" (click)="sidenav.toggle()">
+    <button
+      mat-icon-button
+      i18n-matTooltip
+      matTooltip="Menu"
+      (click)="sidenav.toggle()"
+    >
       <mat-icon fontIcon="menu"></mat-icon>
     </button>
     <h1 i18n>Rclone WebUI</h1>
     <span class="spacer"></span>
-    <button mat-icon-button matTooltip="Select Language">
+    <button mat-icon-button i18n-matTooltip matTooltip="Select Language">
       <mat-icon fontIcon="translate"></mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Connections">
+    <button mat-icon-button i18n-matTooltip matTooltip="Connections">
       <mat-icon fontIcon="settings_remote"></mat-icon>
     </button>
   </mat-toolbar>

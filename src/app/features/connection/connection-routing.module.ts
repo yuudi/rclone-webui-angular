@@ -14,10 +14,6 @@ const routes: Routes = [
     path: 'new',
     component: ConnectionEditorComponent,
   },
-  {
-    path: 'edit/:id',
-    component: ConnectionEditorComponent,
-  },
 ];
 
 @NgModule({

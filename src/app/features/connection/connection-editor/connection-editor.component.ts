@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { of, tap } from 'rxjs';
 
-import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
+import {
+  Connection,
+  ConnectionService,
+  NoAuthentication,
+  NotSaved,
+} from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { Err, Result } from 'src/app/shared/result';
 
@@ -13,8 +18,8 @@ import { Err, Result } from 'src/app/shared/result';
   templateUrl: './connection-editor.component.html',
   styleUrls: ['./connection-editor.component.scss'],
 })
-export class ConnectionEditorComponent implements OnInit {
-  connectionId: string | null = null;
+export class ConnectionEditorComponent implements OnInit, OnChanges {
+  @Input() connection?: Connection;
   connectionForm = this.fb.nonNullable.group({
     displayName: [
       'New Connection',
@@ -24,8 +29,9 @@ export class ConnectionEditorComponent implements OnInit {
       ConnectionEditorComponent.getCurrentHost(),
       [Validators.required, Validators.pattern(/^(http|https):\/\//)],
     ],
-    username: [''],
-    password: [''],
+    notProtected: [false],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     remember: [false],
   });
 
@@ -37,7 +43,6 @@ export class ConnectionEditorComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private connectionService: ConnectionService,
@@ -45,9 +50,20 @@ export class ConnectionEditorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.connectionId = params['id'] ?? null;
-    });
+    this.updateFormFromInput();
+  }
+
+  ngOnChanges() {
+    this.updateFormFromInput();
+  }
+
+  private updateFormFromInput() {
+    if (this.connection) {
+      this.connectionForm.patchValue({
+        displayName: this.connection.displayName,
+        remoteAddress: this.connection.remoteAddress,
+      });
+    }
   }
 
   uniqueNameValidator(): ValidatorFn {
@@ -81,7 +97,7 @@ export class ConnectionEditorComponent implements OnInit {
   }
 
   testConnection() {
-    const { remoteAddress, username, password } =
+    const { remoteAddress, notProtected, username, password } =
       this.connectionForm.getRawValue();
 
     const cacheIndex = `${remoteAddress}\n${username}\n${password}`;
@@ -90,7 +106,7 @@ export class ConnectionEditorComponent implements OnInit {
       return of(success);
     }
 
-    const credential = username === '' ? null : { username, password };
+    const credential = notProtected ? NoAuthentication : { username, password };
 
     return this.rc.testConnection({ remoteAddress, credential }).pipe(
       tap((success) => {
@@ -101,60 +117,76 @@ export class ConnectionEditorComponent implements OnInit {
 
   connectButtonClicked() {
     this.testConnection().subscribe((success) => {
-      if (success) {
-        let result: Result<null, string>;
-        if (this.connectionId) {
-          result = this.updateConnection();
-        } else {
-          result = this.addConnection();
-        }
-        if (result.ok) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.snackBar.open(
-            $localize`Connection failed:` + result.error,
-            'OK',
-            {
-              duration: 3000,
-            }
-          );
-        }
-      } else {
+      if (!success) {
         this.snackBar.open($localize`Connection failed`, 'OK', {
+          duration: 3000,
+        });
+        return;
+      }
+      let result: Result<null, string>;
+      if (this.connection) {
+        result = this.updateConnectionAndActivate();
+      } else {
+        result = this.addConnectionAndActivate();
+      }
+      if (result.ok) {
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.snackBar.open($localize`Connection failed:` + result.error, 'OK', {
           duration: 3000,
         });
       }
     });
   }
 
-  addConnection() {
-    const { displayName, remoteAddress, username, password, remember } =
-      this.connectionForm.getRawValue();
+  addConnectionAndActivate() {
+    const {
+      displayName,
+      remoteAddress,
+      notProtected,
+      username,
+      password,
+      remember,
+    } = this.connectionForm.getRawValue();
 
-    const credential = username === '' ? null : { username, password };
+    const credential = notProtected ? NoAuthentication : { username, password };
 
-    return this.connectionService.addConnection(
+    const saveResult = this.connectionService.saveConnection(
       { displayName, remoteAddress },
-      credential,
-      remember
+      remember ? credential : NotSaved
+    );
+
+    if (!saveResult.ok) {
+      return saveResult;
+    }
+
+    return this.connectionService.activateConnection(
+      saveResult.value.id,
+      credential
     );
   }
 
-  updateConnection() {
-    const { displayName, remoteAddress, username, password, remember } =
-      this.connectionForm.getRawValue();
+  updateConnectionAndActivate() {
+    const {
+      displayName,
+      remoteAddress,
+      notProtected,
+      username,
+      password,
+      remember,
+    } = this.connectionForm.getRawValue();
 
-    const id = this.connectionId;
+    const id = this.connection?.id;
     if (!id) {
       return new Err('Connection ID is null');
     }
 
-    const credential = username === '' ? null : { username, password };
+    const credential = notProtected ? NoAuthentication : { username, password };
 
     return this.connectionService.updateConnection(
       id,
       { displayName, remoteAddress },
-      remember ? credential : undefined
+      remember ? credential : NotSaved
     );
   }
 }

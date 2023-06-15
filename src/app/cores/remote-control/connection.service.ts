@@ -10,16 +10,20 @@ interface Credentials {
   password: string;
 }
 
+export type NotSaved = undefined;
+export const NotSaved: NotSaved = undefined;
+export type NoAuthentication = null;
+export const NoAuthentication: NoAuthentication = null;
+
 export interface Connection {
   id: string;
   displayName: string;
   remoteAddress: string;
-  /** null means no authentication, undefined means not saved */
-  authentication?: string | null;
+  authentication: string | NotSaved | NoAuthentication;
 }
 
 export interface ConnectionWithAuthentication extends Connection {
-  authentication: string | null;
+  authentication: string | NoAuthentication;
 }
 
 @Injectable({
@@ -31,32 +35,29 @@ export class ConnectionService {
 
   constructor() {
     const connectionsJson = localStorage.getItem('rwa_authentication');
-    if (connectionsJson) {
-      const connections: Connection[] = JSON.parse(connectionsJson);
-      this.connections$.next(connections);
-      if (connections.length === 1) {
-        const onlyConnection = connections[0];
+    if (!connectionsJson) {
+      return;
+    }
+    const connections: Connection[] = JSON.parse(connectionsJson);
+    this.connections$.next(connections);
+    if (connections.length === 1) {
+      const onlyConnection = connections[0];
 
-        if (onlyConnection.authentication === undefined) {
-          //TODO: if the only connection has no authentication, navigate to authentication page
-          //navigate()
-          return;
-        }
-
-        this.activeConnection = onlyConnection as ConnectionWithAuthentication;
+      if (onlyConnection.authentication === undefined) {
+        //TODO: if the only connection has no authentication, navigate to authentication page
+        //navigate()
+        return;
       }
 
-      //TODO: if there is more than one connection, navigate to connection selection page
+      this.activeConnection = onlyConnection as ConnectionWithAuthentication;
     }
+
+    //TODO: if there is more than one connection, navigate to connection selection page
   }
 
-  /**
-   * @param remoteAddress address for remote rclone instance, without trailing slash
-   */
-  addConnection(
+  saveConnection(
     connection: Omit<Connection, 'id' | 'authentication'>,
-    credentials: Credentials | null,
-    saveAuthentication = false
+    credentials: Credentials | NoAuthentication | NotSaved = NotSaved
   ) {
     const { displayName, remoteAddress } = connection;
 
@@ -66,30 +67,21 @@ export class ConnectionService {
 
     const authentication = credentials
       ? btoa(credentials.username + ':' + credentials.password)
-      : null;
+      : credentials;
 
-    this.activeConnection = {
+    const newConnection: Connection = {
       id: uuid(),
       displayName,
       remoteAddress,
       authentication,
     };
 
-    let savedConnection: Connection;
-    if (saveAuthentication) {
-      savedConnection = this.activeConnection;
-    } else {
-      savedConnection = {
-        ...this.activeConnection,
-        authentication: undefined,
-      };
-    }
     const connections = this.connections$.getValue();
-    connections.push(savedConnection);
+    connections.push(newConnection);
     this.connections$.next(connections);
     localStorage.setItem('rwa_authentication', JSON.stringify(connections));
 
-    return new Ok(null);
+    return new Ok(newConnection);
   }
 
   getConnection(id: string) {
@@ -99,12 +91,20 @@ export class ConnectionService {
   updateConnection(
     id: string,
     connection: Partial<Omit<Connection, 'id' | 'authentication'>>,
-    credentials?: Credentials | null
+    credentials: Credentials | NoAuthentication | NotSaved = NotSaved
   ) {
     const connections = this.connections$.getValue();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
-      return new Err($localize`Connection not found`);
+      return new Err($localize`Connection ID not found`);
+    }
+
+    if (
+      connection.displayName &&
+      connection.displayName !== connections[index].displayName &&
+      this.checkNameExists(connection.displayName)
+    ) {
+      return new Err($localize`Name already exists`);
     }
 
     const updatedConnection = {
@@ -112,13 +112,9 @@ export class ConnectionService {
       ...connection,
     };
 
-    if (credentials) {
-      updatedConnection.authentication = btoa(
-        credentials.username + ':' + credentials.password
-      );
-    }
-
-    this.activeConnection = updatedConnection as ConnectionWithAuthentication; //TODO: prompt for authentication if not saved
+    updatedConnection.authentication = credentials
+      ? btoa(credentials.username + ':' + credentials.password)
+      : credentials;
 
     connections[index] = updatedConnection;
     this.connections$.next(connections);
@@ -127,15 +123,24 @@ export class ConnectionService {
     return new Ok(null);
   }
 
-  activateConnection(id: string) {
+  activateConnection(id: string, credentials?: Credentials | NoAuthentication) {
     const connection = this.connections$.getValue().find((c) => c.id === id);
     if (!connection) {
       return new Err($localize`Connection not found`);
     }
 
-    if (connection.authentication === undefined) {
-      return new Err($localize`Connection has no authentication`);
+    const useConnection = { ...connection }; // shallow copy
+    if (credentials === undefined) {
+      if (useConnection.authentication === undefined) {
+        return new Err($localize`Connection has no authentication`);
+      }
+    } else {
+      useConnection.authentication = credentials
+        ? btoa(credentials.username + ':' + credentials.password)
+        : NoAuthentication;
     }
+
+    this.activeConnection = useConnection as ConnectionWithAuthentication;
 
     return new Ok(null);
   }

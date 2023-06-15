@@ -1,21 +1,33 @@
-<ng-container *ngIf="connections$ | async as connections">
-  <mat-action-list
-    *ngIf="connections.length > 0; else no_connection"
-    class="connection__list"
-  >
-    <ng-container *ngFor="let connection of connections; let last = last">
-      <mat-divider></mat-divider>
-      <mat-list-item (click)="onConnectionClicked(connection)">
-        {{ connection.displayName }}
-      </mat-list-item>
-      <mat-divider *ngIf="last"></mat-divider>
-    </ng-container>
-  </mat-action-list>
+<div *ngIf="connections$ | async as connections" class="connection__container">
+  <div class="connection__list-container">
+    <mat-action-list
+      *ngIf="connections.length > 0; else no_connection"
+      class="connection__list"
+    >
+      <ng-container *ngFor="let connection of connections; let last = last">
+        <mat-divider></mat-divider>
+        <mat-list-item
+          (click)="onConnectionClicked(connection)"
+          (dblclick)="onConnectionDoubleClicked(connection)"
+        >
+          {{ connection.displayName }}
+          <span class="spacer"></span>
+        </mat-list-item>
+        <mat-divider *ngIf="last"></mat-divider>
+      </ng-container>
+    </mat-action-list>
 
-  <ng-template #no_connection>
-    <p i18n>No connections</p>
-  </ng-template>
-  <button i18n="create" mat-raised-button color="primary" routerLink="./new">
-    New Connection
-  </button>
-</ng-container>
+    <ng-template #no_connection>
+      <p i18n>No connections</p>
+    </ng-template>
+    <button i18n="create" mat-raised-button color="primary" routerLink="./new">
+      New Connection
+    </button>
+  </div>
+  <div>
+    <app-connection-editor
+      *ngIf="selectedConnection"
+      [connection]="selectedConnection"
+    ></app-connection-editor>
+  </div>
+</div>

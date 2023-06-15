@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
-import { ConnectionService } from './connection.service';
+import { ConnectionService, NoAuthentication } from './connection.service';
 
 type ErrorResponse = {
   error: string;
@@ -37,14 +37,16 @@ export class RemoteControlService {
   testConnection(
     connection?: {
       remoteAddress: string;
-      credential: {
-        username: string;
-        password: string;
-      } | null;
+      credential:
+        | {
+            username: string;
+            password: string;
+          }
+        | NoAuthentication;
     },
     testAuth = false
   ): Observable<boolean> {
-    let remoteAddress: string, authentication: string | null;
+    let remoteAddress: string, authentication: string | NoAuthentication;
     if (connection) {
       remoteAddress = connection.remoteAddress;
       authentication = connection.credential
@@ -53,7 +55,7 @@ export class RemoteControlService {
               ':' +
               connection.credential.password
           )
-        : null;
+        : NoAuthentication;
     } else {
       const remote = this.auth.getActiveConnection();
       if (!remote) {

@@ -1,4 +1,12 @@
-:host {
+.connection__container {
+  display: flex;
+  flex-direction: column;
+  > * {
+    flex: 1;
+  }
+}
+
+.connection__list-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,4 +16,12 @@
 .connection__list {
   max-width: 60em;
   width: 90%;
+}
+
+@media screen and (min-width: 800px) {
+  .connection__container {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
 }

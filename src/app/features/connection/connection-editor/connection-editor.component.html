@@ -1,23 +1,43 @@
 <form [formGroup]="connectionForm" class="connection__container">
   <mat-form-field class="connection__field">
+    <mat-label i18n>Display Name</mat-label>
+    <input matInput formControlName="displayName" />
+    <mat-error
+      i18n
+      *ngIf="connectionForm.controls.displayName.errors?.['required']"
+    >
+      Please enter a display name
+    </mat-error>
+    <mat-error
+      i18n
+      *ngIf="connectionForm.controls.displayName.errors?.['nameExists']"
+    >
+      A connection with this name already exists
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="connection__field">
     <mat-label i18n>Remote Address</mat-label>
     <input matInput formControlName="remoteAddress" />
     <mat-error i18n *ngIf="!connectionForm.controls.remoteAddress.valid">
       Please enter a valid address
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="connection__field">
-    <mat-label i18n>Username</mat-label>
-    <input matInput formControlName="username" />
-  </mat-form-field>
-  <mat-form-field class="connection__field">
-    <mat-label i18n>Password</mat-label>
-    <input type="password" matInput formControlName="password" />
-  </mat-form-field>
-  <mat-checkbox i18n class="connection__field" formControlName="remember">
-    Remember Password
+  <mat-checkbox i18n class="connection__field" formControlName="notProtected">
+    This connection is not protected by a password
   </mat-checkbox>
-
+  <ng-container *ngIf="!connectionForm.controls.notProtected.value">
+    <mat-form-field class="connection__field">
+      <mat-label i18n>Username</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+    <mat-form-field class="connection__field">
+      <mat-label i18n>Password</mat-label>
+      <input type="password" matInput formControlName="password" />
+    </mat-form-field>
+    <mat-checkbox i18n class="connection__field" formControlName="remember">
+      Remember Password
+    </mat-checkbox>
+  </ng-container>
   <button
     mat-raised-button
     (click)="testConnectionClicked()"
