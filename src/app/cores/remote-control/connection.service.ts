@@ -163,6 +163,10 @@ export class ConnectionService {
     return this.connections$;
   }
 
+  getConnectionsValue(): Connection[] {
+    return this.connections$.getValue();
+  }
+
   getActiveConnection() {
     return this.activeConnection;
   }
