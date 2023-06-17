@@ -46,15 +46,7 @@
               Local Filesystem
             </button>
           </mat-menu>
-          <button
-            mat-icon-button
-            [disabled]="group.tabs.length === 0"
-            i18n-matTooltip
-            matTooltip="Close"
-            (click)="tabRemove(group)"
-          >
-            <mat-icon fontIcon="close"></mat-icon>
-          </button>
+
           <div class="spacer"></div>
           <button
             *ngIf="viewsGroups.length > 1"
@@ -82,10 +74,18 @@
           backend
         </div>
         <mat-tab-group preserveContent [(selectedIndex)]="group.currentTab">
-          <mat-tab
-            *ngFor="let view of group.tabs"
-            [label]="view.backend || LOCAL_FS_DISPLAY"
-          >
+          <mat-tab *ngFor="let view of group.tabs; let tabIndex = index">
+            <ng-template mat-tab-label>
+              {{ view.backend || LOCAL_FS_DISPLAY }}
+              <button
+                mat-icon-button
+                i18n-matTooltip
+                matTooltip="Close"
+                (click)="tabRemove(group, tabIndex)"
+              >
+                <mat-icon fontIcon="close"></mat-icon>
+              </button>
+            </ng-template>
             <app-explorer-viewer
               [backend]="view.backend"
               [(path)]="view.path"

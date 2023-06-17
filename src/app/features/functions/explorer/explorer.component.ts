@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { MatIconRegistry } from '@angular/material/icon';
@@ -53,10 +53,18 @@ export class ExplorerComponent implements OnInit {
     group.currentTab = group.tabs.length - 1;
   }
 
-  tabRemove(group: ViewsGroup) {
-    const index = group.currentTab;
-    group.tabs.splice(index, 1);
-    // new index number will be automatically set by Material UI
+  tabRemove(group: ViewsGroup, tabIndex: number) {
+    if (group.currentTab === tabIndex) {
+      // If the tab to be removed is the current tab, select the previous tab.
+      if (tabIndex > 0) {
+        group.currentTab = tabIndex - 1;
+      }
+    } else if (group.currentTab > tabIndex) {
+      // If the tab to be removed is before the current tab, decrement the current tab index.
+      group.currentTab--;
+    }
+
+    group.tabs.splice(tabIndex, 1);
   }
 
   /**
