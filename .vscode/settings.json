@@ -9,10 +9,13 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     "cSpell.words": [
+        "bisync",
+        "listremotes",
         "ngsw",
         "noopauth",
         "rclone",
         "sidenav",
+        "splitscreen",
         "webui"
     ],
     "prettier.prettierPath": "prettier"

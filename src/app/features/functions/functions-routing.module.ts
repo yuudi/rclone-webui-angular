@@ -10,6 +10,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./backend/backend.module').then((m) => m.BackendModule),
   },
+  {
+    path: 'explore',
+    loadChildren: () =>
+      import('./explorer/explorer.module').then((m) => m.ExplorerModule),
+  },
 ];
 
 @NgModule({

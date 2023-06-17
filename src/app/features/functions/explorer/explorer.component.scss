@@ -1,0 +1,25 @@
+.group-container {
+  display: flex;
+  flex-direction: row;
+  > * {
+    flex: 1;
+  }
+}
+
+.group-card {
+  margin: 1em;
+}
+
+.new-group-hint {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.icon--rotate90 {
+  transform: rotate(90deg);
+}

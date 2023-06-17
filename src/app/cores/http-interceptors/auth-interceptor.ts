@@ -5,7 +5,10 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
+import {
+  ConnectionService,
+  NoAuthentication,
+} from 'src/app/cores/remote-control/connection.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -30,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    if (authentication === null) {
+    if (authentication === NoAuthentication) {
       return next.handle(req);
     }
 

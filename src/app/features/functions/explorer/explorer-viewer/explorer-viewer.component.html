@@ -1,0 +1,39 @@
+<mat-action-list>
+  <div matListItemTitle>{{ path || "/" }}</div>
+  <ng-container *ngFor="let item of children">
+    <mat-list-item
+      (dblclick)="itemDblClicked(item)"
+      (contextmenu)="itemRightClicked(item, $event)"
+    >
+      <mat-icon
+        matListItemIcon
+        [fontIcon]="item.IsDir ? 'folder' : 'description'"
+      ></mat-icon>
+      <!-- TODO: icon base on MIME type -->
+      <div matListItemTitle>{{ item.Name }}</div>
+      <div matListItemLine>{{ item.ModTime | date }}</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+  <div
+    [matMenuTriggerFor]="contextMenu"
+    [ngStyle]="{
+      position: 'fixed',
+      top: contextMenuPosition.y,
+      left: contextMenuPosition.x
+    }"
+  ></div>
+  <mat-menu #contextMenu="matMenu">
+    <button mat-menu-item i18n>Copy</button>
+    <button mat-menu-item i18n>Cut</button>
+    <button mat-menu-item i18n>Delete</button>
+    <button mat-menu-item i18n>Rename</button>
+    <button mat-menu-item i18n>Download</button>
+  </mat-menu>
+</mat-action-list>
+<ng-container *ngIf="children === undefined">
+  <mat-spinner></mat-spinner>
+</ng-container>
+<ng-container *ngIf="children?.length === 0">
+  <div i18n>Empty</div>
+</ng-container>

@@ -1,0 +1,98 @@
+<div>
+  <div class="group-container">
+    <mat-card
+      *ngFor="let group of viewsGroups; let groupIndex = index; let last = last"
+      class="group-card"
+    >
+      <mat-card-header>
+        <mat-toolbar>
+          <button
+            mat-icon-button
+            [disabled]="
+              group.tabs.length === 0 ||
+              group.tabs[group.currentTab].path === ''
+            "
+            i18n-matTooltip
+            matTooltip="Go Up"
+            (click)="goUp(group.tabs[group.currentTab])"
+          >
+            <mat-icon fontIcon="arrow_upward"></mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            [disabled]="group.tabs.length === 0"
+            i18n-matTooltip
+            matTooltip="Refresh"
+          >
+            <mat-icon fontIcon="refresh"></mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="addViewMenu"
+            i18n-matTooltip
+            matTooltip="Open Backend"
+          >
+            <mat-icon fontIcon="add"></mat-icon>
+          </button>
+          <mat-menu #addViewMenu>
+            <button
+              mat-menu-item
+              *ngFor="let backend of backendList"
+              (click)="tabAdd(group, backend)"
+            >
+              {{ backend }}
+            </button>
+            <button mat-menu-item (click)="tabAdd(group, '')" i18n>
+              Local Filesystem
+            </button>
+          </mat-menu>
+          <button
+            mat-icon-button
+            [disabled]="group.tabs.length === 0"
+            i18n-matTooltip
+            matTooltip="Close"
+            (click)="tabRemove(group)"
+          >
+            <mat-icon fontIcon="close"></mat-icon>
+          </button>
+          <div class="spacer"></div>
+          <button
+            *ngIf="viewsGroups.length > 1"
+            mat-icon-button
+            i18n-matTooltip
+            matTooltip="Close All"
+            (click)="splitRemove(groupIndex)"
+          >
+            <mat-icon svgIcon="tab_close"></mat-icon>
+          </button>
+          <button
+            *ngIf="last"
+            mat-icon-button
+            i18n-matTooltip
+            matTooltip="Split Window"
+            (click)="splitAdd()"
+          >
+            <mat-icon fontIcon="splitscreen" class="icon--rotate90"></mat-icon>
+          </button>
+        </mat-toolbar>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="group.tabs.length === 0" class="new-group-hint" i18n>
+          click &nbsp;<mat-icon fontIcon="add"></mat-icon>&nbsp; to open a
+          backend
+        </div>
+        <mat-tab-group preserveContent [(selectedIndex)]="group.currentTab">
+          <mat-tab
+            *ngFor="let view of group.tabs"
+            [label]="view.backend || LOCAL_FS_DISPLAY"
+          >
+            <app-explorer-viewer
+              [backend]="view.backend"
+              [(path)]="view.path"
+            ></app-explorer-viewer>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
