@@ -4,9 +4,10 @@ export interface Backend {
 }
 
 export interface BackendUsage {
-  total: number;
-  used: number;
+  total?: number; // if not set, it's unlimited
+  used?: number;
   trashed?: number;
   other?: number;
-  free: number;
+  free?: number;
+  objects?: number; // count of objects
 }

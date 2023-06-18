@@ -42,11 +42,29 @@
             >
               {{ backend }}
             </button>
-            <button mat-menu-item (click)="tabAdd(group, '')" i18n>
+            <button
+              mat-menu-item
+              *ngIf="localFsList.length >= 2; else onlyOneLocalFs"
+              [matMenuTriggerFor]="localFsMenu"
+              i18n
+            >
               Local Filesystem
             </button>
+            <ng-template #onlyOneLocalFs>
+              <button mat-menu-item (click)="tabAdd(group, '')" i18n>
+                Local Filesystem
+              </button>
+            </ng-template>
           </mat-menu>
-
+          <mat-menu #localFsMenu="matMenu">
+            <button
+              mat-menu-item
+              *ngFor="let localFs of localFsList"
+              (click)="tabAdd(group, localFs)"
+            >
+              {{ localFs }}:\
+            </button>
+          </mat-menu>
           <div class="spacer"></div>
           <button
             *ngIf="viewsGroups.length > 1"
@@ -76,7 +94,10 @@
         <mat-tab-group preserveContent [(selectedIndex)]="group.currentTab">
           <mat-tab *ngFor="let view of group.tabs; let tabIndex = index">
             <ng-template mat-tab-label>
-              {{ view.backend || LOCAL_FS_DISPLAY }}
+              <ng-container *ngIf="view.backend as backend; else localBackend">
+                {{ backend }}
+              </ng-container>
+              <ng-template #localBackend i18n> Local Filesystem </ng-template>
               <button
                 mat-icon-button
                 i18n-matTooltip

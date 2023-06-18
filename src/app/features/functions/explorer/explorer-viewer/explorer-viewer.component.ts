@@ -2,13 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -18,8 +17,10 @@ import {
   DirItem,
   DirectoryItem,
   ExplorerView,
+  FileItem,
 } from '../explorer.model';
 import { ExplorerService } from '../explorer.service';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -29,46 +30,54 @@ const Loading = undefined;
   templateUrl: './explorer-viewer.component.html',
   styleUrls: ['./explorer-viewer.component.scss'],
 })
-export class ExplorerViewerComponent implements OnInit, OnChanges {
+export class ExplorerViewerComponent {
   @Input() backend!: string;
-  @Input() path!: string;
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
   @Output() clipboardPasted = new EventEmitter<ExplorerView>();
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
 
+  private _path!: string;
+  get path() {
+    return this._path;
+  }
+  @Input() set path(path: string) {
+    if (this._path === path) {
+      return;
+    }
+    this._path = path;
+    this.pathChange.emit(path);
+
+    this.currentPathSubScription.unsubscribe();
+    this.currentPathSubScription = new Subscription();
+    this.fetchChildren();
+  }
+
   children: DirectoryItem[] | Loading = Loading;
-  listChildrenSubScription?: Subscription;
+  currentPathSubScription = new Subscription();
 
   contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
 
   constructor(
     private snackBar: MatSnackBar,
+    private dialog: MatDialog,
     private rc: RemoteControlService,
     private explorerService: ExplorerService
   ) {}
 
-  ngOnInit() {
-    this.fetchChildren();
-  }
-
-  ngOnChanges() {
-    this.fetchChildren();
-  }
-
   fetchChildren() {
     this.children = Loading;
 
-    this.listChildrenSubScription?.unsubscribe();
-    this.listChildrenSubScription = this.explorerService
+    const sub = this.explorerService
       .listChildren(this)
       .subscribe((children) => {
         this.children = children.list;
       });
+    this.currentPathSubScription.add(sub);
   }
 
-  itemDblClicked(item: DirectoryItem) {
+  itemDblClicked(item: FileItem | DirItem) {
     if (item.IsDir) {
       this.openFolder(item);
     } else {
@@ -81,7 +90,6 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
 
   openFolder(item: DirItem) {
     this.path = item.Path;
-    this.pathChange.emit(this.path);
   }
 
   itemRightClicked(item: DirectoryItem, event: MouseEvent) {
@@ -92,7 +100,35 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     this.contextMenu.openMenu();
   }
 
-  downloadFileClicked() {
+  deleteClicked() {
+    const item = this.contextMenuItem;
+    if (!item) {
+      throw new Error('No context menu item when delete clicked.');
+    }
+    const dialog = this.dialog.open(DeleteConfirmDialogComponent, {
+      data: item,
+    });
+    const sub = dialog.componentInstance.confirm.subscribe(() =>
+      this.deleteConfirmed(item)
+    );
+    this.currentPathSubScription.add(sub);
+  }
+
+  deleteConfirmed(item: DirectoryItem) {
+    const sub = this.explorerService
+      .deleteItem(this.backend, item)
+      .subscribe(() => {
+        this.snackBar.open('Deleted');
+        const index = this.children?.findIndex((i) => i.Path === item.Path);
+        if (index === undefined || index === -1) {
+          throw new Error('Deleted item not found in children.');
+        }
+        this.children?.splice(index, 1);
+      });
+    this.currentPathSubScription.add(sub);
+  }
+
+  downloadClicked() {
     if (!this.contextMenuItem) {
       throw new Error('No context menu item when download file clicked.');
     }

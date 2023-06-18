@@ -1,0 +1,7 @@
+<button mat-icon-button (click)="pathClicked('')">/</button>
+<ng-container *ngFor="let part of pathParts; let last = last">
+  <button mat-button (click)="pathClicked(part.fullPath)">
+    {{ part.name }}
+  </button>
+  <ng-container *ngIf="!last">/</ng-container>
+</ng-container>

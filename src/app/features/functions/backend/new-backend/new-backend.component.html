@@ -23,7 +23,7 @@
             <mat-card-content class="new-backend__list-container">
               <mat-selection-list
                 *ngIf="providers$ | async as providers"
-                [multiple]="false"
+                multiple="false"
                 (selectionChange)="
                   providerSelectedChanged(
                     $event.options.values().next().value.value
@@ -171,11 +171,12 @@
       <ng-template matStepContent>
         <div
           *ngIf="providerNeedAuth && (!providerOptions?.['token']) ;else noAuth"
-          i18n
         >
-          You will be redirected to the provider's website to authorize, click
-          save now
-          <div *ngIf="waitingForBackend">
+          <span i18n
+            >You will be redirected to the provider's website to authorize,
+            click save now</span
+          >
+          <div *ngIf="waitingForBackend" i18n>
             Authorizing...
             <mat-spinner></mat-spinner>
           </div>

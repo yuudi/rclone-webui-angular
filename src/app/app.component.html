@@ -1,39 +1,44 @@
-<div class="app__container">
-  <mat-toolbar color="primary">
-    <button
-      mat-icon-button
-      i18n-matTooltip
-      matTooltip="Menu"
-      (click)="sidenav.toggle()"
-    >
-      <mat-icon fontIcon="menu"></mat-icon>
-    </button>
-    <h1 i18n>Rclone WebUI</h1>
-    <span class="spacer"></span>
-    <button mat-icon-button i18n-matTooltip matTooltip="Select Language">
-      <mat-icon fontIcon="translate"></mat-icon>
-    </button>
-    <button mat-icon-button i18n-matTooltip matTooltip="Connections">
-      <mat-icon fontIcon="settings_remote"></mat-icon>
-    </button>
-  </mat-toolbar>
-
-  <mat-sidenav-container class="sidenav__container">
-    <mat-sidenav #sidenav>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/dashboard" i18n>Dashboard</a>
-        <a mat-list-item routerLink="/connection" i18n>Connection</a>
-        <a mat-list-item routerLink="/rclone" i18n>Functions</a>
-        <a
-          mat-list-item
-          routerLink="/rclone/drive"
-          i18n="Cloud or physical drive"
-          >Drives</a
-        >
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+<mat-toolbar color="primary">
+  <button mat-icon-button i18n-matTooltip matTooltip="Menu">
+    <mat-icon fontIcon="menu"></mat-icon>
+  </button>
+  <a
+    mat-icon-button
+    routerLink="/dashboard"
+    i18n-matTooltip
+    matTooltip="Dashboard"
+  >
+    <mat-icon fontIcon="dashboard"></mat-icon>
+  </a>
+  <a
+    mat-icon-button
+    routerLink="/rclone/drive"
+    i18n-matTooltip
+    matTooltip="Drives"
+  >
+    <mat-icon fontIcon="storage"></mat-icon>
+  </a>
+  <a
+    mat-icon-button
+    routerLink="/rclone/explore"
+    i18n-matTooltip
+    matTooltip="Browser"
+  >
+    <mat-icon fontIcon="folder"></mat-icon>
+  </a>
+  <span class="spacer"></span>
+  <h1 i18n>Rclone WebUI</h1>
+  <span class="spacer"></span>
+  <button mat-icon-button i18n-matTooltip matTooltip="Select Language">
+    <mat-icon fontIcon="translate"></mat-icon>
+  </button>
+  <button
+    *ngIf="showRemoteSetting"
+    mat-icon-button
+    i18n-matTooltip
+    matTooltip="Connections"
+  >
+    <mat-icon fontIcon="settings_remote"></mat-icon>
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>

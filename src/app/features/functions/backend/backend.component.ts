@@ -44,21 +44,14 @@ export class BackendComponent implements OnInit {
   }
 
   fetchUsage(id: string) {
-    this.backendService
-      .getBackendUsage(id)
-      .pipe(
-        tap({
-          error: this.displayError.bind(this),
-        })
-      )
-      .subscribe((usage) => {
-        const ref = this.backendList?.find((backend) => backend.id === id);
-        if (!ref) {
-          console.error(`Backend ${id} not found!`);
-          return;
-        }
-        ref.usage = usage;
-      });
+    this.backendService.getBackendUsage(id).subscribe((usage) => {
+      const ref = this.backendList?.find((backend) => backend.id === id);
+      if (!ref) {
+        console.error(`Backend ${id} not found!`);
+        return;
+      }
+      ref.usage = usage;
+    });
   }
 
   private displayError(error: unknown) {

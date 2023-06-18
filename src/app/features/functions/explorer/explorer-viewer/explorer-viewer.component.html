@@ -1,5 +1,11 @@
-<mat-action-list>
-  <div matListItemTitle>{{ path || "/" }}</div>
+<app-path-splitter [(path)]="path"></app-path-splitter>
+<ng-container *ngIf="children === undefined">
+  <mat-spinner></mat-spinner>
+</ng-container>
+<ng-container *ngIf="children?.length === 0">
+  <div i18n>Empty</div>
+</ng-container>
+<mat-action-list class="explorer-view__container">
   <ng-container *ngFor="let item of children">
     <mat-list-item
       (dblclick)="itemDblClicked(item)"
@@ -24,16 +30,33 @@
     }"
   ></div>
   <mat-menu #contextMenu="matMenu">
-    <button mat-menu-item i18n>Copy</button>
-    <button mat-menu-item i18n>Cut</button>
-    <button mat-menu-item i18n>Delete</button>
-    <button mat-menu-item i18n>Rename</button>
-    <button mat-menu-item (click)="downloadFileClicked()" i18n>Download</button>
+    <button mat-menu-item>
+      <mat-icon fontIcon="file_copy"></mat-icon>
+      <span i18n>Copy</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon fontIcon="drive_file_move"></mat-icon>
+      <span i18n>Move</span>
+    </button>
+    <button mat-menu-item (click)="deleteClicked()">
+      <mat-icon fontIcon="delete"></mat-icon>
+      <span i18n>Delete</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon fontIcon="edit"></mat-icon>
+      <span i18n>Rename</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon fontIcon="add_link"></mat-icon>
+      <span i18n>Generate Link</span>
+    </button>
+    <button
+      *ngIf="!contextMenuItem?.IsDir"
+      mat-menu-item
+      (click)="downloadClicked()"
+    >
+      <mat-icon fontIcon="download"></mat-icon>
+      <span i18n>Download</span>
+    </button>
   </mat-menu>
 </mat-action-list>
-<ng-container *ngIf="children === undefined">
-  <mat-spinner></mat-spinner>
-</ng-container>
-<ng-container *ngIf="children?.length === 0">
-  <div i18n>Empty</div>
-</ng-container>

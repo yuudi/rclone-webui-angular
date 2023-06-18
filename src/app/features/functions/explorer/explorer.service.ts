@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import {
@@ -14,8 +15,10 @@ import {
 export class ExplorerService {
   constructor(private rc: RemoteControlService) {}
 
-  listBackends() {
-    return this.rc.call<{ remotes: string[] }>('config/listremotes');
+  getOsType() {
+    return this.rc
+      .call<{ os: string }>('core/version')
+      .pipe(map((res) => res.os));
   }
 
   listChildren(view: ExplorerView) {
@@ -24,6 +27,28 @@ export class ExplorerService {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
+  }
+
+  deleteFile(backend: string, path: string) {
+    return this.rc.call<EmptyObj>('operations/deletefile', {
+      fs: ExplorerService.toFs(backend),
+      remote: path,
+    });
+  }
+
+  deleteFolder(backend: string, path: string) {
+    return this.rc.call<EmptyObj>('operations/purge', {
+      fs: ExplorerService.toFs(backend),
+      remote: path,
+    });
+  }
+
+  deleteItem(backend: string, item: DirectoryItem) {
+    if (item.IsDir) {
+      return this.deleteFolder(backend, item.Path);
+    } else {
+      return this.deleteFile(backend, item.Path);
+    }
   }
 
   clipboardOperate(backend: string, path: string, clipboard: AppClipboard) {

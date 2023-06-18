@@ -6,8 +6,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -15,7 +13,6 @@ import { environment } from 'src/environments/environment.development';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { httpInterceptorProviders } from './cores/http-interceptors';
-import { NotFoundComponent } from './cores/not-found/not-found.component';
 
 const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
   'ngsw-worker.js',
@@ -28,7 +25,7 @@ const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
 );
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,8 +35,6 @@ const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
     MatTooltipModule,
   ],
   providers: [httpInterceptorProviders],

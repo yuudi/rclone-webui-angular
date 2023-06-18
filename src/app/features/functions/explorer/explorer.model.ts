@@ -15,17 +15,16 @@ export interface SyncClipboard {
   dirPath: string;
 }
 
-export type DirectoryItem = FileItem | DirItem;
-
-export interface FileItem extends DirectoryItemBase {
-  readonly IsDir: false;
+export interface FileItem extends DirectoryItem {
+  IsDir: false;
 }
 
-export interface DirItem extends DirectoryItemBase {
-  readonly IsDir: true;
+export interface DirItem extends DirectoryItem {
+  IsDir: true;
 }
 
-interface DirectoryItemBase {
+export interface DirectoryItem {
+  IsDir: boolean;
   Path: string;
   Name: string;
   Size: number;

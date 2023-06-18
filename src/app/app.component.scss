@@ -1,13 +1,9 @@
-.app__container {
+:host {
   height: 100%;
   display: flex;
   flex-flow: column;
 }
 
 .spacer {
-  flex: 1 1 auto;
-}
-
-.sidenav__container {
   flex: 1 1 auto;
 }

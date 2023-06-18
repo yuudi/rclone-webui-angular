@@ -7,15 +7,16 @@
   </mat-card-subtitle>
   <mat-card-content class="backend-info__content">
     <mat-progress-spinner
+      *ngIf="usage?.free && usage?.total"
       color="accent"
       mode="determinate"
-      [value]="usage ? (1 - usage.free / usage.total) * 100 : 0"
+      [value]="(1 - usage!.free! / usage!.total!) * 100"
     >
     </mat-progress-spinner>
     <ng-container *ngIf="usage">
       <table class="backend-info__description">
         <tbody>
-          <tr>
+          <tr *ngIf="usage.used">
             <td class="backend-info__field" i18n="Already Used Space">Used</td>
             <td class="backend-info__value">{{ usage.used | bytes }}</td>
           </tr>
@@ -31,17 +32,21 @@
             </td>
             <td class="backend-info__value">{{ usage.other | bytes }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="usage.free">
             <td class="backend-info__field" i18n="Available Space">Free</td>
             <td class="backend-info__value">{{ usage.free | bytes }}</td>
+          </tr>
+          <tr *ngIf="usage.objects">
+            <td class="backend-info__field" i18n="Count of Objects">Objects</td>
+            <td class="backend-info__value">{{ usage.objects }}</td>
           </tr>
         </tbody>
       </table>
     </ng-container>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button i18n>
-      Browse <mat-icon fontIcon="folder_open"> </mat-icon>
+    <button mat-button (click)="browseClicked()" i18n>
+      Browse <mat-icon fontIcon="folder_open"></mat-icon>
     </button>
     <button mat-button [matMenuTriggerFor]="actions" i18n>
       Actions

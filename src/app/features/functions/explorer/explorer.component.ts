@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { first, lastValueFrom } from 'rxjs';
 
 import { MatIconRegistry } from '@angular/material/icon';
 
+import { BackendService } from '../backend/backend.service';
 import { AppClipboard, ExplorerView } from './explorer.model';
 import { ExplorerService } from './explorer.service';
 
@@ -14,16 +17,17 @@ type ViewsGroup = { tabs: ExplorerView[]; currentTab: number };
   styleUrls: ['./explorer.component.scss'],
 })
 export class ExplorerComponent implements OnInit {
-  readonly LOCAL_FS_DISPLAY = $localize`Local File System`;
-
-  viewsGroups: ViewsGroup[] = [{ tabs: [], currentTab: -1 }]; // Initially, there is one group with no view.
+  viewsGroups: ViewsGroup[] = [{ tabs: [], currentTab: 0 }]; // Initially, there is one group with no view.
   clipboard: AppClipboard | null = null;
   backendList: string[] | null = null;
+  localFsList: string[] = [];
 
   constructor(
+    private route: ActivatedRoute,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private explorerService: ExplorerService
+    private explorerService: ExplorerService,
+    private backendService: BackendService
   ) {
     iconRegistry.addSvgIcon(
       'tab_close',
@@ -32,9 +36,44 @@ export class ExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.explorerService.listBackends().subscribe((list) => {
+    this.backendService.listBackends().subscribe((list) => {
       this.backendList = list.remotes;
     });
+
+    this.fetchLocalFsList();
+
+    this.route.queryParams.pipe(first()).subscribe((params) => {
+      const backend = params['drive'];
+      if (backend) {
+        this.viewsGroups[0].tabs.push({
+          backend: backend,
+          path: '',
+        });
+      }
+    });
+  }
+
+  async fetchLocalFsList() {
+    const os = await lastValueFrom(this.explorerService.getOsType());
+    if (os === 'windows') {
+      // In Windows, there are no api to list all drives,
+      // So we just try from C to Z,
+      // This is not a good solution,
+      // But it's the best we can do for now,
+      // If new api is available, we should use that.
+      let drive = 'C';
+      while (drive <= 'Z') {
+        try {
+          await lastValueFrom(this.backendService.getBackendUsage(drive));
+          this.localFsList.push(drive);
+          drive = String.fromCharCode(drive.charCodeAt(0) + 1);
+        } catch (error) {
+          return;
+        }
+      }
+    } else {
+      this.localFsList.push('');
+    }
   }
 
   splitAdd() {

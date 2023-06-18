@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { NotFoundComponent } from './cores/not-found/not-found.component';
 import { connectionGuard } from './cores/remote-control/connection.guard';
 
 const routes: Routes = [
@@ -31,7 +30,10 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./cores/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
   },
 ];
 
