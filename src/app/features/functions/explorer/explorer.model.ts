@@ -6,7 +6,7 @@ export interface ExplorerView {
 export interface AppClipboard {
   type: 'copy' | 'move';
   backend: string;
-  items: ExplorerItem[];
+  items: DirectoryItem[];
 }
 
 export interface SyncClipboard {
@@ -15,29 +15,22 @@ export interface SyncClipboard {
   dirPath: string;
 }
 
-export interface FileItem {
-  Path: string;
+export type DirectoryItem = FileItem | DirItem;
+
+export interface FileItem extends DirectoryItemBase {
   readonly IsDir: false;
 }
 
-export const FileItem = (Path: string) => ({ Path, IsDir: false } as FileItem);
-
-export interface DirItem {
-  Path: string;
+export interface DirItem extends DirectoryItemBase {
   readonly IsDir: true;
 }
 
-export const DirItem = (Path: string) => ({ Path, IsDir: true } as DirItem);
-
-export type ExplorerItem = FileItem | DirItem;
-
-export interface DirectoryItem {
+interface DirectoryItemBase {
   Path: string;
   Name: string;
   Size: number;
   MimeType: string;
   ModTime: Date;
-  IsDir: boolean;
 }
 
 export type EmptyObj = Record<string, never>;

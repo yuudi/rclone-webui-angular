@@ -1,10 +1,19 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-import { ConnectionService, NotSaved } from './connection.service';
+import { environment } from 'src/environments/environment';
+import {
+  ConnectionService,
+  NoAuthentication,
+  NotSaved,
+} from './connection.service';
 
 export const connectionGuard: CanActivateFn = () => {
   const connectionService = inject(ConnectionService);
+  if (environment.embed) {
+    connectionService.activateConnection('embed', NoAuthentication);
+    return true;
+  }
   const router = inject(Router);
   if (connectionService.getActiveConnection()) {
     return true;

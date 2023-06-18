@@ -1,5 +1,26 @@
+.backend-info__container {
+  height: 100%;
+}
+
+.backend-info__title {
+  margin: 0.5em 1em;
+}
+
+.backend-info__subtitle {
+  margin: 0 1em;
+}
+
 .backend-info__content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
+}
+
+.backend-info__field {
+  text-align: center;
+}
+
+.backend-info__value {
+  text-align: right;
 }

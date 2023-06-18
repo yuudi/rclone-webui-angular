@@ -20,6 +20,7 @@ export interface Connection {
   id: string;
   displayName: string;
   remoteAddress: string;
+  isSameOrigin: boolean;
   authentication: string | NotSaved | NoAuthentication;
 }
 
@@ -41,10 +42,11 @@ export class ConnectionService {
       if (environment.embed) {
         this.connections$.next([
           {
-            id: uuid(),
+            id: 'embed',
             displayName: 'This PC',
             remoteAddress: window.location.origin,
-            authentication: NotSaved,
+            isSameOrigin: true,
+            authentication: NoAuthentication,
           },
         ]);
       }
@@ -55,13 +57,13 @@ export class ConnectionService {
   }
 
   saveConnection(
-    connection: Omit<Connection, 'id' | 'authentication'>,
+    connection: { displayName: string; remoteAddress: string },
     credentials: Credentials | NoAuthentication | NotSaved = NotSaved
   ) {
     const { displayName, remoteAddress } = connection;
 
     if (this.checkNameExists(displayName)) {
-      return new Err($localize`Name already exists`);
+      return Err($localize`Name already exists`);
     }
 
     const authentication = credentials
@@ -72,6 +74,7 @@ export class ConnectionService {
       id: uuid(),
       displayName,
       remoteAddress,
+      isSameOrigin: remoteAddress === window.location.origin,
       authentication,
     };
 
@@ -80,7 +83,7 @@ export class ConnectionService {
     this.connections$.next(connections);
     localStorage.setItem('rwa_authentication', JSON.stringify(connections));
 
-    return new Ok(newConnection);
+    return Ok(newConnection);
   }
 
   getConnection(id: string) {
@@ -95,7 +98,7 @@ export class ConnectionService {
     const connections = this.connections$.getValue();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
-      return new Err($localize`Connection ID not found`);
+      return Err($localize`Connection ID not found`);
     }
 
     if (
@@ -103,7 +106,7 @@ export class ConnectionService {
       connection.displayName !== connections[index].displayName &&
       this.checkNameExists(connection.displayName)
     ) {
-      return new Err($localize`Name already exists`);
+      return Err($localize`Name already exists`);
     }
 
     const updatedConnection = {
@@ -119,19 +122,19 @@ export class ConnectionService {
     this.connections$.next(connections);
     localStorage.setItem('rwa_authentication', JSON.stringify(connections));
 
-    return new Ok(null);
+    return Ok();
   }
 
   activateConnection(id: string, credentials?: Credentials | NoAuthentication) {
     const connection = this.connections$.getValue().find((c) => c.id === id);
     if (!connection) {
-      return new Err($localize`Connection not found`);
+      return Err($localize`Connection not found`);
     }
 
     const useConnection = { ...connection }; // shallow copy
     if (credentials === undefined) {
       if (useConnection.authentication === undefined) {
-        return new Err($localize`Connection has no authentication`);
+        return Err($localize`Connection has no authentication`);
       }
     } else {
       useConnection.authentication = credentials
@@ -141,21 +144,21 @@ export class ConnectionService {
 
     this.activeConnection = useConnection as ConnectionWithAuthentication;
 
-    return new Ok(null);
+    return Ok();
   }
 
   deleteConnection(id: string) {
     const connections = this.connections$.getValue();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
-      return new Err($localize`Connection not found`);
+      return Err($localize`Connection not found`);
     }
 
     connections.splice(index, 1);
     this.connections$.next(connections);
     localStorage.setItem('rwa_authentication', JSON.stringify(connections));
 
-    return new Ok(null);
+    return Ok();
   }
 
   getConnections(): Observable<Connection[]> {

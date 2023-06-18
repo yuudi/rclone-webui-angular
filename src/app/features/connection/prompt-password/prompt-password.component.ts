@@ -35,10 +35,10 @@ export class PromptPasswordComponent {
     if (this.authenticationForm.invalid) {
       return;
     }
-    const { username, password, remember } =
+    const { notProtected, username, password, remember } =
       this.authenticationForm.getRawValue();
     let credentials;
-    if (this.authenticationForm.value.notProtected) {
+    if (notProtected) {
       credentials = NoAuthentication;
     } else {
       credentials = {

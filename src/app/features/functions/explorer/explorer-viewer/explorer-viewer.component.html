@@ -28,7 +28,7 @@
     <button mat-menu-item i18n>Cut</button>
     <button mat-menu-item i18n>Delete</button>
     <button mat-menu-item i18n>Rename</button>
-    <button mat-menu-item i18n>Download</button>
+    <button mat-menu-item (click)="downloadFileClicked()" i18n>Download</button>
   </mat-menu>
 </mat-action-list>
 <ng-container *ngIf="children === undefined">

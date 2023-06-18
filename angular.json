@@ -67,6 +67,14 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "embed": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.embed.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

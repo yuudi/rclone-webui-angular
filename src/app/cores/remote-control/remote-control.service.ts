@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { ConnectionService, NoAuthentication } from './connection.service';
+import { Err, Ok, Result } from 'src/app/shared/result';
 
 type ErrorResponse = {
   error: string;
@@ -22,7 +23,7 @@ export class RemoteControlService {
    */
   call<R>(
     operation: string,
-    params?: { [key: string]: string | number }
+    params?: { [key: string]: string | number | Record<string, unknown> }
   ): Observable<R> {
     const remote = this.auth.getActiveConnection();
 
@@ -32,6 +33,33 @@ export class RemoteControlService {
     return this.http
       .post<R>(remote.remoteAddress + '/' + operation, params)
       .pipe(catchError(this.handleError));
+  }
+
+  getDownloadUrl(backend: string, file: string): Result<string, string> {
+    const remote = this.auth.getActiveConnection();
+    if (!remote) {
+      return Err('Remote address is not set');
+    }
+    return Ok(
+      remote.remoteAddress +
+        '/[' +
+        (backend ? backend + ':' : '/') +
+        ']/' +
+        file
+    );
+  }
+
+  downloadFile(backend: string, file: string): Result<never, string> {
+    const result = this.getDownloadUrl(backend, file);
+    if (!result.ok) {
+      return result;
+    }
+    const a = document.createElement('a');
+    a.href = result.value;
+    a.download = file.split('/').pop() ?? file;
+    a.click();
+    a.remove();
+    return Ok();
   }
 
   testConnection(
@@ -90,8 +118,8 @@ export class RemoteControlService {
         JSON.stringify(error.error as ErrorResponse)
       );
     }
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
+    return throwError(() =>
+      Error('Something bad happened; please try again later.')
     );
   }
 }

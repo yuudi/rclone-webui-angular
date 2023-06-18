@@ -12,11 +12,11 @@ import { Subscription } from 'rxjs';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import {
   AppClipboard,
   DirItem,
   DirectoryItem,
-  ExplorerItem,
   ExplorerView,
 } from '../explorer.model';
 import { ExplorerService } from '../explorer.service';
@@ -40,10 +40,12 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   children: DirectoryItem[] | Loading = Loading;
   listChildrenSubScription?: Subscription;
 
+  contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
 
   constructor(
     private snackBar: MatSnackBar,
+    private rc: RemoteControlService,
     private explorerService: ExplorerService
   ) {}
 
@@ -66,7 +68,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
       });
   }
 
-  itemDblClicked(item: ExplorerItem) {
+  itemDblClicked(item: DirectoryItem) {
     if (item.IsDir) {
       this.openFolder(item);
     } else {
@@ -82,10 +84,18 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     this.pathChange.emit(this.path);
   }
 
-  itemRightClicked(item: ExplorerItem, event: MouseEvent) {
+  itemRightClicked(item: DirectoryItem, event: MouseEvent) {
     event.preventDefault();
+    this.contextMenuItem = item;
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
+  }
+
+  downloadFileClicked() {
+    if (!this.contextMenuItem) {
+      throw new Error('No context menu item when download file clicked.');
+    }
+    return this.rc.downloadFile(this.backend, this.contextMenuItem.Path);
   }
 }

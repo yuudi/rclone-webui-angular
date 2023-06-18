@@ -1,0 +1,200 @@
+<mat-card class="new-backend__container">
+  <mat-stepper linear>
+    <mat-step>
+      <ng-template matStepLabel i18n>Provider</ng-template>
+      <div class="new-backend__provider-step">
+        <div class="new-backend__provider-search-bar">
+          <mat-form-field>
+            <mat-label i18n>Search</mat-label>
+            <input matInput type="text" [(ngModel)]="providerSearchString" />
+            <button
+              *ngIf="providerSearchString"
+              matSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="providerSearchString = ''"
+            >
+              <mat-icon fontIcon="close"></mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <div class="new-backend__list-card-container">
+          <mat-card>
+            <mat-card-content class="new-backend__list-container">
+              <mat-selection-list
+                *ngIf="providers$ | async as providers"
+                [multiple]="false"
+                (selectionChange)="
+                  providerSelectedChanged(
+                    $event.options.values().next().value.value
+                  )
+                "
+              >
+                <mat-list-option
+                  *ngFor="
+                    let provider of providers
+                      | search : providerSearchString : ['Name', 'Description']
+                  "
+                  [value]="provider"
+                >
+                  <div matListItemTitle>{{ provider.Name }}</div>
+                  <div matListItemLine>{{ provider.Description }}</div>
+                </mat-list-option>
+              </mat-selection-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="new-backend__button">
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            [disabled]="providerSelected === undefined"
+            i18n="next step"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel i18n>Options</ng-template>
+      <ng-template matStepContent>
+        <mat-card *ngIf="requiredFieldHint" class="new-backend__option-hint">
+          <mat-card-content i18n>
+            Only stared* fields are required :)
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-stroked-button
+              (click)="hintDismissClicked()"
+              i18n="understand"
+            >
+              Got it
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <div class="new-backend__option-form">
+          <ng-container *ngFor="let option of providerSelected?.Options">
+            <mat-divider></mat-divider>
+            <ng-container
+              *ngIf="!(
+                (option.Advanced && !showAdvancedOptions) || (
+                  providerSelected?.Name==='s3' &&
+                  option.Provider &&
+                  (option.Provider !== providerOptions?.['provider'])
+                )
+              )"
+            >
+              <div class="new-backend__option-field">
+                <mat-form-field class="new-backend__option-field-input">
+                  <!-- TODO: different field type base on `option.Type` -->
+                  <mat-label>{{ option.Name }}</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="providerOptions[option.Name]"
+                    [required]="option.Required"
+                    [type]="option.IsPassword ? 'password' : 'text'"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option
+                      *ngFor="let example of option.Examples"
+                      [value]="example.Value"
+                    >
+                      <h4 class="new-backend__option-autocomplete-value">
+                        {{ example.Value }}
+                      </h4>
+                      {{ example.Help }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <div>
+                  {{ option.Help }}
+                </div>
+              </div>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="new-backend__button">
+          <button
+            mat-raised-button
+            (click)="showAdvancedOptions = !showAdvancedOptions"
+          >
+            <mat-icon
+              [fontIcon]="showAdvancedOptions ? 'expand_less' : 'expand_more'"
+            ></mat-icon>
+            {{
+              showAdvancedOptions
+                ? "Hide Advanced Options"
+                : "Show Advanced Options"
+            }}
+          </button>
+        </div>
+        <div class="new-backend__button">
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            i18n="next step"
+          >
+            Next
+          </button>
+        </div>
+      </ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel i18n>Name</ng-template>
+      <ng-template matStepContent>
+        <div class="new-backend__name-input">
+          <mat-form-field>
+            <mat-label i18n>Name</mat-label>
+            <input matInput [formControl]="newBackendName" />
+          </mat-form-field>
+        </div>
+        <div class="new-backend__button">
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            [disabled]="newBackendName.invalid"
+            i18n="next step"
+          >
+            Next
+          </button>
+        </div>
+      </ng-template>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel i18n>Save</ng-template>
+      <ng-template matStepContent>
+        <div
+          *ngIf="providerNeedAuth && (!providerOptions?.['token']) ;else noAuth"
+          i18n
+        >
+          You will be redirected to the provider's website to authorize, click
+          save now
+          <div *ngIf="waitingForBackend">
+            Authorizing...
+            <mat-spinner></mat-spinner>
+          </div>
+        </div>
+        <ng-template #noAuth>
+          <div i18n>You are all set, click save now</div>
+        </ng-template>
+
+        <div class="new-backend__button">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="saveClicked()"
+            i18n
+          >
+            Save
+          </button>
+        </div>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
+</mat-card>

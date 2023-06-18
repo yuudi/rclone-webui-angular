@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { of, tap } from 'rxjs';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import {
   Connection,
@@ -123,7 +124,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
         });
         return;
       }
-      let result: Result<null, string>;
+      let result: Result<never, string>;
       if (this.connection) {
         result = this.updateConnectionAndActivate();
       } else {
@@ -178,7 +179,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const id = this.connection?.id;
     if (!id) {
-      return new Err('Connection ID is null');
+      return Err('Connection ID is null');
     }
 
     const credential = notProtected ? NoAuthentication : { username, password };

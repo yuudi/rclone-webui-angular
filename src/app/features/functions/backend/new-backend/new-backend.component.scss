@@ -1,0 +1,51 @@
+.new-backend__container {
+  margin: 1em;
+}
+
+.new-backend__list-container {
+  overflow-y: scroll;
+}
+
+.new-backend__list-card-container,
+.new-backend__provider-search-bar,
+.new-backend__name-input {
+  width: 80%;
+  max-width: 70em;
+  margin: 1em auto;
+}
+
+.new-backend__button {
+  display: flex;
+  justify-content: center;
+}
+
+.new-backend__option-hint {
+  width: 25em;
+  margin: 1em auto;
+}
+
+.new-backend__option-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2em 0;
+}
+
+.new-backend__option-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 60em;
+  width: 90%;
+  margin: 1em;
+}
+
+.new-backend__option-field-input {
+  flex-shrink: 0;
+  width: 15em;
+  margin: 1em;
+}
+
+.new-backend__option-autocomplete-value {
+  margin: 0;
+}
