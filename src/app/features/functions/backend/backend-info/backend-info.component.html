@@ -6,6 +6,7 @@
     {{ backend.type }}
   </mat-card-subtitle>
   <mat-card-content class="backend-info__content">
+    <div *ngIf="usage === null" i18n>Not Measured</div>
     <mat-progress-spinner
       *ngIf="usage?.free && usage?.total"
       color="accent"
@@ -48,14 +49,16 @@
     <button mat-button (click)="browseClicked()" i18n>
       Browse <mat-icon fontIcon="folder_open"></mat-icon>
     </button>
-    <button mat-button [matMenuTriggerFor]="actions" i18n>
-      Actions
-      <mat-icon fontIcon="expand_more"></mat-icon>
-    </button>
-    <mat-menu #actions="matMenu">
-      <button i18n mat-menu-item>Mount</button>
-      <button i18n mat-menu-item>Serve</button>
-      <button i18n mat-menu-item color="danger">Delete</button>
-    </mat-menu>
+    <!--
+      <button mat-button [matMenuTriggerFor]="actions" i18n>
+        Actions
+        <mat-icon fontIcon="expand_more"></mat-icon>
+      </button>
+      <mat-menu #actions="matMenu">
+        <button i18n mat-menu-item>Mount</button>
+        <button i18n mat-menu-item>Serve</button>
+        <button i18n mat-menu-item color="danger">Delete</button>
+      </mat-menu>
+    -->
   </mat-card-actions>
 </mat-card>

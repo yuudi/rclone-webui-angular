@@ -58,26 +58,30 @@
               <span i18n>Discard</span>
             </button>
           </mat-menu>
-          <button
-            mat-icon-button
-            [disabled]="group.tabs.length === 0"
-            i18n-matTooltip
-            matTooltip="Create Folder"
-          >
-            <mat-icon
-              fontIcon="create_new_folder"
-              class="material-icons-outlined"
-            ></mat-icon>
-          </button>
+          <!--
+            <button
+              mat-icon-button
+              [disabled]="group.tabs.length === 0"
+              i18n-matTooltip
+              matTooltip="Create Folder"
+            >
+              <mat-icon
+                fontIcon="create_new_folder"
+                class="material-icons-outlined"
+              ></mat-icon>
+            </button>
+          -->
           <div class="spacer"></div>
-          <button
-            mat-icon-button
-            [disabled]="viewsGroups.length > 2"
-            i18n-matTooltip
-            matTooltip="Sync"
-          >
-            <mat-icon fontIcon="sync"></mat-icon>
-          </button>
+          <!-- 
+            <button
+              mat-icon-button
+              [disabled]="viewsGroups.length > 2"
+              i18n-matTooltip
+              matTooltip="Sync"
+            >
+              <mat-icon fontIcon="sync"></mat-icon>
+            </button>
+          -->
           <button
             mat-icon-button
             [matMenuTriggerFor]="addViewMenu"

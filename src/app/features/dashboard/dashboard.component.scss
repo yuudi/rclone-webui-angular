@@ -1,0 +1,12 @@
+:host {
+  margin: 3em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.dashboard__card {
+  display: inline-block;
+  margin: 2em;
+  min-width: 20em;
+}

@@ -9,6 +9,7 @@
   </button>
   <mat-menu #functionMenu>
     <button mat-menu-item routerLink="/dashboard" i18n>Dashboard</button>
+    <button mat-menu-item routerLink="/rclone/drive" i18n>Drives</button>
   </mat-menu>
   <a
     mat-icon-button
@@ -26,14 +27,6 @@
   >
     <mat-icon fontIcon="storage"></mat-icon>
   </a>
-  <a
-    mat-icon-button
-    routerLink="/rclone/explore"
-    i18n-matTooltip
-    matTooltip="Browser"
-  >
-    <mat-icon fontIcon="folder"></mat-icon>
-  </a>
   <span class="spacer"></span>
   <h1 i18n>Rclone WebUI</h1>
   <span class="spacer"></span>
@@ -43,9 +36,9 @@
     i18n-matTooltip
     matTooltip="Select Language"
   >
-    <mat-icon fontIcon="translate"></mat-icon>
+    <mat-icon fontIcon="language"></mat-icon>
   </button>
-  <mat-menu #languageMenu>
+  <mat-menu #languageMenu xPosition="before">
     <button mat-menu-item i18n>English</button>
   </mat-menu>
   <button

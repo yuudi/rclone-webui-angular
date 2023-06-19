@@ -1,1 +1,45 @@
-<p i18n>dashboard works!</p>
+<mat-card class="dashboard__card">
+  <mat-card-title i18n>Rclone</mat-card-title>
+  <mat-card-content>
+    <table *ngIf="version">
+      <tr>
+        <td i18n>Version</td>
+        <td>{{ version.version }}</td>
+      </tr>
+      <tr>
+        <td i18n>Platform</td>
+        <td>{{ version.os }}-{{ version.arch }}</td>
+      </tr>
+      <tr>
+        <td i18n>Go version</td>
+        <td>{{ version.goVersion }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="dashboard__card">
+  <mat-card-title i18n>Statistics</mat-card-title>
+  <mat-card-content>
+    <table *ngIf="stat$ | async as stat">
+      <tr>
+        <td i18n>Transferring</td>
+        <td>
+          {{ stat.transferring?.length ?? 0 }}
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Transferred</td>
+        <td>
+          {{ stat.transfers }}
+        </td>
+      </tr>
+      <tr>
+        <td i18n>Speed</td>
+        <td>
+          {{ stat.speed }}
+        </td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

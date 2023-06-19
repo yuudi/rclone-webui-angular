@@ -11,7 +11,7 @@ import { Backend, BackendUsage } from '../backend.model';
 export class BackendInfoComponent {
   @Input() backendName!: string;
   @Input() backend!: Backend;
-  @Input() usage?: BackendUsage;
+  @Input() usage?: BackendUsage | null;
 
   constructor(private router: Router) {}
 

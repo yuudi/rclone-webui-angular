@@ -6,6 +6,9 @@ import { Backend, BackendUsage } from './backend.model';
 import { BackendService } from './backend.service';
 import { tap } from 'rxjs';
 
+type Unmeasured = null;
+const Unmeasured = null;
+
 @Component({
   selector: 'app-backend',
   templateUrl: './backend.component.html',
@@ -15,7 +18,7 @@ export class BackendComponent implements OnInit {
   backendList?: {
     id: string;
     config: Backend;
-    usage?: BackendUsage;
+    usage?: BackendUsage | Unmeasured;
   }[];
 
   constructor(
@@ -44,13 +47,18 @@ export class BackendComponent implements OnInit {
   }
 
   fetchUsage(id: string) {
-    this.backendService.getBackendUsage(id).subscribe((usage) => {
-      const ref = this.backendList?.find((backend) => backend.id === id);
-      if (!ref) {
-        console.error(`Backend ${id} not found!`);
-        return;
-      }
-      ref.usage = usage;
+    const ref = this.backendList?.find((backend) => backend.id === id);
+    if (!ref) {
+      console.error(`Backend ${id} not found!`);
+      return;
+    }
+    this.backendService.getBackendUsage(id).subscribe({
+      next: (usage) => {
+        ref.usage = usage;
+      },
+      error: () => {
+        ref.usage = Unmeasured;
+      },
     });
   }
 
