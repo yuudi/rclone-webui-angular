@@ -30,11 +30,11 @@
     }"
   ></div>
   <mat-menu #contextMenu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="copyClicked()">
       <mat-icon fontIcon="file_copy"></mat-icon>
       <span i18n>Copy</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="moveClicked()">
       <mat-icon fontIcon="drive_file_move"></mat-icon>
       <span i18n>Move</span>
     </button>
@@ -42,7 +42,7 @@
       <mat-icon fontIcon="delete"></mat-icon>
       <span i18n>Delete</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="renameClicked()">
       <mat-icon fontIcon="edit"></mat-icon>
       <span i18n>Rename</span>
     </button>

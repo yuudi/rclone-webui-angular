@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build": "ng build --configuration production,embed",
+    "watch": "ng build --watch --configuration development,embed",
     "test": "ng test",
     "lint:prettier": "prettier ./src --write",
     "lint:eslint": "ng lint --fix",

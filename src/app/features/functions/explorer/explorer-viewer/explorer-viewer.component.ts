@@ -2,10 +2,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -16,11 +17,11 @@ import {
   AppClipboard,
   DirItem,
   DirectoryItem,
-  ExplorerView,
   FileItem,
 } from '../explorer.model';
 import { ExplorerService } from '../explorer.service';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
+import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -30,11 +31,11 @@ const Loading = undefined;
   templateUrl: './explorer-viewer.component.html',
   styleUrls: ['./explorer-viewer.component.scss'],
 })
-export class ExplorerViewerComponent {
+export class ExplorerViewerComponent implements OnInit {
   @Input() backend!: string;
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
-  @Output() clipboardPasted = new EventEmitter<ExplorerView>();
+  @Input() refresh$?: Observable<void>;
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
 
   private _path!: string;
@@ -66,11 +67,17 @@ export class ExplorerViewerComponent {
     private explorerService: ExplorerService
   ) {}
 
+  ngOnInit(): void {
+    this.refresh$?.subscribe(() => {
+      this.fetchChildren();
+    });
+  }
+
   fetchChildren() {
     this.children = Loading;
 
     const sub = this.explorerService
-      .listChildren(this)
+      .listChildren(this.backend, this.path)
       .subscribe((children) => {
         this.children = children.list;
       });
@@ -98,6 +105,67 @@ export class ExplorerViewerComponent {
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
     this.contextMenu.openMenu();
+  }
+
+  copyClicked() {
+    const item = this.contextMenuItem;
+    if (!item) {
+      throw new Error('No context menu item when copy clicked.');
+    }
+    this.clipboardAdded.emit({
+      type: 'copy',
+      backend: this.backend,
+      items: [item],
+    });
+  }
+
+  moveClicked() {
+    const item = this.contextMenuItem;
+    if (!item) {
+      throw new Error('No context menu item when move clicked.');
+    }
+    this.clipboardAdded.emit({
+      type: 'move',
+      backend: this.backend,
+      items: [item],
+    });
+  }
+
+  renameClicked() {
+    const item = this.contextMenuItem;
+    if (!item) {
+      throw new Error('No context menu item when delete clicked.');
+    }
+    const nameAvailable$ = new Subject<boolean>();
+    const dialog = this.dialog.open(RenameDialogComponent, {
+      data: {
+        name: item.Name,
+        nameAvailable$,
+      },
+    });
+    const nameSub = dialog.componentInstance.nameChange.subscribe((name) => {
+      if (!name) {
+        nameAvailable$.next(false);
+        return;
+      }
+      const exist = this.children?.find((i) => i.Name === name);
+      nameAvailable$.next(!exist);
+    });
+    this.currentPathSubScription.add(nameSub);
+    const confirmSub = dialog.componentInstance.confirm.subscribe((name) => {
+      this.renameConfirmed(item, name);
+    });
+    this.currentPathSubScription.add(confirmSub);
+  }
+
+  renameConfirmed(item: DirectoryItem, newName: string) {
+    const sub = this.explorerService
+      .renameItem(this.backend, item, newName)
+      .subscribe(() => {
+        this.snackBar.open('Renamed');
+        item.Name = newName;
+      });
+    this.currentPathSubScription.add(sub);
   }
 
   deleteClicked() {

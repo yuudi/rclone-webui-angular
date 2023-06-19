@@ -6,6 +6,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -36,6 +37,7 @@ const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatMenuModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

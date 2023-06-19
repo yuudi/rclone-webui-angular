@@ -23,16 +23,69 @@
             [disabled]="group.tabs.length === 0"
             i18n-matTooltip
             matTooltip="Refresh"
+            (click)="refresh(group.tabs[group.currentTab])"
           >
             <mat-icon fontIcon="refresh"></mat-icon>
           </button>
           <button
             mat-icon-button
+            [matMenuTriggerFor]="clipboardViewMenu"
+            i18n-matTooltip
+            matTooltip="Clipboard"
+          >
+            <mat-icon
+              fontIcon="inventory_2"
+              class="material-icons-outlined"
+            ></mat-icon>
+          </button>
+          <mat-menu #clipboardViewMenu>
+            <button
+              mat-menu-item
+              [disabled]="!clipboard?.items?.length"
+              (click)="clipboardPaste(group.tabs[group.currentTab])"
+            >
+              <mat-icon fontIcon="content_paste"></mat-icon>
+              <span i18n>Paste Here</span>
+            </button>
+            <button
+              mat-menu-item
+              [disabled]="!clipboard?.items?.length"
+              (click)="clipboardClear()"
+            >
+              <mat-icon fontIcon="content_paste_off"></mat-icon>
+              <span i18n>Discard</span>
+            </button>
+          </mat-menu>
+          <button
+            mat-icon-button
+            [disabled]="group.tabs.length === 0"
+            i18n-matTooltip
+            matTooltip="Create Folder"
+          >
+            <mat-icon
+              fontIcon="create_new_folder"
+              class="material-icons-outlined"
+            ></mat-icon>
+          </button>
+          <div class="spacer"></div>
+          <button
+            mat-icon-button
+            [disabled]="viewsGroups.length > 2"
+            i18n-matTooltip
+            matTooltip="Sync"
+          >
+            <mat-icon fontIcon="sync"></mat-icon>
+          </button>
+          <button
+            mat-icon-button
             [matMenuTriggerFor]="addViewMenu"
             i18n-matTooltip
-            matTooltip="Open Backend"
+            matTooltip="New Tab"
           >
-            <mat-icon fontIcon="add"></mat-icon>
+            <mat-icon
+              fontIcon="library_add"
+              class="material-icons-outlined"
+            ></mat-icon>
           </button>
           <mat-menu #addViewMenu>
             <button
@@ -65,7 +118,6 @@
               {{ localFs }}:\
             </button>
           </mat-menu>
-          <div class="spacer"></div>
           <button
             *ngIf="viewsGroups.length > 1"
             mat-icon-button
@@ -88,8 +140,12 @@
       </mat-card-header>
       <mat-card-content>
         <div *ngIf="group.tabs.length === 0" class="new-group-hint" i18n>
-          click &nbsp;<mat-icon fontIcon="add"></mat-icon>&nbsp; to open a
-          backend
+          click
+          <mat-icon
+            fontIcon="library_add"
+            class="material-icons-outlined"
+          ></mat-icon>
+          to open a backend
         </div>
         <mat-tab-group preserveContent [(selectedIndex)]="group.currentTab">
           <mat-tab *ngFor="let view of group.tabs; let tabIndex = index">
@@ -110,6 +166,9 @@
             <app-explorer-viewer
               [backend]="view.backend"
               [(path)]="view.path"
+              [refresh$]="view.refresh$"
+              (clipboardAdded)="clipboardAdd($event)"
+              #explorerViewer
             ></app-explorer-viewer>
           </mat-tab>
         </mat-tab-group>

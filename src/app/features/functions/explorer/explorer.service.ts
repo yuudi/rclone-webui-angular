@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import {
-  AppClipboard,
-  DirectoryItem,
-  EmptyObj,
-  ExplorerView,
-} from './explorer.model';
+import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +16,7 @@ export class ExplorerService {
       .pipe(map((res) => res.os));
   }
 
-  listChildren(view: ExplorerView) {
-    const { backend, path } = view;
+  listChildren(backend: string, path: string) {
     return this.rc.call<{ list: DirectoryItem[] }>('operations/list', {
       fs: ExplorerService.toFs(backend),
       remote: path,
@@ -51,23 +45,37 @@ export class ExplorerService {
     }
   }
 
+  renameItem(backend: string, item: DirectoryItem, newName: string) {
+    const pathList = item.Path.split('/');
+    pathList[pathList.length - 1] = newName;
+    const newPath = pathList.join('/');
+
+    if (item.IsDir) {
+      return this.rcSync('move', backend, item.Path, backend, newPath);
+    } else {
+      return this.rcOperate('move', backend, item.Path, backend, newPath);
+    }
+  }
+
   clipboardOperate(backend: string, path: string, clipboard: AppClipboard) {
     return clipboard.items.map((item) => {
       if (item.IsDir) {
+        const dirName = item.Path.split('/').pop();
         return this.rcSync(
           clipboard.type,
           clipboard.backend,
           item.Path,
           backend,
-          path
+          path + '/' + dirName
         );
       } else {
+        const fileName = item.Path.split('/').pop();
         return this.rcOperate(
           clipboard.type,
           clipboard.backend,
           item.Path,
           backend,
-          path
+          path + '/' + fileName
         );
       }
     });

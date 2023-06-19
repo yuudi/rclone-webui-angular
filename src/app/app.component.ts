@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
+import { MatIconRegistry } from '@angular/material/icon';
 
 import { environment } from 'src/environments/environment';
 
@@ -9,4 +12,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   showRemoteSetting = !environment.embed;
+
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon(
+      'github',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/icons/github-mark-white.svg'
+      )
+    );
+  }
 }

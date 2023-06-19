@@ -1,7 +1,15 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button i18n-matTooltip matTooltip="Menu">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="functionMenu"
+    i18n-matTooltip
+    matTooltip="Menu"
+  >
     <mat-icon fontIcon="menu"></mat-icon>
   </button>
+  <mat-menu #functionMenu>
+    <button mat-menu-item routerLink="/dashboard" i18n>Dashboard</button>
+  </mat-menu>
   <a
     mat-icon-button
     routerLink="/dashboard"
@@ -29,9 +37,17 @@
   <span class="spacer"></span>
   <h1 i18n>Rclone WebUI</h1>
   <span class="spacer"></span>
-  <button mat-icon-button i18n-matTooltip matTooltip="Select Language">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="languageMenu"
+    i18n-matTooltip
+    matTooltip="Select Language"
+  >
     <mat-icon fontIcon="translate"></mat-icon>
   </button>
+  <mat-menu #languageMenu>
+    <button mat-menu-item i18n>English</button>
+  </mat-menu>
   <button
     *ngIf="showRemoteSetting"
     mat-icon-button
@@ -40,5 +56,14 @@
   >
     <mat-icon fontIcon="settings_remote"></mat-icon>
   </button>
+  <a
+    mat-icon-button
+    href="https://github.com/yuudi/rclone-webui-angular"
+    target="_blank"
+    i18n-matTooltip
+    matTooltip="Source Code"
+  >
+    <mat-icon svgIcon="github"></mat-icon>
+  </a>
 </mat-toolbar>
 <router-outlet></router-outlet>

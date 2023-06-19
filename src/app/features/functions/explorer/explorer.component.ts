@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { first, lastValueFrom } from 'rxjs';
+import { Subject, first, lastValueFrom } from 'rxjs';
 
 import { MatIconRegistry } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BackendService } from '../backend/backend.service';
 import { AppClipboard, ExplorerView } from './explorer.model';
@@ -24,6 +25,7 @@ export class ExplorerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private explorerService: ExplorerService,
@@ -48,6 +50,7 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend: backend,
           path: '',
+          refresh$: new Subject(),
         });
       }
     });
@@ -88,6 +91,7 @@ export class ExplorerComponent implements OnInit {
     group.tabs.push({
       backend: backend,
       path: '',
+      refresh$: new Subject(),
     });
     group.currentTab = group.tabs.length - 1;
   }
@@ -108,10 +112,48 @@ export class ExplorerComponent implements OnInit {
 
   /**
    * Move a view to parent view in-place
+   * this will trigger a refresh
    */
   goUp(view: ExplorerView) {
     const path = view.path.split('/');
     path.pop();
     view.path = path.join('/');
+  }
+
+  refresh(view: ExplorerView) {
+    view.refresh$.next(); // I regret not using ngRx, but It's too late now.
+  }
+
+  clipboardAdd(clipboard: AppClipboard) {
+    this.clipboard = clipboard;
+  }
+
+  clipboardClear() {
+    this.clipboard = null;
+  }
+
+  clipboardPaste(view: ExplorerView, action?: 'copy' | 'move') {
+    if (!this.clipboard) {
+      return;
+    }
+    if (action) {
+      this.clipboard.type = action;
+    }
+    const opObsList = this.explorerService.clipboardOperate(
+      view.backend,
+      view.path,
+      this.clipboard
+    );
+    for (const opObs of opObsList) {
+      opObs.subscribe({
+        next: () => {
+          this.snackBar.open($localize`Task Created Successfully`, 'Dismiss');
+        },
+        error: (err) => {
+          this.snackBar.open(err, 'Dismiss');
+        },
+      });
+    }
+    this.clipboard = null;
   }
 }

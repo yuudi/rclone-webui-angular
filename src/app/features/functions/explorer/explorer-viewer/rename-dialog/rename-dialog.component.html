@@ -1,0 +1,26 @@
+<h2 i18n mat-dialog-title>Rename</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label i18n>New name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.name"
+      (ngModelChange)="nameChange.emit($event)"
+    />
+    <mat-error *ngIf="(data.nameAvailable$ | async) === false" i18n>
+      Name already exists
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close i18n>Cancel</button>
+  <button
+    mat-button
+    mat-dialog-close
+    [disabled]="(data.nameAvailable$ | async) === false"
+    (click)="confirm.emit(data.name)"
+    i18n
+  >
+    Ok
+  </button>
+</div>

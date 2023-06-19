@@ -1,6 +1,9 @@
+import { Subject } from 'rxjs';
+
 export interface ExplorerView {
   backend: string;
   path: string;
+  refresh$: Subject<void>;
 }
 
 export interface AppClipboard {
