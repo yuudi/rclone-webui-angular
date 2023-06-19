@@ -1,7 +1,10 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -17,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ExplorerRoutingModule } from './explorer-routing.module';
+import { CopyDialogComponent } from './explorer-viewer/copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component';
 import { ExplorerViewerComponent } from './explorer-viewer/explorer-viewer.component';
 import { PathSplitterComponent } from './explorer-viewer/path-splitter/path-splitter.component';
@@ -32,10 +36,13 @@ import { FilesSummaryPipe } from './files-summary.pipe';
     DeleteConfirmDialogComponent,
     PathSplitterComponent,
     RenameDialogComponent,
+    CopyDialogComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ClipboardModule,
+    TextFieldModule,
     ExplorerRoutingModule,
     MatIconModule,
     MatButtonModule,
@@ -50,6 +57,7 @@ import { FilesSummaryPipe } from './files-summary.pipe';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatBadgeModule,
   ],
 })
 export class ExplorerModule {}

@@ -1,0 +1,23 @@
+<h2 i18n mat-dialog-title>Link Created</h2>
+<div mat-dialog-content>
+  <mat-form-field class="copy__link">
+    <textarea
+      matInput
+      [value]="data.content"
+      readonly
+      cdkTextareaAutosize
+    ></textarea>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    class="copy__button"
+    [cdkCopyToClipboard]="data.content"
+    i18n
+  >
+    Copy
+  </button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close i18n>Done</button>
+</div>

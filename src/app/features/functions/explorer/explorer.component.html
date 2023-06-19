@@ -29,6 +29,7 @@
           </button>
           <button
             mat-icon-button
+            [disabled]="group.tabs.length === 0"
             [matMenuTriggerFor]="clipboardViewMenu"
             i18n-matTooltip
             matTooltip="Clipboard"
@@ -36,6 +37,7 @@
             <mat-icon
               fontIcon="inventory_2"
               class="material-icons-outlined"
+              [matBadge]="clipboard?.items?.length"
             ></mat-icon>
           </button>
           <mat-menu #clipboardViewMenu>

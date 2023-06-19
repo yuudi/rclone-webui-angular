@@ -22,6 +22,7 @@ import {
 import { ExplorerService } from '../explorer.service';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
+import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -192,6 +193,31 @@ export class ExplorerViewerComponent implements OnInit {
           throw new Error('Deleted item not found in children.');
         }
         this.children?.splice(index, 1);
+      });
+    this.currentPathSubScription.add(sub);
+  }
+
+  generateLinkClicked() {
+    const item = this.contextMenuItem;
+    if (!item) {
+      throw new Error('No context menu item when generate link clicked.');
+    }
+    const sub = this.explorerService
+      .generateLink(this.backend, item.Path)
+      .subscribe({
+        next: (link) => {
+          this.dialog.open(CopyDialogComponent, {
+            data: {
+              content: link,
+            },
+          });
+        },
+        error: () => {
+          this.snackBar.open(
+            'this backend does not support generating link',
+            $localize`OK`
+          );
+        },
       });
     this.currentPathSubScription.add(sub);
   }

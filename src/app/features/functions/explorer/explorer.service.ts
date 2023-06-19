@@ -57,6 +57,15 @@ export class ExplorerService {
     }
   }
 
+  generateLink(backend: string, path: string) {
+    return this.rc
+      .call<{ url: string }>('operations/publiclink', {
+        fs: ExplorerService.toFs(backend),
+        remote: path,
+      })
+      .pipe(map((res) => res.url));
+  }
+
   clipboardOperate(backend: string, path: string, clipboard: AppClipboard) {
     return clipboard.items.map((item) => {
       if (item.IsDir) {
