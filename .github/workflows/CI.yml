@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - development
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: RcloneWebuiAngular-${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            RcloneWebuiAngular-${{ runner.os }}-node-
+
+      - name: CI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "::group::Initialize"
+          BRANCH=ci/${{ github.run_number }}
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git checkout -b $BRANCH
+          changed=false
+          echo "::endgroup::"
+
+          echo "::group::Lint"
+          npm ci
+          npm run lint
+          if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
+            git add .
+            git commit -m ":art: format code"
+            changed=true
+          fi
+          echo "::endgroup::"
+
+          echo "::group::i18n"
+          npm run extract-i18n
+          if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
+            git add .
+            git commit -m ":globe_with_meridians: update i18n"
+            changed=true
+          fi
+          echo "::endgroup::"
+
+          if [ "$changed" = true ]; then
+            echo "::group::Pull Request"
+            git push --set-upstream origin $BRANCH
+            gh pr create --title "CI" --body "CI" --base "development" --head "$BRANCH" --repo "$GITHUB_REPOSITORY"
+            echo "::endgroup::"
+          fi
