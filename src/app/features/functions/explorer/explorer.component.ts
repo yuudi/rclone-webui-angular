@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, first, lastValueFrom } from 'rxjs';
+import { Subject, catchError, first, lastValueFrom, map, of } from 'rxjs';
 
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -61,18 +61,20 @@ export class ExplorerComponent implements OnInit {
     if (os === 'windows') {
       // In Windows, there are no api to list all drives,
       // So we just try from C to Z,
+      // When we get an error, we stop and assume that's the last drive.
       // This is not a good solution,
       // But it's the best we can do for now,
       // If new api is available, we should use that.
       let drive = 'C';
       while (drive <= 'Z') {
-        try {
-          await lastValueFrom(this.backendService.getBackendUsage(drive));
-          this.localFsList.push(drive);
-          drive = String.fromCharCode(drive.charCodeAt(0) + 1);
-        } catch (error) {
-          return;
+        const result = await lastValueFrom(
+          this.backendService.checkWindowsDriveExist(drive)
+        );
+        if (!result) {
+          break;
         }
+        this.localFsList.push(drive);
+        drive = String.fromCharCode(drive.charCodeAt(0) + 1);
       }
     } else {
       this.localFsList.push('');
