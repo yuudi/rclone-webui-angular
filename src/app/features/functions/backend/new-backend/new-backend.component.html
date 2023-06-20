@@ -176,8 +176,8 @@
             >You will be redirected to the provider's website to authorize,
             click save now</span
           >
-          <div *ngIf="waitingForBackend" i18n>
-            Authorizing...
+          <div *ngIf="waitingForBackend">
+            <ng-container i18n>Authorizing...</ng-container>
             <mat-spinner></mat-spinner>
           </div>
         </div>

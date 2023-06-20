@@ -26,13 +26,11 @@ import { ExplorerViewerComponent } from './explorer-viewer/explorer-viewer.compo
 import { PathSplitterComponent } from './explorer-viewer/path-splitter/path-splitter.component';
 import { RenameDialogComponent } from './explorer-viewer/rename-dialog/rename-dialog.component';
 import { ExplorerComponent } from './explorer.component';
-import { FilesSummaryPipe } from './files-summary.pipe';
 
 @NgModule({
   declarations: [
     ExplorerComponent,
     ExplorerViewerComponent,
-    FilesSummaryPipe,
     DeleteConfirmDialogComponent,
     PathSplitterComponent,
     RenameDialogComponent,

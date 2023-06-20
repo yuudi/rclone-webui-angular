@@ -75,3 +75,21 @@ Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
   - [ ] Rclone embedded
   - [ ] PWA Standalone
   - [ ] Electron
+
+## Contribute
+
+### Bug report
+
+Bug reports are welcome, please open an [issue](https://github.com/yuudi/rclone-webui-angular/issues/new/choose) or [discuss](https://github.com/yuudi/rclone-webui-angular/discussions/new/choose)
+
+### Code
+
+For small bugfix, just open a [pull request](https://github.com/yuudi/rclone-webui-angular/pulls)
+
+For new feature or big changes, please open an [issue](https://github.com/yuudi/rclone-webui-angular/issues/new/choose) first to discuss
+
+### Translation
+
+If you want to help translate, first search the issue to see if there is already a translation in progress, if not, open an issue to claim the translation
+
+Please use translate tool like [Poedit](https://poedit.net/) to translate the [XLIFF file](./src/locale/messages.xlf)

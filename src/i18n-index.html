@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title i18n>Rclone Webui</title>
+    <link rel="icon" href="data:;">
+    <script>
+      // ES5
+      (function () {
+        langs = ["en-US", "zh-CN"];
+        for (i = 0; i < langs.length; i++) {
+          if (langs[i] == navigator.language) {
+            window.location.href = "/" + langs[i] + "/";
+            return;
+          }
+        }
+        window.location.href = "/en-US/";
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript i18n>
+      Please enable JavaScript to continue using this application.
+    </noscript>
+  </body>
+</html>

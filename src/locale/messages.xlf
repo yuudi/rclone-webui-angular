@@ -1,0 +1,764 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="2102825898069375693" datatype="html">
+        <source>Menu</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3152486099939084158" datatype="html">
+        <source>Drives</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7730992219911127538" datatype="html">
+        <source>Rclone WebUI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="487077452159084336" datatype="html">
+        <source>Select Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5866254605255506989" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4689443708886954687" datatype="html">
+        <source>Chinese Simplified</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2557623954339695776" datatype="html">
+        <source>Connections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4352526755847379280" datatype="html">
+        <source>Source Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2649252321173430744" datatype="html">
+        <source>Not Found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/not-found/not-found.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="542838625985791371" datatype="html">
+        <source>return home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/not-found/not-found.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6488103466338737410" datatype="html">
+        <source>Name already exists</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="12491435104517248" datatype="html">
+        <source>Connection ID not found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">101</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7285459956951862232" datatype="html">
+        <source>Connection not found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2659934568888177208" datatype="html">
+        <source>Connection has no authentication</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3013055597615607317" datatype="html">
+        <source>Display Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8505935423745518392" datatype="html">
+        <source> Please enter a display name </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">8,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="300615299523179346" datatype="html">
+        <source> A connection with this name already exists </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6149473508047129471" datatype="html">
+        <source>Remote Address</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4288365178410286526" datatype="html">
+        <source> Please enter a valid address </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">21,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431967982799746382" datatype="html">
+        <source> This connection is not protected by a password </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5248717555542428023" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7055385188245520959" datatype="html">
+        <source> Remember Password </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">37,39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">19,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7673863024811381818" datatype="html">
+        <source> Test Connection </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">46,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1545005867911976778" datatype="html">
+        <source> Connect </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
+          <context context-type="linenumber">55,57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="582119650624142213" datatype="html">
+        <source>Connection successful</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4448321183127826742" datatype="html">
+        <source>Connection failed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8643396715708565201" datatype="html">
+        <source>Connection failed:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8451342921207487014" datatype="html">
+        <source>No connections</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2903873185531053389" datatype="html">
+        <source> New Connection </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+        <note priority="1" from="description">create</note>
+      </trans-unit>
+      <trans-unit id="1536087519743707362" datatype="html">
+        <source>Dismiss</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/connection.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8191371354890763172" datatype="html">
+        <source>Enter Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1879517876731100451" datatype="html">
+        <source>Rclone</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="962765493084218985" datatype="html">
+        <source>Platform</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8961799598905368955" datatype="html">
+        <source>Go version</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1069523139277190436" datatype="html">
+        <source>Statistics</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1441510615438989312" datatype="html">
+        <source>Transferring</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1224770523323579455" datatype="html">
+        <source>Transferred</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3128293408739574" datatype="html">
+        <source>Speed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2527698965946238336" datatype="html">
+        <source>Not Measured</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="81585474102700882" datatype="html">
+        <source>Used</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description">Already Used Space</note>
+      </trans-unit>
+      <trans-unit id="3200393806027771580" datatype="html">
+        <source> Trash </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+        <note priority="1" from="description">Space used by trash</note>
+      </trans-unit>
+      <trans-unit id="8605967835704545279" datatype="html">
+        <source> Other </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">31,33</context>
+        </context-group>
+        <note priority="1" from="description">Space used by other</note>
+      </trans-unit>
+      <trans-unit id="5891064527381218201" datatype="html">
+        <source>Free</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <note priority="1" from="description">Available Space</note>
+      </trans-unit>
+      <trans-unit id="7531602241051125940" datatype="html">
+        <source>Objects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <note priority="1" from="description">Count of Objects</note>
+      </trans-unit>
+      <trans-unit id="787163983066183218" datatype="html">
+        <source>Browse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6827560313738519815" datatype="html">
+        <source>New Backend</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8232773653071363045" datatype="html">
+        <source>Provider</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4580988005648117665" datatype="html">
+        <source>Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3971100408152984961" datatype="html">
+        <source> Next </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">54,56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">141,143</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">163,165</context>
+        </context-group>
+        <note priority="1" from="description">next step</note>
+      </trans-unit>
+      <trans-unit id="8432562579042371182" datatype="html">
+        <source>Options</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3623640243867983281" datatype="html">
+        <source> Only stared* fields are required :) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4258500568871377211" datatype="html">
+        <source> Got it </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">72,74</context>
+        </context-group>
+        <note priority="1" from="description">understand</note>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">148</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">170</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7960163200088679566" datatype="html">
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">176,177</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2466435579379681938" datatype="html">
+        <source>Authorizing...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">180</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6649706328938022022" datatype="html">
+        <source>You are all set, click save now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">185</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3620188369327429839" datatype="html">
+        <source> Save </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">194,196</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5334162996115147515" datatype="html">
+        <source>Link Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3765886400143289586" datatype="html">
+        <source> Copy </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="397098723873502323" datatype="html">
+        <source>Done</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4052706577506222469" datatype="html">
+        <source>Would you like to delete <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4165850386196559100" datatype="html">
+        <source>Empty</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4323470180912194028" datatype="html">
+        <source>Copy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2354817630223808522" datatype="html">
+        <source>Move</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6041115344061899387" datatype="html">
+        <source>Rename</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3476827161214058075" datatype="html">
+        <source>Generate Link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3099741642167775297" datatype="html">
+        <source>Download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7187000848329495899" datatype="html">
+        <source>Opening File is not implemented yet.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">218</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1674202514578558795" datatype="html">
+        <source>New name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7958523096095518919" datatype="html">
+        <source> Name already exists </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3394880135309962358" datatype="html">
+        <source> Ok </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
+          <context context-type="linenumber">23,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5460217556068689396" datatype="html">
+        <source>Go Up</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1102717806459547726" datatype="html">
+        <source>Refresh</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3591781971294396421" datatype="html">
+        <source>Clipboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7478877538855480857" datatype="html">
+        <source>Paste Here</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3823219296477075982" datatype="html">
+        <source>Discard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="672413176610067158" datatype="html">
+        <source>New Tab</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2812353444192922702" datatype="html">
+        <source> Local Filesystem </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">109,111</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">113,115</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">162</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1084063406279979182" datatype="html">
+        <source>Close All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1693401925844219649" datatype="html">
+        <source>Split Window</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2109484463693647579" datatype="html">
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon
+            fontIcon=&quot;library_add&quot;
+            class=&quot;material-icons-outlined&quot;
+          &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">148,155</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5674970056730934974" datatype="html">
+        <source>Task Created Successfully</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.ts</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7501365879745121673" datatype="html">
+        <source>Manage Drives</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/functions.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3685794532791241025" datatype="html">
+        <source>Explore Drives</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/functions.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
