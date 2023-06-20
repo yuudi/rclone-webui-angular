@@ -33,8 +33,8 @@ jobs:
 
       - name: Archive as Zip
         run: |
+          cp src/i18n-index.html dist/build/index.html
           cd dist
-          mv rclone-webui-angular build
           zip -r currentbuild.zip build
 
       - name: Create Release

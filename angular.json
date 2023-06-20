@@ -24,7 +24,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize": true,
-            "outputPath": "dist/rclone-webui-angular",
+            "outputPath": "dist/build",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
