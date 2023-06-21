@@ -17,7 +17,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3152486099939084158" datatype="html">
@@ -28,49 +28,60 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2849267946273310379" datatype="html">
+        <source>Mounting</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7730992219911127538" datatype="html">
         <source>Rclone WebUI</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="487077452159084336" datatype="html">
         <source>Select Language</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5866254605255506989" datatype="html">
         <source>English</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4689443708886954687" datatype="html">
         <source>Chinese Simplified</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2557623954339695776" datatype="html">
         <source>Connections</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4352526755847379280" datatype="html">
         <source>Source Code</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2649252321173430744" datatype="html">
@@ -278,6 +289,38 @@
           <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.ts</context>
           <context context-type="linenumber">67</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/backend.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.ts</context>
+          <context context-type="linenumber">95</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.ts</context>
+          <context context-type="linenumber">158</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">140</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8191371354890763172" datatype="html">
         <source>Enter Password</source>
@@ -295,6 +338,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
           <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1879517876731100451" datatype="html">
@@ -436,11 +483,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">141,143</context>
+          <context context-type="linenumber">142,144</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">163,165</context>
+          <context context-type="linenumber">164,166</context>
         </context-group>
         <note priority="1" from="description">next step</note>
       </trans-unit>
@@ -466,50 +513,79 @@
         </context-group>
         <note priority="1" from="description">understand</note>
       </trans-unit>
+      <trans-unit id="3044369161367328488" datatype="html">
+        <source> Hide Advanced Options </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">128,130</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2699313572844735542" datatype="html">
+        <source> Show Advanced Options </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
+          <context context-type="linenumber">131,133</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8953033926734869941" datatype="html">
         <source>Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">148</context>
+          <context context-type="linenumber">149</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">171</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7960163200088679566" datatype="html">
         <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">176,177</context>
+          <context context-type="linenumber">177,178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2466435579379681938" datatype="html">
         <source>Authorizing...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6649706328938022022" datatype="html">
         <source>You are all set, click save now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">185</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3620188369327429839" datatype="html">
         <source> Save </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">194,196</context>
+          <context context-type="linenumber">195,197</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7744129393493523836" datatype="html">
+        <source>Error creating backend: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.ts</context>
+          <context context-type="linenumber">94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5334162996115147515" datatype="html">
@@ -542,6 +618,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
           <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.html</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4052706577506222469" datatype="html">
@@ -626,7 +706,32 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
-          <context context-type="linenumber">218</context>
+          <context context-type="linenumber">216</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5488667333459350160" datatype="html">
+        <source>Renamed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">166</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6381490568322624964" datatype="html">
+        <source>Deleted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4606091236515013460" datatype="html">
+        <source>Error:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
+          <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1674202514578558795" datatype="html">
@@ -704,7 +809,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">162</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1084063406279979182" datatype="html">
@@ -718,7 +823,7 @@
         <source>Split Window</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
@@ -728,21 +833,21 @@
           &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">148,155</context>
+          <context context-type="linenumber">151,158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">166</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5674970056730934974" datatype="html">
         <source>Task Created Successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.ts</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7501365879745121673" datatype="html">
@@ -757,6 +862,178 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/functions/functions.component.html</context>
           <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1971865492332905755" datatype="html">
+        <source>New MountPoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6599356923898400319" datatype="html">
+        <source>Unmount All</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="560443334489296785" datatype="html">
+        <source>Rclone does not have access to this path, please check the permission of this path</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="989049066299437124" datatype="html">
+        <source>Mount created and mounted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2364550710330521794" datatype="html">
+        <source>Mount created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="984117971499949443" datatype="html">
+        <source>Mounted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">135</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3297029408193612840" datatype="html">
+        <source>Unmounted</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">145</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/mount.component.ts</context>
+          <context context-type="linenumber">154</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4174953868691227020" datatype="html">
+        <source>Create MountPoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4736210244914788712" datatype="html">
+        <source>Drive</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="174792567272132410" datatype="html">
+        <source> Automatic MountPoint </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">15,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8643692971848848902" datatype="html">
+        <source>MountPoint</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="655049383752216892" datatype="html">
+        <source>Mount Now</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8188665053347707351" datatype="html">
+        <source> Mount as Readonly Drive </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">35,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1174398173025044116" datatype="html">
+        <source> Mount as Windows Network Drive </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="991790413700941336" datatype="html">
+        <source>Cache Mode</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3599005616661192177" datatype="html">
+        <source> Off </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="533769579714104079" datatype="html">
+        <source> Minimal (Only opened files are cached) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">49,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="616337869273310985" datatype="html">
+        <source> Write (All non-readonly files are cached) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3302458363931158751" datatype="html">
+        <source> Full </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2787011255743936179" datatype="html">
+        <source>File Permissions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6880846271161386525" datatype="html">
+        <source>Directory Permissions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4021701907132072675" datatype="html">
+        <source> Skip modification time (can speed things up) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">66,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7941428823403788384" datatype="html">
+        <source> Create </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/functions/mount/new-mount-dialog/new-mount-dialog.component.html</context>
+          <context context-type="linenumber">79,81</context>
         </context-group>
       </trans-unit>
     </body>

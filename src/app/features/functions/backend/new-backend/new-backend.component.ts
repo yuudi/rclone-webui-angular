@@ -90,7 +90,10 @@ export class NewBackendComponent implements OnInit {
         this.router.navigate(['rclone', 'drive']);
       },
       error: (err) => {
-        this.snackBar.open('Error creating backend: ' + err, 'Dismiss');
+        this.snackBar.open(
+          $localize`Error creating backend: ` + err,
+          $localize`Dismiss`
+        );
         this.waitingForBackend = false;
       },
     });

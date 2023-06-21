@@ -163,7 +163,7 @@ export class ExplorerViewerComponent implements OnInit {
     const sub = this.explorerService
       .renameItem(this.backend, item, newName)
       .subscribe(() => {
-        this.snackBar.open('Renamed');
+        this.snackBar.open($localize`Renamed`);
         item.Name = newName;
       });
     this.currentPathSubScription.add(sub);
@@ -187,7 +187,7 @@ export class ExplorerViewerComponent implements OnInit {
     const sub = this.explorerService
       .deleteItem(this.backend, item)
       .subscribe(() => {
-        this.snackBar.open('Deleted');
+        this.snackBar.open($localize`Deleted`);
         const index = this.children?.findIndex((i) => i.Path === item.Path);
         if (index === undefined || index === -1) {
           throw new Error('Deleted item not found in children.');
@@ -212,11 +212,8 @@ export class ExplorerViewerComponent implements OnInit {
             },
           });
         },
-        error: () => {
-          this.snackBar.open(
-            'this backend does not support generating link',
-            $localize`OK`
-          );
+        error: (error) => {
+          this.snackBar.open($localize`Error:` + String(error), $localize`OK`);
         },
       });
     this.currentPathSubScription.add(sub);

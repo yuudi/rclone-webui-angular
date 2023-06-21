@@ -149,10 +149,13 @@ export class ExplorerComponent implements OnInit {
     for (const opObs of opObsList) {
       opObs.subscribe({
         next: () => {
-          this.snackBar.open($localize`Task Created Successfully`, 'Dismiss');
+          this.snackBar.open(
+            $localize`Task Created Successfully`,
+            $localize`Dismiss`
+          );
         },
         error: (err) => {
-          this.snackBar.open(err, 'Dismiss');
+          this.snackBar.open(err, $localize`Dismiss`);
         },
       });
     }

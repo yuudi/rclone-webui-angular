@@ -160,7 +160,7 @@ export class MountComponent implements OnInit {
   editClicked(setting: MountSetting) {
     //TODO
     console.log(setting);
-    this.snackBar.open('Not implemented yet', 'Dismiss');
+    this.snackBar.open('Not implemented yet', $localize`Dismiss`);
   }
 
   deleteClicked(id: string) {

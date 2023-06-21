@@ -63,6 +63,6 @@ export class BackendComponent implements OnInit {
   }
 
   private displayError(error: unknown) {
-    this.snackBar.open(`error: ${error}`, 'Dismiss');
+    this.snackBar.open(`error: ${error}`, $localize`Dismiss`);
   }
 }

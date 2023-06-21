@@ -125,11 +125,12 @@
             <mat-icon
               [fontIcon]="showAdvancedOptions ? 'expand_less' : 'expand_more'"
             ></mat-icon>
-            {{
-              showAdvancedOptions
-                ? "Hide Advanced Options"
-                : "Show Advanced Options"
-            }}
+            <ng-container *ngIf="showAdvancedOptions; else showAdvanced" i18n>
+              Hide Advanced Options
+            </ng-container>
+            <ng-template #showAdvanced i18n>
+              Show Advanced Options
+            </ng-template>
           </button>
         </div>
         <div class="new-backend__button">

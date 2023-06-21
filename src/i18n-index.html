@@ -4,15 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title i18n>Rclone Webui</title>
-    <link rel="icon" href="data:;">
+    <link rel="icon" href="data:;" />
     <script>
-      // ES5
+      // ES3 compatible
       (function () {
-        langs = ["en-US", "zh-CN"];
-        for (i = 0; i < langs.length; i++) {
-          if (langs[i] == navigator.language) {
-            window.location.href = "/" + langs[i] + "/";
-            return;
+        available = ["en-US", "zh-CN"];
+        preference = navigator.languages;
+        for (i = 0; i < preference.length; i++) {
+          for (j = 0; j < available.length; j++) {
+            if (
+              available[j].substring(0, preference[i].length) == preference[i]
+            ) {
+              window.location.href = "/" + available[j] + "/";
+            }
           }
         }
         window.location.href = "/en-US/";
