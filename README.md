@@ -32,6 +32,10 @@ explorer
 
 ![explorer-screenshot](./docs/screenshots/explorer.png)
 
+mounting
+
+![mounting-screenshot](./docs/screenshots/mounting.png)
+
 ## Development environment
 
 Run backend: `rclone rcd --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572`
@@ -42,7 +46,7 @@ Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
 
 ## Todo
 
-- [ ] Mounting management
+- [x] Mounting management
 - [ ] Job viewer
 - [x] International workflow
 - [ ] More Platforms
