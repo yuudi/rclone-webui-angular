@@ -40,6 +40,13 @@ export class MountComponent implements OnInit {
         AutoMountPoint: boolean;
         MountPoint: string;
         enabled: boolean;
+        readonly?: boolean;
+        windowsNetworkMode?: boolean;
+        filePerms?: string;
+        dirPerms?: string;
+        noModTime?: boolean;
+        vfsCacheMode?: string;
+        vfsCacheMaxAge?: string;
       }
     > = this.dialog.open(NewMountDialogComponent, {
       data: {
@@ -52,35 +59,69 @@ export class MountComponent implements OnInit {
       // user canceled
       return;
     }
-    let mountPoint;
+    let mountPoint = dialogResult.MountPoint;
     if (dialogResult.AutoMountPoint) {
       const fsString = dialogResult.Fs.replace(/:$/, '');
       mountPoint =
         os === 'windows'
           ? '\\\\rclone\\' + fsString
           : '/mnt/rclone/' + fsString;
-      if (os !== 'windows') {
-        await lastValueFrom(
-          this.explorerService.createEmptyFolder('', mountPoint).pipe(
-            tap({
-              error: () => {
-                this.snackBar.open(
-                  $localize`Rclone does not have access to this path, please check the permission of this path`,
-                  'Dismiss'
-                );
-              },
-            })
-          )
-        );
-      }
-      const id = this.mountService.createSetting({
-        Fs: dialogResult.Fs,
-        MountPoint: mountPoint,
-        MountedOn: new Date(),
-      });
-      if (dialogResult.enabled) {
+    }
+    if (os !== 'windows') {
+      await lastValueFrom(
+        this.explorerService.createEmptyFolder('', mountPoint).pipe(
+          tap({
+            error: () => {
+              this.snackBar.open(
+                $localize`Rclone does not have access to this path, please check the permission of this path`,
+                'Dismiss'
+              );
+            },
+          })
+        )
+      );
+    }
+    const mountOpt: { [key: string]: string | boolean | number } = {};
+    const vfsOpt: { [key: string]: string | boolean | number } = {};
+    if (dialogResult.readonly !== undefined) {
+      mountOpt['readonly'] = dialogResult.readonly;
+    }
+    if (dialogResult.windowsNetworkMode !== undefined) {
+      mountOpt['windowsMode'] = dialogResult.windowsNetworkMode;
+    }
+    if (dialogResult.filePerms !== undefined) {
+      vfsOpt['filePerms'] = parseInt(dialogResult.filePerms, 8);
+    }
+    if (dialogResult.dirPerms !== undefined) {
+      vfsOpt['dirPerms'] = parseInt(dialogResult.dirPerms, 8);
+    }
+    if (dialogResult.noModTime !== undefined) {
+      mountOpt['noModTime'] = dialogResult.noModTime;
+    }
+    if (dialogResult.vfsCacheMode !== undefined) {
+      vfsOpt['vfsCacheMode'] = dialogResult.vfsCacheMode;
+    }
+    if (dialogResult.vfsCacheMaxAge !== undefined) {
+      vfsOpt['vfsCacheMaxAge'] = dialogResult.vfsCacheMaxAge;
+    }
+
+    const id = this.mountService.createSetting({
+      Fs: dialogResult.Fs,
+      MountPoint: mountPoint,
+      MountedOn: new Date(),
+      mountOpt,
+      vfsOpt,
+    });
+    if (dialogResult.enabled) {
+      try {
         await lastValueFrom(this.mountService.mount(id));
+        this.snackBar.open($localize`Mount created and mounted`, undefined, {
+          duration: 3000,
+        });
+      } catch (error) {
+        this.snackBar.open(String(error), 'Dismiss');
       }
+    } else {
       this.snackBar.open($localize`Mount created`, undefined, {
         duration: 3000,
       });
@@ -89,10 +130,15 @@ export class MountComponent implements OnInit {
 
   slideChanged(id: string, checked: boolean) {
     if (checked) {
-      this.mountService.mount(id).subscribe(() => {
-        this.snackBar.open('Mounted', undefined, {
-          duration: 3000,
-        });
+      this.mountService.mount(id).subscribe({
+        next: () => {
+          this.snackBar.open('Mounted', undefined, {
+            duration: 3000,
+          });
+        },
+        error: (error) => {
+          this.snackBar.open(String(error), 'Dismiss');
+        },
       });
     } else {
       this.mountService.unmount(id).subscribe(() => {

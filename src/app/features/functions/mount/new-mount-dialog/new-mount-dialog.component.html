@@ -17,10 +17,56 @@
   </mat-checkbox>
   <mat-form-field *ngIf="mountForm.value.AutoMountPoint === false">
     <mat-label i18n>MountPoint</mat-label>
-    <input matInput formControlName="mountPoint" />
+    <input matInput formControlName="MountPoint" />
   </mat-form-field>
   <mat-checkbox formControlName="enabled" i18n>Mount Now</mat-checkbox>
-  <!-- TODO: advanced options -->
+  <div class="button-advanced">
+    <button mat-button (click)="showAdvancedOptions = !showAdvancedOptions">
+      <mat-icon
+        [fontIcon]="showAdvancedOptions ? 'expand_less' : 'expand_more'"
+      ></mat-icon>
+      <ng-container *ngIf="showAdvancedOptions; else showAdvanced" i18n>
+        Hide Advanced Options
+      </ng-container>
+      <ng-template #showAdvanced i18n> Show Advanced Options </ng-template>
+    </button>
+  </div>
+  <ng-container *ngIf="showAdvancedOptions">
+    <mat-checkbox formControlName="readonly" i18n>
+      Mount as Readonly Drive
+    </mat-checkbox>
+    <mat-checkbox
+      *ngIf="data.osType === 'windows'"
+      formControlName="windowsNetworkMode"
+      i18n
+    >
+      Mount as Windows Network Drive
+    </mat-checkbox>
+    <mat-form-field>
+      <mat-label i18n>Cache Mode</mat-label>
+      <mat-select formControlName="vfsCacheMode">
+        <mat-option value="off" i18n> Off </mat-option>
+        <mat-option value="minimal" i18n>
+          Minimal (Only opened files are cached)
+        </mat-option>
+        <mat-option value="write" i18n>
+          Write (All non-readonly files are cached)
+        </mat-option>
+        <mat-option value="full" i18n> Full </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="data.osType !== 'windows'">
+      <mat-label i18n>File Permissions</mat-label>
+      <input matInput formControlName="filePerms" />
+    </mat-form-field>
+    <mat-form-field *ngIf="data.osType !== 'windows'">
+      <mat-label i18n>Directory Permissions</mat-label>
+      <input matInput formControlName="dirPerms" />
+    </mat-form-field>
+    <mat-checkbox formControlName="noModTime" i18n>
+      Skip modification time (can speed things up)
+    </mat-checkbox>
+  </ng-container>
 </form>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close i18n>Cancel</button>

@@ -12,9 +12,26 @@ export class NewMountDialogComponent {
   mountForm = this.fb.nonNullable.group({
     Fs: ['', Validators.required],
     AutoMountPoint: [true], // Only for Windows
-    MountPoint: [''],
+    MountPoint: ['', Validators.required],
     enabled: [true],
+    readonly: [false],
+    windowsNetworkMode: [true],
+    filePerms: [
+      '0666',
+      [Validators.required, Validators.pattern(/^0?[1-7][0-7]{2}$/)], // although something like 077 is valid, we don't want to allow it
+    ],
+    dirPerms: [
+      '0777',
+      [Validators.required, Validators.pattern(/^0?[1-7][0-7]{2}$/)],
+    ],
+    noModTime: [false],
+    vfsCacheMode: ['minimal'],
+    vfsCacheMaxAge: [
+      '1h',
+      [Validators.required, Validators.pattern(/^\d+[smhd]$/)],
+    ],
   });
+  showAdvancedOptions = false;
 
   constructor(
     private fb: FormBuilder,

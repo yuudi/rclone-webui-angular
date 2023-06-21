@@ -15,8 +15,8 @@ export interface MountSetting extends Mount {
   id: string;
   enabled: boolean;
   mountType?: 'mount' | 'cmount' | 'mount2';
-  mountOpt?: { [key: string]: string };
-  vfsOpt?: { [key: string]: string };
+  mountOpt: { [key: string]: string | boolean | number };
+  vfsOpt: { [key: string]: string | boolean | number };
 }
 
 @Injectable({
@@ -72,6 +72,8 @@ export class MountService {
           ...mount,
           enabled: true,
           id: uuid(),
+          mountOpt: {},
+          vfsOpt: {},
         });
       } else {
         mountSettings[index].enabled = true;
@@ -102,7 +104,12 @@ export class MountService {
       return throwError('Mount setting ID not found');
     }
     return this.rc
-      .call('mount/mount', { fs: setting.Fs, mountPoint: setting.MountPoint })
+      .call('mount/mount', {
+        fs: setting.Fs,
+        mountPoint: setting.MountPoint,
+        mountOpt: setting.mountOpt,
+        vfsOpt: setting.vfsOpt,
+      })
       .pipe(
         tap(() => {
           setting.enabled = true;

@@ -1,8 +1,6 @@
 .button-group {
   display: flex;
   margin: 3em;
-  width: 80%;
-  max-width: 50em;
 
   button {
     margin: 0 1em;
@@ -14,8 +12,10 @@
 }
 
 .list-container {
-  margin: 3em;
+  margin: 3em auto;
   min-height: 20em;
+  width: 80%;
+  max-width: 50em;
 }
 
 .list-line {
