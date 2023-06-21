@@ -8,7 +8,11 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-checkbox formControlName="AutoMountPoint" i18n>
+  <mat-checkbox
+    *ngIf="data.osType === 'windows'"
+    formControlName="AutoMountPoint"
+    i18n
+  >
     Automatic MountPoint
   </mat-checkbox>
   <mat-form-field *ngIf="mountForm.value.AutoMountPoint === false">

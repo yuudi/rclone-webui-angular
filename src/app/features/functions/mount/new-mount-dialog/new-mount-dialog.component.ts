@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class NewMountDialogComponent {
   mountForm = this.fb.nonNullable.group({
     Fs: ['', Validators.required],
-    AutoMountPoint: [true],
+    AutoMountPoint: [true], // Only for Windows
     MountPoint: [''],
     enabled: [true],
   });
@@ -20,7 +20,15 @@ export class NewMountDialogComponent {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
     public data: {
+      osType: string;
       fsOptions: string[];
     }
-  ) {}
+  ) {
+    if (data.osType === 'windows') {
+      this.mountForm.controls.MountPoint.setValue('Z:');
+    } else {
+      this.mountForm.controls.AutoMountPoint.setValue(false);
+      this.mountForm.controls.MountPoint.setValue('/mnt/rclone');
+    }
+  }
 }

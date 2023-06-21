@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, lastValueFrom, tap } from 'rxjs';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BackendService } from '../backend/backend.service';
@@ -30,59 +30,61 @@ export class MountComponent implements OnInit {
     this.settings$ = this.mountService.getMountSettings();
   }
 
-  newMountClicked() {
-    this.backendService.listBackends().subscribe((remoteList) => {
-      const dialog = this.dialog.open(NewMountDialogComponent, {
-        data: {
-          fsOptions: remoteList.remotes,
-        },
-      });
-      forkJoin([dialog.afterClosed(), this.os$]).subscribe(
-        (
-          args: [
-            {
-              Fs: string;
-              AutoMountPoint: boolean;
-              MountPoint: string;
-              enabled: boolean;
-            },
-            string
-          ]
-        ) => {
-          const [result, os] = args;
-          if (result) {
-            let mountPoint;
-            if (result.AutoMountPoint) {
-              const fsString = result.Fs.replace(/:$/, '');
-              mountPoint =
-                os === 'windows'
-                  ? '\\\\rclone\\' + fsString
-                  : '/mnt/rclone/' + fsString;
-              if (os !== 'windows') {
-                this.explorerService
-                  .createEmptyFolder('', mountPoint)
-                  .subscribe();
-              }
-            } else {
-              mountPoint = result.MountPoint;
-            }
-            const id = this.mountService.createSetting({
-              Fs: result.Fs,
-              MountPoint: mountPoint,
-              MountedOn: new Date(),
-            });
-            if (result.enabled) {
-              this.mountService.mount(id).subscribe(() => {
-                this.snackBar.open('Added', undefined, {
-                  duration: 3000,
-                });
-              });
-            }
-          }
-        }
-      );
+  async newMountClicked() {
+    const remoteList = await lastValueFrom(this.backendService.listBackends());
+    const os = await lastValueFrom(this.os$);
+    const dialog: MatDialogRef<
+      NewMountDialogComponent,
+      {
+        Fs: string;
+        AutoMountPoint: boolean;
+        MountPoint: string;
+        enabled: boolean;
+      }
+    > = this.dialog.open(NewMountDialogComponent, {
+      data: {
+        osType: os,
+        fsOptions: remoteList.remotes,
+      },
     });
-    // what a hell
+    const dialogResult = await lastValueFrom(dialog.afterClosed());
+    if (!dialogResult) {
+      // user canceled
+      return;
+    }
+    let mountPoint;
+    if (dialogResult.AutoMountPoint) {
+      const fsString = dialogResult.Fs.replace(/:$/, '');
+      mountPoint =
+        os === 'windows'
+          ? '\\\\rclone\\' + fsString
+          : '/mnt/rclone/' + fsString;
+      if (os !== 'windows') {
+        await lastValueFrom(
+          this.explorerService.createEmptyFolder('', mountPoint).pipe(
+            tap({
+              error: () => {
+                this.snackBar.open(
+                  $localize`Rclone does not have access to this path, please check the permission of this path`,
+                  'Dismiss'
+                );
+              },
+            })
+          )
+        );
+      }
+      const id = this.mountService.createSetting({
+        Fs: dialogResult.Fs,
+        MountPoint: mountPoint,
+        MountedOn: new Date(),
+      });
+      if (dialogResult.enabled) {
+        await lastValueFrom(this.mountService.mount(id));
+      }
+      this.snackBar.open($localize`Mount created`, undefined, {
+        duration: 3000,
+      });
+    }
   }
 
   slideChanged(id: string, checked: boolean) {
