@@ -74,7 +74,7 @@ export class MountComponent implements OnInit {
             error: () => {
               this.snackBar.open(
                 $localize`Rclone does not have access to this path, please check the permission of this path`,
-                'Dismiss'
+                $localize`Dismiss`
               );
             },
           })
@@ -87,7 +87,7 @@ export class MountComponent implements OnInit {
       mountOpt['readonly'] = dialogResult.readonly;
     }
     if (dialogResult.windowsNetworkMode !== undefined) {
-      mountOpt['windowsMode'] = dialogResult.windowsNetworkMode;
+      mountOpt['windowsNetworkMode'] = dialogResult.windowsNetworkMode;
     }
     if (dialogResult.filePerms !== undefined) {
       vfsOpt['filePerms'] = parseInt(dialogResult.filePerms, 8);
@@ -119,7 +119,7 @@ export class MountComponent implements OnInit {
           duration: 3000,
         });
       } catch (error) {
-        this.snackBar.open(String(error), 'Dismiss');
+        this.snackBar.open(String(error), $localize`Dismiss`);
       }
     } else {
       this.snackBar.open($localize`Mount created`, undefined, {
@@ -132,17 +132,17 @@ export class MountComponent implements OnInit {
     if (checked) {
       this.mountService.mount(id).subscribe({
         next: () => {
-          this.snackBar.open('Mounted', undefined, {
+          this.snackBar.open($localize`Mounted`, undefined, {
             duration: 3000,
           });
         },
         error: (error) => {
-          this.snackBar.open(String(error), 'Dismiss');
+          this.snackBar.open(String(error), $localize`Dismiss`);
         },
       });
     } else {
       this.mountService.unmount(id).subscribe(() => {
-        this.snackBar.open('Unmounted', undefined, {
+        this.snackBar.open($localize`Unmounted`, undefined, {
           duration: 3000,
         });
       });
@@ -151,9 +151,22 @@ export class MountComponent implements OnInit {
 
   unmountAllClicked() {
     this.mountService.unmountAll().subscribe(() => {
-      this.snackBar.open('Unmounted', undefined, {
+      this.snackBar.open($localize`Unmounted`, undefined, {
         duration: 3000,
       });
+    });
+  }
+
+  editClicked(setting: MountSetting) {
+    //TODO
+    console.log(setting);
+    this.snackBar.open('Not implemented yet', 'Dismiss');
+  }
+
+  deleteClicked(id: string) {
+    this.mountService.deleteSetting(id);
+    this.snackBar.open($localize`Deleted`, undefined, {
+      duration: 3000,
     });
   }
 }

@@ -16,23 +16,41 @@
 </div>
 <mat-card class="list-container">
   <mat-list>
-    <mat-list-item *ngFor="let setting of settings$ | async">
-      <div matListItemLine class="list-line">
-        <span class="mount-info">
-          {{ setting.Fs }}:
-          <mat-icon
-            fontIcon="sync_alt"
-            class="material-symbols-outlined"
-          ></mat-icon>
-          {{ setting.MountPoint }}
-        </span>
-        <div class="spacer"></div>
-        <mat-slide-toggle
-          color="accent"
-          [checked]="setting.enabled"
-          (change)="slideChanged(setting.id, $event.checked)"
-        ></mat-slide-toggle>
-      </div>
-    </mat-list-item>
+    <ng-container *ngFor="let setting of settings$ | async; let last = last">
+      <mat-list-item>
+        <div matListItemLine class="list-line">
+          <span class="mount-info">
+            {{ setting.Fs }}:
+            <mat-icon
+              fontIcon="sync_alt"
+              class="material-symbols-outlined"
+            ></mat-icon>
+            {{ setting.MountPoint }}
+          </span>
+          <div class="spacer"></div>
+          <span class="mount-action">
+            <mat-slide-toggle
+              color="accent"
+              [checked]="setting.enabled"
+              (change)="slideChanged(setting.id, $event.checked)"
+            ></mat-slide-toggle>
+            <button mat-icon-button [matMenuTriggerFor]="mountSettingMenu">
+              <mat-icon fontIcon="more_vert"></mat-icon>
+            </button>
+            <mat-menu #mountSettingMenu="matMenu">
+              <button mat-menu-item (click)="editClicked(setting)">
+                <mat-icon fontIcon="edit"></mat-icon>
+                <span i18n>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteClicked(setting.id)">
+                <mat-icon fontIcon="delete"></mat-icon>
+                <span i18n>Delete</span>
+              </button>
+            </mat-menu>
+          </span>
+        </div>
+      </mat-list-item>
+      <mat-divider *ngIf="!last"></mat-divider>
+    </ng-container>
   </mat-list>
 </mat-card>

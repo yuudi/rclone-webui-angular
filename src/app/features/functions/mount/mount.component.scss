@@ -1,6 +1,8 @@
 .button-group {
   display: flex;
-  margin: 3em;
+  margin: 3em auto;
+  width: 90%;
+  max-width: 65em;
 
   button {
     margin: 0 1em;
@@ -28,5 +30,10 @@
     .mat-icon {
       margin: 0.5em;
     }
+  }
+
+  .mount-action {
+    display: flex;
+    align-items: center;
   }
 }

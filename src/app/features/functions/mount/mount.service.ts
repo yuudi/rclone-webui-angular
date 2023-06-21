@@ -97,6 +97,17 @@ export class MountService {
     return id;
   }
 
+  deleteSetting(id: string) {
+    const mountSettings = this.mountSettings$.getValue();
+    const index = mountSettings.findIndex((m) => m.id === id);
+    if (index === -1) {
+      throw new Error('Mount setting ID not found when deleting');
+    }
+    mountSettings.splice(index, 1);
+    this.mountSettings$.next(mountSettings);
+    localStorage.setItem('rwa_mountSettings', JSON.stringify(mountSettings));
+  }
+
   mount(id: string) {
     const mountSettings = this.mountSettings$.getValue();
     const setting = mountSettings.find((m) => m.id === id);
@@ -105,16 +116,22 @@ export class MountService {
     }
     return this.rc
       .call('mount/mount', {
-        fs: setting.Fs,
+        fs: setting.Fs + ':',
         mountPoint: setting.MountPoint,
         mountOpt: setting.mountOpt,
         vfsOpt: setting.vfsOpt,
       })
       .pipe(
-        tap(() => {
-          setting.enabled = true;
-          setting.MountedOn = new Date();
-          this.mountSettings$.next(mountSettings);
+        tap({
+          next: () => {
+            setting.enabled = true;
+            setting.MountedOn = new Date();
+            this.mountSettings$.next(mountSettings);
+          },
+          error: () => {
+            setting.enabled = false;
+            this.mountSettings$.next(mountSettings);
+          },
         })
       );
   }
