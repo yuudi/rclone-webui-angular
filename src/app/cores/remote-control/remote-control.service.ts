@@ -23,7 +23,9 @@ export class RemoteControlService {
    */
   call<R>(
     operation: string,
-    params?: { [key: string]: string | number | Record<string, unknown> }
+    params?: {
+      [key: string]: string | boolean | number | Record<string, unknown>;
+    }
   ): Observable<R> {
     const remote = this.auth.getActiveConnection();
 

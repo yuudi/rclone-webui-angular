@@ -4,9 +4,10 @@ import { Observable, forkJoin } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { BackendService } from '../backend/backend.service';
+import { ExplorerService } from '../explorer/explorer.service';
 import { MountService, MountSetting } from './mount.service';
 import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.component';
-import { BackendService } from '../backend/backend.service';
 
 @Component({
   selector: 'app-mount',
@@ -21,7 +22,8 @@ export class MountComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private mountService: MountService,
-    private backendService: BackendService
+    private backendService: BackendService,
+    private explorerService: ExplorerService
   ) {}
 
   ngOnInit() {
@@ -56,6 +58,11 @@ export class MountComponent implements OnInit {
                 os === 'windows'
                   ? '\\\\rclone\\' + fsString
                   : '/mnt/rclone/' + fsString;
+              if (os !== 'windows') {
+                this.explorerService
+                  .createEmptyFolder('', mountPoint)
+                  .subscribe();
+              }
             } else {
               mountPoint = result.MountPoint;
             }
@@ -75,6 +82,7 @@ export class MountComponent implements OnInit {
         }
       );
     });
+    // what a hell
   }
 
   slideChanged(id: string, checked: boolean) {

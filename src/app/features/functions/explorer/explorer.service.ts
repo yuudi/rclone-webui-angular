@@ -23,6 +23,13 @@ export class ExplorerService {
     });
   }
 
+  createEmptyFolder(backend: string, path: string) {
+    return this.rc.call<EmptyObj>('operations/mkdir', {
+      fs: ExplorerService.toFs(backend),
+      remote: path,
+    });
+  }
+
   deleteFile(backend: string, path: string) {
     return this.rc.call<EmptyObj>('operations/deletefile', {
       fs: ExplorerService.toFs(backend),
