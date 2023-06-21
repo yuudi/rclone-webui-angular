@@ -4,856 +4,511 @@
     <body>
       <trans-unit id="2102825898069375693" datatype="html">
         <source>Menu</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
         <target>目录</target>
       </trans-unit>
       <trans-unit id="6570363013146073520" datatype="html">
         <source>Dashboard</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">11</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
         <target>控制面板</target>
       </trans-unit>
       <trans-unit id="3152486099939084158" datatype="html">
         <source>Drives</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
         <target>储存池</target>
       </trans-unit>
       <trans-unit id="7730992219911127538" datatype="html">
         <source>Rclone WebUI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
         <target>Rclone WebUI</target>
       </trans-unit>
       <trans-unit id="487077452159084336" datatype="html">
         <source>Select Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
         <target>选择语言</target>
       </trans-unit>
       <trans-unit id="5866254605255506989" datatype="html">
         <source>English</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">42</context>
-        </context-group>
         <target>英语</target>
       </trans-unit>
       <trans-unit id="2557623954339695776" datatype="html">
         <source>Connections</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
         <target>连接</target>
       </trans-unit>
       <trans-unit id="4352526755847379280" datatype="html">
         <source>Source Code</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
         <target>源代码</target>
       </trans-unit>
       <trans-unit id="2649252321173430744" datatype="html">
         <source>Not Found</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/not-found/not-found.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
         <target>未找到</target>
       </trans-unit>
       <trans-unit id="542838625985791371" datatype="html">
         <source>return home</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/not-found/not-found.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
         <target>回到主页</target>
       </trans-unit>
       <trans-unit id="6488103466338737410" datatype="html">
         <source>Name already exists</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">66</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
         <target>名称已存在</target>
       </trans-unit>
       <trans-unit id="12491435104517248" datatype="html">
         <source>Connection ID not found</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
         <target>未找到连接ID</target>
       </trans-unit>
       <trans-unit id="7285459956951862232" datatype="html">
         <source>Connection not found</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">131</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">154</context>
-        </context-group>
         <target>未找到连接</target>
       </trans-unit>
       <trans-unit id="2659934568888177208" datatype="html">
         <source>Connection has no authentication</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/cores/remote-control/connection.service.ts</context>
-          <context context-type="linenumber">137</context>
-        </context-group>
         <target>连接没有认证</target>
       </trans-unit>
       <trans-unit id="3013055597615607317" datatype="html">
         <source>Display Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">3</context>
-        </context-group>
         <target>显示名</target>
       </trans-unit>
       <trans-unit id="8505935423745518392" datatype="html">
         <source> Please enter a display name </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">8,10</context>
-        </context-group>
-        <target>请输入一个显示名</target>
+        <target state="translated"> 请输入一个显示名 </target>
       </trans-unit>
       <trans-unit id="300615299523179346" datatype="html">
         <source> A connection with this name already exists </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">14,16</context>
-        </context-group>
-        <target>该连接名已存在</target>
+        <target state="translated"> 该连接名已存在 </target>
       </trans-unit>
       <trans-unit id="6149473508047129471" datatype="html">
         <source>Remote Address</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
         <target>远程地址</target>
       </trans-unit>
       <trans-unit id="4288365178410286526" datatype="html">
         <source> Please enter a valid address </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">21,23</context>
-        </context-group>
-        <target>请输入一个有效的地址</target>
+        <target state="translated"> 请输入一个有效的地址 </target>
       </trans-unit>
       <trans-unit id="1431967982799746382" datatype="html">
         <source> This connection is not protected by a password </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">25,27</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">7,9</context>
-        </context-group>
-        <target>此连接无密码保护</target>
+        <target state="translated"> 此连接无密码保护 </target>
       </trans-unit>
       <trans-unit id="5248717555542428023" datatype="html">
         <source>Username</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
         <target>用户名</target>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
         <target>密码</target>
       </trans-unit>
       <trans-unit id="7055385188245520959" datatype="html">
         <source> Remember Password </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">37,39</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">19,21</context>
-        </context-group>
-        <target>记住密码</target>
+        <target state="translated"> 记住密码 </target>
       </trans-unit>
       <trans-unit id="7673863024811381818" datatype="html">
         <source> Test Connection </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">46,48</context>
-        </context-group>
-        <target>测试连接</target>
+        <target state="translated"> 测试连接 </target>
       </trans-unit>
       <trans-unit id="1545005867911976778" datatype="html">
         <source> Connect </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.html</context>
-          <context context-type="linenumber">55,57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">32,34</context>
-        </context-group>
-        <target>连接</target>
+        <target state="translated"> 连接 </target>
       </trans-unit>
       <trans-unit id="582119650624142213" datatype="html">
         <source>Connection successful</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
-          <context context-type="linenumber">83</context>
-        </context-group>
         <target>连接成功</target>
       </trans-unit>
       <trans-unit id="4448321183127826742" datatype="html">
         <source>Connection failed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
-          <context context-type="linenumber">87</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
-          <context context-type="linenumber">122</context>
-        </context-group>
         <target>连接失败</target>
       </trans-unit>
       <trans-unit id="8643396715708565201" datatype="html">
         <source>Connection failed:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection-editor/connection-editor.component.ts</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
         <target>连接失败：</target>
       </trans-unit>
       <trans-unit id="8451342921207487014" datatype="html">
         <source>No connections</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
         <target>无连接</target>
       </trans-unit>
       <trans-unit id="2903873185531053389" datatype="html">
         <source> New Connection </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection.component.html</context>
-          <context context-type="linenumber">23,25</context>
-        </context-group>
         <note priority="1" from="description">create</note>
-        <target>新连接</target>
+        <target state="translated"> 新连接 </target>
       </trans-unit>
       <trans-unit id="1536087519743707362" datatype="html">
         <source>Dismiss</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/connection.component.ts</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.ts</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
         <target>忽略</target>
       </trans-unit>
       <trans-unit id="8191371354890763172" datatype="html">
         <source>Enter Password</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
         <target>输入密码</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/connection/prompt-password/prompt-password.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
         <target>取消</target>
       </trans-unit>
       <trans-unit id="1879517876731100451" datatype="html">
         <source>Rclone</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
         <target>Rclone</target>
       </trans-unit>
       <trans-unit id="2724055831234181057" datatype="html">
         <source>Version</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
         <target>版本</target>
       </trans-unit>
       <trans-unit id="962765493084218985" datatype="html">
         <source>Platform</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
         <target>平台</target>
       </trans-unit>
       <trans-unit id="8961799598905368955" datatype="html">
         <source>Go version</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
         <target>Go语言版本</target>
       </trans-unit>
       <trans-unit id="1069523139277190436" datatype="html">
         <source>Statistics</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
         <target>统计</target>
       </trans-unit>
       <trans-unit id="1441510615438989312" datatype="html">
         <source>Transferring</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
         <target>正在传输</target>
       </trans-unit>
       <trans-unit id="1224770523323579455" datatype="html">
         <source>Transferred</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
         <target>完成传输</target>
       </trans-unit>
       <trans-unit id="3128293408739574" datatype="html">
         <source>Speed</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/dashboard.component.html</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
         <target>速度</target>
       </trans-unit>
       <trans-unit id="2527698965946238336" datatype="html">
         <source>Not Measured</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
         <target>不计量</target>
       </trans-unit>
       <trans-unit id="81585474102700882" datatype="html">
         <source>Used</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
         <note priority="1" from="description">Already Used Space</note>
         <target>已使用</target>
       </trans-unit>
       <trans-unit id="3200393806027771580" datatype="html">
         <source> Trash </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">25,27</context>
-        </context-group>
         <note priority="1" from="description">Space used by trash</note>
-        <target>回收站</target>
+        <target state="translated"> 回收站 </target>
       </trans-unit>
       <trans-unit id="8605967835704545279" datatype="html">
         <source> Other </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">31,33</context>
-        </context-group>
         <note priority="1" from="description">Space used by other</note>
-        <target>其它</target>
+        <target state="translated"> 其它 </target>
       </trans-unit>
       <trans-unit id="5891064527381218201" datatype="html">
         <source>Free</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
         <note priority="1" from="description">Available Space</note>
         <target>可用</target>
       </trans-unit>
       <trans-unit id="7531602241051125940" datatype="html">
         <source>Objects</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
         <note priority="1" from="description">Count of Objects</note>
         <target>对象数</target>
       </trans-unit>
       <trans-unit id="6827560313738519815" datatype="html">
         <source>New Backend</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
         <target>新储存池</target>
       </trans-unit>
       <trans-unit id="8232773653071363045" datatype="html">
         <source>Provider</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
         <target>供应方</target>
       </trans-unit>
       <trans-unit id="4580988005648117665" datatype="html">
         <source>Search</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
         <target>搜索</target>
       </trans-unit>
       <trans-unit id="3971100408152984961" datatype="html">
         <source> Next </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">54,56</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">141,143</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">163,165</context>
-        </context-group>
         <note priority="1" from="description">next step</note>
-        <target>下一步</target>
+        <target state="translated"> 下一步 </target>
       </trans-unit>
       <trans-unit id="8432562579042371182" datatype="html">
         <source>Options</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
         <target>选项</target>
       </trans-unit>
       <trans-unit id="3623640243867983281" datatype="html">
         <source> Only stared* fields are required :) </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">64,66</context>
-        </context-group>
-        <target>只有加(星标*)的必须填写 :)</target>
+        <target state="translated"> 只有加(星标*)的必须填写 :) </target>
       </trans-unit>
       <trans-unit id="4258500568871377211" datatype="html">
         <source> Got it </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">72,74</context>
-        </context-group>
         <note priority="1" from="description">understand</note>
-        <target>知道了</target>
+        <target state="translated"> 知道了 </target>
       </trans-unit>
       <trans-unit id="8953033926734869941" datatype="html">
         <source>Name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">152</context>
-        </context-group>
         <target>名称</target>
       </trans-unit>
       <trans-unit id="3768927257183755959" datatype="html">
         <source>Save</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">170</context>
-        </context-group>
         <target>保存</target>
       </trans-unit>
       <trans-unit id="7960163200088679566" datatype="html">
-        <source>You will be redirected to the provider's website to authorize, click save now</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">176,177</context>
-        </context-group>
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
         <target>您将被重定向到供应方的网站进行授权，现在请点击保存</target>
       </trans-unit>
       <trans-unit id="6649706328938022022" datatype="html">
         <source>You are all set, click save now</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">185</context>
-        </context-group>
         <target>一切就绪，现在请点击保存</target>
       </trans-unit>
       <trans-unit id="3620188369327429839" datatype="html">
         <source> Save </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">194,196</context>
-        </context-group>
-        <target>保存</target>
+        <target state="translated"> 保存 </target>
       </trans-unit>
       <trans-unit id="5334162996115147515" datatype="html">
         <source>Link Created</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
         <target>链接创建成功</target>
       </trans-unit>
       <trans-unit id="3765886400143289586" datatype="html">
         <source> Copy </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
-          <context context-type="linenumber">17,19</context>
-        </context-group>
-        <target>复制</target>
+        <target state="translated"> 复制 </target>
       </trans-unit>
       <trans-unit id="397098723873502323" datatype="html">
         <source>Done</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/copy-dialog/copy-dialog.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
         <target>完成</target>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
         <source>Delete</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
         <target>删除</target>
       </trans-unit>
       <trans-unit id="4052706577506222469" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ data.Name }}"></x>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-        <target></target>
+        <source>Would you like to delete <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/></source>
+        <target state="translated">您想删除 <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/>吗？</target>
       </trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
         <source>No</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
         <target>否</target>
       </trans-unit>
       <trans-unit id="8720977247725652816" datatype="html">
         <source>Ok</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component.html</context>
-          <context context-type="linenumber">5</context>
-        </context-group>
         <target>是</target>
       </trans-unit>
       <trans-unit id="4165850386196559100" datatype="html">
         <source>Empty</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
         <target>空</target>
       </trans-unit>
       <trans-unit id="4323470180912194028" datatype="html">
         <source>Copy</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
         <target>复制</target>
       </trans-unit>
       <trans-unit id="2354817630223808522" datatype="html">
         <source>Move</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
         <target>移动</target>
       </trans-unit>
       <trans-unit id="6041115344061899387" datatype="html">
         <source>Rename</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
         <target>重命名</target>
       </trans-unit>
       <trans-unit id="3476827161214058075" datatype="html">
         <source>Generate Link</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
         <target>创建链接</target>
       </trans-unit>
       <trans-unit id="3099741642167775297" datatype="html">
         <source>Download</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
         <target>下载</target>
       </trans-unit>
       <trans-unit id="7187000848329495899" datatype="html">
         <source>Opening File is not implemented yet.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
-          <context context-type="linenumber">93</context>
-        </context-group>
-        <target>打开文件功能尚未实现</target>
+        <target state="translated">打开文件功能尚未实现。</target>
       </trans-unit>
       <trans-unit id="8998179362936748717" datatype="html">
         <source>OK</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
-          <context context-type="linenumber">94</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/explorer-viewer.component.ts</context>
-          <context context-type="linenumber">218</context>
-        </context-group>
         <target>是</target>
       </trans-unit>
       <trans-unit id="1674202514578558795" datatype="html">
         <source>New name</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
         <target>新名称</target>
       </trans-unit>
       <trans-unit id="7958523096095518919" datatype="html">
         <source> Name already exists </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
-          <context context-type="linenumber">10,12</context>
-        </context-group>
-        <target>名称已经存在</target>
+        <target state="translated"> 名称已经存在 </target>
       </trans-unit>
       <trans-unit id="3394880135309962358" datatype="html">
         <source> Ok </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer-viewer/rename-dialog/rename-dialog.component.html</context>
-          <context context-type="linenumber">23,25</context>
-        </context-group>
-        <target>是</target>
+        <target state="translated"> 是 </target>
       </trans-unit>
       <trans-unit id="5460217556068689396" datatype="html">
         <source>Go Up</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
         <target>向上</target>
       </trans-unit>
       <trans-unit id="1102717806459547726" datatype="html">
         <source>Refresh</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
         <target>刷新</target>
       </trans-unit>
       <trans-unit id="3591781971294396421" datatype="html">
         <source>Clipboard</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
         <target>剪贴板</target>
       </trans-unit>
       <trans-unit id="7478877538855480857" datatype="html">
         <source>Paste Here</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
         <target>在此处粘贴</target>
       </trans-unit>
       <trans-unit id="3823219296477075982" datatype="html">
         <source>Discard</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
         <target>丢弃</target>
       </trans-unit>
       <trans-unit id="672413176610067158" datatype="html">
         <source>New Tab</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">89</context>
-        </context-group>
         <target>新标签页</target>
       </trans-unit>
       <trans-unit id="2812353444192922702" datatype="html">
         <source> Local Filesystem </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">109,111</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">113,115</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">162</context>
-        </context-group>
-        <target>本地文件</target>
+        <target state="translated"> 本地文件 </target>
       </trans-unit>
       <trans-unit id="1084063406279979182" datatype="html">
         <source>Close All</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">131</context>
-        </context-group>
         <target>全部关闭</target>
       </trans-unit>
       <trans-unit id="1693401925844219649" datatype="html">
         <source>Split Window</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">140</context>
-        </context-group>
         <target>分窗口浏览</target>
       </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
-        <source>
-          <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon             fontIcon=" library_add="             class=" material-icons-outlined="           &gt;"></x>
-          <x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"></x>
-        </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">148,155</context>
-        </context-group>
-        <target></target>
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated"> 点击<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> ，打开一个储存池 </target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.html</context>
-          <context context-type="linenumber">166</context>
-        </context-group>
         <target>关闭</target>
       </trans-unit>
       <trans-unit id="5674970056730934974" datatype="html">
         <source>Task Created Successfully</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/explorer/explorer.component.ts</context>
-          <context context-type="linenumber">152</context>
-        </context-group>
         <target>任务已创建</target>
       </trans-unit>
       <trans-unit id="7501365879745121673" datatype="html">
         <source>Manage Drives</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/functions.component.html</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
         <target>管理储存池</target>
       </trans-unit>
       <trans-unit id="3685794532791241025" datatype="html">
         <source>Explore Drives</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/functions.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
         <target>浏览储存池</target>
       </trans-unit>
       <trans-unit id="4689443708886954687" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
         <source>Chinese Simplified</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
         <target>简体中文</target>
       </trans-unit>
       <trans-unit id="787163983066183218" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
         <source>Browse</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/backend-info/backend-info.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
         <target>浏览</target>
       </trans-unit>
       <trans-unit id="2466435579379681938" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
         <source>Authorizing...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/functions/backend/new-backend/new-backend.component.html</context>
-          <context context-type="linenumber">180</context>
-        </context-group>
         <target>授权中……</target>
+      </trans-unit>
+      <trans-unit id="2849267946273310379" datatype="html">
+        <source>Mounting</source>
+        <target state="translated">正在挂载</target>
+      </trans-unit>
+      <trans-unit id="3044369161367328488" datatype="html">
+        <source> Hide Advanced Options </source>
+        <target state="translated"> 隐藏高级选项 </target>
+      </trans-unit>
+      <trans-unit id="2699313572844735542" datatype="html">
+        <source> Show Advanced Options </source>
+        <target state="translated"> 显示高级选项 </target>
+      </trans-unit>
+      <trans-unit id="7744129393493523836" datatype="html">
+        <source>Error creating backend: </source>
+        <target state="translated">创建储存池出错：</target>
+      </trans-unit>
+      <trans-unit id="5488667333459350160" datatype="html">
+        <source>Renamed</source>
+        <target state="translated">重命名成功</target>
+      </trans-unit>
+      <trans-unit id="6381490568322624964" datatype="html">
+        <source>Deleted</source>
+        <target state="translated">删除成功</target>
+      </trans-unit>
+      <trans-unit id="4606091236515013460" datatype="html">
+        <source>Error:</source>
+        <target state="translated">错误：</target>
+      </trans-unit>
+      <trans-unit id="1971865492332905755" datatype="html">
+        <source>New MountPoint</source>
+        <target state="translated">新建挂载点</target>
+      </trans-unit>
+      <trans-unit id="6599356923898400319" datatype="html">
+        <source>Unmount All</source>
+        <target state="translated">取消所有挂载</target>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <target state="translated">编辑</target>
+      </trans-unit>
+      <trans-unit id="560443334489296785" datatype="html">
+        <source>Rclone does not have access to this path, please check the permission of this path</source>
+        <target state="translated">Rclone 无法访问这个路径，请确认这个路径的权限</target>
+      </trans-unit>
+      <trans-unit id="989049066299437124" datatype="html">
+        <source>Mount created and mounted</source>
+        <target state="translated">挂载成功</target>
+      </trans-unit>
+      <trans-unit id="2364550710330521794" datatype="html">
+        <source>Mount created</source>
+        <target state="translated">挂载已创建</target>
+      </trans-unit>
+      <trans-unit id="984117971499949443" datatype="html">
+        <source>Mounted</source>
+        <target state="translated">已挂载</target>
+      </trans-unit>
+      <trans-unit id="3297029408193612840" datatype="html">
+        <source>Unmounted</source>
+        <target state="translated">已取消挂载</target>
+      </trans-unit>
+      <trans-unit id="4174953868691227020" datatype="html">
+        <source>Create MountPoint</source>
+        <target state="translated">创建挂载点</target>
+      </trans-unit>
+      <trans-unit id="4736210244914788712" datatype="html">
+        <source>Drive</source>
+        <target state="translated">储存池</target>
+      </trans-unit>
+      <trans-unit id="174792567272132410" datatype="html">
+        <source> Automatic MountPoint </source>
+        <target state="translated"> 自动选择挂载点 </target>
+      </trans-unit>
+      <trans-unit id="8643692971848848902" datatype="html">
+        <source>MountPoint</source>
+        <target state="translated">挂载点</target>
+      </trans-unit>
+      <trans-unit id="655049383752216892" datatype="html">
+        <source>Mount Now</source>
+        <target state="translated">立刻挂载</target>
+      </trans-unit>
+      <trans-unit id="8188665053347707351" datatype="html">
+        <source> Mount as Readonly Drive </source>
+        <target state="translated"> 以只读方式挂载 </target>
+      </trans-unit>
+      <trans-unit id="1174398173025044116" datatype="html">
+        <source> Mount as Windows Network Drive </source>
+        <target state="translated"> 挂载为 Windows 网络驱动器 </target>
+      </trans-unit>
+      <trans-unit id="991790413700941336" datatype="html">
+        <source>Cache Mode</source>
+        <target state="translated">缓存模式</target>
+      </trans-unit>
+      <trans-unit id="3599005616661192177" datatype="html">
+        <source> Off </source>
+        <target state="translated"> 关闭 </target>
+      </trans-unit>
+      <trans-unit id="533769579714104079" datatype="html">
+        <source> Minimal (Only opened files are cached) </source>
+        <target state="translated"> 最小（缓存正在使用的文件） </target>
+      </trans-unit>
+      <trans-unit id="616337869273310985" datatype="html">
+        <source> Write (All non-readonly files are cached) </source>
+        <target state="translated"> 可写文件（缓存只读文件以外所有文件） </target>
+      </trans-unit>
+      <trans-unit id="3302458363931158751" datatype="html">
+        <source> Full </source>
+        <target state="translated"> 完全 </target>
+      </trans-unit>
+      <trans-unit id="2787011255743936179" datatype="html">
+        <source>File Permissions</source>
+        <target state="translated">文件权限</target>
+      </trans-unit>
+      <trans-unit id="6880846271161386525" datatype="html">
+        <source>Directory Permissions</source>
+        <target state="translated">目录权限</target>
+      </trans-unit>
+      <trans-unit id="4021701907132072675" datatype="html">
+        <source> Skip modification time (can speed things up) </source>
+        <target state="translated"> 跳过文件修改时间（可能提高运行速度） </target>
+      </trans-unit>
+      <trans-unit id="7941428823403788384" datatype="html">
+        <source> Create </source>
+        <target state="translated"> 创建 </target>
       </trans-unit>
     </body>
   </file>

@@ -102,9 +102,14 @@
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "rclone-webui-angular:build"
+            "browserTarget": "rclone-webui-angular:build",
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "targetFiles": [
+              "messages.zh-CN.xlf"
+            ]
           }
         },
         "test": {

@@ -10,7 +10,7 @@
     "lint:prettier": "prettier ./src --write",
     "lint:eslint": "ng lint --fix",
     "lint": "npm run lint:eslint && npm run lint:prettier",
-    "extract-i18n": "ng extract-i18n --output-path src/locale"
+    "extract-i18n": "ng extract-i18n"
   },
   "private": true,
   "dependencies": {
@@ -52,6 +52,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-extract-i18n-merge": "^2.7.0",
     "prettier": "^2.8.8",
     "typescript": "~5.0.2"
   }
