@@ -120,8 +120,6 @@ export class RemoteControlService {
         JSON.stringify(error.error as ErrorResponse)
       );
     }
-    return throwError(() =>
-      Error('Something bad happened; please try again later.')
-    );
+    return throwError(() => error.error?.error ?? error.error.toString());
   }
 }

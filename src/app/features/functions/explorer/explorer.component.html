@@ -131,7 +131,10 @@
             matTooltip="Close All"
             (click)="splitRemove(groupIndex)"
           >
-            <mat-icon svgIcon="tab_close"></mat-icon>
+            <mat-icon
+              fontIcon="tab_close"
+              class="material-symbols-outlined"
+            ></mat-icon>
           </button>
           <button
             *ngIf="last"

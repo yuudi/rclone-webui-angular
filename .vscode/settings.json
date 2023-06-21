@@ -17,6 +17,5 @@
         "sidenav",
         "splitscreen",
         "webui"
-    ],
-    "prettier.prettierPath": "prettier"
+    ]
 }

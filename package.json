@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint:prettier": "prettier ./src --write",
     "lint:eslint": "ng lint --fix",
-    "lint": "npm run lint:prettier && npm run lint:eslint",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
     "extract-i18n": "ng extract-i18n --output-path src/locale"
   },
   "private": true,
