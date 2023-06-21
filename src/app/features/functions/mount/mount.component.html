@@ -17,12 +17,22 @@
 <mat-card class="list-container">
   <mat-list>
     <mat-list-item *ngFor="let setting of settings$ | async">
-      {{ setting.Fs }}:{{ setting.MountPoint }}
-      <mat-slide-toggle
-        color="accent"
-        [checked]="setting.enabled"
-        (change)="slideChanged(setting.id, $event.checked)"
-      ></mat-slide-toggle>
+      <div matListItemLine class="list-line">
+        <span class="mount-info">
+          {{ setting.Fs }}
+          <mat-icon
+            fontIcon="sync_alt"
+            class="material-symbols-outlined"
+          ></mat-icon>
+          {{ setting.MountPoint }}
+        </span>
+        <div class="spacer"></div>
+        <mat-slide-toggle
+          color="accent"
+          [checked]="setting.enabled"
+          (change)="slideChanged(setting.id, $event.checked)"
+        ></mat-slide-toggle>
+      </div>
     </mat-list-item>
   </mat-list>
 </mat-card>

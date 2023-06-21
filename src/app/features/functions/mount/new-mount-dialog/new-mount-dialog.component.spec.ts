@@ -8,7 +8,7 @@ describe('NewMountDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NewMountDialogComponent]
+      declarations: [NewMountDialogComponent],
     });
     fixture = TestBed.createComponent(NewMountDialogComponent);
     component = fixture.componentInstance;

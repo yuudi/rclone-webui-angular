@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, map, of, tap, throwError } from 'rxjs';
 
 import { v4 as uuid } from 'uuid';
 
@@ -44,7 +44,7 @@ export class MountService {
     }
     return this.rc
       .call<{ os: string }>('core/version')
-      .pipe(tap((res) => (this.os = res.os)));
+      .pipe(map((res) => (this.os = res.os)));
   }
 
   getMountSettings(): Observable<MountSetting[]> {
@@ -75,6 +75,7 @@ export class MountService {
         });
       } else {
         mountSettings[index].enabled = true;
+        mountSettings[index].MountedOn = mount.MountedOn;
       }
     }
     this.mountSettings$.next(mountSettings);
@@ -82,14 +83,16 @@ export class MountService {
   }
 
   createSetting(mountSetting: Omit<MountSetting, 'id' | 'enabled'>) {
+    const id = uuid();
     const mountSettings = this.mountSettings$.getValue();
     mountSettings.push({
       ...mountSetting,
-      id: uuid(),
+      id,
       enabled: false,
     });
     this.mountSettings$.next(mountSettings);
     localStorage.setItem('rwa_mountSettings', JSON.stringify(mountSettings));
+    return id;
   }
 
   mount(id: string) {
@@ -103,6 +106,7 @@ export class MountService {
       .pipe(
         tap(() => {
           setting.enabled = true;
+          setting.MountedOn = new Date();
           this.mountSettings$.next(mountSettings);
         })
       );

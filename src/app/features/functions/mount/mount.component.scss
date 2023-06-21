@@ -1,6 +1,9 @@
 .button-group {
   display: flex;
   margin: 3em;
+  width: 80%;
+  max-width: 50em;
+
   button {
     margin: 0 1em;
   }
@@ -13,4 +16,17 @@
 .list-container {
   margin: 3em;
   min-height: 20em;
+}
+
+.list-line {
+  display: flex;
+
+  .mount-info {
+    display: flex;
+    align-items: center;
+
+    .mat-icon {
+      margin: 0.5em;
+    }
+  }
 }

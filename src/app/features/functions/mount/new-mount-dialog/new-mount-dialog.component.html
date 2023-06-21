@@ -1,1 +1,32 @@
-<p>new-mount-dialog works!</p>
+<h3 mat-dialog-title i18n>Create MountPoint</h3>
+<form mat-dialog-content class="mount-form" [formGroup]="mountForm">
+  <mat-form-field>
+    <mat-label i18n>Drive</mat-label>
+    <mat-select formControlName="Fs">
+      <mat-option *ngFor="let fs of data.fsOptions" [value]="fs">
+        {{ fs }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox formControlName="AutoMountPoint" i18n>
+    Automatic MountPoint
+  </mat-checkbox>
+  <mat-form-field *ngIf="mountForm.value.AutoMountPoint === false">
+    <mat-label i18n>MountPoint</mat-label>
+    <input matInput formControlName="mountPoint" />
+  </mat-form-field>
+  <mat-checkbox formControlName="enabled" i18n>Mount Now</mat-checkbox>
+  <!-- TODO: advanced options -->
+</form>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close i18n>Cancel</button>
+  <button
+    mat-button
+    [disabled]="!mountForm.valid"
+    [mat-dialog-close]="mountForm.value"
+    type="submit"
+    i18n
+  >
+    Create
+  </button>
+</div>
