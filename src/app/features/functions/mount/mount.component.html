@@ -1,0 +1,28 @@
+<div class="button-group">
+  <button mat-raised-button color="primary" (click)="newMountClicked()">
+    <mat-icon fontIcon="smb_share" class="material-symbols-outlined"></mat-icon>
+    <span i18n>New MountPoint</span>
+  </button>
+  <div class="spacer"></div>
+
+  <button
+    mat-raised-button
+    color="warn"
+    [disabled]="(settings$ | async)?.length"
+  >
+    <mat-icon fontIcon="cloud_off"></mat-icon>
+    <span i18n>Unmount All</span>
+  </button>
+</div>
+<mat-card class="list-container">
+  <mat-list>
+    <mat-list-item *ngFor="let setting of settings$ | async">
+      {{ setting.Fs }}:{{ setting.MountPoint }}
+      <mat-slide-toggle
+        color="accent"
+        [checked]="setting.enabled"
+        (change)="slideChanged(setting.id, $event.checked)"
+      ></mat-slide-toggle>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

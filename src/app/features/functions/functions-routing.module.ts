@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./explorer/explorer.module').then((m) => m.ExplorerModule),
   },
+  {
+    path: 'mount',
+    loadChildren: () =>
+      import('./mount/mount.module').then((m) => m.MountModule),
+  },
 ];
 
 @NgModule({
