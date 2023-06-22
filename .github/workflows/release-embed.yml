@@ -1,4 +1,4 @@
-name: Release
+name: Release Embed
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      deployments: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build
+          npm run build:embed
 
       - name: Archive as Zip
         run: |

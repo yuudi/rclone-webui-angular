@@ -14,9 +14,15 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "en-US",
+        "sourceLocale": {
+          "code": "en-US",
+          "baseHref": "en-US"
+        },
         "locales": {
-          "zh-CN": "src/locale/messages.zh-CN.xlf"
+          "zh-CN": {
+            "translation": "src/locale/messages.zh-CN.xlf",
+            "baseHref": "zh-CN"
+          }
         }
       },
       "architect": {
@@ -67,19 +73,21 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "namedChunks": true
             },
             "embed": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.embed.ts"
+                }
+              ]
+            },
+            "standalone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.standalone.ts"
                 }
               ]
             }

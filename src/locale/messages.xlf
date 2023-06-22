@@ -13,6 +13,7 @@
       </trans-unit>
       <trans-unit id="2849267946273310379" datatype="html">
         <source>Mounting</source>
+        <note priority="1" from="description">noun</note>
       </trans-unit>
       <trans-unit id="7730992219911127538" datatype="html">
         <source>Rclone WebUI</source>
@@ -384,6 +385,10 @@
       </trans-unit>
       <trans-unit id="7941428823403788384" datatype="html">
         <source> Create </source>
+      </trans-unit>
+      <trans-unit id="1518435952515160235" datatype="html">
+        <source> Mounting </source>
+        <note priority="1" from="description">noun</note>
       </trans-unit>
     </body>
   </file>

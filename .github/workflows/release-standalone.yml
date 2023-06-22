@@ -1,0 +1,44 @@
+name: Release Standalone
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: RcloneWebuiAngular-${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            RcloneWebuiAngular-${{ runner.os }}-node-
+
+      - name: Build
+        run: |
+          npm ci
+          sed -i 's/"baseHref": "\(.*\)"/"baseHref": "rclone-webui-angular\/\1"/g' ./angular.json
+          npm run build:standalone
+          cp src/i18n-index.html dist/build/index.html
+
+      - name: Deploy to Github-Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist/build
+          clean: true
+          git-config-name: github-actions[bot]
+          git-config-email: github-actions[bot]@users.noreply.github.com
+          commit-message: Deployed to Github-Pages

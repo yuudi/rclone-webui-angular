@@ -1,10 +1,20 @@
 # Rclone-Webui-Angular
 
+[中文使用说明](./docs/zh/Instructions.md)
+
 This project is another webui for [rclone](https://github.com/rclone/rclone)
 
 WARNING: this project is still in development, please do not use it in production environment
 
 ## Use
+
+Choose one of the following methods:
+
+- rwa.exe (Work in Progress): Good for those who are not familiar with command line
+- [Embedded](#embedded): Good for managing local instance
+- [PWA Standalone](./docs/pwa.md): Good for managing multiple remote servers
+
+### Embedded
 
 1. Install [rclone](https://rclone.org/downloads/) if you haven't
 

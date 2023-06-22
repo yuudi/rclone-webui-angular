@@ -389,6 +389,7 @@
       <trans-unit id="2849267946273310379" datatype="html">
         <source>Mounting</source>
         <target state="translated">正在挂载</target>
+        <note priority="1" from="description">noun</note>
       </trans-unit>
       <trans-unit id="3044369161367328488" datatype="html">
         <source> Hide Advanced Options </source>
@@ -509,6 +510,11 @@
       <trans-unit id="7941428823403788384" datatype="html">
         <source> Create </source>
         <target state="translated"> 创建 </target>
+      </trans-unit>
+      <trans-unit id="1518435952515160235" datatype="html">
+        <source> Mounting </source>
+        <target state="translated"> 挂载 </target>
+        <note priority="1" from="description">noun</note>
       </trans-unit>
     </body>
   </file>

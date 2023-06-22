@@ -8,9 +8,12 @@
     <mat-icon fontIcon="menu"></mat-icon>
   </button>
   <mat-menu #functionMenu>
+    <button mat-menu-item routerLink="/connection" i18n>Connections</button>
     <button mat-menu-item routerLink="/dashboard" i18n>Dashboard</button>
     <button mat-menu-item routerLink="/rclone/drive" i18n>Drives</button>
-    <button mat-menu-item routerLink="/rclone/mount" i18n>Mounting</button>
+    <button mat-menu-item routerLink="/rclone/mount" i18n="noun">
+      Mounting
+    </button>
   </mat-menu>
   <a
     mat-icon-button
@@ -31,7 +34,7 @@
   <a
     mat-icon-button
     routerLink="/rclone/mount"
-    i18n-matTooltip
+    i18n-matTooltip="noun"
     matTooltip="Mounting"
   >
     <mat-icon fontIcon="smb_share" class="material-symbols-outlined"></mat-icon>
@@ -48,12 +51,13 @@
     <mat-icon fontIcon="language"></mat-icon>
   </button>
   <mat-menu #languageMenu xPosition="before">
-    <a mat-menu-item href="/en-US" i18n>English</a>
-    <a mat-menu-item href="/zh-CN" i18n>Chinese Simplified</a>
+    <a mat-menu-item href="../en-US/" i18n>English</a>
+    <a mat-menu-item href="../zh-CN/" i18n>Chinese Simplified</a>
   </mat-menu>
   <button
     *ngIf="showRemoteSetting"
     mat-icon-button
+    routerLink="/connection"
     i18n-matTooltip
     matTooltip="Connections"
   >

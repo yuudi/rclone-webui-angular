@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  NoPreloading,
+  PreloadAllModules,
+  RouterModule,
+  Routes,
+} from '@angular/router';
 
+import { environment } from 'src/environments/environment';
 import { connectionGuard } from './cores/remote-control/connection.guard';
 
 const routes: Routes = [
@@ -38,7 +44,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      preloadingStrategy: environment.standalone
+        ? PreloadAllModules
+        : NoPreloading,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -9,8 +9,9 @@
   "icons": [
     {
       "src": "assets/icons/icon-rclone.svg",
+      "sizes": "150x150",
       "type": "image/svg+xml",
-      "purpose": "maskable any"
+      "purpose": "any"
     }
   ]
 }
