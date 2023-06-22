@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Subject, first, lastValueFrom } from 'rxjs';
+import { first, lastValueFrom } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { BackendService } from '../backend/backend.service';
+import { RenameDialogComponent } from './explorer-viewer/rename-dialog/rename-dialog.component';
 import { AppClipboard, ExplorerView } from './explorer.model';
 import { ExplorerService } from './explorer.service';
 
@@ -28,6 +30,7 @@ export class ExplorerComponent implements OnInit {
     private snackBar: MatSnackBar,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
+    private dialog: MatDialog,
     private explorerService: ExplorerService,
     private backendService: BackendService
   ) {
@@ -50,7 +53,7 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend: backend,
           path: '',
-          refresh$: new Subject(),
+          actions: {},
         });
       }
     });
@@ -93,7 +96,7 @@ export class ExplorerComponent implements OnInit {
     group.tabs.push({
       backend: backend,
       path: '',
-      refresh$: new Subject(),
+      actions: {},
     });
     group.currentTab = group.tabs.length - 1;
   }
@@ -123,7 +126,7 @@ export class ExplorerComponent implements OnInit {
   }
 
   refresh(view: ExplorerView) {
-    view.refresh$.next(); // I regret not using ngRx, but It's too late now.
+    view.actions.refresh?.();
   }
 
   clipboardAdd(clipboard: AppClipboard) {
@@ -160,5 +163,42 @@ export class ExplorerComponent implements OnInit {
       });
     }
     this.clipboard = null;
+  }
+
+  createFolderClicked(view: ExplorerView) {
+    const children = view.actions.getChildren?.();
+    if (!children) {
+      console.error($localize`view is not ready`);
+      return;
+    }
+    this.dialog
+      .open(RenameDialogComponent, {
+        data: {
+          title: $localize`Create Folder`,
+          name: '',
+          existNames: children.map((child) => child.Name),
+        },
+      })
+      .afterClosed()
+      .subscribe((name?: string) => {
+        if (!name) {
+          // User cancelled
+          return;
+        }
+        this.explorerService
+          .createEmptyFolder(view.backend, view.path + '/' + name)
+          .subscribe({
+            next: () => {
+              this.snackBar.open(
+                $localize`Folder Created Successfully`,
+                $localize`Dismiss`
+              );
+              view.actions.addFolder?.(name);
+            },
+            error: (err) => {
+              this.snackBar.open(err, $localize`Dismiss`);
+            },
+          });
+      });
   }
 }

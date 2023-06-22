@@ -58,19 +58,18 @@
               <span i18n>Discard</span>
             </button>
           </mat-menu>
-          <!--
-            <button
-              mat-icon-button
-              [disabled]="group.tabs.length === 0"
-              i18n-matTooltip
-              matTooltip="Create Folder"
-            >
-              <mat-icon
-                fontIcon="create_new_folder"
-                class="material-icons-outlined"
-              ></mat-icon>
-            </button>
-          -->
+          <button
+            mat-icon-button
+            [disabled]="group.tabs.length === 0"
+            (click)="createFolderClicked(group.tabs[group.currentTab])"
+            i18n-matTooltip
+            matTooltip="Create Folder"
+          >
+            <mat-icon
+              fontIcon="create_new_folder"
+              class="material-icons-outlined"
+            ></mat-icon>
+          </button>
           <div class="spacer"></div>
           <!-- 
             <button
@@ -175,7 +174,7 @@
             <app-explorer-viewer
               [backend]="view.backend"
               [(path)]="view.path"
-              [refresh$]="view.refresh$"
+              [actions]="view.actions"
               (clipboardAdded)="clipboardAdd($event)"
               #explorerViewer
             ></app-explorer-viewer>

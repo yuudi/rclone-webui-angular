@@ -1,9 +1,11 @@
-import { Subject } from 'rxjs';
-
 export interface ExplorerView {
   backend: string;
   path: string;
-  refresh$: Subject<void>;
+  actions: {
+    refresh?: () => void;
+    getChildren?: () => DirectoryItem[] | undefined;
+    addFolder?: (name: string) => void;
+  };
 }
 
 export interface AppClipboard {

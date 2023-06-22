@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -17,12 +17,13 @@ import {
   AppClipboard,
   DirItem,
   DirectoryItem,
+  ExplorerView,
   FileItem,
 } from '../explorer.model';
 import { ExplorerService } from '../explorer.service';
+import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
-import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -36,7 +37,7 @@ export class ExplorerViewerComponent implements OnInit {
   @Input() backend!: string;
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
-  @Input() refresh$?: Observable<void>;
+  @Input() actions!: ExplorerView['actions'];
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
 
   private _path!: string;
@@ -69,9 +70,18 @@ export class ExplorerViewerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.refresh$?.subscribe(() => {
-      this.fetchChildren();
-    });
+    this.actions.refresh = () => void this.fetchChildren();
+    this.actions.getChildren = () => this.children;
+    this.actions.addFolder = (name) => {
+      this.children?.push({
+        Name: name,
+        Path: this.path + '/' + name,
+        IsDir: true,
+        Size: -1,
+        MimeType: 'inode/directory',
+        ModTime: new Date(),
+      });
+    };
   }
 
   fetchChildren() {
@@ -137,26 +147,20 @@ export class ExplorerViewerComponent implements OnInit {
     if (!item) {
       throw new Error('No context menu item when delete clicked.');
     }
-    const nameAvailable$ = new Subject<boolean>();
     const dialog = this.dialog.open(RenameDialogComponent, {
       data: {
+        title: $localize`Rename`,
         name: item.Name,
-        nameAvailable$,
+        existNames: this.children?.map((i) => i.Name) ?? [],
       },
     });
-    const nameSub = dialog.componentInstance.nameChange.subscribe((name) => {
+    dialog.afterClosed().subscribe((name?: string) => {
       if (!name) {
-        nameAvailable$.next(false);
+        // canceled
         return;
       }
-      const exist = this.children?.find((i) => i.Name === name);
-      nameAvailable$.next(!exist);
-    });
-    this.currentPathSubScription.add(nameSub);
-    const confirmSub = dialog.componentInstance.confirm.subscribe((name) => {
       this.renameConfirmed(item, name);
     });
-    this.currentPathSubScription.add(confirmSub);
   }
 
   renameConfirmed(item: DirectoryItem, newName: string) {
