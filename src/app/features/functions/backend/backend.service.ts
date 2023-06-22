@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { Backend, BackendUsage, FsInfo } from './backend.model';
@@ -15,10 +15,21 @@ export class BackendService {
     };
   } = {};
 
+  backendInfoCache: {
+    [id: string]: {
+      info: FsInfo;
+    };
+  } = {};
+
   constructor(private rc: RemoteControlService) {
-    const storage = localStorage.getItem('rwaBackendUsageCache');
-    if (storage) {
-      this.backendUsageCache = JSON.parse(storage);
+    const usageStorage = localStorage.getItem('rwa_BackendUsageCache');
+    if (usageStorage) {
+      this.backendUsageCache = JSON.parse(usageStorage);
+    }
+
+    const infoStorage = localStorage.getItem('rwa_BackendInfoCache');
+    if (infoStorage) {
+      this.backendInfoCache = JSON.parse(infoStorage);
     }
   }
 
@@ -85,6 +96,20 @@ export class BackendService {
   }
 
   getBackendInfo(id: string) {
-    return this.rc.call<FsInfo>('operations/fsinfo', { fs: id + ':' });
+    const cached = this.backendInfoCache[id];
+    if (cached) {
+      return of(cached.info);
+    }
+    return this.rc.call<FsInfo>('operations/fsinfo', { fs: id + ':' }).pipe(
+      tap((info) => {
+        this.backendInfoCache[id] = {
+          info,
+        };
+        localStorage.setItem(
+          'rwa_BackendInfoCache',
+          JSON.stringify(this.backendInfoCache)
+        );
+      })
+    );
   }
 }

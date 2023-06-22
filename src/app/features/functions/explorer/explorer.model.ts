@@ -1,6 +1,9 @@
+import { FsInfo } from '../backend/backend.model';
+
 export interface ExplorerView {
   backend: string;
   path: string;
+  info: Promise<FsInfo>;
   actions: {
     refresh?: () => void;
     getChildren?: () => DirectoryItem[] | undefined;

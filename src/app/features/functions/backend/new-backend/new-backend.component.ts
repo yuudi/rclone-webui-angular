@@ -3,9 +3,12 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { Err, Ok } from 'src/app/shared/result';
+import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { AppProvider } from './new-backend.model';
 import { NewBackendService } from './new-backend.service';
 
@@ -15,6 +18,7 @@ import { NewBackendService } from './new-backend.service';
   styleUrls: ['./new-backend.component.scss'],
 })
 export class NewBackendComponent implements OnInit {
+  stepperSelectedIndex = 0;
   providers$?: Observable<AppProvider[]>;
   newBackendName = new FormControl('', [
     Validators.required,
@@ -31,18 +35,20 @@ export class NewBackendComponent implements OnInit {
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
-    private newBackendService: NewBackendService
+    private dialog: MatDialog,
+    private newBackendService: NewBackendService,
+    private connectionService: ConnectionService
   ) {}
 
   ngOnInit(): void {
     this.providers$ = this.newBackendService.getProviders();
     this.requiredFieldHint = !(
-      localStorage.getItem('rwaNewBackendRequiredFieldHint') === 'false'
+      localStorage.getItem('rwa_NewBackendRequiredFieldHint') === 'false'
     );
   }
 
   hintDismissClicked() {
-    localStorage.setItem('rwaNewBackendRequiredFieldHint', 'false');
+    localStorage.setItem('rwa_NewBackendRequiredFieldHint', 'false');
     this.requiredFieldHint = false;
   }
 
@@ -52,6 +58,49 @@ export class NewBackendComponent implements OnInit {
     this.providerNeedAuth = provider.Options.some(
       (option) => option.Name === 'token'
     );
+  }
+
+  providerSelectedConfirmed() {
+    // warn if it is a remote backend and need auth
+    const address = this.connectionService.getActiveConnection()?.remoteAddress;
+    if (!address) {
+      throw new Error('No active connection');
+    }
+    const hostname = new URL(address).hostname;
+    if (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '[::1]'
+    ) {
+      return;
+    }
+
+    if (this.providerSelected === undefined) {
+      throw new Error('No provider selected');
+    }
+    const needAuth = this.providerSelected.Options.some(
+      (option) => option.Name === 'token'
+    );
+    if (!needAuth) {
+      return;
+    }
+
+    // warn user
+    this.dialog
+      .open(SimpleDialogComponent, {
+        data: {
+          title: $localize`Warning`,
+          message: $localize`This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.`,
+          actions: ['Go back', 'Continue Anyway'],
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result !== 'Continue Anyway') {
+          this.providerSelected = undefined;
+          this.stepperSelectedIndex = 0;
+        }
+      });
   }
 
   resetProviderOptions() {

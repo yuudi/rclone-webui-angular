@@ -46,12 +46,16 @@
       <mat-icon fontIcon="edit"></mat-icon>
       <span i18n>Rename</span>
     </button>
-    <button mat-menu-item (click)="generateLinkClicked()">
+    <button
+      *ngIf="info?.Features?.PublicLink"
+      mat-menu-item
+      (click)="generateLinkClicked()"
+    >
       <mat-icon fontIcon="add_link"></mat-icon>
       <span i18n>Generate Link</span>
     </button>
     <button
-      *ngIf="!contextMenuItem?.IsDir"
+      *ngIf="canDownload && !contextMenuItem?.IsDir"
       mat-menu-item
       (click)="downloadClicked()"
     >

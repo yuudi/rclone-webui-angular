@@ -59,6 +59,10 @@
             </button>
           </mat-menu>
           <button
+            *ngIf="
+              (group.tabs[group.currentTab].info | async)?.Features
+                ?.CanHaveEmptyDirectories
+            "
             mat-icon-button
             [disabled]="group.tabs.length === 0"
             (click)="createFolderClicked(group.tabs[group.currentTab])"
@@ -174,6 +178,7 @@
             <app-explorer-viewer
               [backend]="view.backend"
               [(path)]="view.path"
+              [info]="view.info | async"
               [actions]="view.actions"
               (clipboardAdded)="clipboardAdd($event)"
               #explorerViewer

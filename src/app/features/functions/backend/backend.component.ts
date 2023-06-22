@@ -52,13 +52,22 @@ export class BackendComponent implements OnInit {
       console.error(`Backend ${id} not found!`);
       return;
     }
-    this.backendService.getBackendUsage(id).subscribe({
-      next: (usage) => {
-        ref.usage = usage;
-      },
-      error: () => {
+    this.backendService.getBackendInfo(id).subscribe((info) => {
+      if (!info.Features.About) {
         ref.usage = Unmeasured;
-      },
+        return;
+      }
+      this.backendService.getBackendUsage(id).subscribe({
+        next: (usage) => {
+          ref.usage = usage;
+        },
+        error: () => {
+          this.snackBar.open(
+            $localize`Failed to get usage information for backend ${id}`,
+            $localize`Dismiss`
+          );
+        },
+      });
     });
   }
 

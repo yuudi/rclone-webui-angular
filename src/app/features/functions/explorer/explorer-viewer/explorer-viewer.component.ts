@@ -24,6 +24,8 @@ import { ExplorerService } from '../explorer.service';
 import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
+import { FsInfo } from '../../backend/backend.model';
+import { environment } from 'src/environments/environment';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -35,6 +37,7 @@ const Loading = undefined;
 })
 export class ExplorerViewerComponent implements OnInit {
   @Input() backend!: string;
+  @Input() info: FsInfo | null = null;
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
   @Input() actions!: ExplorerView['actions'];
@@ -61,6 +64,8 @@ export class ExplorerViewerComponent implements OnInit {
 
   contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
+
+  canDownload = environment.embed;
 
   constructor(
     private snackBar: MatSnackBar,

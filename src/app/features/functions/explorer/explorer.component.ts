@@ -53,6 +53,7 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend: backend,
           path: '',
+          info: lastValueFrom(this.backendService.getBackendInfo(backend)),
           actions: {},
         });
       }
@@ -96,6 +97,7 @@ export class ExplorerComponent implements OnInit {
     group.tabs.push({
       backend: backend,
       path: '',
+      info: lastValueFrom(this.backendService.getBackendInfo(backend)),
       actions: {},
     });
     group.currentTab = group.tabs.length - 1;

@@ -1,5 +1,5 @@
 <mat-card class="new-backend__container">
-  <mat-stepper linear>
+  <mat-stepper linear [(selectedIndex)]="stepperSelectedIndex">
     <mat-step>
       <ng-template matStepLabel i18n>Provider</ng-template>
       <div class="new-backend__provider-step">
@@ -49,6 +49,7 @@
             mat-raised-button
             color="primary"
             matStepperNext
+            (click)="providerSelectedConfirmed()"
             [disabled]="providerSelected === undefined"
             i18n="next step"
           >
