@@ -235,7 +235,7 @@
         <target>保存</target>
       </trans-unit>
       <trans-unit id="7960163200088679566" datatype="html">
-        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
+        <source>You will be redirected to the provider's website to authorize, click save now</source>
         <target>您将被重定向到供应方的网站进行授权，现在请点击保存</target>
       </trans-unit>
       <trans-unit id="6649706328938022022" datatype="html">
@@ -355,8 +355,8 @@
         <target>分窗口浏览</target>
       </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
-        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
-        <target state="translated"> 点击<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> ，打开一个储存池 </target>
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated"> 点击<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> ，打开一个储存池 </target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
@@ -515,6 +515,34 @@
         <source> Mounting </source>
         <target state="translated"> 挂载 </target>
         <note priority="1" from="description">noun</note>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+        <target state="translated">删除</target>
+      </trans-unit>
+      <trans-unit id="5427756419569772794" datatype="html">
+        <source>Failed to get usage information for backend <x id="PH" equiv-text="id"/></source>
+        <target state="translated">获取后端使用信息失败 <x id="PH" equiv-text="id"/> 。</target>
+      </trans-unit>
+      <trans-unit id="6759205696902713848" datatype="html">
+        <source>Warning</source>
+        <target state="translated">警告</target>
+      </trans-unit>
+      <trans-unit id="5559087577598810992" datatype="html">
+        <source>This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.</source>
+        <target state="translated">这个供应方需要认证。因为你使用的是一个远程连接，无法自动认证（OAuth）。你可能需要在本地rclone上进行授权，然后将token复制到远程连接。</target>
+      </trans-unit>
+      <trans-unit id="2812208926273686149" datatype="html">
+        <source>Create Folder</source>
+        <target state="translated">创建文件夹</target>
+      </trans-unit>
+      <trans-unit id="7806473130802584518" datatype="html">
+        <source>view is not ready</source>
+        <target state="translated">视图还没有准备好</target>
+      </trans-unit>
+      <trans-unit id="7168628217068609895" datatype="html">
+        <source>Folder Created Successfully</source>
+        <target state="translated">创建文件夹成功</target>
       </trans-unit>
     </body>
   </file>

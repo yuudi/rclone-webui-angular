@@ -390,6 +390,27 @@
         <source> Mounting </source>
         <note priority="1" from="description">noun</note>
       </trans-unit>
+      <trans-unit id="2812208926273686149" datatype="html">
+        <source>Create Folder</source>
+      </trans-unit>
+      <trans-unit id="5427756419569772794" datatype="html">
+        <source>Failed to get usage information for backend <x id="PH" equiv-text="id"/></source>
+      </trans-unit>
+      <trans-unit id="5559087577598810992" datatype="html">
+        <source>This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.</source>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+      </trans-unit>
+      <trans-unit id="6759205696902713848" datatype="html">
+        <source>Warning</source>
+      </trans-unit>
+      <trans-unit id="7168628217068609895" datatype="html">
+        <source>Folder Created Successfully</source>
+      </trans-unit>
+      <trans-unit id="7806473130802584518" datatype="html">
+        <source>view is not ready</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
