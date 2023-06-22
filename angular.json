@@ -16,12 +16,12 @@
       "i18n": {
         "sourceLocale": {
           "code": "en-US",
-          "baseHref": "en-US"
+          "baseHref": "en-US/"
         },
         "locales": {
           "zh-CN": {
             "translation": "src/locale/messages.zh-CN.xlf",
-            "baseHref": "zh-CN"
+            "baseHref": "zh-CN/"
           }
         }
       },

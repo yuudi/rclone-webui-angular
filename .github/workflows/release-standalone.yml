@@ -9,7 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v3
@@ -33,12 +35,13 @@ jobs:
           npm run build:standalone
           cp src/i18n-index.html dist/build/index.html
 
-      - name: Deploy to Github-Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          branch: gh-pages
-          folder: dist/build
-          clean: true
-          git-config-name: github-actions[bot]
-          git-config-email: github-actions[bot]@users.noreply.github.com
-          commit-message: Deployed to Github-Pages
+          path: ./dist/build
+
+      - name: Deploy to Github-Pages
+        uses: actions/deploy-pages@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifact_name: github-pages
