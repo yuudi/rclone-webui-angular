@@ -61,7 +61,7 @@ Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
 - [x] International workflow
 - [ ] More Platforms
   - [x] Rclone embedded
-  - [ ] PWA Standalone
+  - [x] PWA Standalone
   - [ ] Electron
   - [ ] WinUI 3 with WebView2
 
