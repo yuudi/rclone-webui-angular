@@ -235,7 +235,7 @@
         <target>保存</target>
       </trans-unit>
       <trans-unit id="7960163200088679566" datatype="html">
-        <source>You will be redirected to the provider's website to authorize, click save now</source>
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
         <target>您将被重定向到供应方的网站进行授权，现在请点击保存</target>
       </trans-unit>
       <trans-unit id="6649706328938022022" datatype="html">
@@ -355,8 +355,8 @@
         <target>分窗口浏览</target>
       </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
-        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
-        <target state="translated"> 点击<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> ，打开一个储存池 </target>
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated"> 点击<x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> ，打开一个储存池 </target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
