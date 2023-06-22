@@ -18,6 +18,21 @@
   width: 90%;
 }
 
+.connection__list-content {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.connection__list-action {
+  button {
+    margin: 0.5em;
+  }
+}
+
 @media screen and (min-width: 800px) {
   .connection__container {
     flex-direction: row;

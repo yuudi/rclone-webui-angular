@@ -7,11 +7,31 @@
       <ng-container *ngFor="let connection of connections; let last = last">
         <mat-divider></mat-divider>
         <mat-list-item
-          (click)="onConnectionClicked(connection)"
-          (dblclick)="onConnectionDoubleClicked(connection)"
+          (click)="connectSelected(connection)"
+          (dblclick)="connectClicked(connection)"
         >
-          {{ connection.displayName }}
-          <span class="spacer"></span>
+          <div class="connection__list-content">
+            {{ connection.displayName }}
+            <span class="spacer"></span>
+            <span class="connection__list-action">
+              <button
+                mat-stroked-button
+                color="primary"
+                (click)="connectClicked(connection)"
+                i18n
+              >
+                Connect
+              </button>
+              <button
+                mat-stroked-button
+                color="warn"
+                (click)="connectDeleted(connection)"
+                i18n
+              >
+                Delete
+              </button>
+            </span>
+          </div>
         </mat-list-item>
         <mat-divider *ngIf="last"></mat-divider>
       </ng-container>

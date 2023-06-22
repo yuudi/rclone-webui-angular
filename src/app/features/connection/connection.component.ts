@@ -32,11 +32,11 @@ export class ConnectionComponent implements OnInit {
     this.connections$ = this.connectionService.getConnections();
   }
 
-  onConnectionClicked(connection: Connection) {
+  connectSelected(connection: Connection) {
     this.selectedConnection = connection;
   }
 
-  onConnectionDoubleClicked(connection: Connection) {
+  connectClicked(connection: Connection) {
     if (connection.authentication === NotSaved) {
       this.dialog.open(PromptPasswordComponent, {
         data: connection,
@@ -49,5 +49,9 @@ export class ConnectionComponent implements OnInit {
       return;
     }
     this.route.navigate(['']);
+  }
+
+  connectDeleted(connection: Connection) {
+    this.connectionService.deleteConnection(connection.id);
   }
 }

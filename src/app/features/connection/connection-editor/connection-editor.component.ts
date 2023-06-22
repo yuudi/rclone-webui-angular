@@ -69,6 +69,10 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
   uniqueNameValidator(): ValidatorFn {
     return (control) => {
+      if (control.value === this.connection?.displayName) {
+        // The name is not changed
+        return null;
+      }
       if (this.connectionService.checkNameExists(control.value)) {
         return { nameExists: true };
       }
