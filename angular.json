@@ -75,6 +75,9 @@
               "sourceMap": true,
               "namedChunks": true
             },
+            "no-localize": {
+              "localize": false
+            },
             "embed": {
               "fileReplacements": [
                 {
@@ -101,7 +104,7 @@
               "browserTarget": "rclone-webui-angular:build:production"
             },
             "development": {
-              "browserTarget": "rclone-webui-angular:build:development"
+              "browserTarget": "rclone-webui-angular:build:development,no-localize"
             }
           },
           "defaultConfiguration": "development",
