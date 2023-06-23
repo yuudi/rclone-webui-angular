@@ -60,7 +60,7 @@
           </mat-menu>
           <button
             *ngIf="
-              (group.tabs[group.currentTab].info | async)?.Features
+              (group.tabs[group.currentTab]?.info | async)?.Features
                 ?.CanHaveEmptyDirectories
             "
             mat-icon-button

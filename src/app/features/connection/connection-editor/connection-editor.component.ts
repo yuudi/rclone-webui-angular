@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
+import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, tap } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -12,7 +11,7 @@ import {
   NotSaved,
 } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { Err, Result } from 'src/app/shared/result';
+import { Err } from 'src/app/shared/result';
 
 @Component({
   selector: 'app-connection-editor',
@@ -24,7 +23,8 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
   connectionForm = this.fb.nonNullable.group({
     displayName: [
       'New Connection',
-      [Validators.required, this.uniqueNameValidator()],
+      [Validators.required],
+      [this.uniqueNameValidator()],
     ],
     remoteAddress: [
       ConnectionEditorComponent.getCurrentHost(),
@@ -67,84 +67,72 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     }
   }
 
-  uniqueNameValidator(): ValidatorFn {
-    return (control) => {
+  uniqueNameValidator(): AsyncValidatorFn {
+    return async (control) => {
       if (control.value === this.connection?.displayName) {
         // The name is not changed
         return null;
       }
-      if (this.connectionService.checkNameExists(control.value)) {
+      if (await this.connectionService.checkNameExists(control.value)) {
         return { nameExists: true };
       }
       return null;
     };
   }
 
-  testConnectionClicked() {
-    this.testConnection().subscribe({
-      next: (success) => {
-        if (success) {
-          this.snackBar.open($localize`Connection successful`, 'OK', {
-            duration: 3000,
-          });
-        } else {
-          this.snackBar.open($localize`Connection failed`, 'OK', {
-            duration: 3000,
-          });
-        }
-      },
-      error: () => {
-        this.snackBar.open($localize`Connection failed`, 'OK', {
-          duration: 3000,
-        });
-      },
-    });
+  async testConnectionClicked() {
+    const result = await this.testConnection();
+    if (result) {
+      this.snackBar.open($localize`Connection successful`, 'OK', {
+        duration: 3000,
+      });
+    } else {
+      this.snackBar.open($localize`Connection failed`, 'OK', {
+        duration: 3000,
+      });
+    }
   }
 
-  testConnection() {
+  async testConnection(): Promise<boolean> {
     const { remoteAddress, notProtected, username, password } =
       this.connectionForm.getRawValue();
 
     const cacheIndex = `${remoteAddress}\n${username}\n${password}`;
     const success = this.testResultCache.get(cacheIndex);
     if (success !== undefined) {
-      return of(success);
+      return success;
     }
 
     const credential = notProtected ? NoAuthentication : { username, password };
-
-    return this.rc.testConnection({ remoteAddress, credential }).pipe(
-      tap((success) => {
-        this.testResultCache.set(cacheIndex, success);
-      })
-    );
+    const result = await this.rc.testConnection({ remoteAddress, credential });
+    this.testResultCache.set(cacheIndex, result);
+    return result;
   }
 
-  connectButtonClicked() {
-    this.testConnection().subscribe((success) => {
-      if (!success) {
-        this.snackBar.open($localize`Connection failed`, 'OK', {
-          duration: 3000,
-        });
-        return;
-      }
-      let result: Result<never, string>;
-      if (this.connection) {
-        result = this.updateConnectionAndActivate();
-      } else {
-        result = this.addConnectionAndActivate();
-      }
-      if (result.ok) {
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.snackBar.open($localize`Connection failed:` + result.error, 'OK', {
-          duration: 3000,
-        });
-      }
-    });
+  async connectButtonClicked() {
+    const connectResult = await this.testConnection();
+    if (!connectResult) {
+      this.snackBar.open($localize`Connection failed`, 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+    let result;
+    if (this.connection) {
+      result = await this.updateConnectionAndActivate();
+    } else {
+      result = await this.addConnectionAndActivate();
+    }
+    if (result.ok) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      this.snackBar.open($localize`Connection failed:` + result.error, 'OK', {
+        duration: 3000,
+      });
+    }
   }
 
-  addConnectionAndActivate() {
+  async addConnectionAndActivate() {
     const {
       displayName,
       remoteAddress,
@@ -156,7 +144,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const credential = notProtected ? NoAuthentication : { username, password };
 
-    const saveResult = this.connectionService.saveConnection(
+    const saveResult = await this.connectionService.saveConnection(
       { displayName, remoteAddress },
       remember ? credential : NotSaved
     );

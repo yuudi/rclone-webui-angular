@@ -61,6 +61,6 @@ server {
 }
 ```
 
-完成后，你可以前往 <https://yuudi.github.io/rclone-webui-angular/zh_CN/> 输入你的域名、用户名和密码来访问你的 rclone 服务
+完成后，你可以前往 <https://yuudi.github.io/rclone-webui-angular/zh-CN/> 输入你的域名、用户名和密码来访问你的 rclone 服务
 
 这个页面使用 PWA 技术，只有首次访问需要魔法，之后不再需要，即使断网也可以使用

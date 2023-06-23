@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, lastValueFrom, tap } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.com
 })
 export class MountComponent implements OnInit {
   settings$?: Observable<MountSetting[]>;
-  os$ = this.mountService.getOsType();
+  os = this.mountService.getOsType();
 
   constructor(
     private snackBar: MatSnackBar,
@@ -31,8 +31,8 @@ export class MountComponent implements OnInit {
   }
 
   async newMountClicked() {
-    const remoteList = await lastValueFrom(this.backendService.listBackends());
-    const os = await lastValueFrom(this.os$);
+    const remoteList = (await this.backendService.listBackends()).orThrow();
+    const os = await this.os;
     const dialog: MatDialogRef<
       NewMountDialogComponent,
       {
@@ -51,7 +51,7 @@ export class MountComponent implements OnInit {
     > = this.dialog.open(NewMountDialogComponent, {
       data: {
         osType: os,
-        fsOptions: remoteList.remotes,
+        fsOptions: remoteList,
       },
     });
     const dialogResult = await lastValueFrom(dialog.afterClosed());
@@ -68,18 +68,17 @@ export class MountComponent implements OnInit {
           : '/mnt/rclone/' + fsString;
     }
     if (os !== 'windows') {
-      await lastValueFrom(
-        this.explorerService.createEmptyFolder('', mountPoint).pipe(
-          tap({
-            error: () => {
-              this.snackBar.open(
-                $localize`Rclone does not have access to this path, please check the permission of this path`,
-                $localize`Dismiss`
-              );
-            },
-          })
-        )
+      const result = await this.explorerService.createEmptyFolder(
+        '',
+        mountPoint
       );
+      if (!result.ok) {
+        this.snackBar.open(
+          $localize`Rclone does not have access to this path, please check the permission of this path`,
+          $localize`Dismiss`
+        );
+        return;
+      }
     }
     const mountOpt: { [key: string]: string | boolean | number } = {};
     const vfsOpt: { [key: string]: string | boolean | number } = {};
@@ -105,7 +104,7 @@ export class MountComponent implements OnInit {
       vfsOpt['vfsCacheMaxAge'] = dialogResult.vfsCacheMaxAge;
     }
 
-    const id = this.mountService.createSetting({
+    const id = await this.mountService.createSetting({
       Fs: dialogResult.Fs,
       MountPoint: mountPoint,
       MountedOn: new Date(),
@@ -114,7 +113,7 @@ export class MountComponent implements OnInit {
     });
     if (dialogResult.enabled) {
       try {
-        await lastValueFrom(this.mountService.mount(id));
+        await this.mountService.mount(id);
         this.snackBar.open($localize`Mount created and mounted`, undefined, {
           duration: 3000,
         });
@@ -128,33 +127,37 @@ export class MountComponent implements OnInit {
     }
   }
 
-  slideChanged(id: string, checked: boolean) {
+  async slideChanged(id: string, checked: boolean) {
     if (checked) {
-      this.mountService.mount(id).subscribe({
-        next: () => {
-          this.snackBar.open($localize`Mounted`, undefined, {
-            duration: 3000,
-          });
-        },
-        error: (error) => {
-          this.snackBar.open(String(error), $localize`Dismiss`);
-        },
-      });
+      const result = await this.mountService.mount(id);
+      if (result.ok) {
+        this.snackBar.open($localize`Mounted`, undefined, {
+          duration: 3000,
+        });
+      } else {
+        this.snackBar.open(result.error, $localize`Dismiss`);
+      }
     } else {
-      this.mountService.unmount(id).subscribe(() => {
+      const result = await this.mountService.unmount(id);
+      if (result.ok) {
         this.snackBar.open($localize`Unmounted`, undefined, {
           duration: 3000,
         });
-      });
+      } else {
+        this.snackBar.open(result.error, $localize`Dismiss`);
+      }
     }
   }
 
-  unmountAllClicked() {
-    this.mountService.unmountAll().subscribe(() => {
+  async unmountAllClicked() {
+    const result = await this.mountService.unmountAll();
+    if (result.ok) {
       this.snackBar.open($localize`Unmounted`, undefined, {
         duration: 3000,
       });
-    });
+    } else {
+      this.snackBar.open(result.error, $localize`Dismiss`);
+    }
   }
 
   editClicked(setting: MountSetting) {

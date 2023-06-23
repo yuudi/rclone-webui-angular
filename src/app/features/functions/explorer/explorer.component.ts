@@ -41,8 +41,8 @@ export class ExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.listBackends().subscribe((list) => {
-      this.backendList = list.remotes;
+    this.backendService.listBackends().then((list) => {
+      this.backendList = list.orThrow();
     });
 
     this.fetchLocalFsList();
@@ -53,7 +53,9 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend: backend,
           path: '',
-          info: lastValueFrom(this.backendService.getBackendInfo(backend)),
+          info: this.backendService
+            .getBackendInfo(backend)
+            .then((result) => result.orThrow()),
           actions: {},
         });
       }
@@ -61,7 +63,7 @@ export class ExplorerComponent implements OnInit {
   }
 
   async fetchLocalFsList() {
-    const os = await lastValueFrom(this.explorerService.getOsType());
+    const os = await this.explorerService.getOsType();
     if (os === 'windows') {
       // In Windows, there are no api to list all drives,
       // So we just try from C to Z,
@@ -71,9 +73,7 @@ export class ExplorerComponent implements OnInit {
       // If new api is available, we should use that.
       let drive = 'C';
       while (drive <= 'Z') {
-        const result = await lastValueFrom(
-          this.backendService.checkWindowsDriveExist(drive)
-        );
+        const result = await this.backendService.checkWindowsDriveExist(drive);
         if (!result) {
           break;
         }
@@ -97,7 +97,9 @@ export class ExplorerComponent implements OnInit {
     group.tabs.push({
       backend: backend,
       path: '',
-      info: lastValueFrom(this.backendService.getBackendInfo(backend)),
+      info: this.backendService
+        .getBackendInfo(backend)
+        .then((result) => result.orThrow()),
       actions: {},
     });
     group.currentTab = group.tabs.length - 1;
@@ -139,68 +141,81 @@ export class ExplorerComponent implements OnInit {
     this.clipboard = null;
   }
 
-  clipboardPaste(view: ExplorerView, action?: 'copy' | 'move') {
+  async clipboardPaste(view: ExplorerView, action?: 'copy' | 'move') {
     if (!this.clipboard) {
+      console.error('clipboard is empty when paste');
       return;
     }
+    const clipboard = this.clipboard;
+    this.clipboard = null;
     if (action) {
-      this.clipboard.type = action;
+      clipboard.type = action;
     }
-    const opObsList = this.explorerService.clipboardOperate(
+    const resultList = await this.explorerService.clipboardOperate(
       view.backend,
       view.path,
-      this.clipboard
+      clipboard
     );
-    for (const opObs of opObsList) {
-      opObs.subscribe({
-        next: () => {
-          this.snackBar.open(
-            $localize`Task Created Successfully`,
-            $localize`Dismiss`
-          );
-        },
-        error: (err) => {
-          this.snackBar.open(err, $localize`Dismiss`);
-        },
-      });
+    if (resultList.length === 1) {
+      const result = resultList[0];
+      if (result.ok) {
+        this.snackBar.open(
+          $localize`Task Created Successfully`,
+          $localize`Dismiss`
+        );
+      } else {
+        this.snackBar.open(result.error, $localize`Dismiss`);
+      }
+      return;
     }
-    this.clipboard = null;
+    const errors: string[] = [];
+    for (const result of resultList) {
+      if (!result.ok) {
+        errors.push(result.error);
+      }
+    }
+    if (errors.length === 0) {
+      this.snackBar.open(
+        $localize`Tasks Created Successfully`,
+        $localize`Dismiss`
+      );
+    } else {
+      this.snackBar.open(errors.join('\n'), $localize`Dismiss`);
+    }
   }
 
-  createFolderClicked(view: ExplorerView) {
+  async createFolderClicked(view: ExplorerView) {
     const children = view.actions.getChildren?.();
     if (!children) {
       console.error($localize`view is not ready`);
       return;
     }
-    this.dialog
-      .open(RenameDialogComponent, {
-        data: {
-          title: $localize`Create Folder`,
-          name: '',
-          existNames: children.map((child) => child.Name),
-        },
-      })
-      .afterClosed()
-      .subscribe((name?: string) => {
-        if (!name) {
-          // User cancelled
-          return;
-        }
-        this.explorerService
-          .createEmptyFolder(view.backend, view.path + '/' + name)
-          .subscribe({
-            next: () => {
-              this.snackBar.open(
-                $localize`Folder Created Successfully`,
-                $localize`Dismiss`
-              );
-              view.actions.addFolder?.(name);
-            },
-            error: (err) => {
-              this.snackBar.open(err, $localize`Dismiss`);
-            },
-          });
-      });
+    const name = await lastValueFrom(
+      this.dialog
+        .open(RenameDialogComponent, {
+          data: {
+            title: $localize`Create Folder`,
+            name: '',
+            existNames: children.map((child) => child.Name),
+          },
+        })
+        .afterClosed()
+    );
+    if (!name) {
+      // User cancelled
+      return;
+    }
+    const result = await this.explorerService.createEmptyFolder(
+      view.backend,
+      view.path + '/' + name
+    );
+    if (!result.ok) {
+      this.snackBar.open(result.error, $localize`Dismiss`);
+    }
+    this.snackBar.open(
+      $localize`Folder Created Successfully`,
+      $localize`Dismiss`
+    );
+    view.actions.addFolder?.(name);
   }
 }

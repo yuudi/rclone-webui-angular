@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { catchError, lastValueFrom, map, of } from 'rxjs';
 
 import { ConnectionService, NoAuthentication } from './connection.service';
 import { Err, Ok, Result } from 'src/app/shared/result';
@@ -26,15 +26,32 @@ export class RemoteControlService {
     params?: {
       [key: string]: string | boolean | number | Record<string, unknown>;
     }
-  ): Observable<R> {
+  ): Promise<Result<R, string>> {
     const remote = this.auth.getActiveConnection();
+    const headers: { [key: string]: string } = {};
+    if (remote && remote.authentication) {
+      headers['Authorization'] = `Basic ${remote.authentication}`;
+    }
 
     if (!remote) {
-      return throwError(() => 'Remote address is not set');
+      throw new Error($localize`Remote address is not set`);
     }
-    return this.http
-      .post<R>(remote.remoteAddress + '/' + operation, params)
-      .pipe(catchError(this.handleError));
+    return lastValueFrom(
+      this.http
+        .post<R>(remote.remoteAddress + '/' + operation, params, {
+          headers,
+        })
+        .pipe(
+          map((result) => Ok(result)),
+          catchError((error: HttpErrorResponse) => {
+            this.logError(error);
+            return of(
+              Err(String(error?.error?.error ?? error?.error ?? error))
+            );
+          })
+        )
+    );
+    // http observable only emits once, so we can use lastValueFrom
   }
 
   getDownloadUrl(backend: string, file: string): Result<string, string> {
@@ -51,7 +68,7 @@ export class RemoteControlService {
     );
   }
 
-  downloadFile(backend: string, file: string): Result<never, string> {
+  downloadFile(backend: string, file: string): Result<void, string> {
     const result = this.getDownloadUrl(backend, file);
     if (!result.ok) {
       return result;
@@ -75,7 +92,7 @@ export class RemoteControlService {
         | NoAuthentication;
     },
     testAuth = false
-  ): Observable<boolean> {
+  ): Promise<boolean> {
     let remoteAddress: string, authentication: string | NoAuthentication;
     if (connection) {
       remoteAddress = connection.remoteAddress;
@@ -89,27 +106,32 @@ export class RemoteControlService {
     } else {
       const remote = this.auth.getActiveConnection();
       if (!remote) {
-        return of(false);
+        return Promise.resolve(false);
       }
       remoteAddress = remote.remoteAddress;
       authentication = remote.authentication;
     }
 
-    return this.http
-      .post(
-        remoteAddress + (testAuth ? '/rc/noopauth' : '/rc/noop'),
-        undefined,
-        {
-          headers: authentication
-            ? { Authorization: `Basic ${authentication}` }
-            : undefined,
-          observe: 'response',
-        }
-      )
-      .pipe(map((response) => response.status === 200));
+    return lastValueFrom(
+      this.http
+        .post(
+          remoteAddress + (testAuth ? '/rc/noopauth' : '/rc/noop'),
+          undefined,
+          {
+            headers: authentication
+              ? { Authorization: `Basic ${authentication}` }
+              : undefined,
+            observe: 'response',
+          }
+        )
+        .pipe(
+          map((response) => response.status === 200),
+          catchError(() => of(false))
+        )
+    );
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private logError(error: HttpErrorResponse): void {
     if (error.status === 0) {
       // A client-side or network error occurred
       console.error('An error occurred:', error.error);
@@ -120,6 +142,5 @@ export class RemoteControlService {
         JSON.stringify(error.error as ErrorResponse)
       );
     }
-    return throwError(() => error.error?.error ?? error.error.toString());
   }
 }

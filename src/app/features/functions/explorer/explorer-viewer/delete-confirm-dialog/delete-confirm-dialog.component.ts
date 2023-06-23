@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -10,6 +10,5 @@ import { DirectoryItem } from '../../explorer.model';
   styleUrls: ['./delete-confirm-dialog.component.scss'],
 })
 export class DeleteConfirmDialogComponent {
-  @Output() confirm = new EventEmitter();
   constructor(@Inject(MAT_DIALOG_DATA) public data: DirectoryItem) {}
 }

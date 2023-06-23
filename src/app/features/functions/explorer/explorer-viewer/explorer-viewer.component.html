@@ -1,4 +1,7 @@
-<app-path-splitter [(path)]="path"></app-path-splitter>
+<app-path-splitter
+  [path]="path"
+  (pathChange)="path = $event; fetchChildren()"
+></app-path-splitter>
 <ng-container *ngIf="children === undefined">
   <mat-spinner></mat-spinner>
 </ng-container>

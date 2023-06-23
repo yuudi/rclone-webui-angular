@@ -2,31 +2,34 @@ import { Injectable } from '@angular/core';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 
 import { AppProvider } from './new-backend.model';
-import { Observable, ReplaySubject, map } from 'rxjs';
+import { Ok, Result } from 'src/app/shared/result';
 @Injectable({
   providedIn: 'root',
 })
 export class NewBackendService {
-  providers$ = new ReplaySubject<AppProvider[]>();
+  providersCache?: AppProvider[];
 
-  constructor(private rc: RemoteControlService) {
-    this.rc
-      .call<{
-        providers: AppProvider[];
-      }>('config/providers')
-      .pipe(map((res) => res.providers))
-      .subscribe(this.providers$);
-  }
+  constructor(private rc: RemoteControlService) {}
 
-  getProviders(): Observable<AppProvider[]> {
-    return this.providers$;
+  async getProviders(): Promise<Result<AppProvider[], string>> {
+    if (this.providersCache) {
+      return Ok(this.providersCache);
+    }
+    const result = await this.rc.call<{
+      providers: AppProvider[];
+    }>('config/providers');
+    if (!result.ok) {
+      return result;
+    }
+    this.providersCache = result.value.providers;
+    return Ok(this.providersCache);
   }
 
   createBackend(
     name: string,
     providerName: string,
     options: { [key: string]: string }
-  ) {
+  ): Promise<Result<never, string>> {
     return this.rc.call('config/create', {
       name,
       type: providerName,

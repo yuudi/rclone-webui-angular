@@ -1,40 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { AppStorageService, AwaitableStorageItem } from 'src/app/cores/storage';
+import { Ok, Result } from 'src/app/shared/result';
 import { Backend, BackendUsage, FsInfo } from './backend.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
-  backendUsageCache: {
-    [id: string]: {
-      usage: BackendUsage | null;
-      updated: number; // Unix timestamp in seconds
-    };
-  } = {};
+  backendUsageCacheStorage?: AwaitableStorageItem<{
+    [id: string]: { usage: BackendUsage | null; updated: number };
+  }>;
 
-  backendInfoCache: {
-    [id: string]: {
-      info: FsInfo;
-    };
-  } = {};
+  backendInfoCacheStorage?: AwaitableStorageItem<{
+    [id: string]: FsInfo;
+  }>;
 
-  constructor(private rc: RemoteControlService) {
-    const usageStorage = localStorage.getItem('rwa_BackendUsageCache');
-    if (usageStorage) {
-      this.backendUsageCache = JSON.parse(usageStorage);
-    }
+  constructor(
+    private AwaitableStorageItem: AppStorageService,
+    private rc: RemoteControlService,
+    connectionService: ConnectionService
+  ) {
+    connectionService
+      .getActiveConnectionObservable()
+      .subscribe((connection) => {
+        if (!connection) {
+          return;
+        }
 
-    const infoStorage = localStorage.getItem('rwa_BackendInfoCache');
-    if (infoStorage) {
-      this.backendInfoCache = JSON.parse(infoStorage);
-    }
+        this.backendUsageCacheStorage = this.AwaitableStorageItem.getItem(
+          `${connection.id}-backendUsageCache`,
+          () => {
+            return {};
+          }
+        );
+
+        this.backendInfoCacheStorage = this.AwaitableStorageItem.getItem(
+          `${connection.id}-backendInfoCache`,
+          () => {
+            return {};
+          }
+        );
+      });
   }
 
-  listBackends() {
-    return this.rc.call<{ remotes: string[] }>('config/listremotes');
+  async listBackends(): Promise<Result<string[], string>> {
+    const result = await this.rc.call<{ remotes: string[] }>(
+      'config/listremotes'
+    );
+    if (!result.ok) {
+      return result;
+    }
+    return Ok(result.value.remotes);
   }
 
   getBackends() {
@@ -46,70 +66,70 @@ export class BackendService {
   }
 
   getBackendUsage(id: string): Observable<BackendUsage | null> {
-    const now = new Date().getTime() / 1000;
-    const cached = this.backendUsageCache[id];
-    if (cached && cached.updated > now - 60 * 60) {
-      return of(cached.usage);
+    if (!this.backendUsageCacheStorage) {
+      throw new Error('backendUsageCacheStorage is not initialized');
     }
+    const storage = this.backendUsageCacheStorage;
+    const now = new Date().getTime() / 1000;
+
+    // this observable will emit once or twice
+    // if the cache is not expired, it will emit once
+    // then it will emit again after the remote call
     return new Observable<BackendUsage | null>((observer) => {
-      if (cached) {
-        observer.next(cached.usage);
-      }
-      this.rc
-        .call<BackendUsage>('operations/about', { fs: id + ':' })
-        .subscribe({
-          next: (usage) => {
-            this.backendUsageCache[id] = {
-              usage,
-              updated: now,
-            };
-            localStorage.setItem(
-              'rwaBackendUsageCache',
-              JSON.stringify(this.backendUsageCache)
-            );
-            observer.next(usage);
-            observer.complete();
-          },
-          error: () => {
-            this.backendUsageCache[id] = {
-              usage: null,
-              updated: now,
-            };
-            localStorage.setItem(
-              'rwaBackendUsageCache',
-              JSON.stringify(this.backendUsageCache)
-            );
-            observer.next(null);
-            observer.complete();
-          },
-        });
+      // this construction need a void return
+      (async () => {
+        const cache = await storage.get();
+        const cachedUsage = cache[id];
+        if (cachedUsage) {
+          observer.next(cachedUsage.usage);
+          if (cachedUsage.updated > now - 60 * 60) {
+            return observer.complete();
+          }
+        }
+        const usageResult = await this.rc.call<BackendUsage>(
+          'operations/about',
+          {
+            fs: id + ':',
+          }
+        );
+        if (!usageResult.ok) {
+          return observer.error(usageResult.error);
+        }
+        cache[id] = {
+          usage: usageResult.value,
+          updated: now,
+        };
+        storage.set(cache);
+        observer.next(usageResult.value);
+        observer.complete();
+      })();
     });
   }
 
-  checkWindowsDriveExist(drive: string) {
-    return this.rc
-      .call<BackendUsage>('operations/about', { fs: drive + ':/' })
-      .pipe(
-        map(() => true),
-        catchError(() => of(false))
-      );
+  async checkWindowsDriveExist(drive: string): Promise<boolean> {
+    const result = await this.rc.call<BackendUsage>('operations/about', {
+      fs: drive + ':/',
+    });
+    return result.ok;
   }
 
-  getBackendInfo(id: string) {
-    const cached = this.backendInfoCache[id];
-    if (cached) {
-      return of(cached.info);
+  async getBackendInfo(id: string): Promise<Result<FsInfo, string>> {
+    if (!this.backendInfoCacheStorage) {
+      throw new Error('backendUsageCacheStorage is not initialized');
     }
-    return this.rc.call<FsInfo>('operations/fsinfo', { fs: id + ':' }).pipe(
-      tap((info) => {
-        this.backendInfoCache[id] = {
-          info,
-        };
-        localStorage.setItem(
-          'rwa_BackendInfoCache',
-          JSON.stringify(this.backendInfoCache)
-        );
-      })
-    );
+    const cache = await this.backendInfoCacheStorage.get();
+    const cachedInfo = cache[id];
+    if (cachedInfo) {
+      return Ok(cachedInfo);
+    }
+    const result = await this.rc.call<FsInfo>('operations/fsinfo', {
+      fs: id ? id + ':' : '/',
+    });
+    if (!result.ok) {
+      return result;
+    }
+    cache[id] = result.value;
+    this.backendInfoCacheStorage.set(cache);
+    return result;
   }
 }

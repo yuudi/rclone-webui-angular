@@ -13,10 +13,8 @@ export class DashboardComponent implements OnInit {
   version?: RcloneVersionInfo;
   stat$?: Observable<TransferStatus>;
   constructor(private dashboardService: DashboardService) {}
-  ngOnInit(): void {
-    this.dashboardService.getVersion().subscribe((version) => {
-      this.version = version;
-    });
+  async ngOnInit() {
+    this.version = (await this.dashboardService.getVersion()).orThrow();
     this.stat$ = this.dashboardService.getStat();
   }
 }

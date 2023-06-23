@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { Backend, BackendUsage } from './backend.model';
 import { BackendService } from './backend.service';
-import { tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 type Unmeasured = null;
 const Unmeasured = null;
@@ -15,63 +13,36 @@ const Unmeasured = null;
   styleUrls: ['./backend.component.scss'],
 })
 export class BackendComponent implements OnInit {
-  backendList?: {
+  backendList: {
     id: string;
     config: Backend;
-    usage?: BackendUsage | Unmeasured;
-  }[];
+    usage$?: Observable<BackendUsage | Unmeasured>;
+  }[] = [];
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private backendService: BackendService
-  ) {}
+  constructor(private backendService: BackendService) {}
 
-  ngOnInit() {
-    this.backendService
-      .getBackends()
-      .pipe(
-        tap({
-          error: this.displayError.bind(this),
-        })
-      )
-      .subscribe((backends) => {
-        this.backendList = [];
-        for (const id in backends) {
-          this.backendList.push({
-            id,
-            config: backends[id],
-          });
-          this.fetchUsage(id);
-        }
+  async ngOnInit() {
+    const backends = (await this.backendService.getBackends()).orThrow();
+    for (const id in backends) {
+      this.backendList.push({
+        id,
+        config: backends[id],
       });
+      this.fetchUsage(id);
+    }
   }
 
-  fetchUsage(id: string) {
-    const ref = this.backendList?.find((backend) => backend.id === id);
+  async fetchUsage(id: string) {
+    const ref = this.backendList.find((backend) => backend.id === id);
     if (!ref) {
       console.error(`Backend ${id} not found!`);
       return;
     }
-    this.backendService.getBackendInfo(id).subscribe((info) => {
-      if (!info.Features.About) {
-        ref.usage = Unmeasured;
-        return;
-      }
-      this.backendService.getBackendUsage(id).subscribe({
-        next: (usage) => {
-          ref.usage = usage;
-        },
-        error: () => {
-          this.snackBar.open(
-            $localize`Failed to get usage information for backend ${id}`,
-            $localize`Dismiss`
-          );
-        },
-      });
-    });
-  }
-
-  private displayError(error: unknown) {
-    this.snackBar.open(`error: ${error}`, $localize`Dismiss`);
+    const info = (await this.backendService.getBackendInfo(id)).orThrow();
+    if (!info.Features.About) {
+      ref.usage$ = of(Unmeasured);
+      return;
+    }
+    ref.usage$ = this.backendService.getBackendUsage(id);
   }
 }

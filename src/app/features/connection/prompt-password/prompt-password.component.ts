@@ -31,7 +31,7 @@ export class PromptPasswordComponent {
     @Inject(MAT_DIALOG_DATA) private data: Connection
   ) {}
 
-  connectClicked() {
+  async connectClicked() {
     if (this.authenticationForm.invalid) {
       return;
     }
@@ -48,7 +48,7 @@ export class PromptPasswordComponent {
     }
 
     if (remember) {
-      const result = this.connectionService.updateConnection(
+      const result = await this.connectionService.updateConnection(
         this.data.id,
         {},
         credentials
@@ -59,7 +59,7 @@ export class PromptPasswordComponent {
       }
     }
 
-    const result = this.connectionService.activateConnection(
+    const result = await this.connectionService.activateConnection(
       this.data.id,
       credentials
     );

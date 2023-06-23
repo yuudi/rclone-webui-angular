@@ -8,7 +8,7 @@ import {
   NotSaved,
 } from './connection.service';
 
-export const connectionGuard: CanActivateFn = () => {
+export const connectionGuard: CanActivateFn = async () => {
   const connectionService = inject(ConnectionService);
   if (environment.embed) {
     connectionService.activateConnection('embed', NoAuthentication);
@@ -18,7 +18,7 @@ export const connectionGuard: CanActivateFn = () => {
   if (connectionService.getActiveConnection()) {
     return true;
   }
-  const connections = connectionService.getConnectionsValue();
+  const connections = await connectionService.getConnectionsValue();
   if (connections.length === 1) {
     if (connections[0].authentication !== NotSaved) {
       connectionService.activateConnection(connections[0].id);

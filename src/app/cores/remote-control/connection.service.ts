@@ -3,8 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 import { v4 as uuid } from 'uuid';
 
-import { Err, Ok } from 'src/app/shared/result';
+import { Err, Ok, Result } from 'src/app/shared/result';
 import { environment } from 'src/environments/environment';
+import { AppStorageService } from '../storage/app-storage.service';
+import { ObservableAwaitableStorageItem } from '../storage';
 
 interface Credentials {
   username: string;
@@ -32,37 +34,38 @@ export interface ConnectionWithAuthentication extends Connection {
   providedIn: 'root',
 })
 export class ConnectionService {
-  private connections$ = new BehaviorSubject<Connection[]>([]);
-  private activeConnection: ConnectionWithAuthentication | null = null;
+  private activeConnection =
+    new BehaviorSubject<ConnectionWithAuthentication | null>(null);
+  private connectionsStorage: ObservableAwaitableStorageItem<Connection[]>;
 
-  constructor() {
-    const connectionsJson = localStorage.getItem('rwa_authentication');
-    if (!connectionsJson) {
-      //first time user
-      if (environment.embed) {
-        this.connections$.next([
-          {
-            id: 'embed',
-            displayName: 'This PC',
-            remoteAddress: window.location.origin,
-            isSameOrigin: true,
-            authentication: NoAuthentication,
-          },
-        ]);
+  constructor(private appStorageService: AppStorageService) {
+    this.connectionsStorage = this.appStorageService.getObservableItem(
+      'connections',
+      () => {
+        if (environment.embed) {
+          return [
+            {
+              id: 'embed',
+              displayName: 'This PC',
+              remoteAddress: window.location.origin,
+              isSameOrigin: true,
+              authentication: NoAuthentication,
+            },
+          ];
+        } else {
+          return [];
+        }
       }
-      return;
-    }
-    const connections: Connection[] = JSON.parse(connectionsJson);
-    this.connections$.next(connections);
+    );
   }
 
-  saveConnection(
+  async saveConnection(
     connection: { displayName: string; remoteAddress: string },
     credentials: Credentials | NoAuthentication | NotSaved = NotSaved
-  ) {
+  ): Promise<Result<Connection, string>> {
     const { displayName, remoteAddress } = connection;
 
-    if (this.checkNameExists(displayName)) {
+    if (await this.checkNameExists(displayName)) {
       return Err($localize`Name already exists`);
     }
 
@@ -78,24 +81,24 @@ export class ConnectionService {
       authentication,
     };
 
-    const connections = this.connections$.getValue();
+    const connections = await this.connectionsStorage.get();
     connections.push(newConnection);
-    this.connections$.next(connections);
-    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+    this.connectionsStorage.set(connections);
 
     return Ok(newConnection);
   }
 
-  getConnection(id: string) {
-    return this.connections$.getValue().find((c) => c.id === id) ?? null;
+  async getConnection(id: string): Promise<Connection | null> {
+    const connection = await this.connectionsStorage.get();
+    return connection.find((c) => c.id === id) ?? null;
   }
 
-  updateConnection(
+  async updateConnection(
     id: string,
     connection: Partial<Omit<Connection, 'id' | 'authentication'>>,
     credentials: Credentials | NoAuthentication | NotSaved = NotSaved
-  ) {
-    const connections = this.connections$.getValue();
+  ): Promise<Result<void, string>> {
+    const connections = await this.connectionsStorage.get();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
       return Err($localize`Connection ID not found`);
@@ -104,7 +107,7 @@ export class ConnectionService {
     if (
       connection.displayName &&
       connection.displayName !== connections[index].displayName &&
-      this.checkNameExists(connection.displayName)
+      (await this.checkNameExists(connection.displayName))
     ) {
       return Err($localize`Name already exists`);
     }
@@ -119,14 +122,16 @@ export class ConnectionService {
       : credentials;
 
     connections[index] = updatedConnection;
-    this.connections$.next(connections);
-    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+    this.connectionsStorage.set(connections);
 
     return Ok();
   }
 
-  activateConnection(id: string, credentials?: Credentials | NoAuthentication) {
-    const connection = this.connections$.getValue().find((c) => c.id === id);
+  async activateConnection(
+    id: string,
+    credentials?: Credentials | NoAuthentication
+  ): Promise<Result<void, string>> {
+    const connection = await this.getConnection(id);
     if (!connection) {
       return Err($localize`Connection not found`);
     }
@@ -142,46 +147,47 @@ export class ConnectionService {
         : NoAuthentication;
     }
 
-    this.activeConnection = useConnection as ConnectionWithAuthentication;
+    this.activeConnection.next(useConnection as ConnectionWithAuthentication);
 
     return Ok();
   }
 
-  deleteConnection(id: string) {
-    const connections = this.connections$.getValue();
+  async deleteConnection(id: string): Promise<Result<void, string>> {
+    const connections = await this.connectionsStorage.get();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
       return Err($localize`Connection not found`);
     }
 
     connections.splice(index, 1);
-    this.connections$.next(connections);
-    localStorage.setItem('rwa_authentication', JSON.stringify(connections));
+    this.connectionsStorage.set(connections);
 
     return Ok();
   }
 
   getConnections(): Observable<Connection[]> {
-    return this.connections$;
+    return this.connectionsStorage.asObservable();
   }
 
-  getConnectionsValue(): Connection[] {
-    return this.connections$.getValue();
+  async getConnectionsValue(): Promise<Connection[]> {
+    return await this.connectionsStorage.get();
   }
 
-  getActiveConnection() {
+  getActiveConnection(): ConnectionWithAuthentication | null {
+    return this.activeConnection.getValue();
+  }
+
+  getActiveConnectionObservable(): Observable<Connection | null> {
     return this.activeConnection;
   }
 
-  checkNameExists(name: string): boolean {
-    return this.connections$
-      .getValue()
-      .some((connection) => connection.displayName === name);
+  async checkNameExists(name: string): Promise<boolean> {
+    const connections = await this.connectionsStorage.get();
+    return connections.some((connection) => connection.displayName === name);
   }
 
   clear() {
-    this.connections$.next([]);
-    this.activeConnection = null;
-    localStorage.removeItem('rwa_authentication');
+    this.connectionsStorage.set([]);
+    this.activeConnection.next(null);
   }
 }

@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { v4 as uuid } from 'uuid';
 
+import {
+  Connection,
+  ConnectionService,
+} from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import {
+  AppStorageService,
+  ObservableAwaitableStorageItem,
+} from 'src/app/cores/storage';
 
 export interface Mount {
   Fs: string;
@@ -24,45 +32,58 @@ export interface MountSetting extends Mount {
 })
 export class MountService {
   private os?: string;
-  private mountSettings$ = new BehaviorSubject<MountSetting[]>([]);
+  private mountSettingsStorage?: ObservableAwaitableStorageItem<MountSetting[]>;
+  private mountSettingsSubject = new BehaviorSubject<MountSetting[]>([]);
 
-  constructor(private rc: RemoteControlService) {
-    const storageMountSettings = localStorage.getItem('rwa_mountSettings');
-    if (storageMountSettings) {
-      const mountSettings: MountSetting[] = JSON.parse(storageMountSettings);
-      for (const setting of mountSettings) {
-        setting.enabled = false;
-      }
-      this.mountSettings$.next(mountSettings);
-    }
+  constructor(
+    private appStorageService: AppStorageService,
+    private rc: RemoteControlService,
+    connectionService: ConnectionService
+  ) {
     this.fetchMount();
-  }
-
-  getOsType() {
-    if (this.os) {
-      return of(this.os);
-    }
-    return this.rc
-      .call<{ os: string }>('core/version')
-      .pipe(map((res) => (this.os = res.os)));
-  }
-
-  getMountSettings(): Observable<MountSetting[]> {
-    return this.mountSettings$;
-  }
-
-  private fetchMount() {
-    this.rc
-      .call<{
-        mountPoints: Mount[];
-      }>('mount/listmounts')
-      .subscribe((res) => {
-        this.mergeMountSettings(res.mountPoints);
+    connectionService
+      .getActiveConnectionObservable()
+      .subscribe((connection) => {
+        if (!connection) {
+          return;
+        }
+        this.connectionChanged(connection);
       });
   }
 
-  private mergeMountSettings(mounts: Mount[]) {
-    const mountSettings = this.mountSettings$.getValue();
+  private connectionChanged(connection: Connection) {
+    this.mountSettingsStorage?.destructor();
+    this.mountSettingsStorage = this.appStorageService.getObservableItem(
+      `${connection.id}-mountSettings`,
+      () => []
+    );
+    this.mountSettingsStorage.asObservable().subscribe(
+      this.mountSettingsSubject.next.bind(this.mountSettingsSubject) //only take next, not error or complete
+    );
+  }
+
+  getMountSettings(): Observable<MountSetting[]> {
+    return this.mountSettingsSubject;
+  }
+
+  async getOsType(): Promise<string> {
+    return (await this.rc.call<{ os: string }>('core/version')).orThrow().os;
+  }
+
+  private async fetchMount() {
+    const mountPoints = (
+      await this.rc.call<{
+        mountPoints: Mount[];
+      }>('mount/listmounts')
+    ).orThrow().mountPoints;
+    this.mergeMountSettings(mountPoints);
+  }
+
+  private async mergeMountSettings(mounts: Mount[]) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
     for (const mount of mounts) {
       const index = mountSettings.findIndex(
         (m) => m.MountPoint === mount.MountPoint && m.Fs === mount.Fs
@@ -80,87 +101,93 @@ export class MountService {
         mountSettings[index].MountedOn = mount.MountedOn;
       }
     }
-    this.mountSettings$.next(mountSettings);
-    localStorage.setItem('rwa_mountSettings', JSON.stringify(mountSettings));
+    await this.mountSettingsStorage.set(mountSettings);
   }
 
-  createSetting(mountSetting: Omit<MountSetting, 'id' | 'enabled'>) {
+  async createSetting(mountSetting: Omit<MountSetting, 'id' | 'enabled'>) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
     const id = uuid();
-    const mountSettings = this.mountSettings$.getValue();
+    const mountSettings = await this.mountSettingsStorage.get();
     mountSettings.push({
       ...mountSetting,
       id,
       enabled: false,
     });
-    this.mountSettings$.next(mountSettings);
-    localStorage.setItem('rwa_mountSettings', JSON.stringify(mountSettings));
+    await this.mountSettingsStorage.set(mountSettings);
     return id;
   }
 
-  deleteSetting(id: string) {
-    const mountSettings = this.mountSettings$.getValue();
+  async deleteSetting(id: string) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
     const index = mountSettings.findIndex((m) => m.id === id);
     if (index === -1) {
       throw new Error('Mount setting ID not found when deleting');
     }
     mountSettings.splice(index, 1);
-    this.mountSettings$.next(mountSettings);
-    localStorage.setItem('rwa_mountSettings', JSON.stringify(mountSettings));
+    await this.mountSettingsStorage.set(mountSettings);
   }
 
-  mount(id: string) {
-    const mountSettings = this.mountSettings$.getValue();
+  async mount(id: string) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
     const setting = mountSettings.find((m) => m.id === id);
     if (setting === undefined) {
-      return throwError('Mount setting ID not found');
+      throw new Error('Mount setting ID not found');
     }
-    return this.rc
-      .call('mount/mount', {
-        fs: setting.Fs + ':',
-        mountPoint: setting.MountPoint,
-        mountOpt: setting.mountOpt,
-        vfsOpt: setting.vfsOpt,
-      })
-      .pipe(
-        tap({
-          next: () => {
-            setting.enabled = true;
-            setting.MountedOn = new Date();
-            this.mountSettings$.next(mountSettings);
-          },
-          error: () => {
-            setting.enabled = false;
-            this.mountSettings$.next(mountSettings);
-          },
-        })
-      );
+    const result = await this.rc.call('mount/mount', {
+      fs: setting.Fs + ':',
+      mountPoint: setting.MountPoint,
+      mountOpt: setting.mountOpt,
+      vfsOpt: setting.vfsOpt,
+    });
+    if (result.ok) {
+      setting.enabled = true;
+      setting.MountedOn = new Date();
+    } else {
+      setting.enabled = false;
+    }
+    await this.mountSettingsStorage.set(mountSettings);
+    return result;
   }
 
-  unmount(id: string) {
-    const mountSettings = this.mountSettings$.getValue();
+  async unmount(id: string) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
     const setting = mountSettings.find((m) => m.id === id);
     if (setting === undefined) {
-      return throwError('Mount setting ID not found');
+      throw new Error('Mount setting ID not found');
     }
-    return this.rc
-      .call('mount/unmount', { mountPoint: setting.MountPoint })
-      .pipe(
-        tap(() => {
-          setting.enabled = false;
-          this.mountSettings$.next(mountSettings);
-        })
-      );
+    const result = await this.rc.call('mount/unmount', {
+      mountPoint: setting.MountPoint,
+    });
+    if (result.ok) {
+      setting.enabled = false;
+      await this.mountSettingsStorage.set(mountSettings);
+    }
+    return result;
   }
 
-  unmountAll() {
-    return this.rc.call('mount/unmountall').pipe(
-      tap(() => {
-        const mountSettings = this.mountSettings$.getValue();
-        for (const setting of mountSettings) {
-          setting.enabled = false;
-        }
-        this.mountSettings$.next(mountSettings);
-      })
-    );
+  async unmountAll() {
+    const result = await this.rc.call('mount/unmountall');
+    if (result.ok) {
+      if (!this.mountSettingsStorage) {
+        throw new Error('Mount settings storage not initialized');
+      }
+      const mountSettings = await this.mountSettingsStorage.get();
+      for (const setting of mountSettings) {
+        setting.enabled = false;
+      }
+      await this.mountSettingsStorage.set(mountSettings);
+    }
+    return result;
   }
 }

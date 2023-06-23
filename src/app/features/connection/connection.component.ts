@@ -36,14 +36,16 @@ export class ConnectionComponent implements OnInit {
     this.selectedConnection = connection;
   }
 
-  connectClicked(connection: Connection) {
+  async connectClicked(connection: Connection) {
     if (connection.authentication === NotSaved) {
       this.dialog.open(PromptPasswordComponent, {
         data: connection,
       });
       return;
     }
-    const result = this.connectionService.activateConnection(connection.id);
+    const result = await this.connectionService.activateConnection(
+      connection.id
+    );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`Dismiss`);
       return;

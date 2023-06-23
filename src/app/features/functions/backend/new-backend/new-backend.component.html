@@ -22,7 +22,7 @@
           <mat-card>
             <mat-card-content class="new-backend__list-container">
               <mat-selection-list
-                *ngIf="providers$ | async as providers"
+                *ngIf="(providers | async)?.orThrow() as providers"
                 multiple="false"
                 (selectionChange)="
                   providerSelectedChanged(

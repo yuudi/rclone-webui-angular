@@ -2,11 +2,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -35,32 +36,16 @@ const Loading = undefined;
   templateUrl: './explorer-viewer.component.html',
   styleUrls: ['./explorer-viewer.component.scss'],
 })
-export class ExplorerViewerComponent implements OnInit {
+export class ExplorerViewerComponent implements OnInit, OnChanges {
   @Input() backend!: string;
+  @Input() path!: string;
   @Input() info: FsInfo | null = null;
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
   @Input() actions!: ExplorerView['actions'];
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
 
-  private _path!: string;
-  get path() {
-    return this._path;
-  }
-  @Input() set path(path: string) {
-    if (this._path === path) {
-      return;
-    }
-    this._path = path;
-    this.pathChange.emit(path);
-
-    this.currentPathSubScription.unsubscribe();
-    this.currentPathSubScription = new Subscription();
-    this.fetchChildren();
-  }
-
   children: DirectoryItem[] | Loading = Loading;
-  currentPathSubScription = new Subscription();
 
   contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
@@ -87,17 +72,31 @@ export class ExplorerViewerComponent implements OnInit {
         ModTime: new Date(),
       });
     };
+
+    this.fetchChildren();
   }
 
-  fetchChildren() {
-    this.children = Loading;
+  ngOnChanges() {
+    this.fetchChildren();
+  }
 
-    const sub = this.explorerService
-      .listChildren(this.backend, this.path)
-      .subscribe((children) => {
-        this.children = children.list;
-      });
-    this.currentPathSubScription.add(sub);
+  async fetchChildren() {
+    this.children = Loading;
+    const taskPath = this.path;
+
+    const result = await this.explorerService.listChildren(
+      this.backend,
+      this.path
+    );
+    if (!result.ok) {
+      this.snackBar.open(result.error, $localize`OK`);
+      throw new Error(result.error);
+    }
+    if (taskPath !== this.path) {
+      // path changed
+      return;
+    }
+    this.children = result.value;
   }
 
   itemDblClicked(item: FileItem | DirItem) {
@@ -113,6 +112,7 @@ export class ExplorerViewerComponent implements OnInit {
 
   openFolder(item: DirItem) {
     this.path = item.Path;
+    this.pathChange.emit(this.path);
   }
 
   itemRightClicked(item: DirectoryItem, event: MouseEvent) {
@@ -133,6 +133,10 @@ export class ExplorerViewerComponent implements OnInit {
       backend: this.backend,
       items: [item],
     });
+    this.snackBar.open(
+      $localize`Item Added to Clipboard, now go to destination and paste`,
+      $localize`OK`
+    );
   }
 
   moveClicked() {
@@ -145,9 +149,13 @@ export class ExplorerViewerComponent implements OnInit {
       backend: this.backend,
       items: [item],
     });
+    this.snackBar.open(
+      $localize`Item Added to Clipboard, now go to destination and paste`,
+      $localize`OK`
+    );
   }
 
-  renameClicked() {
+  async renameClicked() {
     const item = this.contextMenuItem;
     if (!item) {
       throw new Error('No context menu item when delete clicked.');
@@ -159,73 +167,77 @@ export class ExplorerViewerComponent implements OnInit {
         existNames: this.children?.map((i) => i.Name) ?? [],
       },
     });
-    dialog.afterClosed().subscribe((name?: string) => {
-      if (!name) {
-        // canceled
-        return;
-      }
-      this.renameConfirmed(item, name);
-    });
+    const name = await lastValueFrom(dialog.afterClosed());
+    if (!name) {
+      // canceled
+      return;
+    }
+    this.renameConfirmed(item, name);
   }
 
-  renameConfirmed(item: DirectoryItem, newName: string) {
-    const sub = this.explorerService
-      .renameItem(this.backend, item, newName)
-      .subscribe(() => {
-        this.snackBar.open($localize`Renamed`);
-        item.Name = newName;
-      });
-    this.currentPathSubScription.add(sub);
+  async renameConfirmed(item: DirectoryItem, newName: string) {
+    const result = await this.explorerService.renameItem(
+      this.backend,
+      item,
+      newName
+    );
+    if (!result.ok) {
+      this.snackBar.open(result.error, $localize`OK`);
+      return;
+    }
+    this.snackBar.open($localize`Renamed`);
+    item.Name = newName;
   }
 
-  deleteClicked() {
+  async deleteClicked() {
     const item = this.contextMenuItem;
     if (!item) {
       throw new Error('No context menu item when delete clicked.');
     }
-    const dialog = this.dialog.open(DeleteConfirmDialogComponent, {
-      data: item,
-    });
-    const sub = dialog.componentInstance.confirm.subscribe(() =>
-      this.deleteConfirmed(item)
+    const result: boolean | void = await lastValueFrom(
+      this.dialog
+        .open(DeleteConfirmDialogComponent, {
+          data: item,
+        })
+        .afterClosed()
     );
-    this.currentPathSubScription.add(sub);
+    if (result === true) {
+      this.deleteConfirmed(item);
+    }
   }
 
-  deleteConfirmed(item: DirectoryItem) {
-    const sub = this.explorerService
-      .deleteItem(this.backend, item)
-      .subscribe(() => {
-        this.snackBar.open($localize`Deleted`);
-        const index = this.children?.findIndex((i) => i.Path === item.Path);
-        if (index === undefined || index === -1) {
-          throw new Error('Deleted item not found in children.');
-        }
-        this.children?.splice(index, 1);
-      });
-    this.currentPathSubScription.add(sub);
+  async deleteConfirmed(item: DirectoryItem) {
+    const result = await this.explorerService.deleteItem(this.backend, item);
+    if (!result.ok) {
+      this.snackBar.open(result.error, $localize`OK`);
+      throw new Error(result.error);
+    }
+    this.snackBar.open($localize`Deleted`);
+    const index = this.children?.findIndex((i) => i.Path === item.Path);
+    if (index === undefined || index === -1) {
+      throw new Error('Deleted item not found in children.');
+    }
+    this.children?.splice(index, 1);
   }
 
-  generateLinkClicked() {
+  async generateLinkClicked() {
     const item = this.contextMenuItem;
     if (!item) {
       throw new Error('No context menu item when generate link clicked.');
     }
-    const sub = this.explorerService
-      .generateLink(this.backend, item.Path)
-      .subscribe({
-        next: (link) => {
-          this.dialog.open(CopyDialogComponent, {
-            data: {
-              content: link,
-            },
-          });
-        },
-        error: (error) => {
-          this.snackBar.open($localize`Error:` + String(error), $localize`OK`);
-        },
-      });
-    this.currentPathSubScription.add(sub);
+    const result = await this.explorerService.generateLink(
+      this.backend,
+      item.Path
+    );
+    if (!result.ok) {
+      this.snackBar.open(result.error, $localize`OK`);
+      return;
+    }
+    this.dialog.open(CopyDialogComponent, {
+      data: {
+        content: result.value,
+      },
+    });
   }
 
   downloadClicked() {

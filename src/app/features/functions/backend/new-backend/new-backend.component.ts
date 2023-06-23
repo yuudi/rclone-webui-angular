@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
-import { Err, Ok } from 'src/app/shared/result';
+import { Err, Ok, Result } from 'src/app/shared/result';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { AppProvider } from './new-backend.model';
 import { NewBackendService } from './new-backend.service';
+import { AppStorageService } from 'src/app/cores/storage';
 
 @Component({
   selector: 'app-new-backend',
@@ -19,7 +19,7 @@ import { NewBackendService } from './new-backend.service';
 })
 export class NewBackendComponent implements OnInit {
   stepperSelectedIndex = 0;
-  providers$?: Observable<AppProvider[]>;
+  providers?: Promise<Result<AppProvider[]>>;
   newBackendName = new FormControl('', [
     Validators.required,
     Validators.min(2),
@@ -31,24 +31,31 @@ export class NewBackendComponent implements OnInit {
   providerNeedAuth = false;
   showAdvancedOptions = false;
   requiredFieldHint = false;
+  requiredFieldHintStorage;
   waitingForBackend = false;
   constructor(
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private appStorageService: AppStorageService,
     private newBackendService: NewBackendService,
     private connectionService: ConnectionService
-  ) {}
-
-  ngOnInit(): void {
-    this.providers$ = this.newBackendService.getProviders();
-    this.requiredFieldHint = !(
-      localStorage.getItem('rwa_NewBackendRequiredFieldHint') === 'false'
+  ) {
+    this.requiredFieldHintStorage = this.appStorageService.getItem(
+      'NewBackendRequiredFieldHint',
+      () => true
     );
   }
 
+  ngOnInit(): void {
+    this.providers = this.newBackendService.getProviders();
+    (async () => {
+      this.requiredFieldHint = await this.requiredFieldHintStorage.get();
+    })();
+  }
+
   hintDismissClicked() {
-    localStorage.setItem('rwa_NewBackendRequiredFieldHint', 'false');
+    this.requiredFieldHintStorage.set(false);
     this.requiredFieldHint = false;
   }
 
@@ -116,7 +123,7 @@ export class NewBackendComponent implements OnInit {
     return Ok();
   }
 
-  saveClicked() {
+  async saveClicked() {
     const options = Object.fromEntries(
       Object.entries(this.providerOptions).filter(([, value]) => value !== '')
     );
@@ -134,17 +141,19 @@ export class NewBackendComponent implements OnInit {
       return;
     }
     this.waitingForBackend = true;
-    this.newBackendService.createBackend(name, backend, options).subscribe({
-      next: () => {
-        this.router.navigate(['rclone', 'drive']);
-      },
-      error: (err) => {
-        this.snackBar.open(
-          $localize`Error creating backend: ` + err,
-          $localize`Dismiss`
-        );
-        this.waitingForBackend = false;
-      },
-    });
+    const result = await this.newBackendService.createBackend(
+      name,
+      backend,
+      options
+    );
+    if (result.ok) {
+      this.router.navigate(['rclone', 'drive']);
+    } else {
+      this.snackBar.open(
+        $localize`Error creating backend: ` + result.error,
+        $localize`Dismiss`
+      );
+      this.waitingForBackend = false;
+    }
   }
 }

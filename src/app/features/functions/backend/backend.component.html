@@ -1,12 +1,12 @@
 <div class="backend__new">
   <a mat-raised-button color="primary" routerLink="./new" i18n>New Backend</a>
 </div>
-<div *ngIf="backendList" class="backends__container">
+<div class="backends__container">
   <app-backend-info
     *ngFor="let backend of backendList"
     class="backends__item"
     [backendName]="backend.id"
     [backend]="backend.config"
-    [usage]="backend.usage"
+    [usage]="backend.usage$ | async"
   ></app-backend-info>
 </div>

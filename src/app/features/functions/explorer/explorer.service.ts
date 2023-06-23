@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { Ok, Result } from 'src/app/shared/result';
 import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 
 @Injectable({
@@ -10,41 +10,73 @@ import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 export class ExplorerService {
   constructor(private rc: RemoteControlService) {}
 
-  getOsType() {
-    return this.rc
-      .call<{ os: string }>('core/version')
-      .pipe(map((res) => res.os));
+  async getOsType(): Promise<string> {
+    return (await this.rc.call<{ os: string }>('core/version')).orThrow().os;
   }
 
-  listChildren(backend: string, path: string) {
-    return this.rc.call<{ list: DirectoryItem[] }>('operations/list', {
+  async listChildren(
+    backend: string,
+    path: string
+  ): Promise<Result<DirectoryItem[], string>> {
+    const result = await this.rc.call<{ list: DirectoryItem[] }>(
+      'operations/list',
+      {
+        fs: ExplorerService.toFs(backend),
+        remote: path,
+      }
+    );
+    if (!result.ok) {
+      return result;
+    }
+    return Ok(result.value.list);
+  }
+
+  async createEmptyFolder(
+    backend: string,
+    path: string
+  ): Promise<Result<void, string>> {
+    const result = await this.rc.call<EmptyObj>('operations/mkdir', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
+    if (!result.ok) {
+      return result;
+    }
+    return Ok();
   }
 
-  createEmptyFolder(backend: string, path: string) {
-    return this.rc.call<EmptyObj>('operations/mkdir', {
+  async deleteFile(
+    backend: string,
+    path: string
+  ): Promise<Result<void, string>> {
+    const result = await this.rc.call<EmptyObj>('operations/deletefile', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
+    if (!result.ok) {
+      return result;
+    }
+    return Ok();
   }
 
-  deleteFile(backend: string, path: string) {
-    return this.rc.call<EmptyObj>('operations/deletefile', {
+  async deleteFolder(
+    backend: string,
+    path: string
+  ): Promise<Result<void, string>> {
+    const result = await this.rc.call<EmptyObj>('operations/purge', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
+    if (!result.ok) {
+      return result;
+    }
+    return Ok();
   }
 
-  deleteFolder(backend: string, path: string) {
-    return this.rc.call<EmptyObj>('operations/purge', {
-      fs: ExplorerService.toFs(backend),
-      remote: path,
-    });
-  }
-
-  deleteItem(backend: string, item: DirectoryItem) {
+  deleteItem(
+    backend: string,
+    item: DirectoryItem
+  ): Promise<Result<void, string>> {
     if (item.IsDir) {
       return this.deleteFolder(backend, item.Path);
     } else {
@@ -52,7 +84,11 @@ export class ExplorerService {
     }
   }
 
-  renameItem(backend: string, item: DirectoryItem, newName: string) {
+  renameItem(
+    backend: string,
+    item: DirectoryItem,
+    newName: string
+  ): Promise<Result<void, string>> {
     const pathList = item.Path.split('/');
     pathList[pathList.length - 1] = newName;
     const newPath = pathList.join('/');
@@ -64,37 +100,51 @@ export class ExplorerService {
     }
   }
 
-  generateLink(backend: string, path: string) {
-    return this.rc
-      .call<{ url: string }>('operations/publiclink', {
+  async generateLink(
+    backend: string,
+    path: string
+  ): Promise<Result<string, string>> {
+    const result = await this.rc.call<{ url: string }>(
+      'operations/publiclink',
+      {
         fs: ExplorerService.toFs(backend),
         remote: path,
-      })
-      .pipe(map((res) => res.url));
+      }
+    );
+    if (!result.ok) {
+      return result;
+    }
+    return Ok(result.value.url);
   }
 
-  clipboardOperate(backend: string, path: string, clipboard: AppClipboard) {
-    return clipboard.items.map((item) => {
-      if (item.IsDir) {
-        const dirName = item.Path.split('/').pop();
-        return this.rcSync(
-          clipboard.type,
-          clipboard.backend,
-          item.Path,
-          backend,
-          path + '/' + dirName
-        );
-      } else {
-        const fileName = item.Path.split('/').pop();
-        return this.rcOperate(
-          clipboard.type,
-          clipboard.backend,
-          item.Path,
-          backend,
-          path + '/' + fileName
-        );
-      }
-    });
+  async clipboardOperate(
+    backend: string,
+    path: string,
+    clipboard: AppClipboard
+  ): Promise<Result<void, string>[]> {
+    return Promise.all(
+      clipboard.items.map((item) => {
+        if (item.IsDir) {
+          const dirName = item.Path.split('/').pop();
+          return this.rcSync(
+            clipboard.type,
+            clipboard.backend,
+            item.Path,
+            backend,
+            path + '/' + dirName
+          );
+        } else {
+          const fileName = item.Path.split('/').pop();
+          return this.rcOperate(
+            clipboard.type,
+            clipboard.backend,
+            item.Path,
+            backend,
+            path + '/' + fileName
+          );
+        }
+      })
+    );
   }
 
   /**
@@ -105,19 +155,23 @@ export class ExplorerService {
    * @param dstRemote path of file, must be a file, not a directory.
    * @returns observable may be error
    */
-  private rcOperate(
+  private async rcOperate(
     action: 'copy' | 'move',
     srcFs: string,
     srcRemote: string,
     dstFs: string,
     dstRemote: string
-  ) {
-    return this.rc.call<EmptyObj>(`operations/${action}file`, {
+  ): Promise<Result<void, string>> {
+    const result = await this.rc.call<EmptyObj>(`operations/${action}file`, {
       srcFs: ExplorerService.toFs(srcFs),
       srcRemote,
       dstFs: ExplorerService.toFs(dstFs),
       dstRemote,
     });
+    if (!result.ok) {
+      return result;
+    }
+    return Ok();
   }
 
   /**
@@ -128,17 +182,21 @@ export class ExplorerService {
    * @param dstRemote path of file, must be a directory, not a file.
    * @returns observable may be error
    */
-  private rcSync(
+  private async rcSync(
     action: 'copy' | 'move' | 'sync' | 'bisync',
     srcFs: string,
     srcRemote: string,
     dstFs: string,
     dstRemote: string
-  ) {
-    return this.rc.call<EmptyObj>('sync/' + action, {
+  ): Promise<Result<void, string>> {
+    const result = await this.rc.call<EmptyObj>('sync/' + action, {
       srcFs: ExplorerService.toFs(srcFs) + srcRemote,
       dstFs: ExplorerService.toFs(dstFs) + dstRemote,
     });
+    if (!result.ok) {
+      return result;
+    }
+    return Ok();
   }
 
   private static toFs(backend: string) {
