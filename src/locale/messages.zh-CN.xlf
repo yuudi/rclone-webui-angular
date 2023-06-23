@@ -411,10 +411,6 @@
         <source>Deleted</source>
         <target state="translated">删除成功</target>
       </trans-unit>
-      <trans-unit id="4606091236515013460" datatype="html">
-        <source>Error:</source>
-        <target state="translated">错误：</target>
-      </trans-unit>
       <trans-unit id="1971865492332905755" datatype="html">
         <source>New MountPoint</source>
         <target state="translated">新建挂载点</target>
@@ -520,10 +516,6 @@
         <source> Delete </source>
         <target state="translated">删除</target>
       </trans-unit>
-      <trans-unit id="5427756419569772794" datatype="html">
-        <source>Failed to get usage information for backend <x id="PH" equiv-text="id"/></source>
-        <target state="translated">获取后端使用信息失败 <x id="PH" equiv-text="id"/> 。</target>
-      </trans-unit>
       <trans-unit id="6759205696902713848" datatype="html">
         <source>Warning</source>
         <target state="translated">警告</target>
@@ -543,6 +535,18 @@
       <trans-unit id="7168628217068609895" datatype="html">
         <source>Folder Created Successfully</source>
         <target state="translated">创建文件夹成功</target>
+      </trans-unit>
+      <trans-unit id="7488670430901851630" datatype="html">
+        <source>Remote address is not set</source>
+        <target state="new">Remote address is not set</target>
+      </trans-unit>
+      <trans-unit id="3981693023798866214" datatype="html">
+        <source>Item Added to Clipboard, now go to destination and paste</source>
+        <target state="new">Item Added to Clipboard, now go to destination and paste</target>
+      </trans-unit>
+      <trans-unit id="1297075260734626852" datatype="html">
+        <source>Tasks Created Successfully</source>
+        <target state="new">Tasks Created Successfully</target>
       </trans-unit>
     </body>
   </file>

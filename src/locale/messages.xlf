@@ -260,9 +260,6 @@
       <trans-unit id="6381490568322624964" datatype="html">
         <source>Deleted</source>
       </trans-unit>
-      <trans-unit id="4606091236515013460" datatype="html">
-        <source>Error:</source>
-      </trans-unit>
       <trans-unit id="1674202514578558795" datatype="html">
         <source>New name</source>
       </trans-unit>
@@ -393,9 +390,6 @@
       <trans-unit id="2812208926273686149" datatype="html">
         <source>Create Folder</source>
       </trans-unit>
-      <trans-unit id="5427756419569772794" datatype="html">
-        <source>Failed to get usage information for backend <x id="PH" equiv-text="id"/></source>
-      </trans-unit>
       <trans-unit id="5559087577598810992" datatype="html">
         <source>This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.</source>
       </trans-unit>
@@ -410,6 +404,15 @@
       </trans-unit>
       <trans-unit id="7806473130802584518" datatype="html">
         <source>view is not ready</source>
+      </trans-unit>
+      <trans-unit id="1297075260734626852" datatype="html">
+        <source>Tasks Created Successfully</source>
+      </trans-unit>
+      <trans-unit id="3981693023798866214" datatype="html">
+        <source>Item Added to Clipboard, now go to destination and paste</source>
+      </trans-unit>
+      <trans-unit id="7488670430901851630" datatype="html">
+        <source>Remote address is not set</source>
       </trans-unit>
     </body>
   </file>
