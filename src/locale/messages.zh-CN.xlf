@@ -388,7 +388,7 @@
       </trans-unit>
       <trans-unit id="2849267946273310379" datatype="html">
         <source>Mounting</source>
-        <target state="translated">正在挂载</target>
+        <target state="translated">挂载</target>
         <note priority="1" from="description">noun</note>
       </trans-unit>
       <trans-unit id="3044369161367328488" datatype="html">
@@ -514,7 +514,7 @@
       </trans-unit>
       <trans-unit id="6660925946511264619" datatype="html">
         <source> Delete </source>
-        <target state="translated">删除</target>
+        <target state="translated"> 删除 </target>
       </trans-unit>
       <trans-unit id="6759205696902713848" datatype="html">
         <source>Warning</source>
@@ -538,15 +538,15 @@
       </trans-unit>
       <trans-unit id="7488670430901851630" datatype="html">
         <source>Remote address is not set</source>
-        <target state="new">Remote address is not set</target>
+        <target state="translated">未设置远程地址</target>
       </trans-unit>
       <trans-unit id="3981693023798866214" datatype="html">
         <source>Item Added to Clipboard, now go to destination and paste</source>
-        <target state="new">Item Added to Clipboard, now go to destination and paste</target>
+        <target state="translated">项目已添加到剪贴板，现在可前往目的地并粘贴</target>
       </trans-unit>
       <trans-unit id="1297075260734626852" datatype="html">
         <source>Tasks Created Successfully</source>
-        <target state="new">Tasks Created Successfully</target>
+        <target state="translated">任务创建成功</target>
       </trans-unit>
     </body>
   </file>
