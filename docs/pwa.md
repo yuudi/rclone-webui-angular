@@ -2,6 +2,8 @@
 
 PWA build is suitable for managing multiple remote servers.
 
+If you want to manage local instance, please check [embed build](./embed.md)
+
 ## Setting up server
 
 1.  Install [rclone](https://rclone.org/) if you haven't
