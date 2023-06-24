@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  showRemoteSetting = !environment.embed;
+  showRemoteSetting = environment.showRemoteSetting;
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(

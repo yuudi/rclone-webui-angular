@@ -42,10 +42,10 @@ export class ConnectionService {
     this.connectionsStorage = this.appStorageService.getObservableItem(
       'connections',
       () => {
-        if (environment.embed) {
+        if (environment.connectSelf) {
           return [
             {
-              id: 'embed',
+              id: 'self',
               displayName: 'This PC',
               remoteAddress: window.location.origin,
               isSameOrigin: true,

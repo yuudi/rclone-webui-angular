@@ -47,7 +47,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       useHash: true,
-      preloadingStrategy: environment.standalone
+      preloadingStrategy: environment.prefetch
         ? PreloadAllModules
         : NoPreloading,
     }),

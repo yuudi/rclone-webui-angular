@@ -50,7 +50,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
 
-  canDownload = environment.embed;
+  canDownload = environment.explorerCanDownload;
 
   constructor(
     private snackBar: MatSnackBar,

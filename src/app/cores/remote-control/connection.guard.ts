@@ -10,8 +10,8 @@ import {
 
 export const connectionGuard: CanActivateFn = async () => {
   const connectionService = inject(ConnectionService);
-  if (environment.embed) {
-    connectionService.activateConnection('embed', NoAuthentication);
+  if (environment.connectSelf) {
+    connectionService.activateConnection('self', NoAuthentication);
     return true;
   }
   const router = inject(Router);

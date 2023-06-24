@@ -1,4 +1,7 @@
 export const environment = {
-  embed: false,
-  standalone: false,
+  explorerCanDownload: false,
+  connectSelf: false,
+  useServiceWorker: false,
+  showRemoteSetting: true,
+  prefetch: false,
 };
