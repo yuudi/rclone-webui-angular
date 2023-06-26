@@ -9,6 +9,7 @@
   </button>
   <mat-menu #functionMenu>
     <button mat-menu-item routerLink="/connection" i18n>Connections</button>
+    <button mat-menu-item routerLink="/rclone/job" i18n>Jobs</button>
     <button mat-menu-item routerLink="/dashboard" i18n>Dashboard</button>
     <button mat-menu-item routerLink="/rclone/drive" i18n>Drives</button>
     <button mat-menu-item routerLink="/rclone/mount" i18n="noun">
@@ -22,6 +23,15 @@
     matTooltip="Dashboard"
   >
     <mat-icon fontIcon="dashboard"></mat-icon>
+  </a>
+  <a
+    mat-icon-button
+    routerLink="/rclone/job"
+    i18n-matTooltip
+    matTooltip="Jobs"
+  >
+    <mat-icon fontIcon="sync"></mat-icon>
+    <!-- TODO: rotation when there is job, hide when no jobs -->
   </a>
   <a
     mat-icon-button

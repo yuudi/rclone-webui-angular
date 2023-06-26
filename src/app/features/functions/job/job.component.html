@@ -1,0 +1,5 @@
+<h2>Jobs</h2>
+<p *ngFor="let kv of jobs | keyvalue">
+  {{ kv.key }}:
+  {{ kv.value | json }}
+</p>

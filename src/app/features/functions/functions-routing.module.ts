@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./mount/mount.module').then((m) => m.MountModule),
   },
+  {
+    path: 'job',
+    loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
+  },
 ];
 
 @NgModule({

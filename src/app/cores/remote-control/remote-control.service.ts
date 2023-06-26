@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, lastValueFrom, map, of } from 'rxjs';
+import { catchError, distinctUntilChanged, lastValueFrom, map, of } from 'rxjs';
 
-import { ConnectionService, NoAuthentication } from './connection.service';
+import { JobInfo } from 'src/app/features/functions/job/job.model';
 import { Err, Ok, Result } from 'src/app/shared/result';
+import { ConnectionService, NoAuthentication } from './connection.service';
 
 type ErrorResponse = {
   error: string;
@@ -12,11 +13,25 @@ type ErrorResponse = {
   path: string;
 };
 
+type JobID<R> = number;
+
 @Injectable({
   providedIn: 'root',
 })
 export class RemoteControlService {
-  constructor(private http: HttpClient, private auth: ConnectionService) {}
+  jobs = new Set<number>();
+  constructor(
+    private http: HttpClient,
+    private connectionService: ConnectionService
+  ) {
+    // clear jobs when connection is changed
+    connectionService
+      .getActiveConnectionObservable()
+      .pipe(distinctUntilChanged())
+      .subscribe(() => {
+        this.jobs.clear();
+      });
+  }
 
   /**
    * call remote rclone instance, see: https://rclone.org/rc/
@@ -27,7 +42,7 @@ export class RemoteControlService {
       [key: string]: string | boolean | number | Record<string, unknown>;
     }
   ): Promise<Result<R, string>> {
-    const remote = this.auth.getActiveConnection();
+    const remote = this.connectionService.getActiveConnection();
     const headers: { [key: string]: string } = {};
     if (remote && remote.authentication) {
       headers['Authorization'] = `Basic ${remote.authentication}`;
@@ -54,8 +69,34 @@ export class RemoteControlService {
     // http observable only emits once, so we can use lastValueFrom
   }
 
+  async callAsync<R>(
+    operation: string,
+    params?: {
+      [key: string]: string | boolean | number | Record<string, unknown>;
+    }
+  ): Promise<Result<number, string>> {
+    const result = await this.call<{ jobid: number }>(operation, {
+      _async: true,
+      ...params,
+    });
+    if (!result.ok) {
+      return result;
+    }
+    const jobid = result.value.jobid;
+    this.jobs.add(jobid);
+    return Ok(jobid as JobID<R>);
+  }
+
+  getJobs() {
+    return this.jobs.values();
+  }
+
+  async getJobInfo<R>(jobid: JobID<R>): Promise<Result<JobInfo<R>, string>> {
+    return this.call<JobInfo<R>>('job/status', { jobid });
+  }
+
   getDownloadUrl(backend: string, file: string): Result<string, string> {
-    const remote = this.auth.getActiveConnection();
+    const remote = this.connectionService.getActiveConnection();
     if (!remote) {
       return Err('Remote address is not set');
     }
@@ -104,7 +145,7 @@ export class RemoteControlService {
           )
         : NoAuthentication;
     } else {
-      const remote = this.auth.getActiveConnection();
+      const remote = this.connectionService.getActiveConnection();
       if (!remote) {
         return Promise.resolve(false);
       }
