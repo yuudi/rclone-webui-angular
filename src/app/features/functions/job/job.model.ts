@@ -5,6 +5,7 @@ interface BaseJobInfo {
   error: string; // empty string if no error
   duration: number; // in seconds
   startTime: Date;
+  input: unknown; // wait for rclone to support this
 }
 
 interface PendingJobInfo extends BaseJobInfo {

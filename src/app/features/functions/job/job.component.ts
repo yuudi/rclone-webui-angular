@@ -8,12 +8,28 @@ import { JobInfo } from './job.model';
   styleUrls: ['./job.component.scss'],
 })
 export class JobComponent implements OnInit {
-  jobs: { [key: number]: JobInfo } = {};
+  jobInfos: { [key: number]: Promise<JobInfo> } = {};
+  jobs = this.jobService.getJobs();
   constructor(private jobService: JobService) {}
-  async ngOnInit() {
-    const jobIdList = await this.jobService.getJobList();
-    for (const jobId of jobIdList) {
-      this.jobs[jobId] = (await this.jobService.getJobInfo(jobId)).orThrow();
+
+  ngOnInit() {
+    const jobList = this.jobService.getJobs();
+    for (const job of jobList) {
+      this.jobInfos[job.id] = this.jobService
+        .getJobInfo(job.id)
+        .then((result) => result.orThrow());
     }
   }
+
+  removeJob(jobId: number) {
+    this.jobService.removeJob(jobId);
+    delete this.jobInfos[jobId];
+  }
+
+  // removeFinishedJob() {
+  //   for (const [jobId, jobInfo] of Object.entries(this.jobs)) {
+  //     // if promise is pending, skip
+  //
+  //   }
+  // }
 }

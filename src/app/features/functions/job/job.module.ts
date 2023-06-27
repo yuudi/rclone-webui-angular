@@ -1,17 +1,27 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { JobRoutingModule } from './job-routing.module';
 import { JobComponent } from './job.component';
 
-
 @NgModule({
-  declarations: [
-    JobComponent
-  ],
+  declarations: [JobComponent],
   imports: [
     CommonModule,
-    JobRoutingModule
-  ]
+    JobRoutingModule,
+    MatCardModule,
+    MatListModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule
+  ],
 })
-export class JobModule { }
+export class JobModule {}

@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { Ok, Result } from 'src/app/shared/result';
+import { JobID, JobService } from '../job/job.service';
 import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExplorerService {
-  constructor(private rc: RemoteControlService) {}
+  constructor(
+    private rc: RemoteControlService,
+    private jobService: JobService
+  ) {}
 
   async getOsType(): Promise<string> {
     return (await this.rc.call<{ os: string }>('core/version')).orThrow().os;
@@ -121,12 +125,12 @@ export class ExplorerService {
     backend: string,
     path: string,
     clipboard: AppClipboard
-  ): Promise<Result<void, string>[]> {
+  ): Promise<Result<JobID<EmptyObj>, string>[]> {
     return Promise.all(
       clipboard.items.map((item) => {
         if (item.IsDir) {
           const dirName = item.Path.split('/').pop();
-          return this.rcSync(
+          return this.rcSyncAsync(
             clipboard.type,
             clipboard.backend,
             item.Path,
@@ -135,7 +139,7 @@ export class ExplorerService {
           );
         } else {
           const fileName = item.Path.split('/').pop();
-          return this.rcOperate(
+          return this.rcOperateAsync(
             clipboard.type,
             clipboard.backend,
             item.Path,
@@ -197,6 +201,50 @@ export class ExplorerService {
       return result;
     }
     return Ok();
+  }
+
+  /**
+   * @param action copy or move
+   * @param srcFs fs name, without colon
+   * @param srcRemote path of file, must be a file, not a directory.
+   * @param dstFs fs name, without colon
+   * @param dstRemote path of file, must be a file, not a directory.
+   * @returns observable may be error
+   */
+  private rcOperateAsync(
+    action: 'copy' | 'move',
+    srcFs: string,
+    srcRemote: string,
+    dstFs: string,
+    dstRemote: string
+  ): Promise<Result<JobID<EmptyObj>, string>> {
+    return this.jobService.callAsync<EmptyObj>(`operations/${action}file`, {
+      srcFs: ExplorerService.toFs(srcFs),
+      srcRemote,
+      dstFs: ExplorerService.toFs(dstFs),
+      dstRemote,
+    });
+  }
+
+  /**
+   * @param action one of [copy, move, sync, bisync]
+   * @param srcFs fs name, without colon
+   * @param srcRemote  path of file, must be a directory, not a file.
+   * @param dstFs fs name, without colon
+   * @param dstRemote path of file, must be a directory, not a file.
+   * @returns observable may be error
+   */
+  private rcSyncAsync(
+    action: 'copy' | 'move' | 'sync' | 'bisync',
+    srcFs: string,
+    srcRemote: string,
+    dstFs: string,
+    dstRemote: string
+  ): Promise<Result<JobID<EmptyObj>, string>> {
+    return this.jobService.callAsync<EmptyObj>('sync/' + action, {
+      srcFs: ExplorerService.toFs(srcFs) + srcRemote,
+      dstFs: ExplorerService.toFs(dstFs) + dstRemote,
+    });
   }
 
   private static toFs(backend: string) {
