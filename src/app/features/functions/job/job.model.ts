@@ -5,7 +5,6 @@ interface BaseJobInfo {
   error: string; // empty string if no error
   duration: number; // in seconds
   startTime: Date;
-  input: unknown; // wait for rclone to support this
 }
 
 interface PendingJobInfo extends BaseJobInfo {
@@ -31,7 +30,8 @@ interface ErrorJobInfo extends BaseJobInfo {
   endTime: Date;
 }
 
-export type JobInfo<R = unknown> =
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type JobInfo<R = any> =
   | PendingJobInfo
   | SuccessJobInfo<R>
   | ErrorJobInfo;

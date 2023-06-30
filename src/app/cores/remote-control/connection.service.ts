@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, distinctUntilChanged } from 'rxjs';
 
 import { v4 as uuid } from 'uuid';
 
 import { Err, Ok, Result } from 'src/app/shared/result';
 import { environment } from 'src/environments/environment';
-import { AppStorageService } from '../storage/app-storage.service';
 import { ObservableAwaitableStorageItem } from '../storage';
+import { AppStorageService } from '../storage/app-storage.service';
 
 interface Credentials {
   username: string;
@@ -178,7 +178,7 @@ export class ConnectionService {
   }
 
   getActiveConnectionObservable(): Observable<Connection | null> {
-    return this.activeConnection;
+    return this.activeConnection.pipe(distinctUntilChanged());
   }
 
   async checkNameExists(name: string): Promise<boolean> {

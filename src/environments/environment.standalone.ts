@@ -4,4 +4,5 @@ export const environment = {
   useServiceWorker: true,
   showRemoteSetting: true,
   prefetch: true,
+  reuseMissingExecuteId: false,
 };

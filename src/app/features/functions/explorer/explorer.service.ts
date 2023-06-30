@@ -135,7 +135,8 @@ export class ExplorerService {
             clipboard.backend,
             item.Path,
             backend,
-            path + '/' + dirName
+            path + '/' + dirName,
+            ExplorerService.actionSummary(clipboard.type, item.Path, backend)
           );
         } else {
           const fileName = item.Path.split('/').pop();
@@ -144,7 +145,8 @@ export class ExplorerService {
             clipboard.backend,
             item.Path,
             backend,
-            path + '/' + fileName
+            path + '/' + fileName,
+            ExplorerService.actionSummary(clipboard.type, item.Path, backend)
           );
         }
       })
@@ -209,6 +211,7 @@ export class ExplorerService {
    * @param srcRemote path of file, must be a file, not a directory.
    * @param dstFs fs name, without colon
    * @param dstRemote path of file, must be a file, not a directory.
+   * @param summary summary text of this job
    * @returns observable may be error
    */
   private rcOperateAsync(
@@ -216,14 +219,19 @@ export class ExplorerService {
     srcFs: string,
     srcRemote: string,
     dstFs: string,
-    dstRemote: string
+    dstRemote: string,
+    summary?: string
   ): Promise<Result<JobID<EmptyObj>, string>> {
-    return this.jobService.callAsync<EmptyObj>(`operations/${action}file`, {
-      srcFs: ExplorerService.toFs(srcFs),
-      srcRemote,
-      dstFs: ExplorerService.toFs(dstFs),
-      dstRemote,
-    });
+    return this.jobService.callAsync<EmptyObj>(
+      `operations/${action}file`,
+      {
+        srcFs: ExplorerService.toFs(srcFs),
+        srcRemote,
+        dstFs: ExplorerService.toFs(dstFs),
+        dstRemote,
+      },
+      summary
+    );
   }
 
   /**
@@ -232,6 +240,7 @@ export class ExplorerService {
    * @param srcRemote  path of file, must be a directory, not a file.
    * @param dstFs fs name, without colon
    * @param dstRemote path of file, must be a directory, not a file.
+   * @param summary summary text of this job
    * @returns observable may be error
    */
   private rcSyncAsync(
@@ -239,12 +248,17 @@ export class ExplorerService {
     srcFs: string,
     srcRemote: string,
     dstFs: string,
-    dstRemote: string
+    dstRemote: string,
+    summary?: string
   ): Promise<Result<JobID<EmptyObj>, string>> {
-    return this.jobService.callAsync<EmptyObj>('sync/' + action, {
-      srcFs: ExplorerService.toFs(srcFs) + srcRemote,
-      dstFs: ExplorerService.toFs(dstFs) + dstRemote,
-    });
+    return this.jobService.callAsync<EmptyObj>(
+      'sync/' + action,
+      {
+        srcFs: ExplorerService.toFs(srcFs) + srcRemote,
+        dstFs: ExplorerService.toFs(dstFs) + dstRemote,
+      },
+      summary
+    );
   }
 
   private static toFs(backend: string) {
@@ -253,5 +267,28 @@ export class ExplorerService {
     } else {
       return backend + ':';
     }
+  }
+
+  private static actionSummary(
+    action: 'move' | 'copy' | 'sync' | 'bisync',
+    name: string,
+    destination: string
+  ): string {
+    let actionName: string;
+    switch (action) {
+      case 'move':
+        actionName = $localize`move`;
+        break;
+      case 'copy':
+        actionName = $localize`copy`;
+        break;
+      case 'sync':
+        actionName = $localize`sync`;
+        break;
+      case 'bisync':
+        actionName = $localize`bi-directional sync`;
+        break;
+    }
+    return $localize`${actionName} "${name}" to "${destination}\:"`;
   }
 }

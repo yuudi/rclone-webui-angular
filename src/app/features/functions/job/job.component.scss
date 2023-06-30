@@ -1,0 +1,31 @@
+.list-container {
+  margin: 3em auto;
+  min-height: 20em;
+  width: 80%;
+  max-width: 50em;
+}
+
+.list-line {
+  display: flex;
+
+  .job-info {
+    display: flex;
+    align-items: center;
+
+    .mat-icon {
+      margin: 0.5em;
+    }
+  }
+}
+.spacer {
+  margin: 0 auto;
+}
+
+.icon--spinning {
+  animation: spin 2s linear infinite;
+}
+
+.empty-hint {
+  margin: 2em auto;
+  text-align: center;
+}

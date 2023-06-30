@@ -33,8 +33,11 @@ export abstract class BaseStorage {
     localKey: string,
     defaultValueFn: () => S
   ): ObservableAwaitableStorageItem<S> {
-    const valueSubject = new BehaviorSubject<S>(defaultValueFn());
     const storageItem = this.getItem(localKey, defaultValueFn);
+    const valueSubject = new BehaviorSubject<S>(defaultValueFn());
+    (async () => {
+      valueSubject.next(await storageItem.get());
+    })();
     return {
       get(): S | Promise<S> {
         return storageItem.get();
@@ -54,19 +57,17 @@ export abstract class BaseStorage {
 }
 
 class LocalStorageStorageItem<T> implements StorageItem<T> {
-  private _value?: T;
-  constructor(private key: string, private defaultFn: () => T) {}
-
-  get(): T {
-    if (this._value !== undefined) {
-      return this._value;
-    }
+  private _value: T;
+  constructor(private key: string, private defaultFn: () => T) {
     const storageString = localStorage.getItem(this.key);
     if (storageString !== null) {
       this._value = JSON.parse(storageString) as T;
-      return this._value;
+      return;
     }
     this._value = this.defaultFn();
+  }
+
+  get(): T {
     return this._value;
   }
 

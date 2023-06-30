@@ -1,39 +1,60 @@
-<!-- <h2>Jobs</h2>
-<p *ngFor="let kv of jobs | keyvalue">
-  {{ kv.key }}:
-  {{ kv.value | json }}
-</p> -->
-
 <mat-card class="list-container">
-  <mat-list>
-    <ng-container *ngFor="let job of jobs; let last = last">
-      <mat-list-item *ngIf="jobInfos[job.id] | async as jobInfo">
-        <div matListItemLine>
-          <span>
-            {{ jobInfo.id }}
-            <!-- TODO: use summary -->
-          </span>
-          <span class="spacer"></span>
-          <span class="job-action">
-            <button mat-icon-button>
+  <mat-list *ngIf="jobs$ | async as jobs; else nothing">
+    <ng-container *ngIf="jobs.length > 0; else nothing">
+      <ng-container *ngFor="let job of jobs; let last = last">
+        <mat-list-item>
+          <div matListItemLine class="list-line">
+            <span class="job-info">
               <mat-icon
-                fontIcon="more_vert"
-                [matMenuTriggerFor]="jobMenu"
+                *ngIf="job.status === 'pending'"
+                fontIcon="sync"
+                class="icon--spinning"
               ></mat-icon>
-            </button>
-            <mat-menu #jobMenu="matMenu">
-              <button mat-menu-item>
-                <mat-icon fontIcon="cancel"></mat-icon>
-                <span i18n>Cancel</span>
+              <mat-icon
+                *ngIf="job.status === 'success'"
+                fontIcon="task_alt"
+              ></mat-icon>
+              <mat-icon
+                *ngIf="job.status === 'failed'"
+                fontIcon="error"
+              ></mat-icon>
+              <span>
+                {{ job.id }}:
+                {{ job.summary }}
+              </span>
+            </span>
+            <span class="spacer"></span>
+            <span class="job-action">
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="jobMenu"
+                matTooltip="More"
+                i18n-matTooltip
+              >
+                <mat-icon fontIcon="more_vert"></mat-icon>
               </button>
-            </mat-menu>
-            <button mat-icon-button>
-              <mat-icon fontIcon="close"></mat-icon>
-            </button>
-          </span>
-        </div>
-      </mat-list-item>
-      <mat-divider *ngIf="!last"></mat-divider>
+              <mat-menu #jobMenu="matMenu">
+                <button mat-menu-item (click)="killJob(job.id)">
+                  <mat-icon fontIcon="cancel"></mat-icon>
+                  <span i18n>Cancel</span>
+                </button>
+              </mat-menu>
+              <button
+                mat-icon-button
+                matTooltip="Remove"
+                i18n-matTooltip
+                (click)="removeJob(job.id)"
+              >
+                <mat-icon fontIcon="close"></mat-icon>
+              </button>
+            </span>
+          </div>
+        </mat-list-item>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </ng-container>
     </ng-container>
   </mat-list>
+  <ng-template #nothing>
+    <p class="empty-hint" i18n>No jobs</p>
+  </ng-template>
 </mat-card>

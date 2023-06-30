@@ -1,60 +1,163 @@
 import { Injectable } from '@angular/core';
-import { distinctUntilChanged } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
-import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
+import {
+  Connection,
+  ConnectionService,
+} from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { Ok, Result } from 'src/app/shared/result';
+import {
+  AppStorageService,
+  ObservableAwaitableStorageItem,
+} from 'src/app/cores/storage';
+import { Err, Ok, Result } from 'src/app/shared/result';
 import { JobInfo } from './job.model';
+import { environment } from 'src/environments/environment';
 
-export type JobID<R> = number;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type JobID<R = unknown> = number;
 type JobStatus = 'pending' | 'success' | 'failed';
+type JobOverview = { id: JobID<unknown>; status: JobStatus; summary: string };
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobService {
-  private jobs: { id: JobID<unknown>; status?: JobStatus; summary?: string }[] =
-    [];
-  private finishedJobCache: { [key: number]: JobInfo<unknown> } = {};
+  private jobsStorage?: ObservableAwaitableStorageItem<{
+    executeId: string;
+    jobs: JobOverview[];
+  }>;
+  private jobsSubject = new BehaviorSubject<JobOverview[]>([]);
+  private finishedJobCache: { [key: number]: JobInfo } = {};
 
   constructor(
-    private connectionService: ConnectionService,
-    private rc: RemoteControlService
+    private storageService: AppStorageService,
+    private rc: RemoteControlService,
+    connectionService: ConnectionService
   ) {
     // clear jobs when connection is changed
     connectionService
       .getActiveConnectionObservable()
-      .pipe(distinctUntilChanged())
-      .subscribe(() => {
-        this.jobs = [];
-        this.fetchJobs();
+      .subscribe((connection) => {
+        if (!connection) {
+          return;
+        }
+        this.connectionChanged(connection);
       });
   }
 
-  private async fetchJobs() {
-    const jobids = await this.getJobList();
-    for (const jobid of jobids) {
-      (async (id) => {
-        const jobInfo = (await this.getJobInfo(id)).orThrow();
-        if (!jobInfo.finished) {
-          // pending job
-          this.jobs.push({
-            id,
-            status: 'pending',
-            summary: JSON.stringify(jobInfo.input), // TODO: use summary
-          });
-        } else if (jobInfo.error) {
-          // failed job
-          this.jobs.push({
-            id,
-            status: 'failed',
-            summary: JSON.stringify(jobInfo.input), // TODO: use summary
-          });
-        } else {
-          // finished job, doing nothing
-        }
-      })(jobid);
+  private connectionChanged(connection: Connection) {
+    this.jobsStorage?.destructor();
+    this.jobsStorage = this.storageService.getObservableItem(
+      `${connection.id}-jobs`,
+      () => ({ executeId: '', jobs: [] })
+    );
+    this.jobsStorage
+      .asObservable()
+      .pipe(map((jobs) => jobs.jobs))
+      .subscribe(this.jobsSubject.next.bind(this.jobsSubject));
+    this.updateJobs();
+  }
+
+  async updateJobs() {
+    if (!this.jobsStorage) {
+      throw new Error('jobsStorage is initialized');
     }
+    const [storageJobs, remoteJobs] = await Promise.all([
+      this.jobsStorage.get(),
+      this.getJobList(),
+    ]);
+    let reused;
+    if (remoteJobs.executeId === undefined) {
+      // old version, missing executeId
+      reused = environment.reuseMissingExecuteId;
+      remoteJobs.executeId = '';
+    } else {
+      reused = remoteJobs.executeId === storageJobs.executeId;
+    }
+    let jobsNeedUpdate: Iterable<JobID>;
+    if (reused) {
+      const storagePendingJobIds = storageJobs.jobs
+        .filter((job) => job.status === 'pending')
+        .map((job) => job.id);
+      // union of storageJobIds and remoteJobIds
+      jobsNeedUpdate = new Set([...storagePendingJobIds, ...remoteJobs.jobids]);
+    } else {
+      jobsNeedUpdate = remoteJobs.jobids;
+      this.jobsStorage.set({
+        executeId: remoteJobs.executeId,
+        jobs: [],
+      });
+    }
+    for (const jobid of jobsNeedUpdate) {
+      this.updateJob(jobid);
+    }
+  }
+
+  private async updateJob(id: JobID) {
+    if (this.jobsStorage === undefined) {
+      throw new Error('jobsStorage is initialized');
+    }
+    const [jobs, jobInfoResult] = await Promise.all([
+      this.jobsStorage.get(),
+      this.getJobInfo(id),
+    ]);
+    const jobInfo = jobInfoResult.orThrow();
+    const index = jobs.jobs.findIndex((job) => job.id === id);
+    if (index === -1) {
+      // new job
+      this.appendJob(jobInfo, 'unknown job created on other client');
+    } else {
+      // existing job
+      if (!jobInfo.finished) {
+        // pending, doing nothing
+        return;
+      }
+      // fetch again to avoid conflict
+      const jobs = await this.jobsStorage.get();
+      if (jobInfo.error) {
+        // failed job
+        jobs.jobs[index].status = 'failed';
+        jobs.jobs[index].summary = jobInfo.error;
+      } else {
+        // success job
+        jobs.jobs[index].status = 'success';
+      }
+      this.jobsStorage.set(jobs);
+    }
+  }
+
+  private async appendJob(
+    jobInfo: {
+      id: JobID;
+      finished: boolean;
+      error?: string;
+    },
+    summary: string
+  ) {
+    if (this.jobsStorage === undefined) {
+      throw new Error('jobsStorage is initialized');
+    }
+    const jobs = await this.jobsStorage.get();
+    if (!jobInfo.finished) {
+      // unfinished job
+      jobs.jobs.push({
+        id: jobInfo.id,
+        status: 'pending',
+        summary,
+      });
+    } else if (jobInfo.error) {
+      // failed job
+      jobs.jobs.push({
+        id: jobInfo.id,
+        status: 'failed',
+        summary,
+      });
+    } else {
+      // finished job, doing nothing
+      return;
+    }
+    this.jobsStorage.set(jobs);
   }
 
   async callAsync<R>(
@@ -72,42 +175,63 @@ export class JobService {
       return result;
     }
     const jobid = result.value.jobid;
-    this.jobs.push({
-      id: jobid,
-      status: 'pending',
-      summary,
-    });
+    this.appendJob(
+      {
+        id: jobid,
+        finished: false,
+      },
+      summary ?? operation
+    );
     return Ok(jobid);
   }
 
-  getJobs(): typeof this.jobs {
-    return this.jobs;
+  getJobs(): Observable<JobOverview[]> {
+    return this.jobsSubject;
   }
 
   private async getJobList() {
-    const res = await this.rc.call<{ jobids: number[] }>('job/list');
-    return res.orThrow().jobids;
+    const res = await this.rc.call<{ executeId?: string; jobids: number[] }>(
+      'job/list'
+    );
+    return res.orThrow();
   }
 
-  async getJobInfo(jobid: number) {
+  async getJobInfo<R>(jobid: JobID<R>): Promise<Result<JobInfo<R>, string>> {
     if (this.finishedJobCache[jobid]) {
       return Ok(this.finishedJobCache[jobid]);
     }
-    const res = await this.rc.call<JobInfo>('job/status', { jobid });
+    const res = await this.rc.call<JobInfo<R>>('job/status', { jobid });
     if (res.ok && res.value.finished) {
       this.finishedJobCache[jobid] = res.value;
     }
     return res;
   }
 
-  killJob(jobid: number) {
+  killJob(jobid: JobID) {
     return this.rc.call('job/stop', { jobid });
   }
 
-  removeJob(jobid: number) {
-    const index = this.jobs.findIndex((job) => job.id === jobid);
-    if (index >= 0) {
-      this.jobs.splice(index, 1);
+  async removeJob(jobid: JobID) {
+    if (this.jobsStorage === undefined) {
+      throw new Error('jobsStorage is initialized');
     }
+
+    const job = await this.jobsStorage.get();
+    const index = job.jobs.findIndex((job) => job.id === jobid);
+    if (index === -1) {
+      return Err('job not found');
+    }
+    job.jobs.splice(index, 1);
+    this.jobsStorage.set(job);
+    return Ok();
+  }
+
+  async removeFinishedJobs() {
+    if (this.jobsStorage === undefined) {
+      throw new Error('jobsStorage is initialized');
+    }
+    const jobs = await this.jobsStorage.get();
+    jobs.jobs = jobs.jobs.filter((job) => job.status !== 'success');
+    this.jobsStorage.set(jobs);
   }
 }
