@@ -414,6 +414,33 @@
       <trans-unit id="7488670430901851630" datatype="html">
         <source>Remote address is not set</source>
       </trans-unit>
+      <trans-unit id="3229595422546554334" datatype="html">
+        <source>Jobs</source>
+      </trans-unit>
+      <trans-unit id="4366763205960752449" datatype="html">
+        <source>move</source>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+      </trans-unit>
+      <trans-unit id="5479686051458408124" datatype="html">
+        <source><x id="PH" equiv-text="actionName"/> &quot;<x id="PH_1" equiv-text="name"/>&quot; to &quot;<x id="PH_2" equiv-text="destination"/>:&quot;</source>
+      </trans-unit>
+      <trans-unit id="5937251202465808296" datatype="html">
+        <source>More</source>
+      </trans-unit>
+      <trans-unit id="6862265996781523030" datatype="html">
+        <source>copy</source>
+      </trans-unit>
+      <trans-unit id="7557275684476197518" datatype="html">
+        <source>sync</source>
+      </trans-unit>
+      <trans-unit id="7962907777822307509" datatype="html">
+        <source>bi-directional sync</source>
+      </trans-unit>
+      <trans-unit id="8111222032681450869" datatype="html">
+        <source>No jobs</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
