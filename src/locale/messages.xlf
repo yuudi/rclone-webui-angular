@@ -221,9 +221,6 @@
       <trans-unit id="7022070615528435141" datatype="html">
         <source>Delete</source>
       </trans-unit>
-      <trans-unit id="4052706577506222469" datatype="html">
-        <source>Would you like to delete <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/></source>
-      </trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
         <source>No</source>
       </trans-unit>
@@ -414,9 +411,6 @@
       <trans-unit id="7488670430901851630" datatype="html">
         <source>Remote address is not set</source>
       </trans-unit>
-      <trans-unit id="3229595422546554334" datatype="html">
-        <source>Jobs</source>
-      </trans-unit>
       <trans-unit id="4366763205960752449" datatype="html">
         <source>move</source>
       </trans-unit>
@@ -440,6 +434,18 @@
       </trans-unit>
       <trans-unit id="8111222032681450869" datatype="html">
         <source>No jobs</source>
+      </trans-unit>
+      <trans-unit id="2870013675900498785" datatype="html">
+        <source>Multi-select</source>
+      </trans-unit>
+      <trans-unit id="4323657569264880384" datatype="html">
+        <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>
+      </trans-unit>
+      <trans-unit id="6448818549106664206" datatype="html">
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </source>
+      </trans-unit>
+      <trans-unit id="9066298133798990764" datatype="html">
+        <source>Would you like to delete</source>
       </trans-unit>
     </body>
   </file>

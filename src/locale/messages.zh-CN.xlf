@@ -262,10 +262,6 @@
         <source>Delete</source>
         <target>删除</target>
       </trans-unit>
-      <trans-unit id="4052706577506222469" datatype="html">
-        <source>Would you like to delete <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/></source>
-        <target state="translated">您想删除 <x id="INTERPOLATION" equiv-text="{{ data.Name }}"/>吗？</target>
-      </trans-unit>
       <trans-unit id="3542042671420335679" datatype="html">
         <source>No</source>
         <target>否</target>
@@ -548,10 +544,6 @@
         <source>Tasks Created Successfully</source>
         <target state="translated">任务创建成功</target>
       </trans-unit>
-      <trans-unit id="3229595422546554334" datatype="html">
-        <source>Jobs</source>
-        <target state="translated">任务</target>
-      </trans-unit>
       <trans-unit id="4366763205960752449" datatype="html">
         <source>move</source>
         <target state="translated">移动</target>
@@ -583,6 +575,22 @@
       <trans-unit id="8111222032681450869" datatype="html">
         <source>No jobs</source>
         <target state="translated">没有任务</target>
+      </trans-unit>
+      <trans-unit id="9066298133798990764" datatype="html">
+        <source>Would you like to delete</source>
+        <target state="translated">您是否想删除</target>
+      </trans-unit>
+      <trans-unit id="6448818549106664206" datatype="html">
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </source>
+        <target state="translated"> 这 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </target>
+      </trans-unit>
+      <trans-unit id="4323657569264880384" datatype="html">
+        <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>
+        <target state="translated">{VAR_PLURAL, plural, other {<x id="INTERPOLATION"/> 个项目}}</target>
+      </trans-unit>
+      <trans-unit id="2870013675900498785" datatype="html">
+        <source>Multi-select</source>
+        <target state="translated">多选</target>
       </trans-unit>
     </body>
   </file>
