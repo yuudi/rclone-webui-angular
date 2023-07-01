@@ -1,5 +1,12 @@
 <h2 i18n mat-dialog-title>Delete</h2>
-<div i18n mat-dialog-content>Would you like to delete {{ data.Name }}</div>
+<div mat-dialog-content>
+  <ng-container i18n>Would you like to delete</ng-container>
+  <ng-container *ngIf="data.length === 1">{{ data[0].Name }}</ng-container>
+  <ng-container *ngIf="data.length > 1" i18n>
+    these {data.length, plural, one {{{data.length}} item} other
+    {{{data.length}} items}}
+  </ng-container>
+</div>
 <div mat-dialog-actions>
   <button i18n mat-button mat-dialog-close>No</button>
   <button i18n mat-button [mat-dialog-close]="true">Ok</button>

@@ -10,10 +10,13 @@ import {
 import { lastValueFrom } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatSelectionList } from '@angular/material/list';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { environment } from 'src/environments/environment';
+import { FsInfo } from '../../backend/backend.model';
 import {
   AppClipboard,
   DirItem,
@@ -25,8 +28,6 @@ import { ExplorerService } from '../explorer.service';
 import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
-import { FsInfo } from '../../backend/backend.model';
-import { environment } from 'src/environments/environment';
 
 type Loading = undefined;
 const Loading = undefined;
@@ -43,10 +44,12 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
   @Input() actions!: ExplorerView['actions'];
+  @ViewChild('selectionList') selectionList!: MatSelectionList;
   @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
 
   children: DirectoryItem[] | Loading = Loading;
 
+  multiSelectMode = false;
   contextMenuItem?: DirectoryItem;
   contextMenuPosition = { x: '0px', y: '0px' };
 
@@ -82,6 +85,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
 
   async fetchChildren() {
     this.children = Loading;
+    this.multiSelectMode = false;
     const taskPath = this.path;
 
     const result = await this.explorerService.listChildren(
@@ -99,7 +103,15 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     this.children = result.value;
   }
 
-  itemDblClicked(item: FileItem | DirItem) {
+  selectionChanged() {
+    const selected = this.selectionList.selectedOptions.selected;
+
+    if (selected.length === 0) {
+      this.multiSelectMode = false;
+    }
+  }
+
+  itemOpened(item: FileItem | DirItem) {
     if (item.IsDir) {
       this.openFolder(item);
     } else {
@@ -123,15 +135,35 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     this.contextMenu.openMenu();
   }
 
-  copyClicked() {
+  multiSelectClicked() {
     const item = this.contextMenuItem;
     if (!item) {
+      throw new Error('No context menu item when copy clicked.');
+    }
+    this.multiSelectMode = true;
+  }
+
+  private getSelectedItems(): DirectoryItem[] {
+    if (this.multiSelectMode) {
+      return this.selectionList.selectedOptions.selected.map((i) => i.value);
+    } else {
+      const item = this.contextMenuItem;
+      if (!item) {
+        return [];
+      }
+      return [item];
+    }
+  }
+
+  copyClicked() {
+    const items = this.getSelectedItems();
+    if (items.length === 0) {
       throw new Error('No context menu item when copy clicked.');
     }
     this.clipboardAdded.emit({
       type: 'copy',
       backend: this.backend,
-      items: [item],
+      items,
     });
     this.snackBar.open(
       $localize`Item Added to Clipboard, now go to destination and paste`,
@@ -140,14 +172,14 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   }
 
   moveClicked() {
-    const item = this.contextMenuItem;
-    if (!item) {
+    const items = this.getSelectedItems();
+    if (items.length === 0) {
       throw new Error('No context menu item when move clicked.');
     }
     this.clipboardAdded.emit({
       type: 'move',
       backend: this.backend,
-      items: [item],
+      items,
     });
     this.snackBar.open(
       $localize`Item Added to Clipboard, now go to destination and paste`,
@@ -190,29 +222,33 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   }
 
   async deleteClicked() {
-    const item = this.contextMenuItem;
-    if (!item) {
+    const items = this.getSelectedItems();
+    if (items.length === 0) {
       throw new Error('No context menu item when delete clicked.');
     }
     const result: boolean | void = await lastValueFrom(
       this.dialog
         .open(DeleteConfirmDialogComponent, {
-          data: item,
+          data: items,
         })
         .afterClosed()
     );
     if (result === true) {
-      this.deleteConfirmed(item);
+      this.deleteConfirmed(items);
     }
   }
 
-  async deleteConfirmed(item: DirectoryItem) {
+  async deleteConfirmed(items: DirectoryItem[]) {
+    await Promise.all(items.map((i) => this.deleteItem(i)));
+    this.snackBar.open($localize`Deleted`);
+  }
+
+  private async deleteItem(item: DirectoryItem) {
     const result = await this.explorerService.deleteItem(this.backend, item);
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`OK`);
       throw new Error(result.error);
     }
-    this.snackBar.open($localize`Deleted`);
     const index = this.children?.findIndex((i) => i.Path === item.Path);
     if (index === undefined || index === -1) {
       throw new Error('Deleted item not found in children.');

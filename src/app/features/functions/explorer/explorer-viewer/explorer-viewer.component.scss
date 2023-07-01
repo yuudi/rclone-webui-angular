@@ -2,3 +2,9 @@
   height: 65vh;
   overflow-y: scroll;
 }
+
+.explorer-view__list-option--hide-checkbox {
+  ::ng-deep .mdc-list-item__end {
+    display: none;
+  }
+}

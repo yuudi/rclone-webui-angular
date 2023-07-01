@@ -1,6 +1,6 @@
 <app-path-splitter
   [path]="path"
-  (pathChange)="path = $event; fetchChildren()"
+  (pathChange)="pathChange.emit($event)"
 ></app-path-splitter>
 <ng-container *ngIf="children === undefined">
   <mat-spinner></mat-spinner>
@@ -8,11 +8,16 @@
 <ng-container *ngIf="children?.length === 0">
   <div i18n>Empty</div>
 </ng-container>
-<mat-action-list class="explorer-view__container">
+<mat-selection-list class="explorer-view__container" #selectionList>
   <ng-container *ngFor="let item of children">
-    <mat-list-item
-      (dblclick)="itemDblClicked(item)"
-      (contextmenu)="itemRightClicked(item, $event)"
+    <mat-list-option
+      (click)="multiSelectMode ? selectionChanged() : itemOpened(item)"
+      (contextmenu)="listOption.selected = true; itemRightClicked(item, $event)"
+      [value]="item"
+      [ngClass]="{
+        'explorer-view__list-option--hide-checkbox': !multiSelectMode
+      }"
+      #listOption
     >
       <mat-icon
         matListItemIcon
@@ -21,7 +26,7 @@
       <!-- TODO: icon base on MIME type -->
       <div matListItemTitle>{{ item.Name }}</div>
       <div matListItemLine>{{ item.ModTime | date }}</div>
-    </mat-list-item>
+    </mat-list-option>
     <mat-divider></mat-divider>
   </ng-container>
   <div
@@ -32,38 +37,43 @@
       left: contextMenuPosition.x
     }"
   ></div>
-  <mat-menu #contextMenu="matMenu">
-    <button mat-menu-item (click)="copyClicked()">
-      <mat-icon fontIcon="file_copy"></mat-icon>
-      <span i18n>Copy</span>
-    </button>
-    <button mat-menu-item (click)="moveClicked()">
-      <mat-icon fontIcon="drive_file_move"></mat-icon>
-      <span i18n>Move</span>
-    </button>
-    <button mat-menu-item (click)="deleteClicked()">
-      <mat-icon fontIcon="delete"></mat-icon>
-      <span i18n>Delete</span>
-    </button>
-    <button mat-menu-item (click)="renameClicked()">
-      <mat-icon fontIcon="edit"></mat-icon>
-      <span i18n>Rename</span>
-    </button>
-    <button
-      *ngIf="info?.Features?.PublicLink"
-      mat-menu-item
-      (click)="generateLinkClicked()"
-    >
-      <mat-icon fontIcon="add_link"></mat-icon>
-      <span i18n>Generate Link</span>
-    </button>
-    <button
-      *ngIf="canDownload && !contextMenuItem?.IsDir"
-      mat-menu-item
-      (click)="downloadClicked()"
-    >
-      <mat-icon fontIcon="download"></mat-icon>
-      <span i18n>Download</span>
-    </button>
-  </mat-menu>
-</mat-action-list>
+</mat-selection-list>
+
+<mat-menu #contextMenu="matMenu">
+  <button mat-menu-item *ngIf="!multiSelectMode" (click)="multiSelectClicked()">
+    <mat-icon fontIcon="check_box"></mat-icon>
+    <span i18n>Multi-select</span>
+  </button>
+  <button mat-menu-item (click)="copyClicked()">
+    <mat-icon fontIcon="file_copy"></mat-icon>
+    <span i18n>Copy</span>
+  </button>
+  <button mat-menu-item (click)="moveClicked()">
+    <mat-icon fontIcon="drive_file_move"></mat-icon>
+    <span i18n>Move</span>
+  </button>
+  <button mat-menu-item (click)="deleteClicked()">
+    <mat-icon fontIcon="delete"></mat-icon>
+    <span i18n>Delete</span>
+  </button>
+  <button mat-menu-item (click)="renameClicked()">
+    <mat-icon fontIcon="edit"></mat-icon>
+    <span i18n>Rename</span>
+  </button>
+  <button
+    *ngIf="info?.Features?.PublicLink"
+    mat-menu-item
+    (click)="generateLinkClicked()"
+  >
+    <mat-icon fontIcon="add_link"></mat-icon>
+    <span i18n>Generate Link</span>
+  </button>
+  <button
+    *ngIf="canDownload && !contextMenuItem?.IsDir"
+    mat-menu-item
+    (click)="downloadClicked()"
+  >
+    <mat-icon fontIcon="download"></mat-icon>
+    <span i18n>Download</span>
+  </button>
+</mat-menu>

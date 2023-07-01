@@ -40,13 +40,12 @@ mounting
 ## Todo
 
 - [x] Mounting management
-- [ ] Job viewer
+- [x] Job viewer
 - [x] International workflow
 - [ ] More Platforms
   - [x] Rclone embedded
   - [x] PWA Standalone
   - [ ] Electron
-  - [ ] WinUI 3 with WebView2
 - [ ] Scheduled task manager (Electron only)
 
 ## Contribute
