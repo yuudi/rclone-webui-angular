@@ -17,6 +17,6 @@ export class SimpleDialogComponent {
       title: string;
       message: string;
       actions: string[];
-    }
+    },
   ) {}
 }

@@ -39,7 +39,7 @@ export class NewMountDialogComponent {
     public data: {
       osType: string;
       fsOptions: string[];
-    }
+    },
   ) {
     if (data.osType === 'windows') {
       this.mountForm.controls.MountPoint.setValue('Z:');

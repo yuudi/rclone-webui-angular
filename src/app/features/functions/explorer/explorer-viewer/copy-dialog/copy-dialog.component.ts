@@ -12,6 +12,6 @@ export class CopyDialogComponent {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       content: string;
-    }
+    },
   ) {}
 }

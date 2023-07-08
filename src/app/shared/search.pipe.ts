@@ -8,7 +8,7 @@ export class SearchPipe implements PipeTransform {
     values: V[],
     searchString: string,
     searchKeys: K[],
-    caseSensitive = false
+    caseSensitive = false,
   ): V[] {
     if (!searchString) {
       return values;
@@ -18,15 +18,15 @@ export class SearchPipe implements PipeTransform {
     }
     return values.filter((v) =>
       searchKeys.some((key) =>
-        SearchPipe.isSubSequence(searchString, v[key], caseSensitive)
-      )
+        SearchPipe.isSubSequence(searchString, v[key], caseSensitive),
+      ),
     );
   }
 
   private static isSubSequence(
     sub: string,
     str: string,
-    caseSensitive = false
+    caseSensitive = false,
   ): boolean {
     if (!caseSensitive) {
       sub = sub.toLowerCase();

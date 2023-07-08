@@ -23,7 +23,7 @@ export class MountComponent implements OnInit {
     private dialog: MatDialog,
     private mountService: MountService,
     private backendService: BackendService,
-    private explorerService: ExplorerService
+    private explorerService: ExplorerService,
   ) {}
 
   ngOnInit() {
@@ -70,12 +70,12 @@ export class MountComponent implements OnInit {
     if (os !== 'windows') {
       const result = await this.explorerService.createEmptyFolder(
         '',
-        mountPoint
+        mountPoint,
       );
       if (!result.ok) {
         this.snackBar.open(
           $localize`Rclone does not have access to this path, please check the permission of this path`,
-          $localize`Dismiss`
+          $localize`Dismiss`,
         );
         return;
       }

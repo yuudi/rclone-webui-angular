@@ -21,17 +21,17 @@ export abstract class BaseStorage {
 
   getItem<S>(
     localKey: string,
-    defaultValueFn: () => S
+    defaultValueFn: () => S,
   ): AwaitableStorageItem<S> {
     return new LocalStorageStorageItem<S>(
       `${this.prefix}-${localKey}`,
-      defaultValueFn
+      defaultValueFn,
     );
   }
 
   getObservableItem<S>(
     localKey: string,
-    defaultValueFn: () => S
+    defaultValueFn: () => S,
   ): ObservableAwaitableStorageItem<S> {
     const storageItem = this.getItem(localKey, defaultValueFn);
     const valueSubject = new BehaviorSubject<S>(defaultValueFn());
@@ -58,7 +58,10 @@ export abstract class BaseStorage {
 
 class LocalStorageStorageItem<T> implements StorageItem<T> {
   private _value: T;
-  constructor(private key: string, private defaultFn: () => T) {
+  constructor(
+    private key: string,
+    private defaultFn: () => T,
+  ) {
     const storageString = localStorage.getItem(this.key);
     if (storageString !== null) {
       this._value = JSON.parse(storageString) as T;

@@ -8,7 +8,7 @@ export class BytesPipe implements PipeTransform {
     value: number,
     fractionDigits = 2,
     base: 1024 | 1000 = 1024,
-    IEC = true
+    IEC = true,
   ): string {
     const units =
       IEC && base === 1024

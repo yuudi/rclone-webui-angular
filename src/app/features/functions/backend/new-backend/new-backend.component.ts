@@ -39,11 +39,11 @@ export class NewBackendComponent implements OnInit {
     private dialog: MatDialog,
     private appStorageService: AppStorageService,
     private newBackendService: NewBackendService,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
   ) {
     this.requiredFieldHintStorage = this.appStorageService.getItem(
       'NewBackendRequiredFieldHint',
-      () => true
+      () => true,
     );
   }
 
@@ -63,7 +63,7 @@ export class NewBackendComponent implements OnInit {
     this.providerSelected = provider;
     this.resetProviderOptions();
     this.providerNeedAuth = provider.Options.some(
-      (option) => option.Name === 'token'
+      (option) => option.Name === 'token',
     );
   }
 
@@ -86,7 +86,7 @@ export class NewBackendComponent implements OnInit {
       throw new Error('No provider selected');
     }
     const needAuth = this.providerSelected.Options.some(
-      (option) => option.Name === 'token'
+      (option) => option.Name === 'token',
     );
     if (!needAuth) {
       return;
@@ -118,14 +118,14 @@ export class NewBackendComponent implements OnInit {
       this.providerSelected.Options.map((option) => [
         option.Name,
         option.DefaultStr,
-      ])
+      ]),
     );
     return Ok();
   }
 
   async saveClicked() {
     const options = Object.fromEntries(
-      Object.entries(this.providerOptions).filter(([, value]) => value !== '')
+      Object.entries(this.providerOptions).filter(([, value]) => value !== ''),
     );
     if (this.providerNeedAuth && !options['token']) {
       options['token'] = '';
@@ -144,14 +144,14 @@ export class NewBackendComponent implements OnInit {
     const result = await this.newBackendService.createBackend(
       name,
       backend,
-      options
+      options,
     );
     if (result.ok) {
       this.router.navigate(['rclone', 'drive']);
     } else {
       this.snackBar.open(
         $localize`Error creating backend: ` + result.error,
-        $localize`Dismiss`
+        $localize`Dismiss`,
       );
       this.waitingForBackend = false;
     }

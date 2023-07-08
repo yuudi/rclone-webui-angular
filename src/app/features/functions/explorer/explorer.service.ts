@@ -11,7 +11,7 @@ import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 export class ExplorerService {
   constructor(
     private rc: RemoteControlService,
-    private jobService: JobService
+    private jobService: JobService,
   ) {}
 
   async getOsType(): Promise<string> {
@@ -20,14 +20,14 @@ export class ExplorerService {
 
   async listChildren(
     backend: string,
-    path: string
+    path: string,
   ): Promise<Result<DirectoryItem[], string>> {
     const result = await this.rc.call<{ list: DirectoryItem[] }>(
       'operations/list',
       {
         fs: ExplorerService.toFs(backend),
         remote: path,
-      }
+      },
     );
     if (!result.ok) {
       return result;
@@ -37,7 +37,7 @@ export class ExplorerService {
 
   async createEmptyFolder(
     backend: string,
-    path: string
+    path: string,
   ): Promise<Result<void, string>> {
     const result = await this.rc.call<EmptyObj>('operations/mkdir', {
       fs: ExplorerService.toFs(backend),
@@ -51,7 +51,7 @@ export class ExplorerService {
 
   async deleteFile(
     backend: string,
-    path: string
+    path: string,
   ): Promise<Result<void, string>> {
     const result = await this.rc.call<EmptyObj>('operations/deletefile', {
       fs: ExplorerService.toFs(backend),
@@ -65,7 +65,7 @@ export class ExplorerService {
 
   async deleteFolder(
     backend: string,
-    path: string
+    path: string,
   ): Promise<Result<void, string>> {
     const result = await this.rc.call<EmptyObj>('operations/purge', {
       fs: ExplorerService.toFs(backend),
@@ -79,7 +79,7 @@ export class ExplorerService {
 
   deleteItem(
     backend: string,
-    item: DirectoryItem
+    item: DirectoryItem,
   ): Promise<Result<void, string>> {
     if (item.IsDir) {
       return this.deleteFolder(backend, item.Path);
@@ -91,7 +91,7 @@ export class ExplorerService {
   renameItem(
     backend: string,
     item: DirectoryItem,
-    newName: string
+    newName: string,
   ): Promise<Result<void, string>> {
     const pathList = item.Path.split('/');
     pathList[pathList.length - 1] = newName;
@@ -106,14 +106,14 @@ export class ExplorerService {
 
   async generateLink(
     backend: string,
-    path: string
+    path: string,
   ): Promise<Result<string, string>> {
     const result = await this.rc.call<{ url: string }>(
       'operations/publiclink',
       {
         fs: ExplorerService.toFs(backend),
         remote: path,
-      }
+      },
     );
     if (!result.ok) {
       return result;
@@ -124,7 +124,7 @@ export class ExplorerService {
   async clipboardOperate(
     backend: string,
     path: string,
-    clipboard: AppClipboard
+    clipboard: AppClipboard,
   ): Promise<Result<JobID<EmptyObj>, string>[]> {
     return Promise.all(
       clipboard.items.map((item) => {
@@ -136,7 +136,7 @@ export class ExplorerService {
             item.Path,
             backend,
             path + '/' + dirName,
-            ExplorerService.actionSummary(clipboard.type, item.Path, backend)
+            ExplorerService.actionSummary(clipboard.type, item.Path, backend),
           );
         } else {
           const fileName = item.Path.split('/').pop();
@@ -146,10 +146,10 @@ export class ExplorerService {
             item.Path,
             backend,
             path + '/' + fileName,
-            ExplorerService.actionSummary(clipboard.type, item.Path, backend)
+            ExplorerService.actionSummary(clipboard.type, item.Path, backend),
           );
         }
-      })
+      }),
     );
   }
 
@@ -166,7 +166,7 @@ export class ExplorerService {
     srcFs: string,
     srcRemote: string,
     dstFs: string,
-    dstRemote: string
+    dstRemote: string,
   ): Promise<Result<void, string>> {
     const result = await this.rc.call<EmptyObj>(`operations/${action}file`, {
       srcFs: ExplorerService.toFs(srcFs),
@@ -193,7 +193,7 @@ export class ExplorerService {
     srcFs: string,
     srcRemote: string,
     dstFs: string,
-    dstRemote: string
+    dstRemote: string,
   ): Promise<Result<void, string>> {
     const result = await this.rc.call<EmptyObj>('sync/' + action, {
       srcFs: ExplorerService.toFs(srcFs) + srcRemote,
@@ -220,7 +220,7 @@ export class ExplorerService {
     srcRemote: string,
     dstFs: string,
     dstRemote: string,
-    summary?: string
+    summary?: string,
   ): Promise<Result<JobID<EmptyObj>, string>> {
     return this.jobService.callAsync<EmptyObj>(
       `operations/${action}file`,
@@ -230,7 +230,7 @@ export class ExplorerService {
         dstFs: ExplorerService.toFs(dstFs),
         dstRemote,
       },
-      summary
+      summary,
     );
   }
 
@@ -249,7 +249,7 @@ export class ExplorerService {
     srcRemote: string,
     dstFs: string,
     dstRemote: string,
-    summary?: string
+    summary?: string,
   ): Promise<Result<JobID<EmptyObj>, string>> {
     return this.jobService.callAsync<EmptyObj>(
       'sync/' + action,
@@ -257,7 +257,7 @@ export class ExplorerService {
         srcFs: ExplorerService.toFs(srcFs) + srcRemote,
         dstFs: ExplorerService.toFs(dstFs) + dstRemote,
       },
-      summary
+      summary,
     );
   }
 
@@ -272,7 +272,7 @@ export class ExplorerService {
   private static actionSummary(
     action: 'move' | 'copy' | 'sync' | 'bisync',
     name: string,
-    destination: string
+    destination: string,
   ): string {
     let actionName: string;
     switch (action) {

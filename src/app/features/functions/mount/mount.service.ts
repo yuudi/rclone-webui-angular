@@ -38,7 +38,7 @@ export class MountService {
   constructor(
     private appStorageService: AppStorageService,
     private rc: RemoteControlService,
-    connectionService: ConnectionService
+    connectionService: ConnectionService,
   ) {
     this.fetchMount();
     connectionService
@@ -55,10 +55,10 @@ export class MountService {
     this.mountSettingsStorage?.destructor();
     this.mountSettingsStorage = this.appStorageService.getObservableItem(
       `${connection.id}-mountSettings`,
-      () => []
+      () => [],
     );
     this.mountSettingsStorage.asObservable().subscribe(
-      this.mountSettingsSubject.next.bind(this.mountSettingsSubject) //only take next, not error or complete
+      this.mountSettingsSubject.next.bind(this.mountSettingsSubject), //only take next, not error or complete
     );
   }
 
@@ -86,7 +86,7 @@ export class MountService {
     const mountSettings = await this.mountSettingsStorage.get();
     for (const mount of mounts) {
       const index = mountSettings.findIndex(
-        (m) => m.MountPoint === mount.MountPoint && m.Fs === mount.Fs
+        (m) => m.MountPoint === mount.MountPoint && m.Fs === mount.Fs,
       );
       if (index === -1) {
         mountSettings.push({

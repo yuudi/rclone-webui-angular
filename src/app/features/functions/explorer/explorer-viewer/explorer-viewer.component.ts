@@ -59,7 +59,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private rc: RemoteControlService,
-    private explorerService: ExplorerService
+    private explorerService: ExplorerService,
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +90,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
 
     const result = await this.explorerService.listChildren(
       this.backend,
-      this.path
+      this.path,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`OK`);
@@ -117,7 +117,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     } else {
       this.snackBar.open(
         $localize`Opening File is not implemented yet.`,
-        $localize`OK`
+        $localize`OK`,
       );
     }
   }
@@ -167,7 +167,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     });
     this.snackBar.open(
       $localize`Item Added to Clipboard, now go to destination and paste`,
-      $localize`OK`
+      $localize`OK`,
     );
   }
 
@@ -183,7 +183,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     });
     this.snackBar.open(
       $localize`Item Added to Clipboard, now go to destination and paste`,
-      $localize`OK`
+      $localize`OK`,
     );
   }
 
@@ -211,7 +211,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     const result = await this.explorerService.renameItem(
       this.backend,
       item,
-      newName
+      newName,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`OK`);
@@ -231,7 +231,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
         .open(DeleteConfirmDialogComponent, {
           data: items,
         })
-        .afterClosed()
+        .afterClosed(),
     );
     if (result === true) {
       this.deleteConfirmed(items);
@@ -263,7 +263,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     }
     const result = await this.explorerService.generateLink(
       this.backend,
-      item.Path
+      item.Path,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`OK`);

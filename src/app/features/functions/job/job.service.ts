@@ -33,7 +33,7 @@ export class JobService {
   constructor(
     private storageService: AppStorageService,
     private rc: RemoteControlService,
-    connectionService: ConnectionService
+    connectionService: ConnectionService,
   ) {
     // clear jobs when connection is changed
     connectionService
@@ -50,7 +50,7 @@ export class JobService {
     this.jobsStorage?.destructor();
     this.jobsStorage = this.storageService.getObservableItem(
       `${connection.id}-jobs`,
-      () => ({ executeId: '', jobs: [] })
+      () => ({ executeId: '', jobs: [] }),
     );
     this.jobsStorage
       .asObservable()
@@ -133,7 +133,7 @@ export class JobService {
       finished: boolean;
       error?: string;
     },
-    summary: string
+    summary: string,
   ) {
     if (this.jobsStorage === undefined) {
       throw new Error('jobsStorage is initialized');
@@ -165,7 +165,7 @@ export class JobService {
     params?: {
       [key: string]: string | boolean | number | Record<string, unknown>;
     },
-    summary?: string
+    summary?: string,
   ): Promise<Result<JobID<R>, string>> {
     const result = await this.rc.call<{ jobid: number }>(operation, {
       _async: true,
@@ -180,7 +180,7 @@ export class JobService {
         id: jobid,
         finished: false,
       },
-      summary ?? operation
+      summary ?? operation,
     );
     return Ok(jobid);
   }
@@ -191,7 +191,7 @@ export class JobService {
 
   private async getJobList() {
     const res = await this.rc.call<{ executeId?: string; jobids: number[] }>(
-      'job/list'
+      'job/list',
     );
     return res.orThrow();
   }

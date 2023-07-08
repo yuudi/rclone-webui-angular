@@ -17,7 +17,7 @@ export class DashboardService {
   getStat(): Observable<TransferStatus> {
     return timer(0, 10000).pipe(
       switchMap(() => this.rc.call<TransferStatus>('core/stats')),
-      map((result) => result.orThrow())
+      map((result) => result.orThrow()),
     );
   }
 }

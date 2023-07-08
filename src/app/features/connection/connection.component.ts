@@ -25,7 +25,7 @@ export class ConnectionComponent implements OnInit {
     private route: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
   ) {}
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class ConnectionComponent implements OnInit {
       return;
     }
     const result = await this.connectionService.activateConnection(
-      connection.id
+      connection.id,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`Dismiss`);

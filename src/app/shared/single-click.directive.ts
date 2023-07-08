@@ -29,7 +29,7 @@ export class SingleClickDirective implements OnInit, OnDestroy {
     this.click$
       .pipe(
         bufferTime(this.appSingleClickDelay),
-        filter((clicks) => clicks.length === 1)
+        filter((clicks) => clicks.length === 1),
       )
       .subscribe((clicks) => this.appSingleClick.emit(clicks[0]));
   }

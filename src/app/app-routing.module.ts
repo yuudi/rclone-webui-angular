@@ -16,14 +16,14 @@ const routes: Routes = [
     canActivate: [connectionGuard],
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
-        (m) => m.DashboardModule
+        (m) => m.DashboardModule,
       ),
   },
   {
     path: 'connection',
     loadChildren: () =>
       import('./features/connection/connection.module').then(
-        (m) => m.ConnectionModule
+        (m) => m.ConnectionModule,
       ),
   },
   {
@@ -31,14 +31,14 @@ const routes: Routes = [
     canActivate: [connectionGuard],
     loadChildren: () =>
       import('./features/functions/functions.module').then(
-        (m) => m.FunctionsModule
+        (m) => m.FunctionsModule,
       ),
   },
   {
     path: '**',
     loadComponent: () =>
       import('./cores/not-found/not-found.component').then(
-        (m) => m.NotFoundComponent
+        (m) => m.NotFoundComponent,
       ),
   },
 ];

@@ -56,7 +56,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     private router: Router,
     private snackBar: MatSnackBar,
     private connectionService: ConnectionService,
-    private rc: RemoteControlService
+    private rc: RemoteControlService,
   ) {}
 
   ngOnInit() {
@@ -168,7 +168,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const saveResult = await this.connectionService.saveConnection(
       { displayName, remoteAddress },
-      remember ? credential : NotSaved
+      remember ? credential : NotSaved,
     );
 
     if (!saveResult.ok) {
@@ -177,7 +177,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     return this.connectionService.activateConnection(
       saveResult.value.id,
-      credential
+      credential,
     );
   }
 
@@ -201,7 +201,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     return this.connectionService.updateConnection(
       id,
       { displayName, remoteAddress },
-      remember ? credential : NotSaved
+      remember ? credential : NotSaved,
     );
   }
 }

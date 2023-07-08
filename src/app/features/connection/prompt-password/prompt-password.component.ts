@@ -28,7 +28,7 @@ export class PromptPasswordComponent {
     private router: Router,
     private snackBar: MatSnackBar,
     private connectionService: ConnectionService,
-    @Inject(MAT_DIALOG_DATA) private data: Connection
+    @Inject(MAT_DIALOG_DATA) private data: Connection,
   ) {}
 
   async connectClicked() {
@@ -51,7 +51,7 @@ export class PromptPasswordComponent {
       const result = await this.connectionService.updateConnection(
         this.data.id,
         {},
-        credentials
+        credentials,
       );
       if (!result.ok) {
         this.snackBar.open(result.error, $localize`Dismiss`);
@@ -61,7 +61,7 @@ export class PromptPasswordComponent {
 
     const result = await this.connectionService.activateConnection(
       this.data.id,
-      credentials
+      credentials,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`Dismiss`);

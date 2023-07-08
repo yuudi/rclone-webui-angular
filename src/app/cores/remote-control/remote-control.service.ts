@@ -18,7 +18,7 @@ type ErrorResponse = {
 export class RemoteControlService {
   constructor(
     private http: HttpClient,
-    private connectionService: ConnectionService
+    private connectionService: ConnectionService,
   ) {}
 
   /**
@@ -28,7 +28,7 @@ export class RemoteControlService {
     operation: string,
     params?: {
       [key: string]: string | boolean | number | Record<string, unknown>;
-    }
+    },
   ): Promise<Result<R, string>> {
     const remote = this.connectionService.getActiveConnection();
     const headers: { [key: string]: string } = {};
@@ -49,10 +49,10 @@ export class RemoteControlService {
           catchError((error: HttpErrorResponse) => {
             this.logError(error);
             return of(
-              Err(String(error?.error?.error ?? error?.error ?? error))
+              Err(String(error?.error?.error ?? error?.error ?? error)),
             );
-          })
-        )
+          }),
+        ),
     );
     // http observable only emits once, so we can use lastValueFrom
   }
@@ -67,7 +67,7 @@ export class RemoteControlService {
         '/[' +
         (backend ? backend + ':' : '/') +
         ']/' +
-        file
+        file,
     );
   }
 
@@ -94,7 +94,7 @@ export class RemoteControlService {
           }
         | NoAuthentication;
     },
-    testAuth = false
+    testAuth = false,
   ): Promise<boolean> {
     let remoteAddress: string, authentication: string | NoAuthentication;
     if (connection) {
@@ -103,7 +103,7 @@ export class RemoteControlService {
         ? btoa(
             connection.credential.username +
               ':' +
-              connection.credential.password
+              connection.credential.password,
           )
         : NoAuthentication;
     } else {
@@ -125,12 +125,12 @@ export class RemoteControlService {
               ? { Authorization: `Basic ${authentication}` }
               : undefined,
             observe: 'response',
-          }
+          },
         )
         .pipe(
           map((response) => response.status === 200),
-          catchError(() => of(false))
-        )
+          catchError(() => of(false)),
+        ),
     );
   }
 
@@ -142,7 +142,7 @@ export class RemoteControlService {
       // The backend returned an unsuccessful response code.
       console.error(
         `Backend returned code ${error.status}, body was: `,
-        JSON.stringify(error.error as ErrorResponse)
+        JSON.stringify(error.error as ErrorResponse),
       );
     }
   }

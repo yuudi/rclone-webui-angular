@@ -14,6 +14,6 @@ export class RenameDialogComponent {
       title: string;
       name: string;
       existNames: string[];
-    }
+    },
   ) {}
 }

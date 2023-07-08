@@ -22,7 +22,7 @@ export class BackendService {
   constructor(
     private AwaitableStorageItem: AppStorageService,
     private rc: RemoteControlService,
-    connectionService: ConnectionService
+    connectionService: ConnectionService,
   ) {
     connectionService
       .getActiveConnectionObservable()
@@ -35,21 +35,21 @@ export class BackendService {
           `${connection.id}-backendUsageCache`,
           () => {
             return {};
-          }
+          },
         );
 
         this.backendInfoCacheStorage = this.AwaitableStorageItem.getItem(
           `${connection.id}-backendInfoCache`,
           () => {
             return {};
-          }
+          },
         );
       });
   }
 
   async listBackends(): Promise<Result<string[], string>> {
     const result = await this.rc.call<{ remotes: string[] }>(
-      'config/listremotes'
+      'config/listremotes',
     );
     if (!result.ok) {
       return result;
@@ -90,7 +90,7 @@ export class BackendService {
           'operations/about',
           {
             fs: id + ':',
-          }
+          },
         );
         if (!usageResult.ok) {
           return observer.error(usageResult.error);

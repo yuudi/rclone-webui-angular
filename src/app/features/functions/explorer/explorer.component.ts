@@ -32,11 +32,11 @@ export class ExplorerComponent implements OnInit {
     sanitizer: DomSanitizer,
     private dialog: MatDialog,
     private explorerService: ExplorerService,
-    private backendService: BackendService
+    private backendService: BackendService,
   ) {
     iconRegistry.addSvgIcon(
       'tab_close',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/tab_close.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('assets/icons/tab_close.svg'),
     );
   }
 
@@ -154,14 +154,14 @@ export class ExplorerComponent implements OnInit {
     const resultList = await this.explorerService.clipboardOperate(
       view.backend,
       view.path,
-      clipboard
+      clipboard,
     );
     if (resultList.length === 1) {
       const result = resultList[0];
       if (result.ok) {
         this.snackBar.open(
           $localize`Task Created Successfully`,
-          $localize`Dismiss`
+          $localize`Dismiss`,
         );
       } else {
         this.snackBar.open(result.error, $localize`Dismiss`);
@@ -177,7 +177,7 @@ export class ExplorerComponent implements OnInit {
     if (errors.length === 0) {
       this.snackBar.open(
         $localize`Tasks Created Successfully`,
-        $localize`Dismiss`
+        $localize`Dismiss`,
       );
     } else {
       this.snackBar.open(errors.join('\n'), $localize`Dismiss`);
@@ -199,7 +199,7 @@ export class ExplorerComponent implements OnInit {
             existNames: children.map((child) => child.Name),
           },
         })
-        .afterClosed()
+        .afterClosed(),
     );
     if (!name) {
       // User cancelled
@@ -207,14 +207,14 @@ export class ExplorerComponent implements OnInit {
     }
     const result = await this.explorerService.createEmptyFolder(
       view.backend,
-      view.path + '/' + name
+      view.path + '/' + name,
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`Dismiss`);
     }
     this.snackBar.open(
       $localize`Folder Created Successfully`,
-      $localize`Dismiss`
+      $localize`Dismiss`,
     );
     view.actions.addFolder?.(name);
   }

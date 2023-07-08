@@ -33,7 +33,7 @@
                 <mat-list-option
                   *ngFor="
                     let provider of providers
-                      | search : providerSearchString : ['Name', 'Description']
+                      | search: providerSearchString : ['Name', 'Description']
                   "
                   [value]="provider"
                 >
@@ -79,13 +79,14 @@
           <ng-container *ngFor="let option of providerSelected?.Options">
             <mat-divider></mat-divider>
             <ng-container
-              *ngIf="!(
-                (option.Advanced && !showAdvancedOptions) || (
-                  providerSelected?.Name==='s3' &&
-                  option.Provider &&
-                  (option.Provider !== providerOptions?.['provider'])
+              *ngIf="
+                !(
+                  (option.Advanced && !showAdvancedOptions) ||
+                  (providerSelected?.Name === 's3' &&
+                    option.Provider &&
+                    option.Provider !== providerOptions?.['provider'])
                 )
-              )"
+              "
             >
               <div class="new-backend__option-field">
                 <mat-form-field class="new-backend__option-field-input">
@@ -172,7 +173,7 @@
       <ng-template matStepLabel i18n>Save</ng-template>
       <ng-template matStepContent>
         <div
-          *ngIf="providerNeedAuth && (!providerOptions?.['token']) ;else noAuth"
+          *ngIf="providerNeedAuth && !providerOptions?.['token']; else noAuth"
         >
           <span i18n
             >You will be redirected to the provider's website to authorize,

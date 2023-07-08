@@ -27,8 +27,8 @@ export class AppComponent {
     iconRegistry.addSvgIcon(
       'github',
       sanitizer.bypassSecurityTrustResourceUrl(
-        'assets/icons/github-mark-white.svg'
-      )
+        'assets/icons/github-mark-white.svg',
+      ),
     );
   }
 
@@ -37,7 +37,7 @@ export class AppComponent {
     const hashtag = window.location.hash;
     const newUrl = new URL(
       `../${languageCode}/${hashtag}`,
-      window.location.href
+      window.location.href,
     );
     window.location.href = newUrl.href;
   }

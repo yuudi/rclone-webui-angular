@@ -55,13 +55,13 @@ export class ConnectionService {
         } else {
           return [];
         }
-      }
+      },
     );
   }
 
   async saveConnection(
     connection: { displayName: string; remoteAddress: string },
-    credentials: Credentials | NoAuthentication | NotSaved = NotSaved
+    credentials: Credentials | NoAuthentication | NotSaved = NotSaved,
   ): Promise<Result<Connection, string>> {
     const { displayName, remoteAddress } = connection;
 
@@ -96,7 +96,7 @@ export class ConnectionService {
   async updateConnection(
     id: string,
     connection: Partial<Omit<Connection, 'id' | 'authentication'>>,
-    credentials: Credentials | NoAuthentication | NotSaved = NotSaved
+    credentials: Credentials | NoAuthentication | NotSaved = NotSaved,
   ): Promise<Result<void, string>> {
     const connections = await this.connectionsStorage.get();
     const index = connections.findIndex((c) => c.id === id);
@@ -129,7 +129,7 @@ export class ConnectionService {
 
   async activateConnection(
     id: string,
-    credentials?: Credentials | NoAuthentication
+    credentials?: Credentials | NoAuthentication,
   ): Promise<Result<void, string>> {
     const connection = await this.getConnection(id);
     if (!connection) {

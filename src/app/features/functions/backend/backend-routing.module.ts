@@ -8,7 +8,7 @@ const routes: Routes = [
     path: 'new',
     loadChildren: () =>
       import('./new-backend/new-backend.module').then(
-        (m) => m.NewBackendModule
+        (m) => m.NewBackendModule,
       ),
   },
 ];

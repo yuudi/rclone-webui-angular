@@ -28,7 +28,7 @@ export class NewBackendService {
   createBackend(
     name: string,
     providerName: string,
-    options: { [key: string]: string }
+    options: { [key: string]: string },
   ): Promise<Result<never, string>> {
     return this.rc.call('config/create', {
       name,
