@@ -444,6 +444,12 @@
       <trans-unit id="1987414866514451380" datatype="html">
         <source> This address is not secure, please set up an HTTPS connection on that host </source>
       </trans-unit>
+      <trans-unit id="5020688442735484718" datatype="html">
+        <source>Job Manager</source>
+      </trans-unit>
+      <trans-unit id="8247504084319724481" datatype="html">
+        <source>Mount Manager</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

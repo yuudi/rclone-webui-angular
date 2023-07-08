@@ -588,6 +588,14 @@
         <source> This address is not secure, please set up an HTTPS connection on that host </source>
         <target state="translated"> 此地址不安全，请在该主机上设置HTTPS连接 </target>
       </trans-unit>
+      <trans-unit id="8247504084319724481" datatype="html">
+        <source>Mount Manager</source>
+        <target state="translated">挂载管理</target>
+      </trans-unit>
+      <trans-unit id="5020688442735484718" datatype="html">
+        <source>Job Manager</source>
+        <target state="translated">任务管理</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

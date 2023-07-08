@@ -56,7 +56,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     private router: Router,
     private snackBar: MatSnackBar,
     private connectionService: ConnectionService,
-    private rc: RemoteControlService,
+    private rc: RemoteControlService
   ) {}
 
   ngOnInit() {
@@ -91,11 +91,16 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
   secureContextValidator(): ValidatorFn {
     return (control) => {
-      const url = new URL(control.value);
+      let url;
+      try {
+        url = new URL(control.value);
+      } catch (e) {
+        return { pattern: true };
+      }
       if (url.protocol === 'https:') {
         return null;
       }
-      if (url.hostname in ['localhost', '127.0.0.1', '[::1]']) {
+      if (['localhost', '127.0.0.1', '[::1]'].includes(url.hostname)) {
         return null;
       }
       return { insecureContext: true };
@@ -168,7 +173,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const saveResult = await this.connectionService.saveConnection(
       { displayName, remoteAddress },
-      remember ? credential : NotSaved,
+      remember ? credential : NotSaved
     );
 
     if (!saveResult.ok) {
@@ -177,7 +182,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     return this.connectionService.activateConnection(
       saveResult.value.id,
-      credential,
+      credential
     );
   }
 
@@ -201,7 +206,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     return this.connectionService.updateConnection(
       id,
       { displayName, remoteAddress },
-      remember ? credential : NotSaved,
+      remember ? credential : NotSaved
     );
   }
 }
