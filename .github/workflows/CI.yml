@@ -41,7 +41,7 @@ jobs:
           echo "::endgroup::"
 
           echo "::group::Lint"
-          npm ci
+          npm clean-install
           npm run lint
           if [ -n "$(git status --untracked-files=no --porcelain)" ]; then
             git add .

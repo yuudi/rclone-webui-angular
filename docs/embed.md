@@ -11,7 +11,7 @@ If you want to manage multiple remote servers, please check [PWA build](./pwa.md
 1. Then run the following command
 
    ```bash
-   rclone rcd --rc-web-gui --rc-web-fetch-url="https://api.github.com/repos/yuudi/rclone-webui-angular/releases/latest"
+   rclone rcd --rc-web-gui --rc-web-gui-update --rc-web-fetch-url="https://s3.yuudi.dev/rwa/embed/version.json"
    ```
 
    If you have used [rclone-webui-react](https://github.com/rclone/rclone-webui-react) before, you need to force an update by appending `--rc-web-gui-force-update` to the command

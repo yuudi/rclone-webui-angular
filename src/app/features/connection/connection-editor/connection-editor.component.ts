@@ -1,5 +1,10 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { AsyncValidatorFn, FormBuilder, Validators } from '@angular/forms';
+import {
+  AsyncValidatorFn,
+  FormBuilder,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -28,7 +33,11 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
     ],
     remoteAddress: [
       ConnectionEditorComponent.getCurrentHost(),
-      [Validators.required, Validators.pattern(/^(http|https):\/\//)],
+      [
+        Validators.required,
+        Validators.pattern(/^(http|https):\/\//),
+        this.secureContextValidator(),
+      ],
     ],
     notProtected: [false],
     username: ['', [Validators.required]],
@@ -77,6 +86,19 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
         return { nameExists: true };
       }
       return null;
+    };
+  }
+
+  secureContextValidator(): ValidatorFn {
+    return (control) => {
+      const url = new URL(control.value);
+      if (url.protocol === 'https:') {
+        return null;
+      }
+      if (url.hostname in ['localhost', '127.0.0.1', '[::1]']) {
+        return null;
+      }
+      return { insecureContext: true };
     };
   }
 

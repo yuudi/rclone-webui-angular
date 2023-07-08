@@ -8,6 +8,11 @@
     <script>
       // ES3 compatible
       (function () {
+        savedLanguage = localStorage.getItem("rwa-language");
+        if (savedLanguage) {
+          window.location.href = "./" + savedLanguage + "/";
+          return;
+        }
         available = ["en-US", "zh-CN"];
         preference = navigator.languages;
         for (i = 0; i < preference.length; i++) {

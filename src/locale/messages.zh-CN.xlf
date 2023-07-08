@@ -22,10 +22,6 @@
         <source>Select Language</source>
         <target>选择语言</target>
       </trans-unit>
-      <trans-unit id="5866254605255506989" datatype="html">
-        <source>English</source>
-        <target>英语</target>
-      </trans-unit>
       <trans-unit id="2557623954339695776" datatype="html">
         <source>Connections</source>
         <target>连接</target>
@@ -370,10 +366,6 @@
         <source>Explore Drives</source>
         <target>浏览储存池</target>
       </trans-unit>
-      <trans-unit id="4689443708886954687" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-        <source>Chinese Simplified</source>
-        <target>简体中文</target>
-      </trans-unit>
       <trans-unit id="787163983066183218" datatype="html" xmlns="urn:oasis:names:tc:xliff:document:1.2">
         <source>Browse</source>
         <target>浏览</target>
@@ -591,6 +583,10 @@
       <trans-unit id="2870013675900498785" datatype="html">
         <source>Multi-select</source>
         <target state="translated">多选</target>
+      </trans-unit>
+      <trans-unit id="1987414866514451380" datatype="html">
+        <source> This address is not secure, please set up an HTTPS connection on that host </source>
+        <target state="translated"> 此地址不安全，请在该主机上设置HTTPS连接 </target>
       </trans-unit>
     </body>
   </file>

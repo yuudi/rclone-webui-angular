@@ -6,19 +6,11 @@
 
 首先安装 [rclone](https://rclone.org/downloads/)
 
-然后运行以下命令获取图形界面（需要魔法）
+然后运行以下命令获取图形界面
 
 ```bash
-rclone rcd --rc-web-gui --rc-web-fetch-url="https://api.github.com/repos/yuudi/rclone-webui-angular/releases/latest" --rc-web-gui-force-update
+rclone rcd --rc-web-gui --rc-web-gui-update --rc-web-fetch-url="https://s3.yuudi.dev/rwa/embed/version.json"
 ```
-
-之后就不再需要魔法，可以直接运行以下命令
-
-```bash
-rclone rcd --rc-web-gui
-```
-
-如果需要更新，请重新运行第一个的命令
 
 ## 远程服务器
 

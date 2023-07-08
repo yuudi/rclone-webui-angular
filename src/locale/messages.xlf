@@ -21,12 +21,6 @@
       <trans-unit id="487077452159084336" datatype="html">
         <source>Select Language</source>
       </trans-unit>
-      <trans-unit id="5866254605255506989" datatype="html">
-        <source>English</source>
-      </trans-unit>
-      <trans-unit id="4689443708886954687" datatype="html">
-        <source>Chinese Simplified</source>
-      </trans-unit>
       <trans-unit id="2557623954339695776" datatype="html">
         <source>Connections</source>
       </trans-unit>
@@ -446,6 +440,9 @@
       </trans-unit>
       <trans-unit id="9066298133798990764" datatype="html">
         <source>Would you like to delete</source>
+      </trans-unit>
+      <trans-unit id="1987414866514451380" datatype="html">
+        <source> This address is not secure, please set up an HTTPS connection on that host </source>
       </trans-unit>
     </body>
   </file>

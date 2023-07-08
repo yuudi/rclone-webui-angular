@@ -64,8 +64,13 @@
     <mat-icon fontIcon="language"></mat-icon>
   </button>
   <mat-menu #languageMenu xPosition="before">
-    <a mat-menu-item href="../en-US/" i18n>English</a>
-    <a mat-menu-item href="../zh-CN/" i18n>Chinese Simplified</a>
+    <button
+      *ngFor="let language of languages"
+      mat-menu-item
+      (click)="activateLanguage(language.code)"
+    >
+      {{ language.display }}
+    </button>
   </mat-menu>
   <button
     *ngIf="showRemoteSetting"

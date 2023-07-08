@@ -93,6 +93,14 @@
                   "with": "src/environments/environment.standalone.ts"
                 }
               ]
+            },
+            "native": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.native.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

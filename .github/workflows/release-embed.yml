@@ -28,14 +28,14 @@ jobs:
 
       - name: Build
         run: |
-          npm ci
+          npm clean-install --omit=dev
           npm run build:embed
 
       - name: Archive as Zip
         run: |
           cp src/i18n-index.html dist/build/index.html
           cd dist
-          zip -r currentbuild.zip build
+          zip -r embed.zip build
 
       - name: Create Release
         id: create_release
@@ -54,6 +54,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/currentbuild.zip
-          asset_name: currentbuild.zip
+          asset_path: ./dist/embed.zip
+          asset_name: embed.zip
           asset_content_type: application/zip
+
+      - name: Upload to S3
+        uses: docker://rclone/rclone:latest
+        with:
+          entrypoint: /bin/sh
+          args: |
+            rclone ${{ secrets.S3_ARGS }} copyto dist/embed.zip :s3:yuudi/rwa/embed/${{ github.ref_name }}/embed.zip
+            echo '{"tag_name":"${{ github.ref_name }}","assets":[{"browser_download_url":"https://s3.yuudi.dev/rwa/embed/${{ github.ref_name }}/embed.zip"}]}' | \
+              rclone ${{ secrets.S3_ARGS }} rcat :s3:yuudi/rwa/embed/version.json

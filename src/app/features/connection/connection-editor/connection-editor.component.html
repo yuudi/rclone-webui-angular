@@ -18,8 +18,17 @@
   <mat-form-field class="connection__field">
     <mat-label i18n>Remote Address</mat-label>
     <input matInput formControlName="remoteAddress" />
-    <mat-error i18n *ngIf="!connectionForm.controls.remoteAddress.valid">
+    <mat-error
+      *ngIf="connectionForm.controls.remoteAddress.errors?.['pattern']"
+      i18n
+    >
       Please enter a valid address
+    </mat-error>
+    <mat-error
+      *ngIf="connectionForm.controls.remoteAddress.errors?.['insecureContext']"
+      i18n
+    >
+      This address is not secure, please set up an HTTPS connection on that host
     </mat-error>
   </mat-form-field>
   <mat-checkbox i18n class="connection__field" formControlName="notProtected">

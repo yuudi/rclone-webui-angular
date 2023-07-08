@@ -30,7 +30,7 @@ jobs:
 
       - name: Build
         run: |
-          npm ci
+          npm clean-install --omit=dev
           sed -i 's/"baseHref": "\(.*\)"/"baseHref": "rclone-webui-angular\/\1"/g' ./angular.json
           npm run build:standalone
           cp src/i18n-index.html dist/build/index.html
