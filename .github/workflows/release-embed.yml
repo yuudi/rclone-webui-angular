@@ -28,7 +28,7 @@ jobs:
 
       - name: Build
         run: |
-          npm clean-install --omit=dev
+          npm clean-install
           npm run build:embed
 
       - name: Archive as Zip
@@ -61,7 +61,7 @@ jobs:
       - name: Upload to S3
         uses: docker://rclone/rclone:latest
         with:
-          entrypoint: /bin/sh
+          entrypoint: /bin/sh -c
           args: |
             rclone ${{ secrets.S3_ARGS }} copyto dist/embed.zip :s3:yuudi/rwa/embed/${{ github.ref_name }}/embed.zip
             echo '{"tag_name":"${{ github.ref_name }}","assets":[{"browser_download_url":"https://s3.yuudi.dev/rwa/embed/${{ github.ref_name }}/embed.zip"}]}' | \

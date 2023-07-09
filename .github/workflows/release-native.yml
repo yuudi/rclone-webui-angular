@@ -1,0 +1,47 @@
+name: Release Native
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: RcloneWebuiAngular-${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            RcloneWebuiAngular-${{ runner.os }}-node-
+
+      - name: Build
+        run: |
+          npm clean-install
+          npm run build:native
+
+      - name: Archive as Zip
+        run: |
+          cp src/i18n-index.html dist/build/index.html
+          cd dist
+          zip -r native.zip build
+
+      - name: Upload to S3
+        uses: docker://rclone/rclone:latest
+        with:
+          entrypoint: /bin/sh -c
+          args: |
+            rclone ${{ secrets.S3_ARGS }} copyto dist/native.zip :s3:yuudi/rwa/native/${{ github.ref_name }}/native.zip
+            echo '{"tag_name":"${{ github.ref_name }}","assets":[{"browser_download_url":"https://s3.yuudi.dev/rwa/native/${{ github.ref_name }}/native.zip"}]}' | \
+              rclone ${{ secrets.S3_ARGS }} rcat :s3:yuudi/rwa/native/version.json
