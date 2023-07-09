@@ -8,7 +8,7 @@ WARNING: this project is still in development, please do not use it in productio
 
 Choose one that suits you
 
-- rwa.exe (Work in Progress): Good for those who are not familiar with command line
+- [Desktop](./docs/native.md): Good for those who are not familiar with command line
 - [Embed](./docs/embed.md): Good for managing local instance
 - [PWA Standalone](./docs/pwa.md): Good for managing multiple remote servers
 
@@ -42,10 +42,10 @@ mounting
 - [x] Mounting management
 - [x] Job viewer
 - [x] International workflow
-- [ ] More Platforms
+- [x] More Platforms
   - [x] Rclone embedded
   - [x] PWA Standalone
-  - [ ] Electron
+  - [x] Electron
 - [ ] Scheduled task manager (Electron only)
 
 ## Contribute

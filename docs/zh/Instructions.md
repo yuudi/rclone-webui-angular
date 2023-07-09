@@ -1,8 +1,14 @@
 # 使用方法
 
-请根据需要选择[本地使用](#本地)或[远程服务器使用](#远程服务器)
+请根据需要选择[桌面版](#桌面版)或[内嵌至rclone](#内嵌)或[远程服务器使用](#远程服务器)
 
-## 本地
+桌面版适合不熟悉命令行的用户管理本地 rclone，内嵌适合管理本地 rclone，远程服务器使用适合管理远程服务器上的 rclone
+
+## 桌面版
+
+下载 [rwa-desktop](https://github.com/yuudi/rwa-desktop/releases/latest) 并选择适合的安装包，如果不知道选择哪个，选择 `rwa-windows-x64-setup.exe` 即可
+
+## 内嵌
 
 首先安装 [rclone](https://rclone.org/downloads/)
 

@@ -2,6 +2,7 @@
 
 Embed build is suitable for managing local instance.
 
+If you want a native desktop application, please check [native build](./native.md)  
 If you want to manage multiple remote servers, please check [PWA build](./pwa.md)
 
 ## Setting up

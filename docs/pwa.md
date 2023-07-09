@@ -2,7 +2,7 @@
 
 PWA build is suitable for managing multiple remote servers.
 
-If you want to manage local instance, please check [embed build](./embed.md)
+If you want to manage local instance, please check [Electron build](./native.md) or [embed build](./embed.md)
 
 ## Setting up server
 
