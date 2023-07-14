@@ -450,6 +450,9 @@
       <trans-unit id="8247504084319724481" datatype="html">
         <source>Mount Manager</source>
       </trans-unit>
+      <trans-unit id="9147492985231433943" datatype="html">
+        <source> Auto Mount on Startup </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

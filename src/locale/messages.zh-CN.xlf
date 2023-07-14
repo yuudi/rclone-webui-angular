@@ -596,6 +596,10 @@
         <source>Job Manager</source>
         <target state="translated">任务管理</target>
       </trans-unit>
+      <trans-unit id="9147492985231433943" datatype="html">
+        <source> Auto Mount on Startup </source>
+        <target state="translated"> 启动时自动挂载 </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
