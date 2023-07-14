@@ -5,4 +5,5 @@ export const environment = {
   showRemoteSetting: true,
   prefetch: true,
   reuseMissingExecuteId: false,
+  electron: false,
 };

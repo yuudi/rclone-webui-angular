@@ -50,6 +50,11 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
+          body: |
+            Release ${{ github.ref_name }}
+
+            Note: If you are looking for the desktop app, please go to [rwa desktop](https://github.com/yuudi/rwa-desktop/releases/latest)
+            注意：如果你在寻找桌面版，请前往 [rwa desktop](https://github.com/yuudi/rwa-desktop/releases/latest)
 
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1

@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   showRemoteSetting = environment.showRemoteSetting;
+  showScheduledJobs = environment.electron;
   languages = [
     {
       display: 'English',

@@ -4,6 +4,7 @@ import { Observable, lastValueFrom } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { environment } from 'src/environments/environment';
 import { BackendService } from '../backend/backend.service';
 import { ExplorerService } from '../explorer/explorer.service';
 import { MountService, MountSetting } from './mount.service';
@@ -17,6 +18,7 @@ import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.com
 export class MountComponent implements OnInit {
   settings$?: Observable<MountSetting[]>;
   os = this.mountService.getOsType();
+  hasCron = environment.electron;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -40,6 +42,7 @@ export class MountComponent implements OnInit {
         AutoMountPoint: boolean;
         MountPoint: string;
         enabled: boolean;
+        autoMount: boolean;
         readonly?: boolean;
         windowsNetworkMode?: boolean;
         filePerms?: string;
@@ -125,11 +128,17 @@ export class MountComponent implements OnInit {
         duration: 3000,
       });
     }
+    if (dialogResult.autoMount) {
+      this.mountService.enableAutoMount(id);
+    }
   }
 
   async slideChanged(id: string, checked: boolean) {
     if (checked) {
       const result = await this.mountService.mount(id);
+      if (this.hasCron) {
+        await this.mountService.enableAutoMount(id);
+      }
       if (result.ok) {
         this.snackBar.open($localize`Mounted`, undefined, {
           duration: 3000,
@@ -139,6 +148,9 @@ export class MountComponent implements OnInit {
       }
     } else {
       const result = await this.mountService.unmount(id);
+      if (this.hasCron) {
+        await this.mountService.disableAutoMount(id);
+      }
       if (result.ok) {
         this.snackBar.open($localize`Unmounted`, undefined, {
           duration: 3000,
@@ -166,7 +178,10 @@ export class MountComponent implements OnInit {
     this.snackBar.open('Not implemented yet', $localize`Dismiss`);
   }
 
-  deleteClicked(id: string) {
+  async deleteClicked(id: string) {
+    if (this.hasCron) {
+      await this.mountService.disableAutoMount(id);
+    }
     this.mountService.deleteSetting(id);
     this.snackBar.open($localize`Deleted`, undefined, {
       duration: 3000,

@@ -12,6 +12,9 @@ import {
   AppStorageService,
   ObservableAwaitableStorageItem,
 } from 'src/app/cores/storage';
+import { CronService } from '../cron/cron.service';
+import { environment } from 'src/environments/environment';
+import { trimEnding } from 'src/app/shared/utils';
 
 export interface Mount {
   Fs: string;
@@ -22,6 +25,7 @@ export interface Mount {
 export interface MountSetting extends Mount {
   id: string;
   enabled: boolean;
+  autoMountTaskId: string | null;
   mountType?: 'mount' | 'cmount' | 'mount2';
   mountOpt: { [key: string]: string | boolean | number };
   vfsOpt: { [key: string]: string | boolean | number };
@@ -35,10 +39,13 @@ export class MountService {
   private mountSettingsStorage?: ObservableAwaitableStorageItem<MountSetting[]>;
   private mountSettingsSubject = new BehaviorSubject<MountSetting[]>([]);
 
+  hasCron = environment.electron;
+
   constructor(
     private appStorageService: AppStorageService,
     private rc: RemoteControlService,
     connectionService: ConnectionService,
+    private cronService: CronService,
   ) {
     this.fetchMount();
     connectionService
@@ -84,14 +91,25 @@ export class MountService {
       throw new Error('Mount settings storage not initialized');
     }
     const mountSettings = await this.mountSettingsStorage.get();
+    if (!this.hasCron) {
+      // if no cron, treat as nothing is mounted
+      for (const setting of mountSettings) {
+        setting.enabled = false;
+      }
+    }
     for (const mount of mounts) {
-      const index = mountSettings.findIndex(
-        (m) => m.MountPoint === mount.MountPoint && m.Fs === mount.Fs,
-      );
+      // incoming mount point is always ended with ':'
+      const fsWithoutColon = trimEnding(mount.Fs, ':');
+      const index = mountSettings.findIndex((m) => {
+        return m.MountPoint === mount.MountPoint && m.Fs === fsWithoutColon;
+      });
       if (index === -1) {
         mountSettings.push({
-          ...mount,
+          Fs: fsWithoutColon,
+          MountPoint: mount.MountPoint,
+          MountedOn: mount.MountedOn,
           enabled: true,
+          autoMountTaskId: null,
           id: uuid(),
           mountOpt: {},
           vfsOpt: {},
@@ -104,7 +122,9 @@ export class MountService {
     await this.mountSettingsStorage.set(mountSettings);
   }
 
-  async createSetting(mountSetting: Omit<MountSetting, 'id' | 'enabled'>) {
+  async createSetting(
+    mountSetting: Omit<MountSetting, 'id' | 'enabled' | 'autoMountTaskId'>,
+  ) {
     if (!this.mountSettingsStorage) {
       throw new Error('Mount settings storage not initialized');
     }
@@ -114,6 +134,7 @@ export class MountService {
       ...mountSetting,
       id,
       enabled: false,
+      autoMountTaskId: null,
     });
     await this.mountSettingsStorage.set(mountSettings);
     return id;
@@ -127,6 +148,9 @@ export class MountService {
     const index = mountSettings.findIndex((m) => m.id === id);
     if (index === -1) {
       throw new Error('Mount setting ID not found when deleting');
+    }
+    if (mountSettings[index].enabled) {
+      await this.unmount(id);
     }
     mountSettings.splice(index, 1);
     await this.mountSettingsStorage.set(mountSettings);
@@ -189,5 +213,46 @@ export class MountService {
       await this.mountSettingsStorage.set(mountSettings);
     }
     return result;
+  }
+
+  async enableAutoMount(id: string) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
+    const setting = mountSettings.find((m) => m.id === id);
+    if (setting === undefined) {
+      throw new Error('Mount setting ID not found');
+    }
+    if (setting.autoMountTaskId) {
+      throw new Error('Mount setting already has auto mount enabled');
+    }
+    const expression = '@startup';
+    const task = await this.cronService.toTask(expression, 'mount/mount', {
+      fs: setting.Fs + ':',
+      mountPoint: setting.MountPoint,
+      mountOpt: setting.mountOpt,
+      vfsOpt: setting.vfsOpt,
+    });
+    setting.autoMountTaskId = task.id;
+    this.mountSettingsStorage.set(mountSettings);
+    this.cronService.getSchedular()?.addTask(task);
+  }
+
+  async disableAutoMount(id: string) {
+    if (!this.mountSettingsStorage) {
+      throw new Error('Mount settings storage not initialized');
+    }
+    const mountSettings = await this.mountSettingsStorage.get();
+    const setting = mountSettings.find((m) => m.id === id);
+    if (setting === undefined) {
+      throw new Error('Mount setting ID not found');
+    }
+    if (!setting.autoMountTaskId) {
+      throw new Error('Mount setting does not have auto mount enabled');
+    }
+    this.cronService.getSchedular()?.removeTask(setting.autoMountTaskId);
+    setting.autoMountTaskId = null;
+    this.mountSettingsStorage.set(mountSettings);
   }
 }

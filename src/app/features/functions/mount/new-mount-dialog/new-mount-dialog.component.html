@@ -8,6 +8,9 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <mat-checkbox *ngIf="hasCron" formControlName="autoMount" i18n>
+    Auto Mount on Startup
+  </mat-checkbox>
   <mat-checkbox
     *ngIf="data.osType === 'windows'"
     formControlName="AutoMountPoint"

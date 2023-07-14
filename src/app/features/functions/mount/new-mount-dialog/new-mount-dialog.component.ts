@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-mount-dialog',
@@ -14,6 +15,7 @@ export class NewMountDialogComponent {
     AutoMountPoint: [true], // Only for Windows
     MountPoint: ['', Validators.required],
     enabled: [true],
+    autoMount: [false], // Scheduled task
     readonly: [false],
     windowsNetworkMode: [true],
     filePerms: [
@@ -32,6 +34,7 @@ export class NewMountDialogComponent {
     ],
   });
   showAdvancedOptions = false;
+  hasCron = environment.electron;
 
   constructor(
     private fb: FormBuilder,

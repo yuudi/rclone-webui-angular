@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { FunctionsComponent } from './functions.component';
+import { isElectronGuard } from './is-electron.guard';
 
 const routes: Routes = [
   { path: '', component: FunctionsComponent, pathMatch: 'full' },
@@ -24,6 +25,11 @@ const routes: Routes = [
     path: 'job',
     loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
   },
+  // {
+  //   path: 'cron',
+  //   loadChildren: () => import('./cron/cron.module').then((m) => m.CronModule),
+  //   canActivate: [isElectronGuard],
+  // },
 ];
 
 @NgModule({
