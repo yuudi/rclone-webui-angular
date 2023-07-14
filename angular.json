@@ -19,6 +19,10 @@
           "baseHref": "en-US/"
         },
         "locales": {
+          "tr-TR": {
+            "translation": "src/locale/messages.tr-TR.xlf",
+            "baseHref": "tr-TR/"
+          },
           "zh-CN": {
             "translation": "src/locale/messages.zh-CN.xlf",
             "baseHref": "zh-CN/"

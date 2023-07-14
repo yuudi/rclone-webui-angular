@@ -19,6 +19,10 @@ export class AppComponent {
       code: 'en-US',
     },
     {
+      display: 'Türkçe',
+      code: 'tr-TR',
+    },
+    {
       display: '简体中文',
       code: 'zh-CN',
     },
