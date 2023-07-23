@@ -600,6 +600,70 @@
         <source> Auto Mount on Startup </source>
         <target state="translated"> 启动时自动挂载 </target>
       </trans-unit>
+      <trans-unit id="607811176731198522" datatype="html">
+        <source> Scheduled Jobs </source>
+        <target state="new"> Scheduled Jobs </target>
+      </trans-unit>
+      <trans-unit id="1558461139634843126" datatype="html">
+        <source>Scheduled Jobs</source>
+        <target state="new">Scheduled Jobs</target>
+      </trans-unit>
+      <trans-unit id="9153452608611372640" datatype="html">
+        <source> Advanced Cron Expression </source>
+        <target state="new"> Advanced Cron Expression </target>
+      </trans-unit>
+      <trans-unit id="8797571140213982792" datatype="html">
+        <source>CRON Expression</source>
+        <target state="new">CRON Expression</target>
+      </trans-unit>
+      <trans-unit id="1950868348901927527" datatype="html">
+        <source> Please enter a valid CRON expression </source>
+        <target state="new"> Please enter a valid CRON expression </target>
+      </trans-unit>
+      <trans-unit id="1283895920974679461" datatype="html">
+        <source>Operation</source>
+        <target state="new">Operation</target>
+      </trans-unit>
+      <trans-unit id="8233354833414258314" datatype="html">
+        <source> Sync (Delete items that is not present at source) </source>
+        <target state="new"> Sync (Delete items that is not present at source) </target>
+      </trans-unit>
+      <trans-unit id="1859677652107567652" datatype="html">
+        <source> Copy (Keep items that is not present at source) </source>
+        <target state="new"> Copy (Keep items that is not present at source) </target>
+      </trans-unit>
+      <trans-unit id="617331019136138957" datatype="html">
+        <source> Bi-direction Sync </source>
+        <target state="new"> Bi-direction Sync </target>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="new">from</target>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <target state="new">to</target>
+      </trans-unit>
+      <trans-unit id="8293670171001042991" datatype="html">
+        <source>every</source>
+        <target state="new">every</target>
+      </trans-unit>
+      <trans-unit id="5689442636734876664" datatype="html">
+        <source>hour</source>
+        <target state="new">hour</target>
+      </trans-unit>
+      <trans-unit id="6320319413541466015" datatype="html">
+        <source>day</source>
+        <target state="new">day</target>
+      </trans-unit>
+      <trans-unit id="5338673541028692262" datatype="html">
+        <source>at</source>
+        <target state="new">at</target>
+      </trans-unit>
+      <trans-unit id="7693034132286462542" datatype="html">
+        <source> New Cron Job </source>
+        <target state="new"> New Cron Job </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

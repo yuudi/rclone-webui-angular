@@ -453,6 +453,54 @@
       <trans-unit id="9147492985231433943" datatype="html">
         <source> Auto Mount on Startup </source>
       </trans-unit>
+      <trans-unit id="1283895920974679461" datatype="html">
+        <source>Operation</source>
+      </trans-unit>
+      <trans-unit id="1558461139634843126" datatype="html">
+        <source>Scheduled Jobs</source>
+      </trans-unit>
+      <trans-unit id="1859677652107567652" datatype="html">
+        <source> Copy (Keep items that is not present at source) </source>
+      </trans-unit>
+      <trans-unit id="1950868348901927527" datatype="html">
+        <source> Please enter a valid CRON expression </source>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+      </trans-unit>
+      <trans-unit id="5338673541028692262" datatype="html">
+        <source>at</source>
+      </trans-unit>
+      <trans-unit id="5689442636734876664" datatype="html">
+        <source>hour</source>
+      </trans-unit>
+      <trans-unit id="607811176731198522" datatype="html">
+        <source> Scheduled Jobs </source>
+      </trans-unit>
+      <trans-unit id="617331019136138957" datatype="html">
+        <source> Bi-direction Sync </source>
+      </trans-unit>
+      <trans-unit id="6320319413541466015" datatype="html">
+        <source>day</source>
+      </trans-unit>
+      <trans-unit id="7693034132286462542" datatype="html">
+        <source> New Cron Job </source>
+      </trans-unit>
+      <trans-unit id="8233354833414258314" datatype="html">
+        <source> Sync (Delete items that is not present at source) </source>
+      </trans-unit>
+      <trans-unit id="8293670171001042991" datatype="html">
+        <source>every</source>
+      </trans-unit>
+      <trans-unit id="8797571140213982792" datatype="html">
+        <source>CRON Expression</source>
+      </trans-unit>
+      <trans-unit id="9153452608611372640" datatype="html">
+        <source> Advanced Cron Expression </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

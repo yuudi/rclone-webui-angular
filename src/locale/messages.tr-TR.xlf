@@ -248,8 +248,8 @@
         <target state="translated">Kaydet</target>
       </trans-unit>
       <trans-unit id="7960163200088679566" datatype="html">
-        <source>You will be redirected to the provider's website to authorize, click save now</source>
-        <target state="translated">Yetkilendirmek için sağlayıcının web sitesine yönlendirileceksiniz, şimdi kaydet'i tıklayın</target>
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
+        <target state="translated">Yetkilendirmek için sağlayıcının web sitesine yönlendirileceksiniz, şimdi kaydet&apos;i tıklayın</target>
       </trans-unit>
       <trans-unit id="2466435579379681938" datatype="html">
         <source>Authorizing...</source>
@@ -257,7 +257,7 @@
       </trans-unit>
       <trans-unit id="6649706328938022022" datatype="html">
         <source>You are all set, click save now</source>
-        <target state="translated">Her şey hazır, şimdi kaydet'i tıklayın</target>
+        <target state="translated">Her şey hazır, şimdi kaydet&apos;i tıklayın</target>
       </trans-unit>
       <trans-unit id="3620188369327429839" datatype="html">
         <source> Save </source>
@@ -380,8 +380,8 @@
         <target state="translated">Pencereyi böl</target>
       </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
-        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
-        <target state="translated">bir arka uç açmak için <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; >"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> öğesini tıklayın</target>
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated">bir arka uç açmak için <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> öğesini tıklayın</target>
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
@@ -413,7 +413,7 @@
       </trans-unit>
       <trans-unit id="560443334489296785" datatype="html">
         <source>Rclone does not have access to this path, please check the permission of this path</source>
-        <target state="translated">Rclone'un bu yola erişimi yok, lütfen bu yolun iznini kontrol edin.</target>
+        <target state="translated">Rclone&apos;un bu yola erişimi yok, lütfen bu yolun iznini kontrol edin.</target>
       </trans-unit>
       <trans-unit id="989049066299437124" datatype="html">
         <source>Mount created and mounted</source>
@@ -457,7 +457,7 @@
       </trans-unit>
       <trans-unit id="1174398173025044116" datatype="html">
         <source> Mount as Windows Network Drive </source>
-        <target state="translated">Windows'u Ağ Sürücüsü olarak bağla</target>
+        <target state="translated">Windows&apos;u Ağ Sürücüsü olarak bağla</target>
       </trans-unit>
       <trans-unit id="991790413700941336" datatype="html">
         <source>Cache Mode</source>
@@ -545,8 +545,8 @@
         <target state="translated">Sil</target>
       </trans-unit>
       <trans-unit id="5479686051458408124" datatype="html">
-        <source><x id="PH" equiv-text="actionName"/> "<x id="PH_1" equiv-text="name"/>" to "<x id="PH_2" equiv-text="destination"/>:"</source>
-        <target state="translated"><x id="PH" equiv-text="actionName"/> "<x id="PH_1" equiv-text="name"/>" - "<x id="PH_2" equiv-text="destination"/>:"</target>
+        <source><x id="PH" equiv-text="actionName"/> &quot;<x id="PH_1" equiv-text="name"/>&quot; to &quot;<x id="PH_2" equiv-text="destination"/>:&quot;</source>
+        <target state="translated"><x id="PH" equiv-text="actionName"/> &quot;<x id="PH_1" equiv-text="name"/>&quot; - &quot;<x id="PH_2" equiv-text="destination"/>:&quot;</target>
       </trans-unit>
       <trans-unit id="5937251202465808296" datatype="html">
         <source>More</source>
@@ -599,6 +599,70 @@
       <trans-unit id="9147492985231433943" datatype="html">
         <source> Auto Mount on Startup </source>
         <target state="translated">Başlangıçta Otomatik Bağla</target>
+      </trans-unit>
+      <trans-unit id="607811176731198522" datatype="html">
+        <source> Scheduled Jobs </source>
+        <target state="new"> Scheduled Jobs </target>
+      </trans-unit>
+      <trans-unit id="1558461139634843126" datatype="html">
+        <source>Scheduled Jobs</source>
+        <target state="new">Scheduled Jobs</target>
+      </trans-unit>
+      <trans-unit id="9153452608611372640" datatype="html">
+        <source> Advanced Cron Expression </source>
+        <target state="new"> Advanced Cron Expression </target>
+      </trans-unit>
+      <trans-unit id="8797571140213982792" datatype="html">
+        <source>CRON Expression</source>
+        <target state="new">CRON Expression</target>
+      </trans-unit>
+      <trans-unit id="1950868348901927527" datatype="html">
+        <source> Please enter a valid CRON expression </source>
+        <target state="new"> Please enter a valid CRON expression </target>
+      </trans-unit>
+      <trans-unit id="1283895920974679461" datatype="html">
+        <source>Operation</source>
+        <target state="new">Operation</target>
+      </trans-unit>
+      <trans-unit id="8233354833414258314" datatype="html">
+        <source> Sync (Delete items that is not present at source) </source>
+        <target state="new"> Sync (Delete items that is not present at source) </target>
+      </trans-unit>
+      <trans-unit id="1859677652107567652" datatype="html">
+        <source> Copy (Keep items that is not present at source) </source>
+        <target state="new"> Copy (Keep items that is not present at source) </target>
+      </trans-unit>
+      <trans-unit id="617331019136138957" datatype="html">
+        <source> Bi-direction Sync </source>
+        <target state="new"> Bi-direction Sync </target>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="new">from</target>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <target state="new">to</target>
+      </trans-unit>
+      <trans-unit id="8293670171001042991" datatype="html">
+        <source>every</source>
+        <target state="new">every</target>
+      </trans-unit>
+      <trans-unit id="5689442636734876664" datatype="html">
+        <source>hour</source>
+        <target state="new">hour</target>
+      </trans-unit>
+      <trans-unit id="6320319413541466015" datatype="html">
+        <source>day</source>
+        <target state="new">day</target>
+      </trans-unit>
+      <trans-unit id="5338673541028692262" datatype="html">
+        <source>at</source>
+        <target state="new">at</target>
+      </trans-unit>
+      <trans-unit id="7693034132286462542" datatype="html">
+        <source> New Cron Job </source>
+        <target state="new"> New Cron Job </target>
       </trans-unit>
     </body>
   </file>
