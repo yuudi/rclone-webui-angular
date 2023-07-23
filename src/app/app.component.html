@@ -74,6 +74,45 @@
   <span class="spacer"></span>
   <button
     mat-icon-button
+    [matMenuTriggerFor]="themeMenu"
+    i18n-matTooltip
+    matTooltip="Select Theme"
+  >
+    <mat-icon
+      [fontIcon]="
+        theme === 'light'
+          ? 'light_mode'
+          : theme === 'dark'
+          ? 'dark_mode'
+          : 'brightness_auto'
+      "
+    ></mat-icon>
+  </button>
+  <mat-menu #themeMenu xPosition="before">
+    <button mat-menu-item (click)="activateThemeSetting('light')">
+      <mat-icon
+        fontIcon="light_mode"
+        class="material-symbols-outlined"
+      ></mat-icon>
+      <span i18n>Light Theme</span>
+    </button>
+    <button mat-menu-item (click)="activateThemeSetting('dark')">
+      <mat-icon
+        fontIcon="dark_mode"
+        class="material-symbols-outlined"
+      ></mat-icon>
+      <span i18n>Dark Theme</span>
+    </button>
+    <button mat-menu-item (click)="activateThemeSetting('auto')">
+      <mat-icon
+        fontIcon="brightness_auto"
+        class="material-symbols-outlined"
+      ></mat-icon>
+      <span i18n>Follow System</span>
+    </button>
+  </mat-menu>
+  <button
+    mat-icon-button
     [matMenuTriggerFor]="languageMenu"
     i18n-matTooltip
     matTooltip="Select Language"
