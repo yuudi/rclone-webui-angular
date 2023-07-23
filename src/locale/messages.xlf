@@ -501,6 +501,18 @@
       <trans-unit id="9153452608611372640" datatype="html">
         <source> Advanced Cron Expression </source>
       </trans-unit>
+      <trans-unit id="1648472582356305138" datatype="html">
+        <source>Light Theme</source>
+      </trans-unit>
+      <trans-unit id="5311528402610524112" datatype="html">
+        <source>Select Theme</source>
+      </trans-unit>
+      <trans-unit id="5824507108095419704" datatype="html">
+        <source>Dark Theme</source>
+      </trans-unit>
+      <trans-unit id="6788447504106132986" datatype="html">
+        <source>Follow System</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

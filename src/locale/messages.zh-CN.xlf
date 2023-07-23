@@ -602,67 +602,83 @@
       </trans-unit>
       <trans-unit id="607811176731198522" datatype="html">
         <source> Scheduled Jobs </source>
-        <target state="new"> Scheduled Jobs </target>
+        <target state="translated"> 计划任务 </target>
       </trans-unit>
       <trans-unit id="1558461139634843126" datatype="html">
         <source>Scheduled Jobs</source>
-        <target state="new">Scheduled Jobs</target>
+        <target state="translated">计划任务</target>
       </trans-unit>
       <trans-unit id="9153452608611372640" datatype="html">
         <source> Advanced Cron Expression </source>
-        <target state="new"> Advanced Cron Expression </target>
+        <target state="translated"> 高级 Cron 表达式 </target>
       </trans-unit>
       <trans-unit id="8797571140213982792" datatype="html">
         <source>CRON Expression</source>
-        <target state="new">CRON Expression</target>
+        <target state="translated">CRON 表达式</target>
       </trans-unit>
       <trans-unit id="1950868348901927527" datatype="html">
         <source> Please enter a valid CRON expression </source>
-        <target state="new"> Please enter a valid CRON expression </target>
+        <target state="translated">请输入有效的 CRON 表达式</target>
       </trans-unit>
       <trans-unit id="1283895920974679461" datatype="html">
         <source>Operation</source>
-        <target state="new">Operation</target>
+        <target state="translated">操作</target>
       </trans-unit>
       <trans-unit id="8233354833414258314" datatype="html">
         <source> Sync (Delete items that is not present at source) </source>
-        <target state="new"> Sync (Delete items that is not present at source) </target>
+        <target state="translated"> 同步（删除源中不存在的项目） </target>
       </trans-unit>
       <trans-unit id="1859677652107567652" datatype="html">
         <source> Copy (Keep items that is not present at source) </source>
-        <target state="new"> Copy (Keep items that is not present at source) </target>
+        <target state="translated"> 复制（保留源中不存在的项目） </target>
       </trans-unit>
       <trans-unit id="617331019136138957" datatype="html">
         <source> Bi-direction Sync </source>
-        <target state="new"> Bi-direction Sync </target>
+        <target state="translated"> 双向同步 </target>
       </trans-unit>
       <trans-unit id="23518581647153834" datatype="html">
         <source>from</source>
-        <target state="new">from</target>
+        <target state="translated">从</target>
       </trans-unit>
       <trans-unit id="3207050836358092212" datatype="html">
         <source>to</source>
-        <target state="new">to</target>
+        <target state="translated">到</target>
       </trans-unit>
       <trans-unit id="8293670171001042991" datatype="html">
         <source>every</source>
-        <target state="new">every</target>
+        <target state="translated">每</target>
       </trans-unit>
       <trans-unit id="5689442636734876664" datatype="html">
         <source>hour</source>
-        <target state="new">hour</target>
+        <target state="translated">小时</target>
       </trans-unit>
       <trans-unit id="6320319413541466015" datatype="html">
         <source>day</source>
-        <target state="new">day</target>
+        <target state="translated">天</target>
       </trans-unit>
       <trans-unit id="5338673541028692262" datatype="html">
         <source>at</source>
-        <target state="new">at</target>
+        <target state="translated">于</target>
       </trans-unit>
       <trans-unit id="7693034132286462542" datatype="html">
         <source> New Cron Job </source>
-        <target state="new"> New Cron Job </target>
+        <target state="translated"> 新计划任务 </target>
+      </trans-unit>
+      <trans-unit id="5311528402610524112" datatype="html">
+        <source>Select Theme</source>
+        <target state="translated">选择主题</target>
+      </trans-unit>
+      <trans-unit id="1648472582356305138" datatype="html">
+        <source>Light Theme</source>
+        <target state="translated">浅色主题</target>
+      </trans-unit>
+      <trans-unit id="5824507108095419704" datatype="html">
+        <source>Dark Theme</source>
+        <target state="translated">深色主题</target>
+      </trans-unit>
+      <trans-unit id="6788447504106132986" datatype="html">
+        <source>Follow System</source>
+        <target state="translated">跟随系统</target>
       </trans-unit>
     </body>
   </file>
