@@ -15,7 +15,7 @@ If you want to manage local instance, please check [Electron build](./native.md)
 1.  Create a username and password, and start rclone
 
     ```bash
-    rclone rcd --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572
+    rclone rcd --rc-serve --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572
     ```
 
 1.  Use reverse proxy and enable HTTPS (important, PWA doesn't allow insecure connection)

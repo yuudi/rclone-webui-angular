@@ -29,7 +29,7 @@ curl https://rclone.org/install.sh | sudo bash
 创建一个用户名和密码，并启动 rclone
 
 ```bash
-rclone rcd --rc-user=用户名 --rc-pass=密码 --rc-addr=127.0.0.1:5572
+rclone rcd --rc-serve --rc-user=用户名 --rc-pass=密码 --rc-addr=127.0.0.1:5572
 ```
 
 使用反向代理并启用 HTTPS（重要，如不设置你的所有数据将暴露给任何人，而且 PWA 不允许使用不安全的连接）

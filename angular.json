@@ -131,6 +131,7 @@
             "format": "xlf",
             "outputPath": "src/locale",
             "targetFiles": [
+              "messages.tr-TR.xlf",
               "messages.zh-CN.xlf"
             ]
           }

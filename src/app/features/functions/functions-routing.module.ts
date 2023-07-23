@@ -25,11 +25,11 @@ const routes: Routes = [
     path: 'job',
     loadChildren: () => import('./job/job.module').then((m) => m.JobModule),
   },
-  // {
-  //   path: 'cron',
-  //   loadChildren: () => import('./cron/cron.module').then((m) => m.CronModule),
-  //   canActivate: [isElectronGuard],
-  // },
+  {
+    path: 'cron',
+    loadChildren: () => import('./cron/cron.module').then((m) => m.CronModule),
+    canActivate: [isElectronGuard],
+  },
 ];
 
 @NgModule({

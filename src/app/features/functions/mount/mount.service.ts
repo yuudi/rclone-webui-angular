@@ -249,7 +249,8 @@ export class MountService {
       throw new Error('Mount setting ID not found');
     }
     if (!setting.autoMountTaskId) {
-      throw new Error('Mount setting does not have auto mount enabled');
+      console.warn('Mount setting does not have auto mount enabled');
+      return;
     }
     this.cronService.getSchedular()?.removeTask(setting.autoMountTaskId);
     setting.autoMountTaskId = null;

@@ -1,0 +1,43 @@
+<form [formGroup]="cronForm">
+  <mat-slide-toggle formControlName="advancedCron" i18n>
+    Advanced Cron Expression
+  </mat-slide-toggle>
+
+  <app-easy-cron
+    *ngIf="cronForm.controls.advancedCron.value === false"
+    (valueChange)="cronForm.controls.expression.setValue($event)"
+  ></app-easy-cron>
+
+  <mat-form-field *ngIf="cronForm.controls.advancedCron.value === true">
+    <mat-label i18n>CRON Expression</mat-label>
+    <input matInput formControlName="expression" />
+    <mat-error *ngIf="cronForm.controls.expression.errors?.['pattern']" i18n>
+      Please enter a valid CRON expression
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label i18n>Operation</mat-label>
+    <mat-select formControlName="type">
+      <mat-option value="sync" i18n>
+        Sync (Delete items that is not present at source)
+      </mat-option>
+      <mat-option value="copy" i18n>
+        Copy (Keep items that is not present at source)
+      </mat-option>
+      <mat-option value="bisync" i18n> Bi-direction Sync </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label i18n>from</mat-label>
+    <input matInput formControlName="from" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label i18n>to</mat-label>
+    <input matInput formControlName="to" />
+  </mat-form-field>
+
+  <button matButton (click)="saveClicked()" i18n>Save</button>
+</form>

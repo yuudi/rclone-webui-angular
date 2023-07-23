@@ -8,7 +8,7 @@
   <button
     mat-raised-button
     color="warn"
-    [disabled]="(settings$ | async)?.length"
+    [disabled]="!(settings$ | async)?.length"
   >
     <mat-icon fontIcon="cloud_off"></mat-icon>
     <span i18n>Unmount All</span>

@@ -17,14 +17,14 @@
     <button mat-menu-item routerLink="/rclone/mount" i18n="noun">
       Mounting
     </button>
-    <!-- <button
+    <button
       *ngIf="showScheduledJobs"
       mat-menu-item
       routerLink="/rclone/cron"
       i18n
     >
       Scheduled Jobs
-    </button> -->
+    </button>
   </mat-menu>
   <span class="shortcuts">
     <a
@@ -59,7 +59,7 @@
         class="material-symbols-outlined"
       ></mat-icon>
     </a>
-    <!-- <a
+    <a
       *ngIf="showScheduledJobs"
       mat-icon-button
       routerLink="/rclone/cron"
@@ -67,7 +67,7 @@
       matTooltip="Scheduled Jobs"
     >
       <mat-icon fontIcon="pending_actions"></mat-icon>
-    </a> -->
+    </a>
   </span>
   <span class="spacer"></span>
   <h1 i18n>Rclone WebUI</h1>

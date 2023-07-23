@@ -46,7 +46,6 @@
     "@angular/compiler-cli": "^16.1.5",
     "@angular/localize": "^16.1.5",
     "@types/jasmine": "^4.3.5",
-    "@types/node-cron": "^3.0.8",
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",

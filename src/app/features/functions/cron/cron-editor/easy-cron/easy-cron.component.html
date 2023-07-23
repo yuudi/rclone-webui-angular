@@ -1,0 +1,27 @@
+<span i18n>every</span>
+<input
+  matInput
+  type="number"
+  [(ngModel)]="fieldEveryCount"
+  min="1"
+  max="30"
+  (ngModelChange)="onValueChange()"
+/>
+<mat-select [(ngModel)]="fieldEveryUnit" (ngModelChange)="onValueChange()">
+  <mat-option value="hour" i18n>hour</mat-option>
+  <mat-option value="day" i18n>day</mat-option>
+</mat-select>
+<span i18n>at</span>
+<input
+  matInput
+  type="number"
+  [(ngModel)]="fieldAtHour"
+  (ngModelChange)="onValueChange()"
+/>
+<span>:</span>
+<input
+  matInput
+  type="number"
+  [(ngModel)]="fieldAtMinute"
+  (ngModelChange)="onValueChange()"
+/>
