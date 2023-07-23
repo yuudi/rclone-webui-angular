@@ -664,6 +664,22 @@
         <source> New Cron Job </source>
         <target state="new"> New Cron Job </target>
       </trans-unit>
+      <trans-unit id="5311528402610524112" datatype="html">
+        <source>Select Theme</source>
+        <target state="new">Select Theme</target>
+      </trans-unit>
+      <trans-unit id="1648472582356305138" datatype="html">
+        <source>Light Theme</source>
+        <target state="new">Light Theme</target>
+      </trans-unit>
+      <trans-unit id="5824507108095419704" datatype="html">
+        <source>Dark Theme</source>
+        <target state="new">Dark Theme</target>
+      </trans-unit>
+      <trans-unit id="6788447504106132986" datatype="html">
+        <source>Follow System</source>
+        <target state="new">Follow System</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
