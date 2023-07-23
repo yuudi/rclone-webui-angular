@@ -47,9 +47,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const theme = localStorage.getItem('rwa') || 'auto';
-    this.activateThemeSetting(
-      theme as 'light' | 'dark' | 'auto',
-    );
+    this.activateThemeSetting(theme as 'light' | 'dark' | 'auto');
   }
 
   activateThemeSetting(theme: 'light' | 'dark' | 'auto') {
