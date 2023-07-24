@@ -162,7 +162,7 @@
       </trans-unit>
       <trans-unit id="1224770523323579455" datatype="html">
         <source>Transferred</source>
-        <target state="translated">aktarıldı</target>
+        <target state="translated">Aktarıldı</target>
       </trans-unit>
       <trans-unit id="3128293408739574" datatype="html">
         <source>Speed</source>
@@ -497,7 +497,7 @@
       </trans-unit>
       <trans-unit id="1518435952515160235" datatype="html">
         <source> Mounting </source>
-        <target state="translated">Disk bağlanıyor</target>
+        <target state="translated">Diski Bağla</target>
         <note priority="1" from="description">noun</note>
       </trans-unit>
       <trans-unit id="2812208926273686149" datatype="html">
@@ -530,11 +530,11 @@
       </trans-unit>
       <trans-unit id="3981693023798866214" datatype="html">
         <source>Item Added to Clipboard, now go to destination and paste</source>
-        <target state="translated">Öğe Panoya Eklendi, şimdi hedefe gidin ve yapıştırın</target>
+        <target state="translated">Öğe panoya eklendi, şimdi hedefe gidin ve yapıştırın</target>
       </trans-unit>
       <trans-unit id="7488670430901851630" datatype="html">
         <source>Remote address is not set</source>
-        <target state="translated">Uzak adres ayarlanmadı</target>
+        <target state="translated">Uzak Adres Ayarlanmadı</target>
       </trans-unit>
       <trans-unit id="4366763205960752449" datatype="html">
         <source>move</source>
@@ -594,7 +594,7 @@
       </trans-unit>
       <trans-unit id="8247504084319724481" datatype="html">
         <source>Mount Manager</source>
-        <target state="translated">Disk yöneticisi</target>
+        <target state="translated">Disk Yöneticisi</target>
       </trans-unit>
       <trans-unit id="9147492985231433943" datatype="html">
         <source> Auto Mount on Startup </source>
@@ -602,83 +602,83 @@
       </trans-unit>
       <trans-unit id="607811176731198522" datatype="html">
         <source> Scheduled Jobs </source>
-        <target state="new"> Scheduled Jobs </target>
+        <target state="new"> Planlanmış Görevler </target>
       </trans-unit>
       <trans-unit id="1558461139634843126" datatype="html">
         <source>Scheduled Jobs</source>
-        <target state="new">Scheduled Jobs</target>
+        <target state="new">Planlanmış Görevler</target>
       </trans-unit>
       <trans-unit id="9153452608611372640" datatype="html">
         <source> Advanced Cron Expression </source>
-        <target state="new"> Advanced Cron Expression </target>
+        <target state="new"> Gelişmiş GÖREV Eklentileri </target>
       </trans-unit>
       <trans-unit id="8797571140213982792" datatype="html">
         <source>CRON Expression</source>
-        <target state="new">CRON Expression</target>
+          <target state="new">GÖREV İfadeleri</target>
       </trans-unit>
       <trans-unit id="1950868348901927527" datatype="html">
         <source> Please enter a valid CRON expression </source>
-        <target state="new"> Please enter a valid CRON expression </target>
+        <target state="new"> Lütfen geçerli bir GÖREV ifadesi girin </target>
       </trans-unit>
       <trans-unit id="1283895920974679461" datatype="html">
         <source>Operation</source>
-        <target state="new">Operation</target>
+        <target state="new">Operasyon</target>
       </trans-unit>
       <trans-unit id="8233354833414258314" datatype="html">
         <source> Sync (Delete items that is not present at source) </source>
-        <target state="new"> Sync (Delete items that is not present at source) </target>
+        <target state="new"> Senkronizasyon (Kaynakta bulunmayan öğeleri silin) </target>
       </trans-unit>
       <trans-unit id="1859677652107567652" datatype="html">
         <source> Copy (Keep items that is not present at source) </source>
-        <target state="new"> Copy (Keep items that is not present at source) </target>
+        <target state="new"> Kopyala (Kaynağında olmayan öğeleri sakla)  </target>
       </trans-unit>
       <trans-unit id="617331019136138957" datatype="html">
         <source> Bi-direction Sync </source>
-        <target state="new"> Bi-direction Sync </target>
+        <target state="new"> Çift Yönlü Senkronizasyon </target>
       </trans-unit>
       <trans-unit id="23518581647153834" datatype="html">
         <source>from</source>
-        <target state="new">from</target>
+        <target state="new">itibaren</target>
       </trans-unit>
       <trans-unit id="3207050836358092212" datatype="html">
         <source>to</source>
-        <target state="new">to</target>
+        <target state="new">ile</target>
       </trans-unit>
       <trans-unit id="8293670171001042991" datatype="html">
         <source>every</source>
-        <target state="new">every</target>
+        <target state="new">Her</target>
       </trans-unit>
       <trans-unit id="5689442636734876664" datatype="html">
         <source>hour</source>
-        <target state="new">hour</target>
+        <target state="new">Saat</target>
       </trans-unit>
       <trans-unit id="6320319413541466015" datatype="html">
         <source>day</source>
-        <target state="new">day</target>
+        <target state="new">Gün</target>
       </trans-unit>
       <trans-unit id="5338673541028692262" datatype="html">
         <source>at</source>
-        <target state="new">at</target>
+        <target state="new">de</target>
       </trans-unit>
       <trans-unit id="7693034132286462542" datatype="html">
         <source> New Cron Job </source>
-        <target state="new"> New Cron Job </target>
+        <target state="new"> Yeni Görev Başlat </target>
       </trans-unit>
       <trans-unit id="5311528402610524112" datatype="html">
         <source>Select Theme</source>
-        <target state="new">Select Theme</target>
+        <target state="new">Tema Seç</target>
       </trans-unit>
       <trans-unit id="1648472582356305138" datatype="html">
         <source>Light Theme</source>
-        <target state="new">Light Theme</target>
+        <target state="new">Beyaz</target>
       </trans-unit>
       <trans-unit id="5824507108095419704" datatype="html">
         <source>Dark Theme</source>
-        <target state="new">Dark Theme</target>
+        <target state="new">Siyah</target>
       </trans-unit>
       <trans-unit id="6788447504106132986" datatype="html">
         <source>Follow System</source>
-        <target state="new">Follow System</target>
+        <target state="new">Varsayılan</target>
       </trans-unit>
     </body>
   </file>
