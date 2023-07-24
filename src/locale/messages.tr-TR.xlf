@@ -614,7 +614,7 @@
       </trans-unit>
       <trans-unit id="8797571140213982792" datatype="html">
         <source>CRON Expression</source>
-          <target state="new">GÖREV İfadeleri</target>
+        <target state="new">GÖREV İfadeleri</target>
       </trans-unit>
       <trans-unit id="1950868348901927527" datatype="html">
         <source> Please enter a valid CRON expression </source>
@@ -630,7 +630,7 @@
       </trans-unit>
       <trans-unit id="1859677652107567652" datatype="html">
         <source> Copy (Keep items that is not present at source) </source>
-        <target state="new"> Kopyala (Kaynağında olmayan öğeleri sakla)  </target>
+        <target state="new"> Kopyala (Kaynağında olmayan öğeleri sakla) </target>
       </trans-unit>
       <trans-unit id="617331019136138957" datatype="html">
         <source> Bi-direction Sync </source>
