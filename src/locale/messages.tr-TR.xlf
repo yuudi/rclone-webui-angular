@@ -680,6 +680,18 @@
         <source>Follow System</source>
         <target state="new">Varsayılan</target>
       </trans-unit>
+      <trans-unit id="7037889682600256786" datatype="html">
+        <source>Upload File</source>
+        <target state="new">Upload File</target>
+      </trans-unit>
+      <trans-unit id="8219369467592425398" datatype="html">
+        <source>File size too large (max 4MB)</source>
+        <target state="new">File size too large (max 4MB)</target>
+      </trans-unit>
+      <trans-unit id="6972700858752369337" datatype="html">
+        <source>File Uploaded Successfully</source>
+        <target state="new">File Uploaded Successfully</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

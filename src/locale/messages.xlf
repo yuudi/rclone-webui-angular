@@ -513,6 +513,15 @@
       <trans-unit id="6788447504106132986" datatype="html">
         <source>Follow System</source>
       </trans-unit>
+      <trans-unit id="6972700858752369337" datatype="html">
+        <source>File Uploaded Successfully</source>
+      </trans-unit>
+      <trans-unit id="7037889682600256786" datatype="html">
+        <source>Upload File</source>
+      </trans-unit>
+      <trans-unit id="8219369467592425398" datatype="html">
+        <source>File size too large (max 4MB)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
