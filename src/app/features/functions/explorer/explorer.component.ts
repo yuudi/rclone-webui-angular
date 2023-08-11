@@ -186,7 +186,7 @@ export class ExplorerComponent implements OnInit {
 
   async createFolderClicked(view: ExplorerView) {
     const children = view.actions.getChildren?.();
-    if (!children) {
+    if (children === undefined) {
       console.error($localize`view is not ready`);
       return;
     }
@@ -211,11 +211,52 @@ export class ExplorerComponent implements OnInit {
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`Dismiss`);
+      return;
     }
     this.snackBar.open(
       $localize`Folder Created Successfully`,
       $localize`Dismiss`,
     );
-    view.actions.addFolder?.(name);
+    view.actions.addChild?.(name, true);
+  }
+
+  uploadFileClicked(view: ExplorerView) {
+    const backend = view.backend;
+    const path = view.actions.getPath?.();
+    if (path === undefined) {
+      console.error($localize`view is not ready`);
+      return;
+    }
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = false;
+    input.click();
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) {
+        return;
+      }
+      if (file.size > 4 * 1024 * 1024) {
+        this.snackBar.open(
+          $localize`File size too large (max 4MB)`,
+          $localize`Dismiss`,
+        );
+        return;
+      }
+      const result = await this.explorerService.uploadSmallFile(
+        backend,
+        path,
+        file,
+      );
+      if (!result.ok) {
+        this.snackBar.open(result.error, $localize`Dismiss`);
+        return;
+      }
+      this.snackBar.open(
+        $localize`File Uploaded Successfully`,
+        $localize`Dismiss`,
+      );
+      view.actions.addChild?.(file.name, false);
+    };
   }
 }

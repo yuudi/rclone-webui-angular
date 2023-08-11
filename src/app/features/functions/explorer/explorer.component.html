@@ -74,6 +74,17 @@
               class="material-icons-outlined"
             ></mat-icon>
           </button>
+          <button
+            mat-icon-button
+            (click)="uploadFileClicked(group.tabs[group.currentTab])"
+            i18n-matTooltip
+            matTooltip="Upload File"
+          >
+            <mat-icon
+              fontIcon="upload_file"
+              class="material-icons-outlined"
+            ></mat-icon>
+          </button>
           <div class="spacer"></div>
           <!-- 
             <button

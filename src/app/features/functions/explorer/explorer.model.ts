@@ -6,8 +6,9 @@ export interface ExplorerView {
   info: Promise<FsInfo>;
   actions: {
     refresh?: () => void;
+    getPath?: () => string;
     getChildren?: () => DirectoryItem[] | undefined;
-    addFolder?: (name: string) => void;
+    addChild?: (name: string, isFolder: boolean) => void;
   };
 }
 

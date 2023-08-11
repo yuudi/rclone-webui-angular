@@ -49,6 +49,22 @@ export class ExplorerService {
     return Ok();
   }
 
+  uploadSmallFile(
+    backend: string,
+    path: string,
+    file: File,
+  ): Promise<Result<EmptyObj, string>> {
+    const fs = encodeURIComponent(ExplorerService.toFs(backend));
+    const remote = encodeURIComponent(path);
+    const form = new FormData();
+    form.append('file', file);
+    // backend behavior does not match documentations
+    return this.rc.call<EmptyObj>(
+      `operations/uploadfile?fs=${fs}&remote=${remote}`,
+      form,
+    );
+  }
+
   async deleteFile(
     backend: string,
     path: string,

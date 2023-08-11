@@ -64,12 +64,13 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.actions.refresh = () => void this.fetchChildren();
+    this.actions.getPath = () => this.path;
     this.actions.getChildren = () => this.children;
-    this.actions.addFolder = (name) => {
+    this.actions.addChild = (name, isFolder) => {
       this.children?.push({
         Name: name,
         Path: this.path + '/' + name,
-        IsDir: true,
+        IsDir: isFolder,
         Size: -1,
         MimeType: 'inode/directory',
         ModTime: new Date(),

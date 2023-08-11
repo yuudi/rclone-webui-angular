@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
 
   activateThemeSetting(theme: Theme) {
     localStorage.setItem('rwa-theme', theme);
+    this.theme = theme;
     if (theme === 'light') {
       this.activeLightTheme();
     } else if (theme === 'dark') {

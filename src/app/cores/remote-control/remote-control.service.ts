@@ -26,9 +26,11 @@ export class RemoteControlService {
    */
   call<R>(
     operation: string,
-    params?: {
-      [key: string]: string | boolean | number | Record<string, unknown>;
-    },
+    params?:
+      | {
+          [key: string]: string | boolean | number | Record<string, unknown>;
+        }
+      | FormData,
   ): Promise<Result<R, string>> {
     const remote = this.connectionService.getActiveConnection();
     const headers: { [key: string]: string } = {};
