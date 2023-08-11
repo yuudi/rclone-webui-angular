@@ -1,6 +1,6 @@
 {
   "name": "rclone-webui-angular",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
