@@ -8,16 +8,16 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-checkbox *ngIf="hasCron" formControlName="autoMount" i18n>
+  <mat-slide-toggle *ngIf="hasCron" formControlName="autoMount" i18n>
     Auto Mount on Startup
-  </mat-checkbox>
-  <mat-checkbox
+  </mat-slide-toggle>
+  <mat-slide-toggle
     *ngIf="data.osType === 'windows'"
     formControlName="AutoMountPoint"
     i18n
   >
     Automatic MountPoint
-  </mat-checkbox>
+  </mat-slide-toggle>
   <mat-form-field *ngIf="mountForm.value.AutoMountPoint === false">
     <mat-label i18n>MountPoint</mat-label>
     <input matInput formControlName="MountPoint" />
@@ -35,16 +35,16 @@
     </button>
   </div>
   <ng-container *ngIf="showAdvancedOptions">
-    <mat-checkbox formControlName="readonly" i18n>
+    <mat-slide-toggle formControlName="readonly" i18n>
       Mount as Readonly Drive
-    </mat-checkbox>
-    <mat-checkbox
+    </mat-slide-toggle>
+    <mat-slide-toggle
       *ngIf="data.osType === 'windows'"
       formControlName="windowsNetworkMode"
       i18n
     >
       Mount as Windows Network Drive
-    </mat-checkbox>
+    </mat-slide-toggle>
     <mat-form-field>
       <mat-label i18n>Cache Mode</mat-label>
       <mat-select formControlName="vfsCacheMode">
@@ -58,6 +58,10 @@
         <mat-option value="full" i18n> Full </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Cache Max Age</mat-label>
+      <input matInput formControlName="vfsCacheMaxAge" />
+    </mat-form-field>
     <mat-form-field *ngIf="data.osType !== 'windows'">
       <mat-label i18n>File Permissions</mat-label>
       <input matInput formControlName="filePerms" />
@@ -66,9 +70,35 @@
       <mat-label i18n>Directory Permissions</mat-label>
       <input matInput formControlName="dirPerms" />
     </mat-form-field>
-    <mat-checkbox formControlName="noModTime" i18n>
+    <mat-slide-toggle formControlName="noModTime" i18n>
       Skip modification time (can speed things up)
-    </mat-checkbox>
+    </mat-slide-toggle>
+    <mat-form-field>
+      <mat-label i18n>Custom Mount Option (Json)</mat-label>
+      <textarea matInput formControlName="customMountOpt"></textarea>
+      <button
+        mat-icon-button
+        i18n-matTooltip
+        matTooltip="Help"
+        matSuffix
+        (click)="getMountOptHelp()"
+      >
+        <mat-icon fontIcon="help"></mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n>Custom Vfs Option (Json)</mat-label>
+      <textarea matInput formControlName="customVfsOpt"></textarea>
+      <button
+        mat-icon-button
+        i18n-matTooltip
+        matTooltip="Help"
+        matSuffix
+        (click)="getVfsOptHelp()"
+      >
+        <mat-icon fontIcon="help"></mat-icon>
+      </button>
+    </mat-form-field>
   </ng-container>
 </form>
 <div mat-dialog-actions>

@@ -16,7 +16,7 @@ Run backend: `rclone rcd --rc-user="<your username>" --rc-pass="<your password>"
 
 Run frontend: `ng serve`
 
-Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
+Api calling will be proxied to backed [config](../src/proxy.conf.mjs)
 
 ## Translation
 

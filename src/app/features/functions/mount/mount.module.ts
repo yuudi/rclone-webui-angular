@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MountRoutingModule } from './mount-routing.module';
 import { MountComponent } from './mount.component';
@@ -26,6 +27,7 @@ import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.com
     CommonModule,
     ReactiveFormsModule,
     MountRoutingModule,
+    MatTooltipModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,

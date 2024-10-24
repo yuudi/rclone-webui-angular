@@ -10,13 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './simple-dialog.component.html',
   styleUrls: ['./simple-dialog.component.scss'],
 })
-export class SimpleDialogComponent {
+export class SimpleDialogComponent<T> {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
       title: string;
       message: string;
-      actions: string[];
+      actions: {
+        value: T;
+        label: string;
+      }[];
     },
   ) {}
 }

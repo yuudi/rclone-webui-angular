@@ -1,7 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+
+import { jsonStringValidator } from 'src/app/shared/json-string-validator.directive';
+import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -32,11 +35,14 @@ export class NewMountDialogComponent {
       '1h',
       [Validators.required, Validators.pattern(/^\d+[smhd]$/)],
     ],
+    customMountOpt: ['{\n}', jsonStringValidator()],
+    customVfsOpt: ['{\n}', jsonStringValidator()],
   });
   showAdvancedOptions = false;
   hasCron = environment.electron;
 
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -50,5 +56,24 @@ export class NewMountDialogComponent {
       this.mountForm.controls.AutoMountPoint.setValue(false);
       this.mountForm.controls.MountPoint.setValue('/mnt/rclone');
     }
+  }
+
+  getMountOptHelp() {
+    this.dialog.open(SimpleDialogComponent, {
+      data: {
+        title: $localize`Information`,
+        message: $localize`This is options for advanced user only!\nPlease input options in JSON format, keys are in PascalCase.\nAvailable options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go\nfind "type Options struct" part`,
+        actions: [{ label: $localize`Close`, value: 0 }],
+      },
+    });
+  }
+  getVfsOptHelp() {
+    this.dialog.open(SimpleDialogComponent, {
+      data: {
+        title: $localize`Information`,
+        message: $localize`This is options for advanced user only!\nPlease input options in JSON format, keys are in PascalCase.\nAvailable options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go\nfind "type Options struct" part`,
+        actions: [{ label: $localize`Close`, value: 0 }],
+      },
+    });
   }
 }

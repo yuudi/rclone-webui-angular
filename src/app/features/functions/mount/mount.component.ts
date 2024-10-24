@@ -50,6 +50,8 @@ export class MountComponent implements OnInit {
         noModTime?: boolean;
         vfsCacheMode?: string;
         vfsCacheMaxAge?: string;
+        customMountOpt?: string;
+        customVfsOpt?: string;
       }
     > = this.dialog.open(NewMountDialogComponent, {
       data: {
@@ -83,8 +85,8 @@ export class MountComponent implements OnInit {
         return;
       }
     }
-    const mountOpt: { [key: string]: string | boolean | number } = {};
-    const vfsOpt: { [key: string]: string | boolean | number } = {};
+    let mountOpt: { [key: string]: string | boolean | number } = {};
+    let vfsOpt: { [key: string]: string | boolean | number } = {};
     if (dialogResult.readonly !== undefined) {
       mountOpt['readonly'] = dialogResult.readonly;
     }
@@ -105,6 +107,12 @@ export class MountComponent implements OnInit {
     }
     if (dialogResult.vfsCacheMaxAge !== undefined) {
       vfsOpt['vfsCacheMaxAge'] = dialogResult.vfsCacheMaxAge;
+    }
+    if (dialogResult.customMountOpt !== undefined) {
+      mountOpt = { ...mountOpt, ...JSON.parse(dialogResult.customMountOpt) };
+    }
+    if (dialogResult.customVfsOpt !== undefined) {
+      vfsOpt = { ...vfsOpt, ...JSON.parse(dialogResult.customVfsOpt) };
     }
 
     const id = await this.mountService.createSetting({

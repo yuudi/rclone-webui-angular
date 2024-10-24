@@ -93,17 +93,24 @@ export class NewBackendComponent implements OnInit {
     }
 
     // warn user
+    const enum action {
+      back,
+      continue,
+    }
     this.dialog
       .open(SimpleDialogComponent, {
         data: {
           title: $localize`Warning`,
           message: $localize`This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.`,
-          actions: ['Go back', 'Continue Anyway'],
+          actions: [
+            { label: $localize`Go back`, value: action.back },
+            { label: $localize`Continue Anyway`, value: action.continue },
+          ],
         },
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result !== 'Continue Anyway') {
+        if (result !== action.continue) {
           this.providerSelected = undefined;
           this.stepperSelectedIndex = 0;
         }
