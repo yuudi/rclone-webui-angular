@@ -67,4 +67,4 @@ function Err<E>(error: E): Err<E> {
 
 type Result<T = unknown, E = unknown> = Ok<T> | Err<E>;
 
-export { Ok, Err, Result };
+export { Err, Ok, Result };

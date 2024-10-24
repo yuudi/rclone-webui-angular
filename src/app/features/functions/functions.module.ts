@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { FunctionsRoutingModule } from './functions-routing.module';
 import { FunctionsComponent } from './functions.component';

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CronService, Schedular, Task } from './cron.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { CronService, Schedular, Task } from './cron.service';
 
 @Component({
   selector: 'app-cron',

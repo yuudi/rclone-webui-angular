@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import packageJson from '../../../../package.json';
 import { environment } from '../../../environments/environment';
 
-import { DashboardService } from './dashboard.service';
 import { RcloneVersionInfo, TransferStatus } from './dashboard.model';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',

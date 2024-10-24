@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable, of } from 'rxjs';
 import { Backend, BackendUsage } from './backend.model';
 import { BackendService } from './backend.service';
-import { Observable, of } from 'rxjs';
 
 type Unmeasured = null;
 const Unmeasured = null;

@@ -11,8 +11,8 @@ import {
   ObservableAwaitableStorageItem,
 } from 'src/app/cores/storage';
 import { Err, Ok, Result } from 'src/app/shared/result';
-import { JobInfo } from './job.model';
 import { environment } from 'src/environments/environment';
+import { JobInfo } from './job.model';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type JobID<R = unknown> = number;

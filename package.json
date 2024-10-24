@@ -1,22 +1,22 @@
 {
   "name": "rclone-webui-angular",
   "version": "0.8.0",
+  "private": true,
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
     "build:dev": "ng build --configuration development",
     "build:embed": "ng build --configuration production,embed",
-    "build:standalone": "ng build --configuration production,standalone",
     "build:native": "ng build --configuration production,native",
-    "watch": "ng build --watch --configuration development,embed",
-    "test": "ng test",
-    "lint:prettier": "prettier ./src --write",
-    "lint:eslint": "ng lint --fix",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "build:standalone": "ng build --configuration production,standalone",
+    "check-updates": "npm-check-updates",
     "extract-i18n": "ng extract-i18n",
-    "check-updates": "npm-check-updates"
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "ng lint --fix",
+    "lint:prettier": "prettier ./src --write",
+    "ng": "ng",
+    "start": "ng serve",
+    "test": "ng test",
+    "watch": "ng build --watch --configuration development,embed"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
     "@angular/cdk": "^16.2.0",
@@ -56,6 +56,8 @@
     "ng-extract-i18n-merge": "^2.7.0",
     "npm-check-updates": "^16.10.18",
     "prettier": "^3.0.1",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-packagejson": "^2.5.3",
     "typescript": "~5.1.6"
   }
 }
