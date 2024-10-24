@@ -694,39 +694,39 @@
       </trans-unit>
       <trans-unit id="734934965373819800" datatype="html">
         <source>Go back</source>
-        <target state="new">Go back</target>
+        <target state="translated">返回</target>
       </trans-unit>
       <trans-unit id="8917490374035866138" datatype="html">
         <source>Continue Anyway</source>
-        <target state="new">Continue Anyway</target>
+        <target state="translated">仍然继续</target>
       </trans-unit>
       <trans-unit id="625410621869219990" datatype="html">
         <source>Cache Max Age</source>
-        <target state="new">Cache Max Age</target>
+        <target state="translated">缓存最大时间</target>
       </trans-unit>
       <trans-unit id="3560038511903081528" datatype="html">
         <source>Custom Mount Option (Json)</source>
-        <target state="new">Custom Mount Option (Json)</target>
+        <target state="translated">自定义挂载选项（Json格式）</target>
       </trans-unit>
       <trans-unit id="7911416166208830577" datatype="html">
         <source>Help</source>
-        <target state="new">Help</target>
+        <target state="translated">帮助</target>
       </trans-unit>
       <trans-unit id="2430852418842843890" datatype="html">
         <source>Custom Vfs Option (Json)</source>
-        <target state="new">Custom Vfs Option (Json)</target>
+        <target state="translated">自定义 Vfs 选项（Json格式）</target>
       </trans-unit>
       <trans-unit id="5037437391296624618" datatype="html">
         <source>Information</source>
-        <target state="new">Information</target>
+        <target state="translated">信息</target>
       </trans-unit>
       <trans-unit id="8211789557515826583" datatype="html">
         <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</source>
-        <target state="new">This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</target>
+        <target state="translated">此选项仅供高级用户使用！请以 JSON 格式输入选项，字段以驼峰命名法命名。可用选项：请参阅 https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go 并找到 &quot;type Options struct&quot;部分</target>
       </trans-unit>
       <trans-unit id="4655465506698701275" datatype="html">
         <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
-        <target state="new">This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</target>
+        <target state="translated">此选项仅供高级用户使用！请以 JSON 格式输入选项，字段以驼峰命名法命名。可用选项：请参阅 https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go 并找到 &quot;type Options struct&quot;部分</target>
       </trans-unit>
     </body>
   </file>
