@@ -549,6 +549,18 @@
       <trans-unit id="8917490374035866138" datatype="html">
         <source>Continue Anyway</source>
       </trans-unit>
+      <trans-unit id="1261272419600256892" datatype="html">
+        <source>WebUI</source>
+      </trans-unit>
+      <trans-unit id="4997332608178159092" datatype="html">
+        <source> (Git)</source>
+      </trans-unit>
+      <trans-unit id="6329815074444777622" datatype="html">
+        <source> (Beta) </source>
+      </trans-unit>
+      <trans-unit id="9180110319941008393" datatype="html">
+        <source>Environment</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

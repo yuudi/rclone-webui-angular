@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import packageJson from '../../../../package.json';
+import { environment } from '../../../environments/environment';
+
 import { DashboardService } from './dashboard.service';
 import { RcloneVersionInfo, TransferStatus } from './dashboard.model';
 
@@ -11,6 +14,8 @@ import { RcloneVersionInfo, TransferStatus } from './dashboard.model';
 })
 export class DashboardComponent implements OnInit {
   version?: RcloneVersionInfo;
+  webUIVersion = packageJson.version;
+  webUIEnv = environment.environment;
   stat$?: Observable<TransferStatus>;
   constructor(private dashboardService: DashboardService) {}
   async ngOnInit() {

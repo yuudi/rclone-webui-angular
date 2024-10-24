@@ -1,4 +1,5 @@
 export const environment = {
+  environment: 'embed',
   explorerCanDownload: true,
   connectSelf: true,
   useServiceWorker: false,

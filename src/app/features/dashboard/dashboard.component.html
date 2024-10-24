@@ -4,7 +4,11 @@
     <table *ngIf="version">
       <tr>
         <td i18n>Version</td>
-        <td>{{ version.version }}</td>
+        <td>
+          {{ version.version }}
+          <ng-container *ngIf="version.isBeta" i18n> (Beta) </ng-container>
+          <ng-container *ngIf="version.isGit" i18n> (Git)</ng-container>
+        </td>
       </tr>
       <tr>
         <td i18n>Platform</td>
@@ -13,6 +17,22 @@
       <tr>
         <td i18n>Go version</td>
         <td>{{ version.goVersion }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="dashboard__card">
+  <mat-card-title i18n>WebUI</mat-card-title>
+  <mat-card-content>
+    <table>
+      <tr>
+        <td i18n>Version</td>
+        <td>{{ webUIVersion }}</td>
+      </tr>
+      <tr>
+        <td i18n>Environment</td>
+        <td>{{ webUIEnv }}</td>
       </tr>
     </table>
   </mat-card-content>

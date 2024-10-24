@@ -1,4 +1,5 @@
 export const environment = {
+  environment: 'native',
   explorerCanDownload: false,
   connectSelf: true,
   useServiceWorker: false,

@@ -728,6 +728,22 @@
         <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
         <target state="translated">此选项仅供高级用户使用！请以 JSON 格式输入选项，字段以驼峰命名法命名。可用选项：请参阅 https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go 并找到 &quot;type Options struct&quot;部分</target>
       </trans-unit>
+      <trans-unit id="6329815074444777622" datatype="html">
+        <source> (Beta) </source>
+        <target state="translated"> (Beta) </target>
+      </trans-unit>
+      <trans-unit id="4997332608178159092" datatype="html">
+        <source> (Git)</source>
+        <target state="translated"> (Git)</target>
+      </trans-unit>
+      <trans-unit id="1261272419600256892" datatype="html">
+        <source>WebUI</source>
+        <target state="translated">网页UI</target>
+      </trans-unit>
+      <trans-unit id="9180110319941008393" datatype="html">
+        <source>Environment</source>
+        <target state="translated">环境</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
