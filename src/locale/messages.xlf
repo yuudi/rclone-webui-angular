@@ -522,6 +522,33 @@
       <trans-unit id="8219369467592425398" datatype="html">
         <source>File size too large (max 4MB)</source>
       </trans-unit>
+      <trans-unit id="2430852418842843890" datatype="html">
+        <source>Custom Vfs Option (Json)</source>
+      </trans-unit>
+      <trans-unit id="3560038511903081528" datatype="html">
+        <source>Custom Mount Option (Json)</source>
+      </trans-unit>
+      <trans-unit id="4655465506698701275" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+      </trans-unit>
+      <trans-unit id="625410621869219990" datatype="html">
+        <source>Cache Max Age</source>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+      </trans-unit>
+      <trans-unit id="7911416166208830577" datatype="html">
+        <source>Help</source>
+      </trans-unit>
+      <trans-unit id="8211789557515826583" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</source>
+      </trans-unit>
+      <trans-unit id="8917490374035866138" datatype="html">
+        <source>Continue Anyway</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

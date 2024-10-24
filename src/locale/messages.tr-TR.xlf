@@ -692,6 +692,42 @@
         <source>File Uploaded Successfully</source>
         <target state="new">File Uploaded Successfully</target>
       </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <target state="new">Go back</target>
+      </trans-unit>
+      <trans-unit id="8917490374035866138" datatype="html">
+        <source>Continue Anyway</source>
+        <target state="new">Continue Anyway</target>
+      </trans-unit>
+      <trans-unit id="625410621869219990" datatype="html">
+        <source>Cache Max Age</source>
+        <target state="new">Cache Max Age</target>
+      </trans-unit>
+      <trans-unit id="3560038511903081528" datatype="html">
+        <source>Custom Mount Option (Json)</source>
+        <target state="new">Custom Mount Option (Json)</target>
+      </trans-unit>
+      <trans-unit id="7911416166208830577" datatype="html">
+        <source>Help</source>
+        <target state="new">Help</target>
+      </trans-unit>
+      <trans-unit id="2430852418842843890" datatype="html">
+        <source>Custom Vfs Option (Json)</source>
+        <target state="new">Custom Vfs Option (Json)</target>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+        <target state="new">Information</target>
+      </trans-unit>
+      <trans-unit id="8211789557515826583" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</source>
+        <target state="new">This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</target>
+      </trans-unit>
+      <trans-unit id="4655465506698701275" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
+        <target state="new">This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
