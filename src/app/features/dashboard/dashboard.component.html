@@ -1,4 +1,48 @@
 <mat-card class="dashboard__card">
+  <mat-card-title i18n>Backends</mat-card-title>
+  <mat-card-content>
+    <ng-container [ngSwitch]="backends?.length">
+      <div *ngSwitchCase="undefined">...</div>
+      <div *ngSwitchCase="null">
+        <a
+          mat-stroked-button
+          color="primary"
+          routerLink="/rclone/drive/new"
+          i18n
+        >
+          Connect your first backend
+        </a>
+      </div>
+      <div *ngSwitchCase="1">
+        <a
+          mat-stroked-button
+          color="primary"
+          routerLink="/rclone/explore"
+          [queryParams]="{ drive: backends?.[0] }"
+          i18n
+        >
+          Browse {{ backends?.[0] }}
+        </a>
+      </div>
+      <div *ngSwitchDefault>
+        <a mat-stroked-button color="primary" routerLink="/rclone/drive" i18n>
+          Browse backends
+        </a>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="dashboard__card">
+  <mat-card-title i18n>Mountpoints</mat-card-title>
+  <mat-card-content>
+    <a mat-stroked-button color="primary" routerLink="/rclone/mount" i18n>
+      Manage Mountpoints
+    </a>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="dashboard__card">
   <mat-card-title i18n>Rclone</mat-card-title>
   <mat-card-content>
     <table *ngIf="version">

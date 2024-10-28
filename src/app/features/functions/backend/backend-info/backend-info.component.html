@@ -46,20 +46,20 @@
     </ng-container>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button (click)="browseClicked()">
+    <button mat-flat-button (click)="browse.emit()">
       <ng-container i18n>Browse</ng-container>
       <mat-icon fontIcon="folder_open"></mat-icon>
     </button>
-    <!--
-      <button mat-button [matMenuTriggerFor]="actions" i18n>
-        Actions
-        <mat-icon fontIcon="expand_more"></mat-icon>
+    <button mat-button [matMenuTriggerFor]="actions" i18n>
+      Actions
+      <mat-icon fontIcon="expand_more"></mat-icon>
+    </button>
+    <mat-menu #actions="matMenu">
+      <button i18n mat-menu-item (click)="duplicate.emit()">Make a copy</button>
+      <button i18n mat-menu-item (click)="rename.emit()">Rename</button>
+      <button i18n mat-menu-item color="danger" (click)="delete.emit()">
+        Delete
       </button>
-      <mat-menu #actions="matMenu">
-        <button i18n mat-menu-item>Mount</button>
-        <button i18n mat-menu-item>Serve</button>
-        <button i18n mat-menu-item color="danger">Delete</button>
-      </mat-menu>
-    -->
+    </mat-menu>
   </mat-card-actions>
 </mat-card>

@@ -744,6 +744,50 @@
         <source>Environment</source>
         <target state="new">Environment</target>
       </trans-unit>
+      <trans-unit id="3040348421210381432" datatype="html">
+        <source>Backends</source>
+        <target state="new">Backends</target>
+      </trans-unit>
+      <trans-unit id="6237521298112481926" datatype="html">
+        <source> Connect your first backend </source>
+        <target state="new"> Connect your first backend </target>
+      </trans-unit>
+      <trans-unit id="1936585210615083762" datatype="html">
+        <source> Browse <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </source>
+        <target state="new"> Browse <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </target>
+      </trans-unit>
+      <trans-unit id="6024376717925952512" datatype="html">
+        <source> Browse backends </source>
+        <target state="new"> Browse backends </target>
+      </trans-unit>
+      <trans-unit id="7113597974464283349" datatype="html">
+        <source>Mountpoints</source>
+        <target state="new">Mountpoints</target>
+      </trans-unit>
+      <trans-unit id="543732250169203115" datatype="html">
+        <source> Manage Mountpoints </source>
+        <target state="new"> Manage Mountpoints </target>
+      </trans-unit>
+      <trans-unit id="5285214346081691861" datatype="html">
+        <source> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <target state="new"> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="3332040951581277030" datatype="html">
+        <source>Make a copy</source>
+        <target state="new">Make a copy</target>
+      </trans-unit>
+      <trans-unit id="6169466287448966850" datatype="html">
+        <source>Choose a new name</source>
+        <target state="new">Choose a new name</target>
+      </trans-unit>
+      <trans-unit id="1398596596566435779" datatype="html">
+        <source>Backend Name</source>
+        <target state="new">Backend Name</target>
+      </trans-unit>
+      <trans-unit id="3280828454015635549" datatype="html">
+        <source> This name has been used </source>
+        <target state="new"> This name has been used </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

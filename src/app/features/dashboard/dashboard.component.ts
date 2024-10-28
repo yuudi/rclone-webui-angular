@@ -13,12 +13,16 @@ import { DashboardService } from './dashboard.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  backends?: string[] | null;
   version?: RcloneVersionInfo;
   webUIVersion = packageJson.version;
   webUIEnv = environment.environment;
   stat$?: Observable<TransferStatus>;
   constructor(private dashboardService: DashboardService) {}
   async ngOnInit() {
+    this.backends = (
+      await this.dashboardService.getBackends()
+    ).orThrow().remotes;
     this.version = (await this.dashboardService.getVersion()).orThrow();
     this.stat$ = this.dashboardService.getStat();
   }

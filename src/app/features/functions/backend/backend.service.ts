@@ -132,4 +132,20 @@ export class BackendService {
     this.backendInfoCacheStorage.set(cache);
     return result;
   }
+
+  createBackend(
+    name: string,
+    providerName: string,
+    options: { [key: string]: string },
+  ): Promise<Result<void, string>> {
+    return this.rc.call('config/create', {
+      name,
+      type: providerName,
+      parameters: options,
+    });
+  }
+
+  deleteBackend(name: string): Promise<Result<void, string>> {
+    return this.rc.call('config/delete', { name });
+  }
 }

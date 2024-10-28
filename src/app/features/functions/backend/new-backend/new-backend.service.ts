@@ -30,7 +30,7 @@ export class NewBackendService {
     name: string,
     providerName: string,
     options: { [key: string]: string },
-  ): Promise<Result<never, string>> {
+  ): Promise<Result<void, string>> {
     return this.rc.call('config/create', {
       name,
       type: providerName,

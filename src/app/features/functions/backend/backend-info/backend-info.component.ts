@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Backend, BackendUsage } from '../backend.model';
 
@@ -12,12 +11,8 @@ export class BackendInfoComponent {
   @Input() backendName!: string;
   @Input() backend!: Backend;
   @Input() usage?: BackendUsage | null;
-
-  constructor(private router: Router) {}
-
-  browseClicked() {
-    this.router.navigate(['rclone', 'explore'], {
-      queryParams: { drive: this.backendName },
-    });
-  }
+  @Output() browse = new EventEmitter();
+  @Output() rename = new EventEmitter();
+  @Output() duplicate = new EventEmitter();
+  @Output() delete = new EventEmitter();
 }

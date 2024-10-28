@@ -8,5 +8,9 @@
     [backendName]="backend.id"
     [backend]="backend.config"
     [usage]="backend.usage$ | async"
+    (browse)="backendBrowse(backend.id)"
+    (rename)="backendRename(backend)"
+    (duplicate)="backendDuplicate(backend)"
+    (delete)="backendDelete(backend.id)"
   ></app-backend-info>
 </div>

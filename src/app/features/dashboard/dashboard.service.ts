@@ -10,6 +10,10 @@ import { RcloneVersionInfo, TransferStatus } from './dashboard.model';
 export class DashboardService {
   constructor(private rc: RemoteControlService) {}
 
+  getBackends() {
+    return this.rc.call<{ remotes: string[] | null }>('config/listremotes');
+  }
+
   getVersion() {
     return this.rc.call<RcloneVersionInfo>('core/version');
   }

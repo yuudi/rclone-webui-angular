@@ -1,0 +1,21 @@
+<h3 mat-dialog-title i18n>Choose a new name</h3>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label i18n>Backend Name</mat-label>
+    <input matInput [(ngModel)]="newName" />
+    <mat-hint *ngIf="data.occupiedList.includes(newName)" i18n>
+      This name has been used
+    </mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close] i18n>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="newName"
+    [disabled]="newName === '' || data.occupiedList.includes(newName)"
+    i18n
+  >
+    Ok
+  </button>
+</div>
