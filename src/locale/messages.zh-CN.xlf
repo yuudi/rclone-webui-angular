@@ -574,7 +574,7 @@
       </trans-unit>
       <trans-unit id="6448818549106664206" datatype="html">
         <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
-        <target state="new"> 这 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </target>
+        <target state="translated"> 这 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </target>
       </trans-unit>
       <trans-unit id="4323657569264880384" datatype="html">
         <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>

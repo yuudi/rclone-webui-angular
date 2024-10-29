@@ -578,7 +578,7 @@
       </trans-unit>
       <trans-unit id="6448818549106664206" datatype="html">
         <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
-        <target state="new">bu {data.length, çoğul, bir {{{data.length}} öğe} diğer {{{data.length}} öğe}}</target>
+        <target state="translated">bu {data.length, çoğul, bir {{{data.length}} öğe} diğer {{{data.length}} öğe}}</target>
       </trans-unit>
       <trans-unit id="9066298133798990764" datatype="html">
         <source>Would you like to delete</source>
