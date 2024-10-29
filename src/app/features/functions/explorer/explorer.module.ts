@@ -23,6 +23,7 @@ import { ExplorerRoutingModule } from './explorer-routing.module';
 import { CopyDialogComponent } from './explorer-viewer/copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component';
 import { ExplorerViewerComponent } from './explorer-viewer/explorer-viewer.component';
+import { FileIconPipe } from './explorer-viewer/file-icon.pipe';
 import { PathSplitterComponent } from './explorer-viewer/path-splitter/path-splitter.component';
 import { RenameDialogComponent } from './explorer-viewer/rename-dialog/rename-dialog.component';
 import { ExplorerComponent } from './explorer.component';
@@ -35,6 +36,7 @@ import { ExplorerComponent } from './explorer.component';
     PathSplitterComponent,
     RenameDialogComponent,
     CopyDialogComponent,
+    FileIconPipe,
   ],
   imports: [
     CommonModule,

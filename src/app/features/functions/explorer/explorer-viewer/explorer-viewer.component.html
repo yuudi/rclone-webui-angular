@@ -19,10 +19,7 @@
       }"
       #listOption
     >
-      <mat-icon
-        matListItemIcon
-        [fontIcon]="item.IsDir ? 'folder' : 'description'"
-      ></mat-icon>
+      <mat-icon matListItemIcon [fontIcon]="item | fileIcon"></mat-icon>
       <!-- TODO: icon base on MIME type -->
       <div matListItemTitle>{{ item.Name }}</div>
       <div matListItemLine>{{ item.ModTime | date }}</div>
