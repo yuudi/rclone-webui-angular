@@ -15,7 +15,7 @@
       (contextmenu)="listOption.selected = true; itemRightClicked(item, $event)"
       [value]="item"
       [ngClass]="{
-        'explorer-view__list-option--hide-checkbox': !multiSelectMode
+        'explorer-view__list-option--hide-checkbox': !multiSelectMode,
       }"
       #listOption
     >
@@ -31,7 +31,7 @@
     [ngStyle]="{
       position: 'fixed',
       top: contextMenuPosition.y,
-      left: contextMenuPosition.x
+      left: contextMenuPosition.x,
     }"
   ></div>
 </mat-selection-list>
