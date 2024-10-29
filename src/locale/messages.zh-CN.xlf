@@ -116,8 +116,8 @@
       </trans-unit>
       <trans-unit id="2903873185531053389" datatype="html">
         <source> New Connection </source>
-        <note priority="1" from="description">create</note>
         <target state="translated"> 新连接 </target>
+        <note priority="1" from="description">create</note>
       </trans-unit>
       <trans-unit id="1536087519743707362" datatype="html">
         <source>Dismiss</source>
@@ -169,28 +169,28 @@
       </trans-unit>
       <trans-unit id="81585474102700882" datatype="html">
         <source>Used</source>
-        <note priority="1" from="description">Already Used Space</note>
         <target>已使用</target>
+        <note priority="1" from="description">Already Used Space</note>
       </trans-unit>
       <trans-unit id="3200393806027771580" datatype="html">
         <source> Trash </source>
-        <note priority="1" from="description">Space used by trash</note>
         <target state="translated"> 回收站 </target>
+        <note priority="1" from="description">Space used by trash</note>
       </trans-unit>
       <trans-unit id="8605967835704545279" datatype="html">
         <source> Other </source>
-        <note priority="1" from="description">Space used by other</note>
         <target state="translated"> 其它 </target>
+        <note priority="1" from="description">Space used by other</note>
       </trans-unit>
       <trans-unit id="5891064527381218201" datatype="html">
         <source>Free</source>
-        <note priority="1" from="description">Available Space</note>
         <target>可用</target>
+        <note priority="1" from="description">Available Space</note>
       </trans-unit>
       <trans-unit id="7531602241051125940" datatype="html">
         <source>Objects</source>
-        <note priority="1" from="description">Count of Objects</note>
         <target>对象数</target>
+        <note priority="1" from="description">Count of Objects</note>
       </trans-unit>
       <trans-unit id="6827560313738519815" datatype="html">
         <source>New Backend</source>
@@ -206,8 +206,8 @@
       </trans-unit>
       <trans-unit id="3971100408152984961" datatype="html">
         <source> Next </source>
-        <note priority="1" from="description">next step</note>
         <target state="translated"> 下一步 </target>
+        <note priority="1" from="description">next step</note>
       </trans-unit>
       <trans-unit id="8432562579042371182" datatype="html">
         <source>Options</source>
@@ -219,8 +219,8 @@
       </trans-unit>
       <trans-unit id="4258500568871377211" datatype="html">
         <source> Got it </source>
-        <note priority="1" from="description">understand</note>
         <target state="translated"> 知道了 </target>
+        <note priority="1" from="description">understand</note>
       </trans-unit>
       <trans-unit id="8953033926734869941" datatype="html">
         <source>Name</source>
@@ -573,8 +573,8 @@
         <target state="translated">您是否想删除</target>
       </trans-unit>
       <trans-unit id="6448818549106664206" datatype="html">
-        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </source>
-        <target state="translated"> 这 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </target>
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
+        <target state="new"> 这 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </target>
       </trans-unit>
       <trans-unit id="4323657569264880384" datatype="html">
         <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>

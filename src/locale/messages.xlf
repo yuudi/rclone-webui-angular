@@ -436,7 +436,7 @@
         <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>
       </trans-unit>
       <trans-unit id="6448818549106664206" datatype="html">
-        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items}}" xid="2555483321350592323"/> </source>
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
       </trans-unit>
       <trans-unit id="9066298133798990764" datatype="html">
         <source>Would you like to delete</source>
