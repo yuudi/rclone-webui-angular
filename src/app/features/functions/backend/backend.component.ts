@@ -62,8 +62,10 @@ export class BackendComponent implements OnInit {
 
   async backendRename(backend: { id: string; config: Backend }) {
     // there is no API to rename, just to create a new one and delete old one
-    await this.backendDuplicate(backend);
-    await this.backendDelete(backend.id);
+    const copied = await this.backendDuplicate(backend);
+    if (copied) {
+      await this.backendDelete(backend.id);
+    }
   }
 
   async backendDuplicate(backend: { id: string; config: Backend }) {
@@ -72,11 +74,12 @@ export class BackendComponent implements OnInit {
     });
     const newName = await lastValueFrom(dialog.afterClosed());
     if (!newName) {
-      return;
+      return 0;
     }
     const { type, ...options } = backend.config;
     (await this.backendService.createBackend(newName, type, options)).orThrow();
     this.backendList.push({ ...backend, id: newName });
+    return 1;
   }
 
   async backendDelete(id: string) {
