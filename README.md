@@ -6,7 +6,13 @@ WARNING: this project is still in development, please do not use it in productio
 
 ## How to Use
 
-Choose one that suits you
+If you already have rclone installed in your local PC, just run:
+
+```bash
+rclone rcd --rc-web-gui --rc-web-gui-update --rc-web-fetch-url="https://s3.yuudi.dev/rwa/embed/version.json"
+```
+
+If that is not your case, choose one that suits you:
 
 - [Desktop](./docs/native.md): Good for those who are not familiar with command line
 - [Embed](./docs/embed.md): Good for managing local instance
@@ -37,17 +43,14 @@ mounting
 
 </details>
 
-## Todo
-
-- [x] Mounting management
-- [x] Job viewer
-- [x] International workflow
-- [x] More Platforms
-  - [x] Rclone embedded
-  - [x] PWA Standalone
-  - [x] Electron
-- [ ] Scheduled task manager (Electron only)
-
 ## Contribute
 
 If you feel like coding, translating or just want to help, please check [CONTRIBUTING.md](./docs/CONTRIBUTING.md)
+
+### Development
+
+Run backend: `rclone rcd --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572`
+
+Run frontend: `ng serve`
+
+Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
