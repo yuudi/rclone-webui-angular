@@ -8,9 +8,13 @@
     <script>
       // ES3 compatible
       (function () {
+        origin = window.location.origin;
+        pathname = window.location.pathname;
+        search = window.location.search;
         savedLanguage = localStorage.getItem("rwa-language");
         if (savedLanguage) {
-          window.location.href = "./" + savedLanguage + "/";
+          window.location.href =
+            origin + pathname + "/" + savedLanguage + search;
           return;
         }
         available = ["en-US", "tr-TR", "zh-CN"];
@@ -20,12 +24,15 @@
             if (
               available[j].substring(0, preference[i].length) == preference[i]
             ) {
-              window.location.href = "./" + available[j] + "/";
+              window.location.href =
+                origin + pathname + "/" + available[j] + search;
+
               return;
             }
           }
         }
-        window.location.href = "./en-US/";
+        window.location.href =
+          origin + pathname + "/en-US" + available[j] + search;
       })();
     </script>
   </head>

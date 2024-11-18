@@ -43,20 +43,27 @@ export class ConnectionService {
       'connections',
       () => {
         if (environment.connectSelf) {
-          return [
-            {
-              id: 'self',
-              displayName: 'This PC',
-              remoteAddress: window.location.origin,
-              isSameOrigin: true,
-              authentication: NoAuthentication,
-            },
-          ];
-        } else {
-          return [];
+          const selfConnection = this.getSelfConnection();
+          return selfConnection ? [selfConnection] : [];
         }
+        return [];
       },
     );
+  }
+
+  private getSelfConnection() {
+    const url = new URL(window.location.href);
+    const login_token = url.searchParams.get('login_token');
+    if (!login_token) {
+      return null;
+    }
+    return {
+      id: 'self',
+      displayName: 'This PC',
+      remoteAddress: window.location.origin,
+      isSameOrigin: true,
+      authentication: login_token,
+    };
   }
 
   async saveConnection(
