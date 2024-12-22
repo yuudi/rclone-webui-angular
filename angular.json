@@ -19,6 +19,10 @@
           "baseHref": "en-US/"
         },
         "locales": {
+          "de-DE":{
+            "translation": "src/locale/messages.de-DE.xlf",
+            "baseHref": "de-DE/"
+          },
           "tr-TR": {
             "translation": "src/locale/messages.tr-TR.xlf",
             "baseHref": "tr-TR/"
@@ -130,6 +134,7 @@
             "format": "xlf",
             "outputPath": "src/locale",
             "targetFiles": [
+              "messages.de-DE.xlf",
               "messages.tr-TR.xlf",
               "messages.zh-CN.xlf"
             ]
