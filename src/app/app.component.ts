@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     },
     {
       display: 'Deutsch',
-      code: 'de-DE'
+      code: 'de-DE',
     },
     {
       display: 'Türkçe',
