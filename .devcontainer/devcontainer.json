@@ -1,6 +1,17 @@
 {
 	"name": "rclone-webui-angular",
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+	"features": {
+		"ghcr.io/devcontainers-extra/features/angular-cli:2": {
+			"version": "16"
+		},
+		"ghcr.io/devcontainers-extra/features/rclone:1": {}
+	},
+	"postCreateCommand": "npm ci && ng analytics disable && echo 'source <(ng completion script)' >> ~/.bashrc",
+	"forwardPorts": [
+		4200,
+		5572
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [

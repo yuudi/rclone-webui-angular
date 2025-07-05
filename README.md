@@ -49,8 +49,11 @@ If you feel like coding, translating or just want to help, please check [CONTRIB
 
 ### Development
 
-Run backend: `rclone rcd --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572`
+> Optional: This project ready for Dev-Container, try it out at [GitHub Codespace](https://codespaces.new/yuudi/rclone-webui-angular)
 
-Run frontend: `ng serve`
+1.  install rclone if you didn't
+1.  start project
 
-Api calling will be proxied to backed [config](./src/proxy.conf.mjs)
+    ```sh
+    npm start # it will start rclone and angular at same time, API calling will be properly proxied to backed
+    ```

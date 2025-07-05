@@ -12,11 +12,25 @@ For new feature or big changes, please open an [issue](https://github.com/yuudi/
 
 ### Development environment
 
-Run backend: `rclone rcd --rc-user="<your username>" --rc-pass="<your password>" --rc-addr=127.0.0.1:5572`
+> Optional: This project ready for Dev-Container, try it out at [GitHub Codespace](https://codespaces.new/yuudi/rclone-webui-angular)
 
-Run frontend: `ng serve`
+1.  install rclone if you didn't
+1.  create some backend for test purpose
 
-Api calling will be proxied to backed [config](../src/proxy.conf.mjs)
+    ```sh
+    TMP_DIR=$(mktemp -d)
+    mkdir -p $TMP_DIR/pseudo-backend/{backend-a/{folder-1,folder-2},backend-b}
+    touch $TMP_DIR/pseudo-backend/backend-a/{folder-1/{file-1.txt,file-2.jpg},file.txt}
+    rclone config create pseudo-backend-a alias remote=$TMP_DIR/pseudo-backend/backend-a
+    rclone config create pseudo-backend-b alias remote=$TMP_DIR/pseudo-backend/backend-b
+    # rm -r $TMP_DIR # when you want to delete them
+    ```
+
+1.  start project
+
+    ```sh
+    npm start # it will start rclone and angular at same time, API calling will be properly proxied to backed
+    ```
 
 ## Translation
 
