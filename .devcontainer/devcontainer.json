@@ -7,7 +7,7 @@
 		},
 		"ghcr.io/devcontainers-extra/features/rclone:1": {}
 	},
-	"postCreateCommand": "npm ci && ng analytics disable && echo 'source <(ng completion script)' >> ~/.bashrc",
+	"postCreateCommand": "ng analytics disable && echo 'source <(ng completion script)' >> ~/.bashrc && npm ci",
 	"forwardPorts": [
 		4200,
 		5572
