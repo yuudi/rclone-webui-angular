@@ -36,12 +36,11 @@ jobs:
           cp src/i18n-index.html dist/build/index.html
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist/build
 
       - name: Deploy to Github-Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          artifact_name: github-pages
