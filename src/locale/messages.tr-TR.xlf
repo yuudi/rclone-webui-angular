@@ -788,6 +788,14 @@
         <source> This name has been used </source>
         <target state="new"> This name has been used </target>
       </trans-unit>
+      <trans-unit id="8911059720204770105" datatype="html">
+        <source>Path</source>
+        <target state="new">Path</target>
+      </trans-unit>
+      <trans-unit id="8839122668244053110" datatype="html">
+        <source>Path copied to clipboard</source>
+        <target state="new">Path copied to clipboard</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

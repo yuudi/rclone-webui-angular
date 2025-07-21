@@ -29,8 +29,8 @@ import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 
-type Loading = undefined;
 const Loading = undefined;
+type Loading = undefined;
 
 @Component({
   selector: 'app-explorer-viewer[backend][path]',
@@ -95,6 +95,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     );
     if (!result.ok) {
       this.snackBar.open(result.error, $localize`OK`);
+      this.children = [];
       throw new Error(result.error);
     }
     if (taskPath !== this.path) {

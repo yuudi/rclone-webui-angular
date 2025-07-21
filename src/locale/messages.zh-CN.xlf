@@ -788,6 +788,14 @@
         <source> This name has been used </source>
         <target state="translated">此名称已被使用</target>
       </trans-unit>
+      <trans-unit id="8911059720204770105" datatype="html">
+        <source>Path</source>
+        <target state="translated">路径</target>
+      </trans-unit>
+      <trans-unit id="8839122668244053110" datatype="html">
+        <source>Path copied to clipboard</source>
+        <target state="translated">路径已复制到剪贴板</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

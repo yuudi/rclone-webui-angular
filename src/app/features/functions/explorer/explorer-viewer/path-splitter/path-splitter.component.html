@@ -1,7 +1,34 @@
-<button mat-icon-button (click)="pathClicked('')">/</button>
-<ng-container *ngFor="let part of pathParts; let last = last">
-  <button mat-button (click)="pathClicked(part.fullPath)">
-    {{ part.name }}
+<ng-container *ngIf="!editMode">
+  <button mat-icon-button (click)="pathClicked('')">/</button>
+  <ng-container *ngFor="let part of pathParts; let last = last">
+    <button mat-button (click)="pathClicked(part.fullPath)">
+      {{ part.name }}
+    </button>
+    <ng-container *ngIf="!last">/</ng-container>
+  </ng-container>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="pathCopy(path)">
+    <mat-icon fontIcon="content_copy"></mat-icon>
   </button>
-  <ng-container *ngIf="!last">/</ng-container>
+  <button mat-icon-button (click)="pathEditClicked()">
+    <mat-icon fontIcon="edit"></mat-icon>
+  </button>
+</ng-container>
+<ng-container *ngIf="editMode">
+  <mat-form-field class="path-edit-field">
+    <mat-label i18n>Path</mat-label>
+    <input
+      matInput
+      [(ngModel)]="editingPath"
+      (keyup.enter)="pathEditSave()"
+      (blur)="pathEditCancel()"
+      #pathInput
+    />
+  </mat-form-field>
+  <button mat-icon-button (mousedown)="pathEditSave()">
+    <mat-icon fontIcon="check"></mat-icon>
+  </button>
+  <button mat-icon-button (click)="pathEditCancel()">
+    <mat-icon fontIcon="edit_off"></mat-icon>
+  </button>
 </ng-container>

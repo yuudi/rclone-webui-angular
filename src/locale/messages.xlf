@@ -594,6 +594,12 @@
       <trans-unit id="7113597974464283349" datatype="html">
         <source>Mountpoints</source>
       </trans-unit>
+      <trans-unit id="8839122668244053110" datatype="html">
+        <source>Path copied to clipboard</source>
+      </trans-unit>
+      <trans-unit id="8911059720204770105" datatype="html">
+        <source>Path</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
