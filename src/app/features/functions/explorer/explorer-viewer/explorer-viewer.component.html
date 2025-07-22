@@ -1,6 +1,8 @@
 <app-path-splitter
   [path]="path"
   (pathChange)="pathChange.emit($event)"
+  [backend]="backend"
+  (backendChange)="backendChange.emit($event)"
 ></app-path-splitter>
 <ng-container *ngIf="children === undefined">
   <mat-spinner></mat-spinner>

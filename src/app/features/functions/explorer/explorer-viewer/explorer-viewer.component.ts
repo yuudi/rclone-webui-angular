@@ -41,6 +41,7 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   @Input() backend!: string;
   @Input() path!: string;
   @Input() info: FsInfo | null = null;
+  @Output() backendChange = new EventEmitter<string>();
   @Output() pathChange = new EventEmitter<string>();
   @Output() clipboardAdded = new EventEmitter<AppClipboard>();
   @Input() actions!: ExplorerView['actions'];

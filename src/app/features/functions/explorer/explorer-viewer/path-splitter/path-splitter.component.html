@@ -1,5 +1,5 @@
 <ng-container *ngIf="!editMode">
-  <button mat-icon-button (click)="pathClicked('')">/</button>
+  <button mat-button (click)="pathClicked('')">{{ backend }}:</button>
   <ng-container *ngFor="let part of pathParts; let last = last">
     <button mat-button (click)="pathClicked(part.fullPath)">
       {{ part.name }}

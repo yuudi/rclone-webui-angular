@@ -11,12 +11,14 @@ import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-path-splitter[path]',
+  selector: 'app-path-splitter[backend][path]',
   templateUrl: './path-splitter.component.html',
   styleUrls: ['./path-splitter.component.scss'],
 })
 export class PathSplitterComponent implements OnInit, OnChanges {
+  @Input() backend!: string;
   @Input() path!: string;
+  @Output() backendChange = new EventEmitter<string>();
   @Output() pathChange = new EventEmitter<string>();
   editMode = false;
   editingPath = '';
@@ -66,7 +68,7 @@ export class PathSplitterComponent implements OnInit, OnChanges {
   }
 
   pathEditClicked() {
-    this.editingPath = this.path;
+    this.editingPath = this.backend + ':' + this.path;
     this.editMode = true;
     this.pathInput?.focus();
   }
@@ -80,8 +82,42 @@ export class PathSplitterComponent implements OnInit, OnChanges {
     // remove leading slash if present
     if (newPath.startsWith('/')) {
       newPath = newPath.substring(1);
+      this.pathChange.emit(newPath);
+      this.editMode = false;
+      return;
     }
-    this.pathChange.emit(newPath);
-    this.editMode = false;
+    // find the first slash or colons
+    const firstSlashIndex = newPath.indexOf('/');
+    const firstColonIndex = newPath.indexOf(':');
+    // debug
+    console.log(
+      'PathSplitterComponent: firstSlashIndex',
+      firstSlashIndex,
+      'firstColonIndex',
+      firstColonIndex,
+    );
+    if (firstSlashIndex === -1 && firstColonIndex === -1) {
+      // no slash or colon found, treat as a relative path
+      this.pathChange.emit(newPath);
+      this.editMode = false;
+      return;
+    }
+    // if a colon is found before the first slash, treat as a backend change
+    if (
+      firstColonIndex !== -1 &&
+      (firstSlashIndex === -1 || firstColonIndex < firstSlashIndex)
+    ) {
+      const backend = newPath.substring(0, firstColonIndex);
+      this.backendChange.emit(backend);
+      const innerPath = newPath.substring(firstColonIndex + 1);
+      this.pathChange.emit(innerPath);
+      this.editMode = false;
+      return;
+    } else {
+      // otherwise, treat as a path change
+      this.pathChange.emit(newPath);
+      this.editMode = false;
+      return;
+    }
   }
 }
