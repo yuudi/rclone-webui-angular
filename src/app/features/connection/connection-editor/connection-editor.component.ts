@@ -17,6 +17,7 @@ import {
 } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { Err } from 'src/app/shared/result';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-connection-editor',
@@ -32,7 +33,7 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
       [this.uniqueNameValidator()],
     ],
     remoteAddress: [
-      ConnectionEditorComponent.getCurrentHost(),
+      environment.connectSelf ? ConnectionEditorComponent.getCurrentHost() : '',
       [
         Validators.required,
         Validators.pattern(/^(http|https):\/\//),
