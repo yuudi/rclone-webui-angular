@@ -68,7 +68,8 @@ export class PathSplitterComponent implements OnInit, OnChanges {
   }
 
   pathEditClicked() {
-    this.editingPath = this.backend + ':' + this.path;
+    const backendIdentifier = this.backend ? this.backend + ':' : '/';
+    this.editingPath = backendIdentifier + this.path;
     this.editMode = true;
     this.pathInput?.focus();
   }
@@ -89,13 +90,6 @@ export class PathSplitterComponent implements OnInit, OnChanges {
     // find the first slash or colons
     const firstSlashIndex = newPath.indexOf('/');
     const firstColonIndex = newPath.indexOf(':');
-    // debug
-    console.log(
-      'PathSplitterComponent: firstSlashIndex',
-      firstSlashIndex,
-      'firstColonIndex',
-      firstColonIndex,
-    );
     if (firstSlashIndex === -1 && firstColonIndex === -1) {
       // no slash or colon found, treat as a relative path
       this.pathChange.emit(newPath);

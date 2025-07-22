@@ -564,9 +564,6 @@
       <trans-unit id="1398596596566435779" datatype="html">
         <source>Backend Name</source>
       </trans-unit>
-      <trans-unit id="1936585210615083762" datatype="html">
-        <source> Browse <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </source>
-      </trans-unit>
       <trans-unit id="3040348421210381432" datatype="html">
         <source>Backends</source>
       </trans-unit>
@@ -578,12 +575,6 @@
       </trans-unit>
       <trans-unit id="5285214346081691861" datatype="html">
         <source> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
-      </trans-unit>
-      <trans-unit id="543732250169203115" datatype="html">
-        <source> Manage Mountpoints </source>
-      </trans-unit>
-      <trans-unit id="6024376717925952512" datatype="html">
-        <source> Browse backends </source>
       </trans-unit>
       <trans-unit id="6169466287448966850" datatype="html">
         <source>Choose a new name</source>
@@ -599,6 +590,30 @@
       </trans-unit>
       <trans-unit id="8911059720204770105" datatype="html">
         <source>Path</source>
+      </trans-unit>
+      <trans-unit id="2707993167295093467" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Backends are connected </source>
+      </trans-unit>
+      <trans-unit id="4165055535933161167" datatype="html">
+        <source> Go </source>
+      </trans-unit>
+      <trans-unit id="4442926641425549164" datatype="html">
+        <source>Go to</source>
+      </trans-unit>
+      <trans-unit id="4702769273710495234" datatype="html">
+        <source> New Backend </source>
+      </trans-unit>
+      <trans-unit id="5093913984358284289" datatype="html">
+        <source> Browse </source>
+      </trans-unit>
+      <trans-unit id="5399405837204211439" datatype="html">
+        <source> Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> is connected </source>
+      </trans-unit>
+      <trans-unit id="7204138652942116672" datatype="html">
+        <source> Manage </source>
+      </trans-unit>
+      <trans-unit id="9154702142818483869" datatype="html">
+        <source> Save your mountpoints here. </source>
       </trans-unit>
     </body>
   </file>

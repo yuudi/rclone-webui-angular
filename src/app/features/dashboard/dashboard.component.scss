@@ -5,8 +5,15 @@
   align-items: stretch;
 }
 
-.dashboard__card {
+.dashboard__card-wrapper {
   display: inline-block;
   margin: 2em;
+}
+
+.dashboard__card {
   min-width: 20em;
+  height: 100%;
+  > mat-card-content {
+    flex: 1;
+  }
 }

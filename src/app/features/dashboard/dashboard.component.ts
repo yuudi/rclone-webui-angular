@@ -14,6 +14,7 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   backends?: string[] | null;
+  goToPath = '';
   version?: RcloneVersionInfo;
   webUIVersion = packageJson.version;
   webUIEnv = environment.environment;

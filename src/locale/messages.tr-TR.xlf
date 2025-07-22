@@ -752,21 +752,9 @@
         <source> Connect your first backend </source>
         <target state="new"> Connect your first backend </target>
       </trans-unit>
-      <trans-unit id="1936585210615083762" datatype="html">
-        <source> Browse <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </source>
-        <target state="new"> Browse <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </target>
-      </trans-unit>
-      <trans-unit id="6024376717925952512" datatype="html">
-        <source> Browse backends </source>
-        <target state="new"> Browse backends </target>
-      </trans-unit>
       <trans-unit id="7113597974464283349" datatype="html">
         <source>Mountpoints</source>
         <target state="new">Mountpoints</target>
-      </trans-unit>
-      <trans-unit id="543732250169203115" datatype="html">
-        <source> Manage Mountpoints </source>
-        <target state="new"> Manage Mountpoints </target>
       </trans-unit>
       <trans-unit id="5285214346081691861" datatype="html">
         <source> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
@@ -795,6 +783,38 @@
       <trans-unit id="8839122668244053110" datatype="html">
         <source>Path copied to clipboard</source>
         <target state="new">Path copied to clipboard</target>
+      </trans-unit>
+      <trans-unit id="4702769273710495234" datatype="html">
+        <source> New Backend </source>
+        <target state="new"> New Backend </target>
+      </trans-unit>
+      <trans-unit id="5399405837204211439" datatype="html">
+        <source> Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> is connected </source>
+        <target state="new"> Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> is connected </target>
+      </trans-unit>
+      <trans-unit id="5093913984358284289" datatype="html">
+        <source> Browse </source>
+        <target state="new"> Browse </target>
+      </trans-unit>
+      <trans-unit id="2707993167295093467" datatype="html">
+        <source> <x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Backends are connected </source>
+        <target state="new"> <x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Backends are connected </target>
+      </trans-unit>
+      <trans-unit id="4442926641425549164" datatype="html">
+        <source>Go to</source>
+        <target state="new">Go to</target>
+      </trans-unit>
+      <trans-unit id="4165055535933161167" datatype="html">
+        <source> Go </source>
+        <target state="new"> Go </target>
+      </trans-unit>
+      <trans-unit id="9154702142818483869" datatype="html">
+        <source> Save your mountpoints here. </source>
+        <target state="new"> Save your mountpoints here. </target>
+      </trans-unit>
+      <trans-unit id="7204138652942116672" datatype="html">
+        <source> Manage </source>
+        <target state="new"> Manage </target>
       </trans-unit>
     </body>
   </file>

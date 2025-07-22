@@ -48,6 +48,40 @@ export class ExplorerComponent implements OnInit {
     this.fetchLocalFsList();
 
     this.route.queryParams.pipe(first()).subscribe((params) => {
+      const fullPath = params['path'];
+      if (fullPath) {
+        let backend, path;
+        // If the path starts with a slash, treat it as an absolute path to the root.
+        if (fullPath.startsWith('/')) {
+          backend = '';
+          path = fullPath.substring(1);
+        } else {
+          // if a colon is found before the first slash, treat as a backend change
+          const firstSlashIndex = fullPath.indexOf('/');
+          const firstColonIndex = fullPath.indexOf(':');
+          if (
+            firstColonIndex !== -1 &&
+            (firstSlashIndex === -1 || firstColonIndex < firstSlashIndex)
+          ) {
+            backend = fullPath.substring(0, firstColonIndex);
+            path = fullPath.substring(firstColonIndex + 1);
+          } else {
+            // otherwise, treat as a absolute path to the root
+            backend = '';
+            path = fullPath;
+          }
+        }
+        this.viewsGroups[0].tabs.push({
+          backend,
+          path,
+          info: this.backendService
+            .getBackendInfo(backend)
+            .then((result) => result.orThrow()),
+          actions: {},
+        });
+        return;
+      }
+
       const backend = params['drive'];
       if (backend) {
         this.viewsGroups[0].tabs.push({
