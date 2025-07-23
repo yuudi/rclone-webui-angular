@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="ru">
+    <body>
+      <trans-unit id="2102825898069375693" datatype="html">
+        <source>Menu</source>
+        <target state="translated">Меню</target>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <target state="translated">Панель Управления</target>
+      </trans-unit>
+      <trans-unit id="3152486099939084158" datatype="html">
+        <source>Drives</source>
+        <target state="translated">Диски</target>
+      </trans-unit>
+      <trans-unit id="2849267946273310379" datatype="html">
+        <source>Mounting</source>
+        <target state="translated">Монтаж</target>
+        <note>noun</note>
+      </trans-unit>
+      <trans-unit id="7730992219911127538" datatype="html">
+        <source>Rclone WebUI</source>
+        <target state="translated">Rclone WebUI</target>
+      </trans-unit>
+      <trans-unit id="487077452159084336" datatype="html">
+        <source>Select Language</source>
+        <target state="translated">Выбор Языка</target>
+      </trans-unit>
+      <trans-unit id="2557623954339695776" datatype="html">
+        <source>Connections</source>
+        <target state="translated">Соединения</target>
+      </trans-unit>
+      <trans-unit id="4352526755847379280" datatype="html">
+        <source>Source Code</source>
+        <target state="translated">Исходный Код</target>
+      </trans-unit>
+      <trans-unit id="2649252321173430744" datatype="html">
+        <source>Not Found</source>
+        <target state="translated">Не найдено</target>
+      </trans-unit>
+      <trans-unit id="542838625985791371" datatype="html">
+        <source>return home</source>
+        <target state="translated">Вернуться на главную</target>
+      </trans-unit>
+      <trans-unit id="6488103466338737410" datatype="html">
+        <source>Name already exists</source>
+        <target state="translated">Имя уже существует</target>
+      </trans-unit>
+      <trans-unit id="12491435104517248" datatype="html">
+        <source>Connection ID not found</source>
+        <target state="translated">ID соединения не найден</target>
+      </trans-unit>
+      <trans-unit id="7285459956951862232" datatype="html">
+        <source>Connection not found</source>
+        <target state="translated">Соединение не найдено</target>
+      </trans-unit>
+      <trans-unit id="2659934568888177208" datatype="html">
+        <source>Connection has no authentication</source>
+        <target state="translated">Для этого соединения не настроена аутентификация</target>
+      </trans-unit>
+      <trans-unit id="3013055597615607317" datatype="html">
+        <source>Display Name</source>
+        <target state="translated">Отображаемое Имя</target>
+      </trans-unit>
+      <trans-unit id="8505935423745518392" datatype="html">
+        <source> Please enter a display name </source>
+        <target state="translated"> Пожалуйста, введите отображаемое имя </target>
+      </trans-unit>
+      <trans-unit id="300615299523179346" datatype="html">
+        <source> A connection with this name already exists </source>
+        <target state="translated"> Соединение с таким именем уже существует </target>
+      </trans-unit>
+      <trans-unit id="6149473508047129471" datatype="html">
+        <source>Remote Address</source>
+        <target state="translated">Удаленный Адрес</target>
+      </trans-unit>
+      <trans-unit id="4288365178410286526" datatype="html">
+        <source> Please enter a valid address </source>
+        <target state="translated"> Пожалуйста, введите корректный адрес </target>
+      </trans-unit>
+      <trans-unit id="1431967982799746382" datatype="html">
+        <source> This connection is not protected by a password </source>
+        <target state="translated"> Это соединение не защищено паролем </target>
+      </trans-unit>
+      <trans-unit id="5248717555542428023" datatype="html">
+        <source>Username</source>
+        <target state="translated">Имя Пользователя</target>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <target state="translated">Пароль</target>
+      </trans-unit>
+      <trans-unit id="7055385188245520959" datatype="html">
+        <source> Remember Password </source>
+        <target state="translated"> Запомнить Пароль </target>
+      </trans-unit>
+      <trans-unit id="7673863024811381818" datatype="html">
+        <source> Test Connection </source>
+        <target state="translated"> Проверка Соединения </target>
+      </trans-unit>
+      <trans-unit id="1545005867911976778" datatype="html">
+        <source> Connect </source>
+        <target state="translated"> Соединить </target>
+      </trans-unit>
+      <trans-unit id="582119650624142213" datatype="html">
+        <source>Connection successful</source>
+        <target state="translated">Соединение успешно</target>
+      </trans-unit>
+      <trans-unit id="4448321183127826742" datatype="html">
+        <source>Connection failed</source>
+        <target state="translated">Соединение не удалось</target>
+      </trans-unit>
+      <trans-unit id="8643396715708565201" datatype="html">
+        <source>Connection failed:</source>
+        <target state="translated">Соединение не удалось:</target>
+      </trans-unit>
+      <trans-unit id="8451342921207487014" datatype="html">
+        <source>No connections</source>
+        <target state="translated">Нет соединений</target>
+      </trans-unit>
+      <trans-unit id="2903873185531053389" datatype="html">
+        <source> New Connection </source>
+        <target state="translated"> Новое Соединение </target>
+        <note>create</note>
+      </trans-unit>
+      <trans-unit id="1536087519743707362" datatype="html">
+        <source>Dismiss</source>
+        <target state="translated">Отменить</target>
+      </trans-unit>
+      <trans-unit id="8191371354890763172" datatype="html">
+        <source>Enter Password</source>
+        <target state="translated">Введите Пароль</target>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target state="translated">Отмена</target>
+      </trans-unit>
+      <trans-unit id="1879517876731100451" datatype="html">
+        <source>Rclone</source>
+        <target state="translated">Rclone</target>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+        <target state="translated">Версия</target>
+      </trans-unit>
+      <trans-unit id="962765493084218985" datatype="html">
+        <source>Platform</source>
+        <target state="translated">Платформа</target>
+      </trans-unit>
+      <trans-unit id="8961799598905368955" datatype="html">
+        <source>Go version</source>
+        <target state="translated">Версия Go</target>
+      </trans-unit>
+      <trans-unit id="1069523139277190436" datatype="html">
+        <source>Statistics</source>
+        <target state="translated">Статистика</target>
+      </trans-unit>
+      <trans-unit id="1441510615438989312" datatype="html">
+        <source>Transferring</source>
+        <target state="translated">Передача</target>
+      </trans-unit>
+      <trans-unit id="1224770523323579455" datatype="html">
+        <source>Transferred</source>
+        <target state="translated">Передано</target>
+      </trans-unit>
+      <trans-unit id="3128293408739574" datatype="html">
+        <source>Speed</source>
+        <target state="translated">Скорость</target>
+      </trans-unit>
+      <trans-unit id="2527698965946238336" datatype="html">
+        <source>Not Measured</source>
+        <target state="translated">Не Измерено</target>
+      </trans-unit>
+      <trans-unit id="81585474102700882" datatype="html">
+        <source>Used</source>
+        <target state="translated">Использовано</target>
+        <note>Already Used Space</note>
+      </trans-unit>
+      <trans-unit id="3200393806027771580" datatype="html">
+        <source> Trash </source>
+        <target state="translated"> Мусор </target>
+        <note>Space used by trash</note>
+      </trans-unit>
+      <trans-unit id="8605967835704545279" datatype="html">
+        <source> Other </source>
+        <target state="translated"> Другое </target>
+        <note>Space used by other</note>
+      </trans-unit>
+      <trans-unit id="5891064527381218201" datatype="html">
+        <source>Free</source>
+        <target state="translated">Свободно</target>
+        <note>Available Space</note>
+      </trans-unit>
+      <trans-unit id="7531602241051125940" datatype="html">
+        <source>Objects</source>
+        <target state="translated">Объекты</target>
+        <note>Count of Objects</note>
+      </trans-unit>
+      <trans-unit id="787163983066183218" datatype="html">
+        <source>Browse</source>
+        <target state="translated">Просмотр</target>
+      </trans-unit>
+      <trans-unit id="6827560313738519815" datatype="html">
+        <source>New Backend</source>
+        <target state="translated">Новая Подключение</target>
+      </trans-unit>
+      <trans-unit id="8232773653071363045" datatype="html">
+        <source>Provider</source>
+        <target state="translated">Провайдер</target>
+      </trans-unit>
+      <trans-unit id="4580988005648117665" datatype="html">
+        <source>Search</source>
+        <target state="translated">Поиск</target>
+      </trans-unit>
+      <trans-unit id="3971100408152984961" datatype="html">
+        <source> Next </source>
+        <target state="translated"> Далее </target>
+        <note>next step</note>
+      </trans-unit>
+      <trans-unit id="8432562579042371182" datatype="html">
+        <source>Options</source>
+        <target state="translated">Опции</target>
+      </trans-unit>
+      <trans-unit id="3623640243867983281" datatype="html">
+        <source> Only stared* fields are required :) </source>
+        <target state="translated"> Только обязательные поля отмечены звездочкой :) </target>
+      </trans-unit>
+      <trans-unit id="4258500568871377211" datatype="html">
+        <source> Got it </source>
+        <target state="translated"> Понял(а) </target>
+        <note>understand</note>
+      </trans-unit>
+      <trans-unit id="3044369161367328488" datatype="html">
+        <source> Hide Advanced Options </source>
+        <target state="translated"> Скрыть расширенные опции </target>
+      </trans-unit>
+      <trans-unit id="2699313572844735542" datatype="html">
+        <source> Show Advanced Options </source>
+        <target state="translated"> Показать расширенные опции </target>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <target state="translated">Имя</target>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <target state="translated">Сохранить</target>
+      </trans-unit>
+      <trans-unit id="7960163200088679566" datatype="html">
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
+        <target state="translated">Вы будете перенаправлены на сайт провайдера для авторизации, нажмите сейчас сохранить</target>
+      </trans-unit>
+      <trans-unit id="2466435579379681938" datatype="html">
+        <source>Authorizing...</source>
+        <target state="translated">Авторизация...</target>
+      </trans-unit>
+      <trans-unit id="6649706328938022022" datatype="html">
+        <source>You are all set, click save now</source>
+        <target state="translated">Вы все настроили, сейчас нажмите сохранить</target>
+      </trans-unit>
+      <trans-unit id="3620188369327429839" datatype="html">
+        <source> Save </source>
+        <target state="translated"> Сохранить </target>
+      </trans-unit>
+      <trans-unit id="7744129393493523836" datatype="html">
+        <source>Error creating backend: </source>
+        <target state="translated">Ошибка создания бэкенда: </target>
+      </trans-unit>
+      <trans-unit id="5334162996115147515" datatype="html">
+        <source>Link Created</source>
+        <target state="translated">Ссылка создана</target>
+      </trans-unit>
+      <trans-unit id="3765886400143289586" datatype="html">
+        <source> Copy </source>
+        <target state="translated"> Копировать </target>
+      </trans-unit>
+      <trans-unit id="397098723873502323" datatype="html">
+        <source>Done</source>
+        <target state="translated">Готово</target>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <target state="translated">Удалить</target>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <target state="translated">Нет</target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="translated">Ок</target>
+      </trans-unit>
+      <trans-unit id="4165850386196559100" datatype="html">
+        <source>Empty</source>
+        <target state="translated">Пусто</target>
+      </trans-unit>
+      <trans-unit id="4323470180912194028" datatype="html">
+        <source>Copy</source>
+        <target state="translated">Копировать</target>
+      </trans-unit>
+      <trans-unit id="2354817630223808522" datatype="html">
+        <source>Move</source>
+        <target state="translated">Переместить</target>
+      </trans-unit>
+      <trans-unit id="6041115344061899387" datatype="html">
+        <source>Rename</source>
+        <target state="translated">Переименовать</target>
+      </trans-unit>
+      <trans-unit id="3476827161214058075" datatype="html">
+        <source>Generate Link</source>
+        <target state="translated">Создать Ссылку</target>
+      </trans-unit>
+      <trans-unit id="3099741642167775297" datatype="html">
+        <source>Download</source>
+        <target state="translated">Скачать</target>
+      </trans-unit>
+      <trans-unit id="7187000848329495899" datatype="html">
+        <source>Opening File is not implemented yet.</source>
+        <target state="translated">Открытие файла еще не реализовано.</target>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <target state="translated">OK</target>
+      </trans-unit>
+      <trans-unit id="5488667333459350160" datatype="html">
+        <source>Renamed</source>
+        <target state="translated">Переименовано</target>
+      </trans-unit>
+      <trans-unit id="6381490568322624964" datatype="html">
+        <source>Deleted</source>
+        <target state="translated">Удалено</target>
+      </trans-unit>
+      <trans-unit id="1674202514578558795" datatype="html">
+        <source>New name</source>
+        <target state="translated">Новое имя</target>
+      </trans-unit>
+      <trans-unit id="7958523096095518919" datatype="html">
+        <source> Name already exists </source>
+        <target state="translated"> Имя уже существует </target>
+      </trans-unit>
+      <trans-unit id="3394880135309962358" datatype="html">
+        <source> Ok </source>
+        <target state="translated"> Ок </target>
+      </trans-unit>
+      <trans-unit id="5460217556068689396" datatype="html">
+        <source>Go Up</source>
+        <target state="translated">Вверх</target>
+      </trans-unit>
+      <trans-unit id="1102717806459547726" datatype="html">
+        <source>Refresh</source>
+        <target state="translated">Обновить</target>
+      </trans-unit>
+      <trans-unit id="3591781971294396421" datatype="html">
+        <source>Clipboard</source>
+        <target state="translated">Буфер Обмена</target>
+      </trans-unit>
+      <trans-unit id="7478877538855480857" datatype="html">
+        <source>Paste Here</source>
+        <target state="translated">Вставить Здесь</target>
+      </trans-unit>
+      <trans-unit id="3823219296477075982" datatype="html">
+        <source>Discard</source>
+        <target state="translated">Отбросить</target>
+      </trans-unit>
+      <trans-unit id="672413176610067158" datatype="html">
+        <source>New Tab</source>
+        <target state="translated">Новая Вкладка</target>
+      </trans-unit>
+      <trans-unit id="2812353444192922702" datatype="html">
+        <source> Local Filesystem </source>
+        <target state="translated"> Локальная Файловая Система </target>
+      </trans-unit>
+      <trans-unit id="1084063406279979182" datatype="html">
+        <source>Close All</source>
+        <target state="translated">Закрыть Все</target>
+      </trans-unit>
+      <trans-unit id="1693401925844219649" datatype="html">
+        <source>Split Window</source>
+        <target state="translated">Разделить Экран</target>
+      </trans-unit>
+      <trans-unit id="2109484463693647579" datatype="html">
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated"> нажмите <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="т"/> чтобы открыть бэкенд </target>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target state="translated">Закрыть</target>
+      </trans-unit>
+      <trans-unit id="5674970056730934974" datatype="html">
+        <source>Task Created Successfully</source>
+        <target state="translated">Задача успешно создана</target>
+      </trans-unit>
+      <trans-unit id="7501365879745121673" datatype="html">
+        <source>Manage Drives</source>
+        <target state="translated">Управление Дисками</target>
+      </trans-unit>
+      <trans-unit id="3685794532791241025" datatype="html">
+        <source>Explore Drives</source>
+        <target state="translated">Исследовать Диски</target>
+      </trans-unit>
+      <trans-unit id="1971865492332905755" datatype="html">
+        <source>New MountPoint</source>
+        <target state="translated">Точка Нового Монтирования</target>
+      </trans-unit>
+      <trans-unit id="6599356923898400319" datatype="html">
+        <source>Unmount All</source>
+        <target state="translated">Отключить Все</target>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <target state="translated">Редактировать</target>
+      </trans-unit>
+      <trans-unit id="560443334489296785" datatype="html">
+        <source>Rclone does not have access to this path, please check the permission of this path</source>
+        <target state="translated">Rclone не имеет доступа к этому пути, пожалуйста, проверьте права доступа к этому пути</target>
+      </trans-unit>
+      <trans-unit id="989049066299437124" datatype="html">
+        <source>Mount created and mounted</source>
+        <target state="translated">Монтаж создан и подключен</target>
+      </trans-unit>
+      <trans-unit id="2364550710330521794" datatype="html">
+        <source>Mount created</source>
+        <target state="translated">Монтаж создан</target>
+      </trans-unit>
+      <trans-unit id="984117971499949443" datatype="html">
+        <source>Mounted</source>
+        <target state="translated">Подключено</target>
+      </trans-unit>
+      <trans-unit id="3297029408193612840" datatype="html">
+        <source>Unmounted</source>
+        <target state="translated">Отключено</target>
+      </trans-unit>
+      <trans-unit id="4174953868691227020" datatype="html">
+        <source>Create MountPoint</source>
+        <target state="translated">Создать Точку Монтирования</target>
+      </trans-unit>
+      <trans-unit id="4736210244914788712" datatype="html">
+        <source>Drive</source>
+        <target state="translated">Диск</target>
+      </trans-unit>
+      <trans-unit id="174792567272132410" datatype="html">
+        <source> Automatic MountPoint </source>
+        <target state="translated"> Автоматическая Точка Монтирования </target>
+      </trans-unit>
+      <trans-unit id="8643692971848848902" datatype="html">
+        <source>MountPoint</source>
+        <target state="translated">Точка Монтирования</target>
+      </trans-unit>
+      <trans-unit id="655049383752216892" datatype="html">
+        <source>Mount Now</source>
+        <target state="translated">Подключить Сейчас</target>
+      </trans-unit>
+      <trans-unit id="8188665053347707351" datatype="html">
+        <source> Mount as Readonly Drive </source>
+        <target state="translated"> Подключить как Только-Чтение Диск </target>
+      </trans-unit>
+      <trans-unit id="1174398173025044116" datatype="html">
+        <source> Mount as Windows Network Drive </source>
+        <target state="translated"> Подключить как Сетевой Диск Windows </target>
+      </trans-unit>
+      <trans-unit id="991790413700941336" datatype="html">
+        <source>Cache Mode</source>
+        <target state="translated">Режим Кэша</target>
+      </trans-unit>
+      <trans-unit id="3599005616661192177" datatype="html">
+        <source> Off </source>
+        <target state="translated"> Выключено </target>
+      </trans-unit>
+      <trans-unit id="533769579714104079" datatype="html">
+        <source> Minimal (Only opened files are cached) </source>
+        <target state="translated"> Минимальный (Кэширование только открытых файлов) </target>
+      </trans-unit>
+      <trans-unit id="616337869273310985" datatype="html">
+        <source> Write (All non-readonly files are cached) </source>
+        <target state="translated"> Запись (Кэширование всех файлов, кроме только-читальных) </target>
+      </trans-unit>
+      <trans-unit id="3302458363931158751" datatype="html">
+        <source> Full </source>
+        <target state="translated"> Полный </target>
+      </trans-unit>
+      <trans-unit id="2787011255743936179" datatype="html">
+        <source>File Permissions</source>
+        <target state="translated">Права на Файлы</target>
+      </trans-unit>
+      <trans-unit id="6880846271161386525" datatype="html">
+        <source>Directory Permissions</source>
+        <target state="translated">Права на Каталоги</target>
+      </trans-unit>
+      <trans-unit id="4021701907132072675" datatype="html">
+        <source> Skip modification time (can speed things up) </source>
+        <target state="translated"> Пропустить время модификации (может ускорить работу) </target>
+      </trans-unit>
+      <trans-unit id="7941428823403788384" datatype="html">
+        <source> Create </source>
+        <target state="translated"> Создать </target>
+      </trans-unit>
+      <trans-unit id="1518435952515160235" datatype="html">
+        <source> Mounting </source>
+        <target state="translated"> Монтаж </target>
+        <note>noun</note>
+      </trans-unit>
+      <trans-unit id="2812208926273686149" datatype="html">
+        <source>Create Folder</source>
+        <target state="translated">Создать Папку</target>
+      </trans-unit>
+      <trans-unit id="5559087577598810992" datatype="html">
+        <source>This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.</source>
+        <target state="translated">Этому провайдеру требуется аутентификация. Так как вы используете удаленный бэкенд, автоматическая аутентификация (OAuth) для вас невозможна. Вам может понадобиться авторизоваться на локальной копии rclone и скопировать токен на бэкенд.</target>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+        <target state="translated"> Удалить </target>
+      </trans-unit>
+      <trans-unit id="6759205696902713848" datatype="html">
+        <source>Warning</source>
+        <target state="translated">Предупреждение</target>
+      </trans-unit>
+      <trans-unit id="7168628217068609895" datatype="html">
+        <source>Folder Created Successfully</source>
+        <target state="translated">Папка успешно создана</target>
+      </trans-unit>
+      <trans-unit id="7806473130802584518" datatype="html">
+        <source>view is not ready</source>
+        <target state="translated">просмотр еще не готов</target>
+      </trans-unit>
+      <trans-unit id="1297075260734626852" datatype="html">
+        <source>Tasks Created Successfully</source>
+        <target state="translated">Задачи успешно созданы</target>
+      </trans-unit>
+      <trans-unit id="3981693023798866214" datatype="html">
+        <source>Item Added to Clipboard, now go to destination and paste</source>
+        <target state="translated">Элемент добавлен в буфер обмена, теперь перейдите к месту назначения и вставьте</target>
+      </trans-unit>
+      <trans-unit id="7488670430901851630" datatype="html">
+        <source>Remote address is not set</source>
+        <target state="translated">Удаленный адрес не установлен</target>
+      </trans-unit>
+      <trans-unit id="4366763205960752449" datatype="html">
+        <source>move</source>
+        <target state="translated">переместить</target>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+        <target state="translated">Удалить</target>
+      </trans-unit>
+      <trans-unit id="5479686051458408124" datatype="html">
+        <source><x id="PH" equiv-text="actionName"/> &quot;<x id="PH_1" equiv-text="name"/>&quot; to &quot;<x id="PH_2" equiv-text="destination"/>:&quot;</source>
+        <target state="translated"><x id="PH" equiv-text="actionName"/> "<x id="PH_1" equiv-text="name"/>" в "<x id="PH_2" equiv-text="destination"/>:"</target>
+      </trans-unit>
+      <trans-unit id="5937251202465808296" datatype="html">
+        <source>More</source>
+        <target state="translated">Больше</target>
+      </trans-unit>
+      <trans-unit id="6862265996781523030" datatype="html">
+        <source>copy</source>
+        <target state="translated">копировать</target>
+      </trans-unit>
+      <trans-unit id="7557275684476197518" datatype="html">
+        <source>sync</source>
+        <target state="translated">синхронизировать</target>
+      </trans-unit>
+      <trans-unit id="7962907777822307509" datatype="html">
+        <source>bi-directional sync</source>
+        <target state="translated">двусторонняя синхронизация</target>
+      </trans-unit>
+      <trans-unit id="8111222032681450869" datatype="html">
+        <source>No jobs</source>
+        <target state="translated">Нет задач</target>
+      </trans-unit>
+      <trans-unit id="2870013675900498785" datatype="html">
+        <source>Multi-select</source>
+        <target state="translated">Множественный Выбор</target>
+      </trans-unit>
+      <trans-unit id="4323657569264880384" datatype="html">
+        <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>
+        <target state="translated">{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> элемент} few {<x id="INTERPOLATION"/> элемента} many {<x id="INTERPOLATION"/> элементов} other {<x id="INTERPOLATION"/> элементов}}</target>
+      </trans-unit>
+      <trans-unit id="6448818549106664206" datatype="html">
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
+        <target state="translated"> эти <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} элемент} few {{{data.length}} элемента} many {{{data.length}} элементов} other {{{data.length}} элементов} }" xid="2555483321350592323"/> </target>
+      </trans-unit>
+      <trans-unit id="9066298133798990764" datatype="html">
+        <source>Would you like to delete</source>
+        <target state="translated">Хотите удалить</target>
+      </trans-unit>
+      <trans-unit id="1987414866514451380" datatype="html">
+        <source> This address is not secure, please set up an HTTPS connection on that host </source>
+        <target state="translated"> Этот адрес не защищен, пожалуйста, установите подключение по HTTPS на этом хосте </target>
+      </trans-unit>
+      <trans-unit id="5020688442735484718" datatype="html">
+        <source>Job Manager</source>
+        <target state="translated">Управление Задачами</target>
+      </trans-unit>
+      <trans-unit id="8247504084319724481" datatype="html">
+        <source>Mount Manager</source>
+        <target state="translated">Управление Монтированием</target>
+      </trans-unit>
+      <trans-unit id="9147492985231433943" datatype="html">
+        <source> Auto Mount on Startup </source>
+        <target state="translated"> Авто Монтирование при Запуске </target>
+      </trans-unit>
+      <trans-unit id="1283895920974679461" datatype="html">
+        <source>Operation</source>
+        <target state="translated">Операция</target>
+      </trans-unit>
+      <trans-unit id="1558461139634843126" datatype="html">
+        <source>Scheduled Jobs</source>
+        <target state="translated">Запланированные задачи</target>
+      </trans-unit>
+      <trans-unit id="1859677652107567652" datatype="html">
+        <source> Copy (Keep items that is not present at source) </source>
+        <target state="translated"> Копировать (Сохранить элементы, которых нет на источнике) </target>
+      </trans-unit>
+      <trans-unit id="1950868348901927527" datatype="html">
+        <source> Please enter a valid CRON expression </source>
+        <target state="translated"> Пожалуйста, введите действительное выражение CRON </target>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="translated">от</target>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <target state="translated">до</target>
+      </trans-unit>
+      <trans-unit id="5338673541028692262" datatype="html">
+        <source>at</source>
+        <target state="translated">в</target>
+      </trans-unit>
+      <trans-unit id="5689442636734876664" datatype="html">
+        <source>hour</source>
+        <target state="translated">час</target>
+      </trans-unit>
+      <trans-unit id="607811176731198522" datatype="html">
+        <source> Scheduled Jobs </source>
+        <target state="translated"> Запланированные Задачи </target>
+      </trans-unit>
+      <trans-unit id="617331019136138957" datatype="html">
+        <source> Bi-direction Sync </source>
+        <target state="translated"> Двусторонняя Синхронизация </target>
+      </trans-unit>
+      <trans-unit id="6320319413541466015" datatype="html">
+        <source>day</source>
+        <target state="translated">день</target>
+      </trans-unit>
+      <trans-unit id="7693034132286462542" datatype="html">
+        <source> New Cron Job </source>
+        <target state="translated"> Новая Задача Cron </target>
+      </trans-unit>
+      <trans-unit id="8233354833414258314" datatype="html">
+        <source> Sync (Delete items that is not present at source) </source>
+        <target state="translated"> Синхронизировать (Удалить элементы, которые отсутствуют на источнике) </target>
+      </trans-unit>
+      <trans-unit id="8293670171001042991" datatype="html">
+        <source>every</source>
+        <target state="translated">каждый</target>
+      </trans-unit>
+      <trans-unit id="8797571140213982792" datatype="html">
+        <source>CRON Expression</source>
+        <target state="translated">Выражение CRON</target>
+      </trans-unit>
+      <trans-unit id="9153452608611372640" datatype="html">
+        <source> Advanced Cron Expression </source>
+        <target state="translated"> Расширенное Выражение Cron </target>
+      </trans-unit>
+      <trans-unit id="1648472582356305138" datatype="html">
+        <source>Light Theme</source>
+        <target state="translated">Светлая Тема</target>
+      </trans-unit>
+      <trans-unit id="5311528402610524112" datatype="html">
+        <source>Select Theme</source>
+        <target state="translated">Выбор Темы</target>
+      </trans-unit>
+      <trans-unit id="5824507108095419704" datatype="html">
+        <source>Dark Theme</source>
+        <target state="translated">Темная Тема</target>
+      </trans-unit>
+      <trans-unit id="6788447504106132986" datatype="html">
+        <source>Follow System</source>
+        <target state="translated">Следовать Системе</target>
+      </trans-unit>
+      <trans-unit id="6972700858752369337" datatype="html">
+        <source>File Uploaded Successfully</source>
+        <target state="translated">Файл успешно загружен</target>
+      </trans-unit>
+      <trans-unit id="7037889682600256786" datatype="html">
+        <source>Upload File</source>
+        <target state="translated">Загрузить Файл</target>
+      </trans-unit>
+      <trans-unit id="8219369467592425398" datatype="html">
+        <source>File size too large (max 4MB)</source>
+        <target state="translated">Размер файла слишком большой (макс 4МБ)</target>
+      </trans-unit>
+      <trans-unit id="2430852418842843890" datatype="html">
+        <source>Custom Vfs Option (Json)</source>
+        <target state="translated">Пользовательская Vfs Опция (Json)</target>
+      </trans-unit>
+      <trans-unit id="3560038511903081528" datatype="html">
+        <source>Custom Mount Option (Json)</source>
+        <target state="translated">Пользовательская Опция Монтирования (Json)</target>
+      </trans-unit>
+      <trans-unit id="4655465506698701275" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
+        <target state="translated">Это опции только для продвинутых пользователей! Пожалуйста, вводите опции в формате JSON, ключи в PascalCase. Доступные опции: пожалуйста, смотрите по адресу https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go найдите "type Options struct" часть</target>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+        <target state="translated">Информация</target>
+      </trans-unit>
+      <trans-unit id="625410621869219990" datatype="html">
+        <source>Cache Max Age</source>
+        <target state="translated">Максимальный Возраст Кэша</target>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <target state="translated">Назад</target>
+      </trans-unit>
+      <trans-unit id="7911416166208830577" datatype="html">
+        <source>Help</source>
+        <target state="translated">Помощь</target>
+      </trans-unit>
+      <trans-unit id="8211789557515826583" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</source>
+        <target state="translated">Это опции только для продвинутых пользователей! Пожалуйста, вводите опции в формате JSON, ключи в PascalCase. Доступные опции: пожалуйста, смотрите по адресу https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go найдите "type Options struct" часть</target>
+      </trans-unit>
+      <trans-unit id="8917490374035866138" datatype="html">
+        <source>Continue Anyway</source>
+        <target state="translated">Продолжить Влюбом Случае</target>
+      </trans-unit>
+      <trans-unit id="1261272419600256892" datatype="html">
+        <source>WebUI</source>
+        <target state="translated">WebUI</target>
+      </trans-unit>
+      <trans-unit id="4997332608178159092" datatype="html">
+        <source> (Git)</source>
+        <target state="translated"> (Git)</target>
+      </trans-unit>
+      <trans-unit id="6329815074444777622" datatype="html">
+        <source> (Beta) </source>
+        <target state="translated"> (Бета) </target>
+      </trans-unit>
+      <trans-unit id="9180110319941008393" datatype="html">
+        <source>Environment</source>
+        <target state="translated">Окружение</target>
+      </trans-unit>
+      <trans-unit id="1398596596566435779" datatype="html">
+        <source>Backend Name</source>
+        <target state="translated">Имя Бэкенда</target>
+      </trans-unit>
+      <trans-unit id="3040348421210381432" datatype="html">
+        <source>Backends</source>
+        <target state="translated">Бэкенды</target>
+      </trans-unit>
+      <trans-unit id="3280828454015635549" datatype="html">
+        <source> This name has been used </source>
+        <target state="translated"> Это имя уже было использовано </target>
+      </trans-unit>
+      <trans-unit id="3332040951581277030" datatype="html">
+        <source>Make a copy</source>
+        <target state="translated">Сделать копию</target>
+      </trans-unit>
+      <trans-unit id="5285214346081691861" datatype="html">
+        <source> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <target state="translated"> Действия <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;мат-иконка fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/мат-иконка&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="6169466287448966850" datatype="html">
+        <source>Choose a new name</source>
+        <target state="translated">Выберите новое имя</target>
+      </trans-unit>
+      <trans-unit id="6237521298112481926" datatype="html">
+        <source> Connect your first backend </source>
+        <target state="translated"> Подключите свой первый бэкенд </target>
+      </trans-unit>
+      <trans-unit id="7113597974464283349" datatype="html">
+        <source>Mountpoints</source>
+        <target state="translated">Точки Монтирования</target>
+      </trans-unit>
+      <trans-unit id="8839122668244053110" datatype="html">
+        <source>Path copied to clipboard</source>
+        <target state="translated">Путь скопирован в буфер обмена</target>
+      </trans-unit>
+      <trans-unit id="8911059720204770105" datatype="html">
+        <source>Path</source>
+        <target state="translated">Путь</target>
+      </trans-unit>
+      <trans-unit id="2707993167295093467" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Backends are connected </source>
+        <target state="translated"> <x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Бэкендов подключено </target>
+      </trans-unit>
+      <trans-unit id="4165055535933161167" datatype="html">
+        <source> Go </source>
+        <target state="translated"> Пойти </target>
+      </trans-unit>
+      <trans-unit id="4442926641425549164" datatype="html">
+        <source>Go to</source>
+        <target state="translated">Перейти к</target>
+      </trans-unit>
+      <trans-unit id="4702769273710495234" datatype="html">
+        <source> New Backend </source>
+        <target state="translated"> Новый Backend </target>
+      </trans-unit>
+      <trans-unit id="5093913984358284289" datatype="html">
+        <source> Browse </source>
+        <target state="translated"> Просмотр </target>
+      </trans-unit>
+      <trans-unit id="5399405837204211439" datatype="html">
+        <source> Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> is connected </source>
+        <target state="translated"> Подключен Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> </target>
+      </trans-unit>
+      <trans-unit id="7204138652942116672" datatype="html">
+        <source> Manage </source>
+        <target state="translated"> Управление </target>
+      </trans-unit>
+      <trans-unit id="9154702142818483869" datatype="html">
+        <source> Save your mountpoints here. </source>
+        <target state="translated"> Сохраните ваши точки монтирования здесь. </target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

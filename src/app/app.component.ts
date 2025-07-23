@@ -23,18 +23,152 @@ export class AppComponent implements OnInit {
     {
       display: 'English',
       code: 'en-US',
+      isAI: false,
+    },
+    {
+      display: 'Afrikaans',
+      code: 'af',
+      isAI: true,
+    },
+    {
+      display: 'العربية',
+      code: 'ar',
+      isAI: true,
+    },
+    {
+      display: 'Català',
+      code: 'ca',
+      isAI: true,
+    },
+    {
+      display: 'Čeština',
+      code: 'cs',
+      isAI: true,
+    },
+    {
+      display: 'Dansk',
+      code: 'da',
+      isAI: true,
     },
     {
       display: 'Deutsch',
       code: 'de-DE',
+      isAI: false,
+    },
+    {
+      display: 'Ελληνικά',
+      code: 'el',
+      isAI: true,
+    },
+    {
+      display: 'Español',
+      code: 'es-ES',
+      isAI: true,
+    },
+    {
+      display: 'Suomi',
+      code: 'fi',
+      isAI: true,
+    },
+    {
+      display: 'Français',
+      code: 'fr',
+      isAI: true,
+    },
+    {
+      display: 'עברית',
+      code: 'he',
+      isAI: true,
+    },
+    {
+      display: 'Magyar',
+      code: 'hu',
+      isAI: true,
+    },
+    {
+      display: 'Italiano',
+      code: 'it',
+      isAI: true,
+    },
+    {
+      display: '日本語',
+      code: 'ja',
+      isAI: true,
+    },
+    {
+      display: '한국어',
+      code: 'ko',
+      isAI: true,
+    },
+    {
+      display: 'Nederlands',
+      code: 'nl',
+      isAI: true,
+    },
+    {
+      display: 'Norsk',
+      code: 'no',
+      isAI: true,
+    },
+    {
+      display: 'Polski',
+      code: 'pl',
+      isAI: true,
+    },
+    {
+      display: 'Português (Brasil)',
+      code: 'pt-BR',
+      isAI: true,
+    },
+    {
+      display: 'Português (Portugal)',
+      code: 'pt-PT',
+      isAI: true,
+    },
+    {
+      display: 'Română',
+      code: 'ro',
+      isAI: true,
+    },
+    {
+      display: 'Русский',
+      code: 'ru',
+      isAI: true,
+    },
+    {
+      display: 'Српски',
+      code: 'sr',
+      isAI: true,
+    },
+    {
+      display: 'Svenska',
+      code: 'sv-SE',
+      isAI: true,
     },
     {
       display: 'Türkçe',
       code: 'tr-TR',
+      isAI: false,
+    },
+    {
+      display: 'Українська',
+      code: 'uk',
+      isAI: true,
+    },
+    {
+      display: 'Tiếng Việt',
+      code: 'vi',
+      isAI: true,
     },
     {
       display: '简体中文',
       code: 'zh-CN',
+      isAI: false,
+    },
+    {
+      display: '繁體中文',
+      code: 'zh-TW',
+      isAI: true,
     },
   ];
 

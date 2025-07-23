@@ -126,6 +126,8 @@
       (click)="activateLanguage(language.code)"
     >
       {{ language.display }}
+      <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+      <span *ngIf="language.isAI"> (🤖AI) </span>
     </button>
   </mat-menu>
   <button

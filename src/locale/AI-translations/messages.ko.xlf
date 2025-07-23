@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="ko">
+    <body>
+      <trans-unit id="2102825898069375693" datatype="html">
+        <source>Menu</source>
+        <target state="translated">메뉴</target>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <target state="translated">대시보드</target>
+      </trans-unit>
+      <trans-unit id="3152486099939084158" datatype="html">
+        <source>Drives</source>
+        <target state="translated">드라이브</target>
+      </trans-unit>
+      <trans-unit id="2849267946273310379" datatype="html">
+        <source>Mounting</source>
+        <target state="translated">마운팅</target>
+        <note>noun</note>
+      </trans-unit>
+      <trans-unit id="7730992219911127538" datatype="html">
+        <source>Rclone WebUI</source>
+        <target state="translated">Rclone 웹UI</target>
+      </trans-unit>
+      <trans-unit id="487077452159084336" datatype="html">
+        <source>Select Language</source>
+        <target state="translated">언어 선택</target>
+      </trans-unit>
+      <trans-unit id="2557623954339695776" datatype="html">
+        <source>Connections</source>
+        <target state="translated">연결</target>
+      </trans-unit>
+      <trans-unit id="4352526755847379280" datatype="html">
+        <source>Source Code</source>
+        <target state="translated">소스 코드</target>
+      </trans-unit>
+      <trans-unit id="2649252321173430744" datatype="html">
+        <source>Not Found</source>
+        <target state="translated">찾을 수 없음</target>
+      </trans-unit>
+      <trans-unit id="542838625985791371" datatype="html">
+        <source>return home</source>
+        <target state="translated">홈으로 돌아가기</target>
+      </trans-unit>
+      <trans-unit id="6488103466338737410" datatype="html">
+        <source>Name already exists</source>
+        <target state="translated">이름이 이미 존재합니다</target>
+      </trans-unit>
+      <trans-unit id="12491435104517248" datatype="html">
+        <source>Connection ID not found</source>
+        <target state="translated">연결 ID를 찾을 수 없습니다</target>
+      </trans-unit>
+      <trans-unit id="7285459956951862232" datatype="html">
+        <source>Connection not found</source>
+        <target state="translated">연결을 찾을 수 없습니다</target>
+      </trans-unit>
+      <trans-unit id="2659934568888177208" datatype="html">
+        <source>Connection has no authentication</source>
+        <target state="translated">연결에 인증이 없습니다</target>
+      </trans-unit>
+      <trans-unit id="3013055597615607317" datatype="html">
+        <source>Display Name</source>
+        <target state="translated">디스플레이 이름</target>
+      </trans-unit>
+      <trans-unit id="8505935423745518392" datatype="html">
+        <source> Please enter a display name </source>
+        <target state="translated"> 디스플레이 이름을 입력하십시오 </target>
+      </trans-unit>
+      <trans-unit id="300615299523179346" datatype="html">
+        <source> A connection with this name already exists </source>
+        <target state="translated"> 이 이름으로 연결이 이미 존재합니다 </target>
+      </trans-unit>
+      <trans-unit id="6149473508047129471" datatype="html">
+        <source>Remote Address</source>
+        <target state="translated">원격 주소</target>
+      </trans-unit>
+      <trans-unit id="4288365178410286526" datatype="html">
+        <source> Please enter a valid address </source>
+        <target state="translated"> 유효한 주소를 입력하십시오 </target>
+      </trans-unit>
+      <trans-unit id="1431967982799746382" datatype="html">
+        <source> This connection is not protected by a password </source>
+        <target state="translated"> 이 연결은 비밀번호로 보호되지 않습니다 </target>
+      </trans-unit>
+      <trans-unit id="5248717555542428023" datatype="html">
+        <source>Username</source>
+        <target state="translated">사용자명</target>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <target state="translated">비밀번호</target>
+      </trans-unit>
+      <trans-unit id="7055385188245520959" datatype="html">
+        <source> Remember Password </source>
+        <target state="translated"> 비밀번호 기억하기 </target>
+      </trans-unit>
+      <trans-unit id="7673863024811381818" datatype="html">
+        <source> Test Connection </source>
+        <target state="translated"> 연결 테스트 </target>
+      </trans-unit>
+      <trans-unit id="1545005867911976778" datatype="html">
+        <source> Connect </source>
+        <target state="translated"> 연결 </target>
+      </trans-unit>
+      <trans-unit id="582119650624142213" datatype="html">
+        <source>Connection successful</source>
+        <target state="translated">연결 성공</target>
+      </trans-unit>
+      <trans-unit id="4448321183127826742" datatype="html">
+        <source>Connection failed</source>
+        <target state="translated">연결 실패</target>
+      </trans-unit>
+      <trans-unit id="8643396715708565201" datatype="html">
+        <source>Connection failed:</source>
+        <target state="translated">연결 실패:</target>
+      </trans-unit>
+      <trans-unit id="8451342921207487014" datatype="html">
+        <source>No connections</source>
+        <target state="translated">연결 없음</target>
+      </trans-unit>
+      <trans-unit id="2903873185531053389" datatype="html">
+        <source> New Connection </source>
+        <target state="translated"> 새로운 연결 </target>
+        <note>create</note>
+      </trans-unit>
+      <trans-unit id="1536087519743707362" datatype="html">
+        <source>Dismiss</source>
+        <target state="translated">닫기</target>
+      </trans-unit>
+      <trans-unit id="8191371354890763172" datatype="html">
+        <source>Enter Password</source>
+        <target state="translated">비밀번호 입력</target>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="1879517876731100451" datatype="html">
+        <source>Rclone</source>
+        <target state="translated">Rclone</target>
+      </trans-unit>
+      <trans-unit id="2724055831234181057" datatype="html">
+        <source>Version</source>
+        <target state="translated">버전</target>
+      </trans-unit>
+      <trans-unit id="962765493084218985" datatype="html">
+        <source>Platform</source>
+        <target state="translated">플랫폼</target>
+      </trans-unit>
+      <trans-unit id="8961799598905368955" datatype="html">
+        <source>Go version</source>
+        <target state="translated">Go 버전</target>
+      </trans-unit>
+      <trans-unit id="1069523139277190436" datatype="html">
+        <source>Statistics</source>
+        <target state="translated">통계</target>
+      </trans-unit>
+      <trans-unit id="1441510615438989312" datatype="html">
+        <source>Transferring</source>
+        <target state="translated">전송 중</target>
+      </trans-unit>
+      <trans-unit id="1224770523323579455" datatype="html">
+        <source>Transferred</source>
+        <target state="translated">전송됨</target>
+      </trans-unit>
+      <trans-unit id="3128293408739574" datatype="html">
+        <source>Speed</source>
+        <target state="translated">속도</target>
+      </trans-unit>
+      <trans-unit id="2527698965946238336" datatype="html">
+        <source>Not Measured</source>
+        <target state="translated">측정되지 않음</target>
+      </trans-unit>
+      <trans-unit id="81585474102700882" datatype="html">
+        <source>Used</source>
+        <target state="translated">사용됨</target>
+        <note>Already Used Space</note>
+      </trans-unit>
+      <trans-unit id="3200393806027771580" datatype="html">
+        <source> Trash </source>
+        <target state="translated"> 휴지통 </target>
+        <note>Space used by trash</note>
+      </trans-unit>
+      <trans-unit id="8605967835704545279" datatype="html">
+        <source> Other </source>
+        <target state="translated"> 기타 </target>
+        <note>Space used by other</note>
+      </trans-unit>
+      <trans-unit id="5891064527381218201" datatype="html">
+        <source>Free</source>
+        <target state="translated">여유 공간</target>
+        <note>Available Space</note>
+      </trans-unit>
+      <trans-unit id="7531602241051125940" datatype="html">
+        <source>Objects</source>
+        <target state="translated">객체</target>
+        <note>Count of Objects</note>
+      </trans-unit>
+      <trans-unit id="787163983066183218" datatype="html">
+        <source>Browse</source>
+        <target state="translated">탐색</target>
+      </trans-unit>
+      <trans-unit id="6827560313738519815" datatype="html">
+        <source>New Backend</source>
+        <target state="translated">새 백엔드</target>
+      </trans-unit>
+      <trans-unit id="8232773653071363045" datatype="html">
+        <source>Provider</source>
+        <target state="translated">제공자</target>
+      </trans-unit>
+      <trans-unit id="4580988005648117665" datatype="html">
+        <source>Search</source>
+        <target state="translated">검색</target>
+      </trans-unit>
+      <trans-unit id="3971100408152984961" datatype="html">
+        <source> Next </source>
+        <target state="translated"> 다음 </target>
+        <note>next step</note>
+      </trans-unit>
+      <trans-unit id="8432562579042371182" datatype="html">
+        <source>Options</source>
+        <target state="translated">옵션</target>
+      </trans-unit>
+      <trans-unit id="3623640243867983281" datatype="html">
+        <source> Only stared* fields are required :) </source>
+        <target state="translated"> 별표가 표시된* 필드만 필수입니다 :) </target>
+      </trans-unit>
+      <trans-unit id="4258500568871377211" datatype="html">
+        <source> Got it </source>
+        <target state="translated"> 알겠습니다 </target>
+        <note>understand</note>
+      </trans-unit>
+      <trans-unit id="3044369161367328488" datatype="html">
+        <source> Hide Advanced Options </source>
+        <target state="translated"> 고급 옵션 숨기기 </target>
+      </trans-unit>
+      <trans-unit id="2699313572844735542" datatype="html">
+        <source> Show Advanced Options </source>
+        <target state="translated"> 고급 옵션 보기 </target>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <target state="translated">이름</target>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <target state="translated">저장</target>
+      </trans-unit>
+      <trans-unit id="7960163200088679566" datatype="html">
+        <source>You will be redirected to the provider&apos;s website to authorize, click save now</source>
+        <target state="translated">제공자의 웹사이트로 이동하여 승인하시고, 지금 저장을 클릭하세요</target>
+      </trans-unit>
+      <trans-unit id="2466435579379681938" datatype="html">
+        <source>Authorizing...</source>
+        <target state="translated">승인 중...</target>
+      </trans-unit>
+      <trans-unit id="6649706328938022022" datatype="html">
+        <source>You are all set, click save now</source>
+        <target state="translated">모든 준비가 완료되었습니다. 지금 저장을 클릭하세요</target>
+      </trans-unit>
+      <trans-unit id="3620188369327429839" datatype="html">
+        <source> Save </source>
+        <target state="translated"> 저장 </target>
+      </trans-unit>
+      <trans-unit id="7744129393493523836" datatype="html">
+        <source>Error creating backend: </source>
+        <target state="translated">백엔드 생성 오류: </target>
+      </trans-unit>
+      <trans-unit id="5334162996115147515" datatype="html">
+        <source>Link Created</source>
+        <target state="translated">링크 생성됨</target>
+      </trans-unit>
+      <trans-unit id="3765886400143289586" datatype="html">
+        <source> Copy </source>
+        <target state="translated"> 복사 </target>
+      </trans-unit>
+      <trans-unit id="397098723873502323" datatype="html">
+        <source>Done</source>
+        <target state="translated">완료</target>
+      </trans-unit>
+      <trans-unit id="7022070615528435141" datatype="html">
+        <source>Delete</source>
+        <target state="translated">삭제</target>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <target state="translated">아니오</target>
+      </trans-unit>
+      <trans-unit id="8720977247725652816" datatype="html">
+        <source>Ok</source>
+        <target state="translated">확인</target>
+      </trans-unit>
+      <trans-unit id="4165850386196559100" datatype="html">
+        <source>Empty</source>
+        <target state="translated">비어있음</target>
+      </trans-unit>
+      <trans-unit id="4323470180912194028" datatype="html">
+        <source>Copy</source>
+        <target state="translated">복사</target>
+      </trans-unit>
+      <trans-unit id="2354817630223808522" datatype="html">
+        <source>Move</source>
+        <target state="translated">이동</target>
+      </trans-unit>
+      <trans-unit id="6041115344061899387" datatype="html">
+        <source>Rename</source>
+        <target state="translated">이름 변경</target>
+      </trans-unit>
+      <trans-unit id="3476827161214058075" datatype="html">
+        <source>Generate Link</source>
+        <target state="translated">링크 생성</target>
+      </trans-unit>
+      <trans-unit id="3099741642167775297" datatype="html">
+        <source>Download</source>
+        <target state="translated">다운로드</target>
+      </trans-unit>
+      <trans-unit id="7187000848329495899" datatype="html">
+        <source>Opening File is not implemented yet.</source>
+        <target state="translated">파일 열기는 아직 구현되지 않았습니다.</target>
+      </trans-unit>
+      <trans-unit id="8998179362936748717" datatype="html">
+        <source>OK</source>
+        <target state="translated">확인</target>
+      </trans-unit>
+      <trans-unit id="5488667333459350160" datatype="html">
+        <source>Renamed</source>
+        <target state="translated">이름이 변경됨</target>
+      </trans-unit>
+      <trans-unit id="6381490568322624964" datatype="html">
+        <source>Deleted</source>
+        <target state="translated">삭제됨</target>
+      </trans-unit>
+      <trans-unit id="1674202514578558795" datatype="html">
+        <source>New name</source>
+        <target state="translated">새 이름</target>
+      </trans-unit>
+      <trans-unit id="7958523096095518919" datatype="html">
+        <source> Name already exists </source>
+        <target state="translated"> 이름이 이미 존재합니다 </target>
+      </trans-unit>
+      <trans-unit id="3394880135309962358" datatype="html">
+        <source> Ok </source>
+        <target state="translated"> 확인 </target>
+      </trans-unit>
+      <trans-unit id="5460217556068689396" datatype="html">
+        <source>Go Up</source>
+        <target state="translated">위로 이동</target>
+      </trans-unit>
+      <trans-unit id="1102717806459547726" datatype="html">
+        <source>Refresh</source>
+        <target state="translated">새로고침</target>
+      </trans-unit>
+      <trans-unit id="3591781971294396421" datatype="html">
+        <source>Clipboard</source>
+        <target state="translated">클립보드</target>
+      </trans-unit>
+      <trans-unit id="7478877538855480857" datatype="html">
+        <source>Paste Here</source>
+        <target state="translated">여기에 붙여넣기</target>
+      </trans-unit>
+      <trans-unit id="3823219296477075982" datatype="html">
+        <source>Discard</source>
+        <target state="translated">취소</target>
+      </trans-unit>
+      <trans-unit id="672413176610067158" datatype="html">
+        <source>New Tab</source>
+        <target state="translated">새 탭</target>
+      </trans-unit>
+      <trans-unit id="2812353444192922702" datatype="html">
+        <source> Local Filesystem </source>
+        <target state="translated"> 로컬 파일 시스템 </target>
+      </trans-unit>
+      <trans-unit id="1084063406279979182" datatype="html">
+        <source>Close All</source>
+        <target state="translated">모두 닫기</target>
+      </trans-unit>
+      <trans-unit id="1693401925844219649" datatype="html">
+        <source>Split Window</source>
+        <target state="translated">분할 창</target>
+      </trans-unit>
+      <trans-unit id="2109484463693647579" datatype="html">
+        <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
+        <target state="translated"> 클릭 <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> 백엔드를 열기 위해 </target>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target state="translated">닫기</target>
+      </trans-unit>
+      <trans-unit id="5674970056730934974" datatype="html">
+        <source>Task Created Successfully</source>
+        <target state="translated">작업이 성공적으로 생성되었습니다</target>
+      </trans-unit>
+      <trans-unit id="7501365879745121673" datatype="html">
+        <source>Manage Drives</source>
+        <target state="translated">드라이브 관리</target>
+      </trans-unit>
+      <trans-unit id="3685794532791241025" datatype="html">
+        <source>Explore Drives</source>
+        <target state="translated">드라이브 탐색</target>
+      </trans-unit>
+      <trans-unit id="1971865492332905755" datatype="html">
+        <source>New MountPoint</source>
+        <target state="translated">새 마운트포인트</target>
+      </trans-unit>
+      <trans-unit id="6599356923898400319" datatype="html">
+        <source>Unmount All</source>
+        <target state="translated">모두 언마운트</target>
+      </trans-unit>
+      <trans-unit id="7585826646011739428" datatype="html">
+        <source>Edit</source>
+        <target state="translated">편집</target>
+      </trans-unit>
+      <trans-unit id="560443334489296785" datatype="html">
+        <source>Rclone does not have access to this path, please check the permission of this path</source>
+        <target state="translated">Rclone은 이 경로에 액세스 권한이 없습니다. 이 경로의 권한을 확인하십시오</target>
+      </trans-unit>
+      <trans-unit id="989049066299437124" datatype="html">
+        <source>Mount created and mounted</source>
+        <target state="translated">마운트가 생성되고 마운트되었습니다</target>
+      </trans-unit>
+      <trans-unit id="2364550710330521794" datatype="html">
+        <source>Mount created</source>
+        <target state="translated">마운트가 생성됨</target>
+      </trans-unit>
+      <trans-unit id="984117971499949443" datatype="html">
+        <source>Mounted</source>
+        <target state="translated">마운트됨</target>
+      </trans-unit>
+      <trans-unit id="3297029408193612840" datatype="html">
+        <source>Unmounted</source>
+        <target state="translated">언마운트됨</target>
+      </trans-unit>
+      <trans-unit id="4174953868691227020" datatype="html">
+        <source>Create MountPoint</source>
+        <target state="translated">마운트포인트 생성</target>
+      </trans-unit>
+      <trans-unit id="4736210244914788712" datatype="html">
+        <source>Drive</source>
+        <target state="translated">드라이브</target>
+      </trans-unit>
+      <trans-unit id="174792567272132410" datatype="html">
+        <source> Automatic MountPoint </source>
+        <target state="translated"> 자동 마운트포인트 </target>
+      </trans-unit>
+      <trans-unit id="8643692971848848902" datatype="html">
+        <source>MountPoint</source>
+        <target state="translated">마운트포인트</target>
+      </trans-unit>
+      <trans-unit id="655049383752216892" datatype="html">
+        <source>Mount Now</source>
+        <target state="translated">지금 마운트</target>
+      </trans-unit>
+      <trans-unit id="8188665053347707351" datatype="html">
+        <source> Mount as Readonly Drive </source>
+        <target state="translated"> 읽기 전용 드라이브로 마운트 </target>
+      </trans-unit>
+      <trans-unit id="1174398173025044116" datatype="html">
+        <source> Mount as Windows Network Drive </source>
+        <target state="translated"> Windows 네트워크 드라이브로 마운트 </target>
+      </trans-unit>
+      <trans-unit id="991790413700941336" datatype="html">
+        <source>Cache Mode</source>
+        <target state="translated">캐시 모드</target>
+      </trans-unit>
+      <trans-unit id="3599005616661192177" datatype="html">
+        <source> Off </source>
+        <target state="translated"> 꺼짐 </target>
+      </trans-unit>
+      <trans-unit id="533769579714104079" datatype="html">
+        <source> Minimal (Only opened files are cached) </source>
+        <target state="translated"> 최소 (열린 파일만 캐시됨) </target>
+      </trans-unit>
+      <trans-unit id="616337869273310985" datatype="html">
+        <source> Write (All non-readonly files are cached) </source>
+        <target state="translated"> 쓰기 (모든 비읽기 전용 파일이 캐시됨) </target>
+      </trans-unit>
+      <trans-unit id="3302458363931158751" datatype="html">
+        <source> Full </source>
+        <target state="translated"> 전체 </target>
+      </trans-unit>
+      <trans-unit id="2787011255743936179" datatype="html">
+        <source>File Permissions</source>
+        <target state="translated">파일 권한</target>
+      </trans-unit>
+      <trans-unit id="6880846271161386525" datatype="html">
+        <source>Directory Permissions</source>
+        <target state="translated">디렉토리 권한</target>
+      </trans-unit>
+      <trans-unit id="4021701907132072675" datatype="html">
+        <source> Skip modification time (can speed things up) </source>
+        <target state="translated"> 수정 시간 건너뛰기 (속도를 높일 수 있음) </target>
+      </trans-unit>
+      <trans-unit id="7941428823403788384" datatype="html">
+        <source> Create </source>
+        <target state="translated"> 생성 </target>
+      </trans-unit>
+      <trans-unit id="1518435952515160235" datatype="html">
+        <source> Mounting </source>
+        <target state="translated"> 마운팅 </target>
+        <note>noun</note>
+      </trans-unit>
+      <trans-unit id="2812208926273686149" datatype="html">
+        <source>Create Folder</source>
+        <target state="translated">폴더 생성</target>
+      </trans-unit>
+      <trans-unit id="5559087577598810992" datatype="html">
+        <source>This provider requires authentication. Because you are using a remote backend, automatic authentication (OAuth) is not possible for you. You may need to authorize on local rclone instance and copy the token to the backend.</source>
+        <target state="translated">이 제공자는 인증이 필요합니다. 원격 백엔드를 사용 중이기 때문에 자동 인증(OAuth)이 불가능할 수 있습니다. 로컬 Rclone 인스턴스에서 승인하고 토큰을 백엔드로 복사해야 할 수 있습니다.</target>
+      </trans-unit>
+      <trans-unit id="6660925946511264619" datatype="html">
+        <source> Delete </source>
+        <target state="translated"> 삭제 </target>
+      </trans-unit>
+      <trans-unit id="6759205696902713848" datatype="html">
+        <source>Warning</source>
+        <target state="translated">경고</target>
+      </trans-unit>
+      <trans-unit id="7168628217068609895" datatype="html">
+        <source>Folder Created Successfully</source>
+        <target state="translated">폴더가 성공적으로 생성되었습니다</target>
+      </trans-unit>
+      <trans-unit id="7806473130802584518" datatype="html">
+        <source>view is not ready</source>
+        <target state="translated">뷰가 준비되지 않았습니다</target>
+      </trans-unit>
+      <trans-unit id="1297075260734626852" datatype="html">
+        <source>Tasks Created Successfully</source>
+        <target state="translated">작업이 성공적으로 생성되었습니다</target>
+      </trans-unit>
+      <trans-unit id="3981693023798866214" datatype="html">
+        <source>Item Added to Clipboard, now go to destination and paste</source>
+        <target state="translated">항목이 클립보드에 추가되었습니다. 목적지로 이동하여 붙여넣으십시오</target>
+      </trans-unit>
+      <trans-unit id="7488670430901851630" datatype="html">
+        <source>Remote address is not set</source>
+        <target state="translated">원격 주소가 설정되지 않았습니다</target>
+      </trans-unit>
+      <trans-unit id="4366763205960752449" datatype="html">
+        <source>move</source>
+        <target state="translated">이동</target>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+        <target state="translated">제거</target>
+      </trans-unit>
+      <trans-unit id="5479686051458408124" datatype="html">
+        <source><x id="PH" equiv-text="actionName"/> &quot;<x id="PH_1" equiv-text="name"/>&quot; to &quot;<x id="PH_2" equiv-text="destination"/>:&quot;</source>
+        <target state="translated"><x id="PH" equiv-text="actionName"/> "<x id="PH_1" equiv-text="name"/>" to "<x id="PH_2" equiv-text="destination"/>:"</target>
+      </trans-unit>
+      <trans-unit id="5937251202465808296" datatype="html">
+        <source>More</source>
+        <target state="translated">더 보기</target>
+      </trans-unit>
+      <trans-unit id="6862265996781523030" datatype="html">
+        <source>copy</source>
+        <target state="translated">복사</target>
+      </trans-unit>
+      <trans-unit id="7557275684476197518" datatype="html">
+        <source>sync</source>
+        <target state="translated">동기화</target>
+      </trans-unit>
+      <trans-unit id="7962907777822307509" datatype="html">
+        <source>bi-directional sync</source>
+        <target state="translated">양방향 동기화</target>
+      </trans-unit>
+      <trans-unit id="8111222032681450869" datatype="html">
+        <source>No jobs</source>
+        <target state="translated">작업 없음</target>
+      </trans-unit>
+      <trans-unit id="2870013675900498785" datatype="html">
+        <source>Multi-select</source>
+        <target state="translated">멀티 선택</target>
+      </trans-unit>
+      <trans-unit id="4323657569264880384" datatype="html">
+        <source>{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> item} other {<x id="INTERPOLATION"/> items}}</source>
+        <target state="translated">{VAR_PLURAL, plural, one {<x id="INTERPOLATION"/> 항목} other {<x id="INTERPOLATION"/> 항목들}}</target>
+      </trans-unit>
+      <trans-unit id="6448818549106664206" datatype="html">
+        <source> these <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </source>
+        <target state="translated"> 이 <x id="ICU" equiv-text="{data.length, plural, one {{{data.length}} item} other {{{data.length}} items} }" xid="2555483321350592323"/> </target>
+      </trans-unit>
+      <trans-unit id="9066298133798990764" datatype="html">
+        <source>Would you like to delete</source>
+        <target state="translated">삭제하시겠습니까</target>
+      </trans-unit>
+      <trans-unit id="1987414866514451380" datatype="html">
+        <source> This address is not secure, please set up an HTTPS connection on that host </source>
+        <target state="translated"> 이 주소는 안전하지 않습니다. HTTPS 연결을 설정하십시오 </target>
+      </trans-unit>
+      <trans-unit id="5020688442735484718" datatype="html">
+        <source>Job Manager</source>
+        <target state="translated">작업 관리자</target>
+      </trans-unit>
+      <trans-unit id="8247504084319724481" datatype="html">
+        <source>Mount Manager</source>
+        <target state="translated">마운트 관리자</target>
+      </trans-unit>
+      <trans-unit id="9147492985231433943" datatype="html">
+        <source> Auto Mount on Startup </source>
+        <target state="translated"> 시작 시 자동 마운트 </target>
+      </trans-unit>
+      <trans-unit id="1283895920974679461" datatype="html">
+        <source>Operation</source>
+        <target state="translated">작업</target>
+      </trans-unit>
+      <trans-unit id="1558461139634843126" datatype="html">
+        <source>Scheduled Jobs</source>
+        <target state="translated">예약된 작업</target>
+      </trans-unit>
+      <trans-unit id="1859677652107567652" datatype="html">
+        <source> Copy (Keep items that is not present at source) </source>
+        <target state="translated"> 복사 (소스에 없는 항목 보존) </target>
+      </trans-unit>
+      <trans-unit id="1950868348901927527" datatype="html">
+        <source> Please enter a valid CRON expression </source>
+        <target state="translated"> 올바른 CRON 표현식을 입력하십시오 </target>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <target state="translated">부터</target>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <target state="translated">까지</target>
+      </trans-unit>
+      <trans-unit id="5338673541028692262" datatype="html">
+        <source>at</source>
+        <target state="translated">에서</target>
+      </trans-unit>
+      <trans-unit id="5689442636734876664" datatype="html">
+        <source>hour</source>
+        <target state="translated">시</target>
+      </trans-unit>
+      <trans-unit id="607811176731198522" datatype="html">
+        <source> Scheduled Jobs </source>
+        <target state="translated"> 예약된 작업 </target>
+      </trans-unit>
+      <trans-unit id="617331019136138957" datatype="html">
+        <source> Bi-direction Sync </source>
+        <target state="translated"> 양방향 동기화 </target>
+      </trans-unit>
+      <trans-unit id="6320319413541466015" datatype="html">
+        <source>day</source>
+        <target state="translated">일</target>
+      </trans-unit>
+      <trans-unit id="7693034132286462542" datatype="html">
+        <source> New Cron Job </source>
+        <target state="translated"> 새 크론 작업 </target>
+      </trans-unit>
+      <trans-unit id="8233354833414258314" datatype="html">
+        <source> Sync (Delete items that is not present at source) </source>
+        <target state="translated"> 동기화 (소스에 없는 항목 삭제) </target>
+      </trans-unit>
+      <trans-unit id="8293670171001042991" datatype="html">
+        <source>every</source>
+        <target state="translated">매</target>
+      </trans-unit>
+      <trans-unit id="8797571140213982792" datatype="html">
+        <source>CRON Expression</source>
+        <target state="translated">CRON 표현식</target>
+      </trans-unit>
+      <trans-unit id="9153452608611372640" datatype="html">
+        <source> Advanced Cron Expression </source>
+        <target state="translated"> 고급 크론 표현식 </target>
+      </trans-unit>
+      <trans-unit id="1648472582356305138" datatype="html">
+        <source>Light Theme</source>
+        <target state="translated">라이트 테마</target>
+      </trans-unit>
+      <trans-unit id="5311528402610524112" datatype="html">
+        <source>Select Theme</source>
+        <target state="translated">테마 선택</target>
+      </trans-unit>
+      <trans-unit id="5824507108095419704" datatype="html">
+        <source>Dark Theme</source>
+        <target state="translated">다크 테마</target>
+      </trans-unit>
+      <trans-unit id="6788447504106132986" datatype="html">
+        <source>Follow System</source>
+        <target state="translated">시스템 따라가기</target>
+      </trans-unit>
+      <trans-unit id="6972700858752369337" datatype="html">
+        <source>File Uploaded Successfully</source>
+        <target state="translated">파일이 성공적으로 업로드되었습니다</target>
+      </trans-unit>
+      <trans-unit id="7037889682600256786" datatype="html">
+        <source>Upload File</source>
+        <target state="translated">파일 업로드</target>
+      </trans-unit>
+      <trans-unit id="8219369467592425398" datatype="html">
+        <source>File size too large (max 4MB)</source>
+        <target state="translated">파일 크기가 너무 큽니다 (최대 4MB)</target>
+      </trans-unit>
+      <trans-unit id="2430852418842843890" datatype="html">
+        <source>Custom Vfs Option (Json)</source>
+        <target state="translated">사용자 정의 Vfs 옵션 (Json)</target>
+      </trans-unit>
+      <trans-unit id="3560038511903081528" datatype="html">
+        <source>Custom Mount Option (Json)</source>
+        <target state="translated">사용자 정의 마운트 옵션 (Json)</target>
+      </trans-unit>
+      <trans-unit id="4655465506698701275" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go find &quot;type Options struct&quot; part</source>
+        <target state="translated">이 옵션은 고급 사용자만을 위한 것입니다! 옵션을 JSON 형식으로 입력하고, 키는 PascalCase로 지정하십시오. 사용 가능한 옵션: https://github.com/rclone/rclone/blob/master/vfs/vfscommon/options.go에서 "type Options struct" 부분을 참조하십시오</target>
+      </trans-unit>
+      <trans-unit id="5037437391296624618" datatype="html">
+        <source>Information</source>
+        <target state="translated">정보</target>
+      </trans-unit>
+      <trans-unit id="625410621869219990" datatype="html">
+        <source>Cache Max Age</source>
+        <target state="translated">캐시 최대 연령</target>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <target state="translated">돌아가기</target>
+      </trans-unit>
+      <trans-unit id="7911416166208830577" datatype="html">
+        <source>Help</source>
+        <target state="translated">도움말</target>
+      </trans-unit>
+      <trans-unit id="8211789557515826583" datatype="html">
+        <source>This is options for advanced user only! Please input options in JSON format, keys are in PascalCase. Available options: please refer to https://github.com/rclone/rclone/blob/master/cmd/mountlib/mount.go find &quot;type Options struct&quot; part</source>
+        <target state="translated">이 옵션은 고급 사용자만을 위한 것입니다! 옵션을 JSON 형식으로 입력하고, 키는 PascalCase로 지정하십시오. 사용 가능한 옵션: https://github.com/rclone/rcline/blob/master/cmd/mountlib/mount.go에서 "type Options struct" 부분을 참조하십시오</target>
+      </trans-unit>
+      <trans-unit id="8917490374035866138" datatype="html">
+        <source>Continue Anyway</source>
+        <target state="translated">계속 진행</target>
+      </trans-unit>
+      <trans-unit id="1261272419600256892" datatype="html">
+        <source>WebUI</source>
+        <target state="translated">웹UI</target>
+      </trans-unit>
+      <trans-unit id="4997332608178159092" datatype="html">
+        <source> (Git)</source>
+        <target state="translated"> (Git)</target>
+      </trans-unit>
+      <trans-unit id="6329815074444777622" datatype="html">
+        <source> (Beta) </source>
+        <target state="translated"> (Beta) </target>
+      </trans-unit>
+      <trans-unit id="9180110319941008393" datatype="html">
+        <source>Environment</source>
+        <target state="translated">환경</target>
+      </trans-unit>
+      <trans-unit id="1398596596566435779" datatype="html">
+        <source>Backend Name</source>
+        <target state="translated">백엔드 이름</target>
+      </trans-unit>
+      <trans-unit id="3040348421210381432" datatype="html">
+        <source>Backends</source>
+        <target state="translated">백엔드</target>
+      </trans-unit>
+      <trans-unit id="3280828454015635549" datatype="html">
+        <source> This name has been used </source>
+        <target state="translated"> 이 이름은 이미 사용 중입니다 </target>
+      </trans-unit>
+      <trans-unit id="3332040951581277030" datatype="html">
+        <source>Make a copy</source>
+        <target state="translated">복사본 만들기</target>
+      </trans-unit>
+      <trans-unit id="5285214346081691861" datatype="html">
+        <source> Actions <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></source>
+        <target state="translated"> 작업 <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;expand_more&quot;&gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="6169466287448966850" datatype="html">
+        <source>Choose a new name</source>
+        <target state="translated">새 이름 선택</target>
+      </trans-unit>
+      <trans-unit id="6237521298112481926" datatype="html">
+        <source> Connect your first backend </source>
+        <target state="translated"> 첫 번째 백엔드를 연결하세요 </target>
+      </trans-unit>
+      <trans-unit id="7113597974464283349" datatype="html">
+        <source>Mountpoints</source>
+        <target state="translated">마운트포인트</target>
+      </trans-unit>
+      <trans-unit id="8839122668244053110" datatype="html">
+        <source>Path copied to clipboard</source>
+        <target state="translated">경로가 클립보드에 복사되었습니다</target>
+      </trans-unit>
+      <trans-unit id="8911059720204770105" datatype="html">
+        <source>Path</source>
+        <target state="translated">경로</target>
+      </trans-unit>
+      <trans-unit id="2707993167295093467" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> Backends are connected </source>
+        <target state="translated"> <x id="INTERPOLATION" equiv-text="{{ backends?.length }}"/> 백엔드가 연결되었습니다 </target>
+      </trans-unit>
+      <trans-unit id="4165055535933161167" datatype="html">
+        <source> Go </source>
+        <target state="translated"> 이동 </target>
+      </trans-unit>
+      <trans-unit id="4442926641425549164" datatype="html">
+        <source>Go to</source>
+        <target state="translated">이동하기</target>
+      </trans-unit>
+      <trans-unit id="4702769273710495234" datatype="html">
+        <source> New Backend </source>
+        <target state="translated"> 새 백엔드 </target>
+      </trans-unit>
+      <trans-unit id="5093913984358284289" datatype="html">
+        <source> Browse </source>
+        <target state="translated"> 탐색 </target>
+      </trans-unit>
+      <trans-unit id="5399405837204211439" datatype="html">
+        <source> Backend <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/> is connected </source>
+        <target state="translated"> 백엔드 <x id="INTERPOLATION" equiv-text="{{ backends?.[0] }}"/>이(가) 연결되었습니다 </target>
+      </trans-unit>
+      <trans-unit id="7204138652942116672" datatype="html">
+        <source> Manage </source>
+        <target state="translated"> 관리 </target>
+      </trans-unit>
+      <trans-unit id="9154702142818483869" datatype="html">
+        <source> Save your mountpoints here. </source>
+        <target state="translated"> 마운트 포인트를 여기에 저장하세요. </target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

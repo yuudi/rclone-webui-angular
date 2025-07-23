@@ -19,17 +19,121 @@
           "baseHref": "en-US/"
         },
         "locales": {
+          "af": {
+            "translation": "src/locale/AI-translations/messages.af.xlf",
+            "baseHref": "af/"
+          },
+          "ar": {
+            "translation": "src/locale/AI-translations/messages.ar.xlf",
+            "baseHref": "ar/"
+          },
+          "ca": {
+            "translation": "src/locale/AI-translations/messages.ca.xlf",
+            "baseHref": "ca/"
+          },
+          "cs": {
+            "translation": "src/locale/AI-translations/messages.cs.xlf",
+            "baseHref": "cs/"
+          },
+          "da": {
+            "translation": "src/locale/AI-translations/messages.da.xlf",
+            "baseHref": "da/"
+          },
           "de-DE": {
             "translation": "src/locale/messages.de-DE.xlf",
             "baseHref": "de-DE/"
+          },
+          "el": {
+            "translation": "src/locale/AI-translations/messages.el.xlf",
+            "baseHref": "el/"
+          },
+          "es-ES": {
+            "translation": "src/locale/AI-translations/messages.es-ES.xlf",
+            "baseHref": "es-ES/"
+          },
+          "fi": {
+            "translation": "src/locale/AI-translations/messages.fi.xlf",
+            "baseHref": "fi/"
+          },
+          "fr": {
+            "translation": "src/locale/AI-translations/messages.fr.xlf",
+            "baseHref": "fr/"
+          },
+          "he": {
+            "translation": "src/locale/AI-translations/messages.he.xlf",
+            "baseHref": "he/"
+          },
+          "hu": {
+            "translation": "src/locale/AI-translations/messages.hu.xlf",
+            "baseHref": "hu/"
+          },
+          "it": {
+            "translation": "src/locale/AI-translations/messages.it.xlf",
+            "baseHref": "it/"
+          },
+          "ja": {
+            "translation": "src/locale/AI-translations/messages.ja.xlf",
+            "baseHref": "ja/"
+          },
+          "ko": {
+            "translation": "src/locale/AI-translations/messages.ko.xlf",
+            "baseHref": "ko/"
+          },
+          "nl": {
+            "translation": "src/locale/AI-translations/messages.nl.xlf",
+            "baseHref": "nl/"
+          },
+          "no": {
+            "translation": "src/locale/AI-translations/messages.no.xlf",
+            "baseHref": "no/"
+          },
+          "pl": {
+            "translation": "src/locale/AI-translations/messages.pl.xlf",
+            "baseHref": "pl/"
+          },
+          "pt-BR": {
+            "translation": "src/locale/AI-translations/messages.pt-BR.xlf",
+            "baseHref": "pt-BR/"
+          },
+          "pt-PT": {
+            "translation": "src/locale/AI-translations/messages.pt-PT.xlf",
+            "baseHref": "pt-PT/"
+          },
+          "ro": {
+            "translation": "src/locale/AI-translations/messages.ro.xlf",
+            "baseHref": "ro/"
+          },
+          "ru": {
+            "translation": "src/locale/AI-translations/messages.ru.xlf",
+            "baseHref": "ru/"
+          },
+          "sr": {
+            "translation": "src/locale/AI-translations/messages.sr.xlf",
+            "baseHref": "sr/"
+          },
+          "sv-SE": {
+            "translation": "src/locale/AI-translations/messages.sv-SE.xlf",
+            "baseHref": "sv-SE/"
           },
           "tr-TR": {
             "translation": "src/locale/messages.tr-TR.xlf",
             "baseHref": "tr-TR/"
           },
+          "uk": {
+            "translation": "src/locale/AI-translations/messages.uk.xlf",
+            "baseHref": "uk/"
+          },
+          "vi": {
+            "translation": "src/locale/AI-translations/messages.vi.xlf",
+            "baseHref": "vi/"
+          },
           "zh-CN": {
             "translation": "src/locale/messages.zh-CN.xlf",
             "baseHref": "zh-CN/"
+          },
+          "zh-TW": {
+            "translation": "src/locale/AI-translations/messages.zh-TW.xlf",
+            "baseHref": "zh-TW/"
           }
         }
       },
