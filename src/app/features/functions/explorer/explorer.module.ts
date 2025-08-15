@@ -19,6 +19,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { BytesPipe } from 'src/app/shared/bytes.pipe';
 import { ExplorerRoutingModule } from './explorer-routing.module';
 import { CopyDialogComponent } from './explorer-viewer/copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './explorer-viewer/delete-confirm-dialog/delete-confirm-dialog.component';
@@ -37,6 +38,7 @@ import { ExplorerComponent } from './explorer.component';
     RenameDialogComponent,
     CopyDialogComponent,
     FileIconPipe,
+    BytesPipe,
   ],
   imports: [
     CommonModule,
