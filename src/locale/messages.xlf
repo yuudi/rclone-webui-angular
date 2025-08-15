@@ -281,12 +281,6 @@
       <trans-unit id="2812353444192922702" datatype="html">
         <source> Local Filesystem </source>
       </trans-unit>
-      <trans-unit id="1084063406279979182" datatype="html">
-        <source>Close All</source>
-      </trans-unit>
-      <trans-unit id="1693401925844219649" datatype="html">
-        <source>Split Window</source>
-      </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
         <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
       </trans-unit>
@@ -614,6 +608,12 @@
       </trans-unit>
       <trans-unit id="9154702142818483869" datatype="html">
         <source> Save your mountpoints here. </source>
+      </trans-unit>
+      <trans-unit id="5449281378832055106" datatype="html">
+        <source>Close panel</source>
+      </trans-unit>
+      <trans-unit id="4578187535108185434" datatype="html">
+        <source>Split panel</source>
       </trans-unit>
     </body>
   </file>

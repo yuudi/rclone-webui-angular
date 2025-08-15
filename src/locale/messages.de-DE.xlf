@@ -371,14 +371,6 @@
         <source> Local Filesystem </source>
         <target state="translated">Lokales Dateisystem</target>
       </trans-unit>
-      <trans-unit id="1084063406279979182" datatype="html">
-        <source>Close All</source>
-        <target state="translated">Alle schließen</target>
-      </trans-unit>
-      <trans-unit id="1693401925844219649" datatype="html">
-        <source>Split Window</source>
-        <target state="translated">Fenster teilen</target>
-      </trans-unit>
       <trans-unit id="2109484463693647579" datatype="html">
         <source> click <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> to open a backend </source>
         <target state="translated">um ein Backend zu öffnen <x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon fontIcon=&quot;library_add&quot; class=&quot;material-icons-outlined&quot; &gt;"/><x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="t"/> Klicken</target>
@@ -815,6 +807,14 @@
       <trans-unit id="7204138652942116672" datatype="html">
         <source> Manage </source>
         <target state="new"> Manage </target>
+      </trans-unit>
+      <trans-unit id="5449281378832055106" datatype="html">
+        <source>Close panel</source>
+        <target state="new">Close panel</target>
+      </trans-unit>
+      <trans-unit id="4578187535108185434" datatype="html">
+        <source>Split panel</source>
+        <target state="new">Split panel</target>
       </trans-unit>
     </body>
   </file>
