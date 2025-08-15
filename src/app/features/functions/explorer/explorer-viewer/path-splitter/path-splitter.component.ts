@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -23,7 +24,7 @@ export class PathSplitterComponent implements OnInit, OnChanges {
   editMode = false;
   editingPath = '';
 
-  @ViewChild('pathInput') pathInput: MatInput | undefined;
+  @ViewChild('pathInput') pathInput: ElementRef<MatInput> | undefined;
 
   constructor(private snackBar: MatSnackBar) {}
 
@@ -71,7 +72,8 @@ export class PathSplitterComponent implements OnInit, OnChanges {
     const backendIdentifier = this.backend ? this.backend + ':' : '/';
     this.editingPath = backendIdentifier + this.path;
     this.editMode = true;
-    this.pathInput?.focus();
+    // focus the input after DOM rendered
+    setTimeout(() => this.pathInput?.nativeElement.focus());
   }
 
   pathEditCancel() {

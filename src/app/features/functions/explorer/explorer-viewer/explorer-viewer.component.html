@@ -25,9 +25,9 @@
       <!-- TODO: icon base on MIME type -->
       <div matListItemTitle>{{ item.Name }}</div>
       <div matListItemLine>
-        <ng-container *ngIf="!item.IsDir"
-          >{{ item.Size | bytes }} |</ng-container
-        >
+        <ng-container *ngIf="!item.IsDir">
+          {{ item.Size | bytes }} |
+        </ng-container>
         {{ item.ModTime | date }}
       </div>
     </mat-list-option>
