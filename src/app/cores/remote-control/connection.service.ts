@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable, distinctUntilChanged } from 'rxjs';
 
 import { v4 as uuid } from 'uuid';
 
-import { Err, Ok, Result } from 'src/app/shared/result';
 import { environment } from 'src/environments/environment';
 import { ObservableAwaitableStorageItem } from '../storage';
 import { AppStorageService } from '../storage/app-storage.service';
@@ -62,11 +61,11 @@ export class ConnectionService {
   async saveConnection(
     connection: { displayName: string; remoteAddress: string },
     credentials: Credentials | NoAuthentication | NotSaved = NotSaved,
-  ): Promise<Result<Connection, string>> {
+  ): Promise<Connection> {
     const { displayName, remoteAddress } = connection;
 
     if (await this.checkNameExists(displayName)) {
-      return Err($localize`Name already exists`);
+      throw new Error($localize`Name already exists`);
     }
 
     const authentication = credentials
@@ -85,7 +84,7 @@ export class ConnectionService {
     connections.push(newConnection);
     this.connectionsStorage.set(connections);
 
-    return Ok(newConnection);
+    return newConnection;
   }
 
   async getConnection(id: string): Promise<Connection | null> {
@@ -97,11 +96,11 @@ export class ConnectionService {
     id: string,
     connection: Partial<Omit<Connection, 'id' | 'authentication'>>,
     credentials: Credentials | NoAuthentication | NotSaved = NotSaved,
-  ): Promise<Result<void, string>> {
+  ): Promise<void> {
     const connections = await this.connectionsStorage.get();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
-      return Err($localize`Connection ID not found`);
+      throw new Error($localize`Connection ID not found`);
     }
 
     if (
@@ -109,7 +108,7 @@ export class ConnectionService {
       connection.displayName !== connections[index].displayName &&
       (await this.checkNameExists(connection.displayName))
     ) {
-      return Err($localize`Name already exists`);
+      throw new Error($localize`Name already exists`);
     }
 
     const updatedConnection = {
@@ -123,23 +122,21 @@ export class ConnectionService {
 
     connections[index] = updatedConnection;
     this.connectionsStorage.set(connections);
-
-    return Ok();
   }
 
   async activateConnection(
     id: string,
     credentials?: Credentials | NoAuthentication,
-  ): Promise<Result<void, string>> {
+  ): Promise<void> {
     const connection = await this.getConnection(id);
     if (!connection) {
-      return Err($localize`Connection not found`);
+      throw new Error($localize`Connection not found`);
     }
 
     const useConnection = { ...connection }; // shallow copy
     if (credentials === undefined) {
       if (useConnection.authentication === undefined) {
-        return Err($localize`Connection has no authentication`);
+        throw new Error($localize`Connection has no authentication`);
       }
     } else {
       useConnection.authentication = credentials
@@ -148,21 +145,17 @@ export class ConnectionService {
     }
 
     this.activeConnection.next(useConnection as ConnectionWithAuthentication);
-
-    return Ok();
   }
 
-  async deleteConnection(id: string): Promise<Result<void, string>> {
+  async deleteConnection(id: string): Promise<void> {
     const connections = await this.connectionsStorage.get();
     const index = connections.findIndex((c) => c.id === id);
     if (index === -1) {
-      return Err($localize`Connection not found`);
+      throw new Error($localize`Connection not found`);
     }
 
     connections.splice(index, 1);
     this.connectionsStorage.set(connections);
-
-    return Ok();
   }
 
   getConnections(): Observable<Connection[]> {

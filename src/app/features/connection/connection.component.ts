@@ -43,14 +43,12 @@ export class ConnectionComponent implements OnInit {
       });
       return;
     }
-    const result = await this.connectionService.activateConnection(
-      connection.id,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`Dismiss`);
-      return;
+    try {
+      await this.connectionService.activateConnection(connection.id);
+      this.route.navigate(['']);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
     }
-    this.route.navigate(['']);
   }
 
   connectDeleted(connection: Connection) {
