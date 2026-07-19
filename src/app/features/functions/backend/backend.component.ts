@@ -30,7 +30,7 @@ export class BackendComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const backends = (await this.backendService.getBackends()).orThrow();
+    const backends = await this.backendService.getBackends();
     for (const id in backends) {
       this.backendList.push({
         id,
@@ -46,7 +46,7 @@ export class BackendComponent implements OnInit {
       console.error(`Backend ${id} not found!`);
       return;
     }
-    const info = (await this.backendService.getBackendInfo(id)).orThrow();
+    const info = await this.backendService.getBackendInfo(id);
     if (!info.Features.About) {
       ref.usage$ = of(Unmeasured);
       return;
@@ -77,13 +77,13 @@ export class BackendComponent implements OnInit {
       return 0;
     }
     const { type, ...options } = backend.config;
-    (await this.backendService.createBackend(newName, type, options)).orThrow();
+    await this.backendService.createBackend(newName, type, options);
     this.backendList.push({ ...backend, id: newName });
     return 1;
   }
 
   async backendDelete(id: string) {
-    (await this.backendService.deleteBackend(id)).orThrow();
+    await this.backendService.deleteBackend(id);
     const index = this.backendList.findIndex((backend) => backend.id === id);
     this.backendList.splice(index, 1);
   }

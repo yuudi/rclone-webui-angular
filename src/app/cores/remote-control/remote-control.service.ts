@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, lastValueFrom, map, of } from 'rxjs';
 
-import { Err, Ok, Result } from 'src/app/shared/result';
 import { ConnectionService, NoAuthentication } from './connection.service';
 
 type ErrorResponse = {
@@ -31,7 +30,7 @@ export class RemoteControlService {
           [key: string]: string | boolean | number | Record<string, unknown>;
         }
       | FormData,
-  ): Promise<Result<R, string>> {
+  ): Promise<R> {
     const remote = this.connectionService.getActiveConnection();
     const headers: { [key: string]: string } = {};
     if (remote && remote.authentication) {
@@ -47,43 +46,39 @@ export class RemoteControlService {
           headers,
         })
         .pipe(
-          map((result) => Ok(result)),
           catchError((error: HttpErrorResponse) => {
             this.logError(error);
-            return of(
-              Err(String(error?.error?.error ?? error?.error ?? error)),
+            const msg = String(
+              error?.error?.error ?? error?.error ?? error?.message ?? error,
             );
+            throw new Error(msg);
           }),
         ),
     );
     // http observable only emits once, so we can use lastValueFrom
   }
 
-  getDownloadUrl(backend: string, file: string): Result<string, string> {
+  getDownloadUrl(backend: string, file: string): string {
     const remote = this.connectionService.getActiveConnection();
     if (!remote) {
-      return Err('Remote address is not set');
+      throw new Error('Remote address is not set');
     }
-    return Ok(
+    return (
       remote.remoteAddress +
-        '/[' +
-        (backend ? backend + ':' : '/') +
-        ']/' +
-        file,
+      '/[' +
+      (backend ? backend + ':' : '/') +
+      ']/' +
+      file
     );
   }
 
-  downloadFile(backend: string, file: string): Result<void, string> {
-    const result = this.getDownloadUrl(backend, file);
-    if (!result.ok) {
-      return result;
-    }
+  downloadFile(backend: string, file: string): void {
+    const url = this.getDownloadUrl(backend, file);
     const a = document.createElement('a');
-    a.href = result.value;
+    a.href = url;
     a.download = file.split('/').pop() ?? file;
     a.click();
     a.remove();
-    return Ok();
   }
 
   testConnection(

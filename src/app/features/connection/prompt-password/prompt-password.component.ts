@@ -47,27 +47,23 @@ export class PromptPasswordComponent {
       };
     }
 
-    if (remember) {
-      const result = await this.connectionService.updateConnection(
+    try {
+      if (remember) {
+        await this.connectionService.updateConnection(
+          this.data.id,
+          {},
+          credentials,
+        );
+      }
+
+      await this.connectionService.activateConnection(
         this.data.id,
-        {},
         credentials,
       );
-      if (!result.ok) {
-        this.snackBar.open(result.error, $localize`Dismiss`);
-        return;
-      }
-    }
 
-    const result = await this.connectionService.activateConnection(
-      this.data.id,
-      credentials,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`Dismiss`);
-      return;
+      this.router.navigate(['/dashboard']);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
     }
-
-    this.router.navigate(['/dashboard']);
   }
 }

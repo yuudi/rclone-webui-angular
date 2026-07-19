@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { AppStorageService, AwaitableStorageItem } from 'src/app/cores/storage';
-import { Ok, Result } from 'src/app/shared/result';
 import { Backend, BackendUsage, FsInfo } from './backend.model';
 
 @Injectable({
@@ -47,14 +46,11 @@ export class BackendService {
       });
   }
 
-  async listBackends(): Promise<Result<string[], string>> {
+  async listBackends(): Promise<string[]> {
     const result = await this.rc.call<{ remotes: string[] }>(
       'config/listremotes',
     );
-    if (!result.ok) {
-      return result;
-    }
-    return Ok(result.value.remotes);
+    return result.remotes;
   }
 
   getBackends() {
@@ -86,49 +82,48 @@ export class BackendService {
             return observer.complete();
           }
         }
-        const usageResult = await this.rc.call<BackendUsage>(
-          'operations/about',
-          {
+        try {
+          const usage = await this.rc.call<BackendUsage>('operations/about', {
             fs: id + ':',
-          },
-        );
-        if (!usageResult.ok) {
-          return observer.error(usageResult.error);
+          });
+          cache[id] = {
+            usage,
+            updated: now,
+          };
+          storage.set(cache);
+          observer.next(usage);
+          observer.complete();
+        } catch (error) {
+          observer.error(error);
         }
-        cache[id] = {
-          usage: usageResult.value,
-          updated: now,
-        };
-        storage.set(cache);
-        observer.next(usageResult.value);
-        observer.complete();
       })();
     });
   }
 
   async checkWindowsDriveExist(drive: string): Promise<boolean> {
-    const result = await this.rc.call<BackendUsage>('operations/about', {
-      fs: drive + ':/',
-    });
-    return result.ok;
+    try {
+      await this.rc.call<BackendUsage>('operations/about', {
+        fs: drive + ':/',
+      });
+      return true;
+    } catch {
+      return false;
+    }
   }
 
-  async getBackendInfo(id: string): Promise<Result<FsInfo, string>> {
+  async getBackendInfo(id: string): Promise<FsInfo> {
     if (!this.backendInfoCacheStorage) {
       throw new Error('backendUsageCacheStorage is not initialized');
     }
     const cache = await this.backendInfoCacheStorage.get();
     const cachedInfo = cache[id];
     if (cachedInfo) {
-      return Ok(cachedInfo);
+      return cachedInfo;
     }
     const result = await this.rc.call<FsInfo>('operations/fsinfo', {
       fs: id ? id + ':' : '/',
     });
-    if (!result.ok) {
-      return result;
-    }
-    cache[id] = result.value;
+    cache[id] = result;
     this.backendInfoCacheStorage.set(cache);
     return result;
   }
@@ -137,7 +132,7 @@ export class BackendService {
     name: string,
     providerName: string,
     options: { [key: string]: string },
-  ): Promise<Result<void, string>> {
+  ): Promise<void> {
     return this.rc.call('config/create', {
       name,
       type: providerName,
@@ -145,7 +140,7 @@ export class BackendService {
     });
   }
 
-  deleteBackend(name: string): Promise<Result<void, string>> {
+  deleteBackend(name: string): Promise<void> {
     return this.rc.call('config/delete', { name });
   }
 }

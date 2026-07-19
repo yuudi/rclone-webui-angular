@@ -21,10 +21,8 @@ export class DashboardComponent implements OnInit {
   stat$?: Observable<TransferStatus>;
   constructor(private dashboardService: DashboardService) {}
   async ngOnInit() {
-    this.backends = (
-      await this.dashboardService.getBackends()
-    ).orThrow().remotes;
-    this.version = (await this.dashboardService.getVersion()).orThrow();
+    this.backends = (await this.dashboardService.getBackends()).remotes;
+    this.version = await this.dashboardService.getVersion();
     this.stat$ = this.dashboardService.getStat();
   }
 }

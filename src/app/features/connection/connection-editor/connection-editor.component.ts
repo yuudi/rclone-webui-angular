@@ -16,7 +16,6 @@ import {
   NotSaved,
 } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { Err } from 'src/app/shared/result';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -145,18 +144,21 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
       });
       return;
     }
-    let result;
-    if (this.connection) {
-      result = await this.updateConnectionAndActivate();
-    } else {
-      result = await this.addConnectionAndActivate();
-    }
-    if (result.ok) {
+    try {
+      if (this.connection) {
+        await this.updateConnectionAndActivate();
+      } else {
+        await this.addConnectionAndActivate();
+      }
       this.router.navigate(['/dashboard']);
-    } else {
-      this.snackBar.open($localize`Connection failed:` + result.error, 'OK', {
-        duration: 3000,
-      });
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Connection failed:` + (err as Error).message,
+        'OK',
+        {
+          duration: 3000,
+        },
+      );
     }
   }
 
@@ -172,22 +174,18 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const credential = notProtected ? NoAuthentication : { username, password };
 
-    const saveResult = await this.connectionService.saveConnection(
+    const newConnection = await this.connectionService.saveConnection(
       { displayName, remoteAddress },
       remember ? credential : NotSaved,
     );
 
-    if (!saveResult.ok) {
-      return saveResult;
-    }
-
-    return this.connectionService.activateConnection(
-      saveResult.value.id,
+    await this.connectionService.activateConnection(
+      newConnection.id,
       credential,
     );
   }
 
-  updateConnectionAndActivate() {
+  async updateConnectionAndActivate() {
     const {
       displayName,
       remoteAddress,
@@ -199,15 +197,16 @@ export class ConnectionEditorComponent implements OnInit, OnChanges {
 
     const id = this.connection?.id;
     if (!id) {
-      return Err('Connection ID is null');
+      throw new Error('Connection ID is null');
     }
 
     const credential = notProtected ? NoAuthentication : { username, password };
 
-    return this.connectionService.updateConnection(
+    await this.connectionService.updateConnection(
       id,
       { displayName, remoteAddress },
       remember ? credential : NotSaved,
     );
+    await this.connectionService.activateConnection(id, credential);
   }
 }

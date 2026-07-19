@@ -90,20 +90,21 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     this.multiSelectMode = false;
     const taskPath = this.path;
 
-    const result = await this.explorerService.listChildren(
-      this.backend,
-      this.path,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`OK`);
+    try {
+      const children = await this.explorerService.listChildren(
+        this.backend,
+        this.path,
+      );
+      if (taskPath !== this.path) {
+        // path changed
+        return;
+      }
+      this.children = children;
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`OK`);
       this.children = [];
-      throw new Error(result.error);
+      throw err;
     }
-    if (taskPath !== this.path) {
-      // path changed
-      return;
-    }
-    this.children = result.value;
   }
 
   selectionChanged() {
@@ -211,17 +212,13 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   }
 
   async renameConfirmed(item: DirectoryItem, newName: string) {
-    const result = await this.explorerService.renameItem(
-      this.backend,
-      item,
-      newName,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`OK`);
-      return;
+    try {
+      await this.explorerService.renameItem(this.backend, item, newName);
+      this.snackBar.open($localize`Renamed`);
+      item.Name = newName;
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`OK`);
     }
-    this.snackBar.open($localize`Renamed`);
-    item.Name = newName;
   }
 
   async deleteClicked() {
@@ -247,16 +244,17 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
   }
 
   private async deleteItem(item: DirectoryItem) {
-    const result = await this.explorerService.deleteItem(this.backend, item);
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`OK`);
-      throw new Error(result.error);
+    try {
+      await this.explorerService.deleteItem(this.backend, item);
+      const index = this.children?.findIndex((i) => i.Path === item.Path);
+      if (index === undefined || index === -1) {
+        throw new Error('Deleted item not found in children.');
+      }
+      this.children?.splice(index, 1);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`OK`);
+      throw err;
     }
-    const index = this.children?.findIndex((i) => i.Path === item.Path);
-    if (index === undefined || index === -1) {
-      throw new Error('Deleted item not found in children.');
-    }
-    this.children?.splice(index, 1);
   }
 
   async generateLinkClicked() {
@@ -264,19 +262,19 @@ export class ExplorerViewerComponent implements OnInit, OnChanges {
     if (!item) {
       throw new Error('No context menu item when generate link clicked.');
     }
-    const result = await this.explorerService.generateLink(
-      this.backend,
-      item.Path,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`OK`);
-      return;
+    try {
+      const link = await this.explorerService.generateLink(
+        this.backend,
+        item.Path,
+      );
+      this.dialog.open(CopyDialogComponent, {
+        data: {
+          content: link,
+        },
+      });
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`OK`);
     }
-    this.dialog.open(CopyDialogComponent, {
-      data: {
-        content: result.value,
-      },
-    });
   }
 
   downloadClicked() {

@@ -33,7 +33,7 @@ export class MountComponent implements OnInit {
   }
 
   async newMountClicked() {
-    const remoteList = (await this.backendService.listBackends()).orThrow();
+    const remoteList = await this.backendService.listBackends();
     const os = await this.os;
     const dialog: MatDialogRef<
       NewMountDialogComponent,
@@ -73,11 +73,9 @@ export class MountComponent implements OnInit {
           : '/mnt/rclone/' + fsString;
     }
     if (os !== 'windows') {
-      const result = await this.explorerService.createEmptyFolder(
-        '',
-        mountPoint,
-      );
-      if (!result.ok) {
+      try {
+        await this.explorerService.createEmptyFolder('', mountPoint);
+      } catch {
         this.snackBar.open(
           $localize`Rclone does not have access to this path, please check the permission of this path`,
           $localize`Dismiss`,
@@ -143,40 +141,40 @@ export class MountComponent implements OnInit {
 
   async slideChanged(id: string, checked: boolean) {
     if (checked) {
-      const result = await this.mountService.mount(id);
-      if (this.hasCron) {
-        await this.mountService.enableAutoMount(id);
-      }
-      if (result.ok) {
+      try {
+        await this.mountService.mount(id);
+        if (this.hasCron) {
+          await this.mountService.enableAutoMount(id);
+        }
         this.snackBar.open($localize`Mounted`, undefined, {
           duration: 3000,
         });
-      } else {
-        this.snackBar.open(result.error, $localize`Dismiss`);
+      } catch (err) {
+        this.snackBar.open((err as Error).message, $localize`Dismiss`);
       }
     } else {
-      const result = await this.mountService.unmount(id);
-      if (this.hasCron) {
-        await this.mountService.disableAutoMount(id);
-      }
-      if (result.ok) {
+      try {
+        await this.mountService.unmount(id);
+        if (this.hasCron) {
+          await this.mountService.disableAutoMount(id);
+        }
         this.snackBar.open($localize`Unmounted`, undefined, {
           duration: 3000,
         });
-      } else {
-        this.snackBar.open(result.error, $localize`Dismiss`);
+      } catch (err) {
+        this.snackBar.open((err as Error).message, $localize`Dismiss`);
       }
     }
   }
 
   async unmountAllClicked() {
-    const result = await this.mountService.unmountAll();
-    if (result.ok) {
+    try {
+      await this.mountService.unmountAll();
       this.snackBar.open($localize`Unmounted`, undefined, {
         duration: 3000,
       });
-    } else {
-      this.snackBar.open(result.error, $localize`Dismiss`);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
     }
   }
 
