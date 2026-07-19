@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { AppStorageService } from 'src/app/cores/storage';
-import { Err, Ok, Result } from 'src/app/shared/result';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { AppProvider } from './new-backend.model';
 import { NewBackendService } from './new-backend.service';
@@ -19,7 +18,7 @@ import { NewBackendService } from './new-backend.service';
 })
 export class NewBackendComponent implements OnInit {
   stepperSelectedIndex = 0;
-  providers?: Promise<Result<AppProvider[]>>;
+  providers?: Promise<AppProvider[]>;
   newBackendName = new FormControl('', [
     Validators.required,
     Validators.min(2),
@@ -119,7 +118,7 @@ export class NewBackendComponent implements OnInit {
 
   resetProviderOptions() {
     if (!this.providerSelected) {
-      return Err('No provider selected');
+      return;
     }
     this.providerOptions = Object.fromEntries(
       this.providerSelected.Options.map((option) => [
@@ -127,7 +126,6 @@ export class NewBackendComponent implements OnInit {
         option.DefaultStr,
       ]),
     );
-    return Ok();
   }
 
   async saveClicked() {
@@ -148,16 +146,12 @@ export class NewBackendComponent implements OnInit {
       return;
     }
     this.waitingForBackend = true;
-    const result = await this.newBackendService.createBackend(
-      name,
-      backend,
-      options,
-    );
-    if (result.ok) {
+    try {
+      await this.newBackendService.createBackend(name, backend, options);
       this.router.navigate(['rclone', 'drive']);
-    } else {
+    } catch (err) {
       this.snackBar.open(
-        $localize`Error creating backend: ` + result.error,
+        $localize`Error creating backend: ` + (err as Error).message,
         $localize`Dismiss`,
       );
       this.waitingForBackend = false;
