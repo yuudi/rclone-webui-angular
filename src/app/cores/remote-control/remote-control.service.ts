@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, lastValueFrom, of } from 'rxjs';
+import { catchError, lastValueFrom, map, of } from 'rxjs';
 
 import { ConnectionService, NoAuthentication } from './connection.service';
 
