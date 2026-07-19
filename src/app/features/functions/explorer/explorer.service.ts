@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { Ok, Result } from 'src/app/shared/result';
 import { JobID, JobService } from '../job/job.service';
 import { AppClipboard, DirectoryItem, EmptyObj } from './explorer.model';
 
@@ -15,13 +14,13 @@ export class ExplorerService {
   ) {}
 
   async getOsType(): Promise<string> {
-    return (await this.rc.call<{ os: string }>('core/version')).orThrow().os;
+    return (await this.rc.call<{ os: string }>('core/version')).os;
   }
 
   async listChildren(
     backend: string,
     path: string,
-  ): Promise<Result<DirectoryItem[], string>> {
+  ): Promise<DirectoryItem[]> {
     const result = await this.rc.call<{ list: DirectoryItem[] }>(
       'operations/list',
       {
@@ -29,31 +28,24 @@ export class ExplorerService {
         remote: path,
       },
     );
-    if (!result.ok) {
-      return result;
-    }
-    return Ok(result.value.list);
+    return result.list;
   }
 
   async createEmptyFolder(
     backend: string,
     path: string,
-  ): Promise<Result<void, string>> {
-    const result = await this.rc.call<EmptyObj>('operations/mkdir', {
+  ): Promise<void> {
+    await this.rc.call<EmptyObj>('operations/mkdir', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
-    if (!result.ok) {
-      return result;
-    }
-    return Ok();
   }
 
   uploadSmallFile(
     backend: string,
     path: string,
     file: File,
-  ): Promise<Result<EmptyObj, string>> {
+  ): Promise<EmptyObj> {
     const fs = encodeURIComponent(ExplorerService.toFs(backend));
     const remote = encodeURIComponent(path);
     const form = new FormData();
@@ -68,35 +60,27 @@ export class ExplorerService {
   async deleteFile(
     backend: string,
     path: string,
-  ): Promise<Result<void, string>> {
-    const result = await this.rc.call<EmptyObj>('operations/deletefile', {
+  ): Promise<void> {
+    await this.rc.call<EmptyObj>('operations/deletefile', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
-    if (!result.ok) {
-      return result;
-    }
-    return Ok();
   }
 
   async deleteFolder(
     backend: string,
     path: string,
-  ): Promise<Result<void, string>> {
-    const result = await this.rc.call<EmptyObj>('operations/purge', {
+  ): Promise<void> {
+    await this.rc.call<EmptyObj>('operations/purge', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
-    if (!result.ok) {
-      return result;
-    }
-    return Ok();
   }
 
   deleteItem(
     backend: string,
     item: DirectoryItem,
-  ): Promise<Result<void, string>> {
+  ): Promise<void> {
     if (item.IsDir) {
       return this.deleteFolder(backend, item.Path);
     } else {
@@ -108,7 +92,7 @@ export class ExplorerService {
     backend: string,
     item: DirectoryItem,
     newName: string,
-  ): Promise<Result<void, string>> {
+  ): Promise<void> {
     const pathList = item.Path.split('/');
     pathList[pathList.length - 1] = newName;
     const newPath = pathList.join('/');
@@ -123,7 +107,7 @@ export class ExplorerService {
   async generateLink(
     backend: string,
     path: string,
-  ): Promise<Result<string, string>> {
+  ): Promise<string> {
     const result = await this.rc.call<{ url: string }>(
       'operations/publiclink',
       {
@@ -131,17 +115,14 @@ export class ExplorerService {
         remote: path,
       },
     );
-    if (!result.ok) {
-      return result;
-    }
-    return Ok(result.value.url);
+    return result.url;
   }
 
   async clipboardOperate(
     backend: string,
     path: string,
     clipboard: AppClipboard,
-  ): Promise<Result<JobID<EmptyObj>, string>[]> {
+  ): Promise<JobID<EmptyObj>[]> {
     return Promise.all(
       clipboard.items.map((item) => {
         if (item.IsDir) {
@@ -183,17 +164,13 @@ export class ExplorerService {
     srcRemote: string,
     dstFs: string,
     dstRemote: string,
-  ): Promise<Result<void, string>> {
-    const result = await this.rc.call<EmptyObj>(`operations/${action}file`, {
+  ): Promise<void> {
+    await this.rc.call<EmptyObj>(`operations/${action}file`, {
       srcFs: ExplorerService.toFs(srcFs),
       srcRemote,
       dstFs: ExplorerService.toFs(dstFs),
       dstRemote,
     });
-    if (!result.ok) {
-      return result;
-    }
-    return Ok();
   }
 
   /**
@@ -210,15 +187,11 @@ export class ExplorerService {
     srcRemote: string,
     dstFs: string,
     dstRemote: string,
-  ): Promise<Result<void, string>> {
-    const result = await this.rc.call<EmptyObj>('sync/' + action, {
+  ): Promise<void> {
+    await this.rc.call<EmptyObj>('sync/' + action, {
       srcFs: ExplorerService.toFs(srcFs) + srcRemote,
       dstFs: ExplorerService.toFs(dstFs) + dstRemote,
     });
-    if (!result.ok) {
-      return result;
-    }
-    return Ok();
   }
 
   /**
@@ -237,7 +210,7 @@ export class ExplorerService {
     dstFs: string,
     dstRemote: string,
     summary?: string,
-  ): Promise<Result<JobID<EmptyObj>, string>> {
+  ): Promise<JobID<EmptyObj>> {
     return this.jobService.callAsync<EmptyObj>(
       `operations/${action}file`,
       {
@@ -266,7 +239,7 @@ export class ExplorerService {
     dstFs: string,
     dstRemote: string,
     summary?: string,
-  ): Promise<Result<JobID<EmptyObj>, string>> {
+  ): Promise<JobID<EmptyObj>> {
     return this.jobService.callAsync<EmptyObj>(
       'sync/' + action,
       {

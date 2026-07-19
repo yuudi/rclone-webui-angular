@@ -42,7 +42,7 @@ export class ExplorerComponent implements OnInit {
 
   ngOnInit() {
     this.backendService.listBackends().then((list) => {
-      this.backendList = list.orThrow();
+      this.backendList = list;
     });
 
     this.fetchLocalFsList();
@@ -74,9 +74,7 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend,
           path,
-          info: this.backendService
-            .getBackendInfo(backend)
-            .then((result) => result.orThrow()),
+          info: this.backendService.getBackendInfo(backend),
           actions: {},
         });
         return;
@@ -87,9 +85,7 @@ export class ExplorerComponent implements OnInit {
         this.viewsGroups[0].tabs.push({
           backend: backend,
           path: '',
-          info: this.backendService
-            .getBackendInfo(backend)
-            .then((result) => result.orThrow()),
+          info: this.backendService.getBackendInfo(backend),
           actions: {},
         });
       }
@@ -131,9 +127,7 @@ export class ExplorerComponent implements OnInit {
     group.tabs.push({
       backend: backend,
       path: '',
-      info: this.backendService
-        .getBackendInfo(backend)
-        .then((result) => result.orThrow()),
+      info: this.backendService.getBackendInfo(backend),
       actions: {},
     });
     group.currentTab = group.tabs.length - 1;
@@ -185,36 +179,18 @@ export class ExplorerComponent implements OnInit {
     if (action) {
       clipboard.type = action;
     }
-    const resultList = await this.explorerService.clipboardOperate(
-      view.backend,
-      view.path,
-      clipboard,
-    );
-    if (resultList.length === 1) {
-      const result = resultList[0];
-      if (result.ok) {
-        this.snackBar.open(
-          $localize`Task Created Successfully`,
-          $localize`Dismiss`,
-        );
-      } else {
-        this.snackBar.open(result.error, $localize`Dismiss`);
-      }
-      return;
-    }
-    const errors: string[] = [];
-    for (const result of resultList) {
-      if (!result.ok) {
-        errors.push(result.error);
-      }
-    }
-    if (errors.length === 0) {
+    try {
+      await this.explorerService.clipboardOperate(
+        view.backend,
+        view.path,
+        clipboard,
+      );
       this.snackBar.open(
-        $localize`Tasks Created Successfully`,
+        $localize`Task Created Successfully`,
         $localize`Dismiss`,
       );
-    } else {
-      this.snackBar.open(errors.join('\n'), $localize`Dismiss`);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
     }
   }
 
@@ -239,19 +215,19 @@ export class ExplorerComponent implements OnInit {
       // User cancelled
       return;
     }
-    const result = await this.explorerService.createEmptyFolder(
-      view.backend,
-      view.path + '/' + name,
-    );
-    if (!result.ok) {
-      this.snackBar.open(result.error, $localize`Dismiss`);
-      return;
+    try {
+      await this.explorerService.createEmptyFolder(
+        view.backend,
+        view.path + '/' + name,
+      );
+      this.snackBar.open(
+        $localize`Folder Created Successfully`,
+        $localize`Dismiss`,
+      );
+      view.actions.addChild?.(name, true);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
     }
-    this.snackBar.open(
-      $localize`Folder Created Successfully`,
-      $localize`Dismiss`,
-    );
-    view.actions.addChild?.(name, true);
   }
 
   uploadFileClicked(view: ExplorerView) {
@@ -277,20 +253,16 @@ export class ExplorerComponent implements OnInit {
         );
         return;
       }
-      const result = await this.explorerService.uploadSmallFile(
-        backend,
-        path,
-        file,
-      );
-      if (!result.ok) {
-        this.snackBar.open(result.error, $localize`Dismiss`);
-        return;
+      try {
+        await this.explorerService.uploadSmallFile(backend, path, file);
+        this.snackBar.open(
+          $localize`File Uploaded Successfully`,
+          $localize`Dismiss`,
+        );
+        view.actions.addChild?.(file.name, false);
+      } catch (err) {
+        this.snackBar.open((err as Error).message, $localize`Dismiss`);
       }
-      this.snackBar.open(
-        $localize`File Uploaded Successfully`,
-        $localize`Dismiss`,
-      );
-      view.actions.addChild?.(file.name, false);
     };
   }
 }

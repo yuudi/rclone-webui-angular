@@ -10,7 +10,6 @@ import {
   AppStorageService,
   ObservableAwaitableStorageItem,
 } from 'src/app/cores/storage';
-import { Err, Ok, Result } from 'src/app/shared/result';
 import { environment } from 'src/environments/environment';
 import { JobInfo } from './job.model';
 
@@ -98,11 +97,10 @@ export class JobService {
     if (this.jobsStorage === undefined) {
       throw new Error('jobsStorage is initialized');
     }
-    const [jobs, jobInfoResult] = await Promise.all([
+    const [jobs, jobInfo] = await Promise.all([
       this.jobsStorage.get(),
       this.getJobInfo(id),
     ]);
-    const jobInfo = jobInfoResult.orThrow();
     const index = jobs.jobs.findIndex((job) => job.id === id);
     if (index === -1) {
       // new job
@@ -166,15 +164,12 @@ export class JobService {
       [key: string]: string | boolean | number | Record<string, unknown>;
     },
     summary?: string,
-  ): Promise<Result<JobID<R>, string>> {
+  ): Promise<JobID<R>> {
     const result = await this.rc.call<{ jobid: number }>(operation, {
       _async: true,
       ...params,
     });
-    if (!result.ok) {
-      return result;
-    }
-    const jobid = result.value.jobid;
+    const jobid = result.jobid;
     this.appendJob(
       {
         id: jobid,
@@ -182,27 +177,24 @@ export class JobService {
       },
       summary ?? operation,
     );
-    return Ok(jobid);
+    return jobid;
   }
 
   getJobs(): Observable<JobOverview[]> {
     return this.jobsSubject;
   }
 
-  private async getJobList() {
-    const res = await this.rc.call<{ executeId?: string; jobids: number[] }>(
-      'job/list',
-    );
-    return res.orThrow();
+  private getJobList() {
+    return this.rc.call<{ executeId?: string; jobids: number[] }>('job/list');
   }
 
-  async getJobInfo<R>(jobid: JobID<R>): Promise<Result<JobInfo<R>, string>> {
+  async getJobInfo<R>(jobid: JobID<R>): Promise<JobInfo<R>> {
     if (this.finishedJobCache[jobid]) {
-      return Ok(this.finishedJobCache[jobid]);
+      return this.finishedJobCache[jobid];
     }
     const res = await this.rc.call<JobInfo<R>>('job/status', { jobid });
-    if (res.ok && res.value.finished) {
-      this.finishedJobCache[jobid] = res.value;
+    if (res.finished) {
+      this.finishedJobCache[jobid] = res;
     }
     return res;
   }
@@ -211,7 +203,7 @@ export class JobService {
     return this.rc.call('job/stop', { jobid });
   }
 
-  async removeJob(jobid: JobID) {
+  async removeJob(jobid: JobID): Promise<void> {
     if (this.jobsStorage === undefined) {
       throw new Error('jobsStorage is initialized');
     }
@@ -219,11 +211,10 @@ export class JobService {
     const job = await this.jobsStorage.get();
     const index = job.jobs.findIndex((job) => job.id === jobid);
     if (index === -1) {
-      return Err('job not found');
+      throw new Error('job not found');
     }
     job.jobs.splice(index, 1);
     this.jobsStorage.set(job);
-    return Ok();
   }
 
   async removeFinishedJobs() {
