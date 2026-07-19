@@ -19,9 +19,10 @@ import { RemoteControlService } from 'src/app/cores/remote-control/remote-contro
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-connection-editor',
-  templateUrl: './connection-editor.component.html',
-  styleUrls: ['./connection-editor.component.scss'],
+    selector: 'app-connection-editor',
+    templateUrl: './connection-editor.component.html',
+    styleUrls: ['./connection-editor.component.scss'],
+    standalone: false
 })
 export class ConnectionEditorComponent implements OnInit, OnChanges {
   @Input() connection?: Connection;

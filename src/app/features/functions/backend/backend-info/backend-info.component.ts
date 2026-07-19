@@ -3,9 +3,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Backend, BackendUsage } from '../backend.model';
 
 @Component({
-  selector: 'app-backend-info[backendName][backend]',
-  templateUrl: './backend-info.component.html',
-  styleUrls: ['./backend-info.component.scss'],
+    selector: 'app-backend-info[backendName][backend]',
+    templateUrl: './backend-info.component.html',
+    styleUrls: ['./backend-info.component.scss'],
+    standalone: false
 })
 export class BackendInfoComponent {
   @Input() backendName!: string;

@@ -11,7 +11,8 @@ import {
 import { Subject, bufferTime, filter } from 'rxjs';
 
 @Directive({
-  selector: '[appSingleClick]',
+    selector: '[appSingleClick]',
+    standalone: false
 })
 export class SingleClickDirective implements OnInit, OnDestroy {
   @Input() appSingleClickDelay = 500;

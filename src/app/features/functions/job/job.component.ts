@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { JobService } from './job.service';
 
 @Component({
-  selector: 'app-job',
-  templateUrl: './job.component.html',
-  styleUrls: ['./job.component.scss'],
+    selector: 'app-job',
+    templateUrl: './job.component.html',
+    styleUrls: ['./job.component.scss'],
+    standalone: false
 })
 export class JobComponent {
   jobs$ = this.jobService.getJobs();

@@ -11,9 +11,10 @@ import { MountService, MountSetting } from './mount.service';
 import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.component';
 
 @Component({
-  selector: 'app-mount',
-  templateUrl: './mount.component.html',
-  styleUrls: ['./mount.component.scss'],
+    selector: 'app-mount',
+    templateUrl: './mount.component.html',
+    styleUrls: ['./mount.component.scss'],
+    standalone: false
 })
 export class MountComponent implements OnInit {
   settings$?: Observable<MountSetting[]>;

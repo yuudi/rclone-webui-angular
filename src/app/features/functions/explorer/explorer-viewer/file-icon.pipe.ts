@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DirectoryItem } from '../explorer.model';
 
 @Pipe({
-  name: 'fileIcon',
+    name: 'fileIcon',
+    standalone: false
 })
 export class FileIconPipe implements PipeTransform {
   transform(value: DirectoryItem): string {

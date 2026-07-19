@@ -8,9 +8,10 @@ import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialo
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-new-mount-dialog',
-  templateUrl: './new-mount-dialog.component.html',
-  styleUrls: ['./new-mount-dialog.component.scss'],
+    selector: 'app-new-mount-dialog',
+    templateUrl: './new-mount-dialog.component.html',
+    styleUrls: ['./new-mount-dialog.component.scss'],
+    standalone: false
 })
 export class NewMountDialogComponent {
   mountForm = this.fb.nonNullable.group({

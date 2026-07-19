@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-easy-cron',
-  templateUrl: './easy-cron.component.html',
-  styleUrls: ['./easy-cron.component.scss'],
+    selector: 'app-easy-cron',
+    templateUrl: './easy-cron.component.html',
+    styleUrls: ['./easy-cron.component.scss'],
+    standalone: false
 })
 export class EasyCronComponent {
   @Output() valueChange = new EventEmitter<string>();

@@ -3,9 +3,10 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-copy-dialog',
-  templateUrl: './copy-dialog.component.html',
-  styleUrls: ['./copy-dialog.component.scss'],
+    selector: 'app-copy-dialog',
+    templateUrl: './copy-dialog.component.html',
+    styleUrls: ['./copy-dialog.component.scss'],
+    standalone: false
 })
 export class CopyDialogComponent {
   constructor(

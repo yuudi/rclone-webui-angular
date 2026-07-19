@@ -12,9 +12,10 @@ import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-path-splitter[backend][path]',
-  templateUrl: './path-splitter.component.html',
-  styleUrls: ['./path-splitter.component.scss'],
+    selector: 'app-path-splitter[backend][path]',
+    templateUrl: './path-splitter.component.html',
+    styleUrls: ['./path-splitter.component.scss'],
+    standalone: false
 })
 export class PathSplitterComponent implements OnInit, OnChanges {
   @Input() backend!: string;
