@@ -2,7 +2,8 @@
 
 @import "@angular/material/theming";
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 $angular-primary: mat.m2-define-palette(mat.$m2-indigo-palette, 500, 100, 900);
 $angular-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
