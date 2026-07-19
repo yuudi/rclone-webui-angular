@@ -26,10 +26,9 @@ import {
 import { CronService, Task } from '../cron.service';
 
 @Component({
-    selector: 'app-cron-editor',
-    templateUrl: './cron-editor.component.html',
-    styleUrls: ['./cron-editor.component.scss'],
-    standalone: false
+  selector: 'app-cron-editor',
+  templateUrl: './cron-editor.component.html',
+  styleUrls: ['./cron-editor.component.scss'],
 })
 export class CronEditorComponent implements OnInit, OnDestroy {
   cronForm = this.fb.nonNullable.group({

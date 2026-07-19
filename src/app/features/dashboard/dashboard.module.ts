@@ -11,7 +11,6 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,6 +19,7 @@ import { DashboardComponent } from './dashboard.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    DashboardComponent,
   ],
   exports: [DashboardComponent],
 })

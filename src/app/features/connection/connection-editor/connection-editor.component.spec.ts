@@ -8,7 +8,7 @@ describe('ConnectionEditorComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ConnectionEditorComponent],
+      imports: [ConnectionEditorComponent],
     });
     fixture = TestBed.createComponent(ConnectionEditorComponent);
     component = fixture.componentInstance;

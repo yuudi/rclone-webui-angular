@@ -5,10 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CronService, Schedular, Task } from './cron.service';
 
 @Component({
-    selector: 'app-cron',
-    templateUrl: './cron.component.html',
-    styleUrls: ['./cron.component.scss'],
-    standalone: false
+  selector: 'app-cron',
+  templateUrl: './cron.component.html',
+  styleUrls: ['./cron.component.scss'],
 })
 export class CronComponent implements OnInit {
   schedular!: Schedular;

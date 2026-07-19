@@ -18,11 +18,6 @@ import { ConnectionComponent } from './connection.component';
 import { PromptPasswordComponent } from './prompt-password/prompt-password.component';
 
 @NgModule({
-  declarations: [
-    ConnectionEditorComponent,
-    ConnectionComponent,
-    PromptPasswordComponent,
-  ],
   imports: [
     CommonModule,
     ConnectionRoutingModule,
@@ -37,6 +32,9 @@ import { PromptPasswordComponent } from './prompt-password/prompt-password.compo
     MatDividerModule,
     MatDialogModule,
     MatIconModule,
+    ConnectionEditorComponent,
+    ConnectionComponent,
+    PromptPasswordComponent,
   ],
   exports: [ConnectionEditorComponent],
 })

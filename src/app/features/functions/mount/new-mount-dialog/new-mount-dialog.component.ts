@@ -1,17 +1,40 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { jsonStringValidator } from 'src/app/shared/json-string-validator.directive';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'app-new-mount-dialog',
-    templateUrl: './new-mount-dialog.component.html',
-    styleUrls: ['./new-mount-dialog.component.scss'],
-    standalone: false
+  selector: 'app-new-mount-dialog',
+  templateUrl: './new-mount-dialog.component.html',
+  styleUrls: ['./new-mount-dialog.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+  ],
 })
 export class NewMountDialogComponent {
   mountForm = this.fb.nonNullable.group({

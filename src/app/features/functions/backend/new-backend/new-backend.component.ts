@@ -12,10 +12,9 @@ import { AppProvider } from './new-backend.model';
 import { NewBackendService } from './new-backend.service';
 
 @Component({
-    selector: 'app-new-backend',
-    templateUrl: './new-backend.component.html',
-    styleUrls: ['./new-backend.component.scss'],
-    standalone: false
+  selector: 'app-new-backend',
+  templateUrl: './new-backend.component.html',
+  styleUrls: ['./new-backend.component.scss'],
 })
 export class NewBackendComponent implements OnInit {
   stepperSelectedIndex = 0;

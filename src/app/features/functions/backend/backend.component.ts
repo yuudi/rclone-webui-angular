@@ -12,10 +12,9 @@ type Unmeasured = null;
 const Unmeasured = null;
 
 @Component({
-    selector: 'app-backend',
-    templateUrl: './backend.component.html',
-    styleUrls: ['./backend.component.scss'],
-    standalone: false
+  selector: 'app-backend',
+  templateUrl: './backend.component.html',
+  styleUrls: ['./backend.component.scss'],
 })
 export class BackendComponent implements OnInit {
   backendList: {

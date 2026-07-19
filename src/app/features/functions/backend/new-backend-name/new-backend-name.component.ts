@@ -3,10 +3,9 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-new-backend-name',
-    templateUrl: './new-backend-name.component.html',
-    styleUrls: ['./new-backend-name.component.scss'],
-    standalone: false
+  selector: 'app-new-backend-name',
+  templateUrl: './new-backend-name.component.html',
+  styleUrls: ['./new-backend-name.component.scss'],
 })
 export class NewBackendNameComponent {
   newName = '';

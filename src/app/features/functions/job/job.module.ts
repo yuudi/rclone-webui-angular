@@ -13,7 +13,6 @@ import { JobRoutingModule } from './job-routing.module';
 import { JobComponent } from './job.component';
 
 @NgModule({
-  declarations: [JobComponent],
   imports: [
     CommonModule,
     JobRoutingModule,
@@ -24,6 +23,7 @@ import { JobComponent } from './job.component';
     MatIconModule,
     MatMenuModule,
     MatTooltipModule,
+    JobComponent,
   ],
 })
 export class JobModule {}

@@ -8,7 +8,7 @@ describe('CopyDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CopyDialogComponent],
+      imports: [CopyDialogComponent],
     });
     fixture = TestBed.createComponent(CopyDialogComponent);
     component = fixture.componentInstance;

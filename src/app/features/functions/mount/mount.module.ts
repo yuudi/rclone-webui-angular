@@ -22,7 +22,6 @@ import { MountComponent } from './mount.component';
 import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.component';
 
 @NgModule({
-  declarations: [MountComponent, NewMountDialogComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -41,6 +40,8 @@ import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.com
     MatSelectModule,
     MatDividerModule,
     MatMenuModule,
+    MountComponent,
+    NewMountDialogComponent,
   ],
 })
 export class MountModule {}

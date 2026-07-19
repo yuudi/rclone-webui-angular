@@ -1,8 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Observable, lastValueFrom } from 'rxjs';
-
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { environment } from 'src/environments/environment';
 import { BackendService } from '../backend/backend.service';
@@ -11,10 +22,21 @@ import { MountService, MountSetting } from './mount.service';
 import { NewMountDialogComponent } from './new-mount-dialog/new-mount-dialog.component';
 
 @Component({
-    selector: 'app-mount',
-    templateUrl: './mount.component.html',
-    styleUrls: ['./mount.component.scss'],
-    standalone: false
+  selector: 'app-mount',
+  templateUrl: './mount.component.html',
+  styleUrls: ['./mount.component.scss'],
+  imports: [
+    CommonModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatMenuModule,
+  ],
 })
 export class MountComponent implements OnInit {
   settings$?: Observable<MountSetting[]>;

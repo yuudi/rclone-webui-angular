@@ -8,7 +8,7 @@ describe('EasyCronComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EasyCronComponent],
+      imports: [EasyCronComponent],
     });
     fixture = TestBed.createComponent(EasyCronComponent);
     component = fixture.componentInstance;

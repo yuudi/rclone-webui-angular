@@ -13,10 +13,9 @@ import {
 import { PromptPasswordComponent } from './prompt-password/prompt-password.component';
 
 @Component({
-    selector: 'app-connection',
-    templateUrl: './connection.component.html',
-    styleUrls: ['./connection.component.scss'],
-    standalone: false
+  selector: 'app-connection',
+  templateUrl: './connection.component.html',
+  styleUrls: ['./connection.component.scss'],
 })
 export class ConnectionComponent implements OnInit {
   connections$?: Observable<Connection[]>;

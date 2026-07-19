@@ -19,12 +19,6 @@ import { BackendComponent } from './backend.component';
 import { NewBackendNameComponent } from './new-backend-name/new-backend-name.component';
 
 @NgModule({
-  declarations: [
-    BackendComponent,
-    BackendInfoComponent,
-    SingleClickDirective,
-    NewBackendNameComponent,
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,6 +32,10 @@ import { NewBackendNameComponent } from './new-backend-name/new-backend-name.com
     MatSnackBarModule,
     MatDialogModule,
     BytesPipeStandalone,
+    BackendComponent,
+    BackendInfoComponent,
+    SingleClickDirective,
+    NewBackendNameComponent,
   ],
   exports: [BackendComponent],
 })

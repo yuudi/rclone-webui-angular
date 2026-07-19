@@ -5,7 +5,6 @@ import { FunctionsRoutingModule } from './functions-routing.module';
 import { FunctionsComponent } from './functions.component';
 
 @NgModule({
-  declarations: [FunctionsComponent],
-  imports: [CommonModule, FunctionsRoutingModule],
+  imports: [CommonModule, FunctionsRoutingModule, FunctionsComponent],
 })
 export class FunctionsModule {}

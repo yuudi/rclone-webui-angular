@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-    imports: [CommonModule, MatButtonModule, MatDialogModule],
-    templateUrl: './simple-dialog.component.html',
-    styleUrls: ['./simple-dialog.component.scss']
+  imports: [CommonModule, MatButtonModule, MatDialogModule],
+  templateUrl: './simple-dialog.component.html',
+  styleUrls: ['./simple-dialog.component.scss'],
 })
 export class SimpleDialogComponent<T> {
   constructor(

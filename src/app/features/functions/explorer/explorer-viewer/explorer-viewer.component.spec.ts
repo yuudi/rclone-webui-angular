@@ -8,7 +8,7 @@ describe('ExplorerViewerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExplorerViewerComponent],
+      imports: [ExplorerViewerComponent],
     });
     fixture = TestBed.createComponent(ExplorerViewerComponent);
     component = fixture.componentInstance;

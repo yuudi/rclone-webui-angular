@@ -8,7 +8,7 @@ describe('MountComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MountComponent],
+      imports: [MountComponent],
     });
     fixture = TestBed.createComponent(MountComponent);
     component = fixture.componentInstance;

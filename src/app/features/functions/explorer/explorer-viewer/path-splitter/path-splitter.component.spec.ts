@@ -8,7 +8,7 @@ describe('PathSplitterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PathSplitterComponent],
+      imports: [PathSplitterComponent],
     });
     fixture = TestBed.createComponent(PathSplitterComponent);
     component = fixture.componentInstance;

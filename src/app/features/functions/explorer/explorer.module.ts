@@ -30,15 +30,6 @@ import { RenameDialogComponent } from './explorer-viewer/rename-dialog/rename-di
 import { ExplorerComponent } from './explorer.component';
 
 @NgModule({
-  declarations: [
-    ExplorerComponent,
-    ExplorerViewerComponent,
-    DeleteConfirmDialogComponent,
-    PathSplitterComponent,
-    RenameDialogComponent,
-    CopyDialogComponent,
-    FileIconPipe,
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -60,6 +51,13 @@ import { ExplorerComponent } from './explorer.component';
     MatInputModule,
     MatBadgeModule,
     BytesPipeStandalone,
+    ExplorerComponent,
+    ExplorerViewerComponent,
+    DeleteConfirmDialogComponent,
+    PathSplitterComponent,
+    RenameDialogComponent,
+    CopyDialogComponent,
+    FileIconPipe,
   ],
 })
 export class ExplorerModule {}

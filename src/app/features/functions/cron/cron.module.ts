@@ -14,7 +14,6 @@ import { CronRoutingModule } from './cron-routing.module';
 import { CronComponent } from './cron.component';
 
 @NgModule({
-  declarations: [CronComponent, CronEditorComponent, EasyCronComponent],
   imports: [
     CommonModule,
     CronRoutingModule,
@@ -25,6 +24,9 @@ import { CronComponent } from './cron.component';
     MatSlideToggleModule,
     MatInputModule,
     MatSnackBarModule,
+    CronComponent,
+    CronEditorComponent,
+    EasyCronComponent,
   ],
 })
 export class CronModule {}

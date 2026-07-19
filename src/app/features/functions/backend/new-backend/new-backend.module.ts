@@ -20,7 +20,6 @@ import { NewBackendRoutingModule } from './new-backend-routing.module';
 import { NewBackendComponent } from './new-backend.component';
 
 @NgModule({
-  declarations: [NewBackendComponent, SearchPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -38,6 +37,8 @@ import { NewBackendComponent } from './new-backend.component';
     MatAutocompleteModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    NewBackendComponent,
+    SearchPipe,
   ],
 })
 export class NewBackendModule {}

@@ -12,9 +12,8 @@ import {
 } from 'src/app/cores/remote-control/connection.service';
 
 @Component({
-    templateUrl: './prompt-password.component.html',
-    styleUrls: ['./prompt-password.component.scss'],
-    standalone: false
+  templateUrl: './prompt-password.component.html',
+  styleUrls: ['./prompt-password.component.scss'],
 })
 export class PromptPasswordComponent {
   authenticationForm = this.fb.nonNullable.group({

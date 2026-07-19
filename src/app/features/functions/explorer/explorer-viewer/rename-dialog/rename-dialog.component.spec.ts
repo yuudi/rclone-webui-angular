@@ -8,7 +8,7 @@ describe('RenameDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [RenameDialogComponent],
+      imports: [RenameDialogComponent],
     });
     fixture = TestBed.createComponent(RenameDialogComponent);
     component = fixture.componentInstance;

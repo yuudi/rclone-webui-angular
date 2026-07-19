@@ -15,10 +15,9 @@ import { ExplorerService } from './explorer.service';
 type ViewsGroup = { tabs: ExplorerView[]; currentTab: number };
 
 @Component({
-    selector: 'app-explorer',
-    templateUrl: './explorer.component.html',
-    styleUrls: ['./explorer.component.scss'],
-    standalone: false
+  selector: 'app-explorer',
+  templateUrl: './explorer.component.html',
+  styleUrls: ['./explorer.component.scss'],
 })
 export class ExplorerComponent implements OnInit {
   viewsGroups: ViewsGroup[] = [{ tabs: [], currentTab: 0 }]; // Initially, there is one group with no view.

@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: 'search',
-    standalone: false
+  name: 'search',
 })
 export class SearchPipe implements PipeTransform {
   transform<V extends { [key in K]: string }, K extends string>(

@@ -33,10 +33,9 @@ const Loading = undefined;
 type Loading = undefined;
 
 @Component({
-    selector: 'app-explorer-viewer[backend][path]',
-    templateUrl: './explorer-viewer.component.html',
-    styleUrls: ['./explorer-viewer.component.scss'],
-    standalone: false
+  selector: 'app-explorer-viewer[backend][path]',
+  templateUrl: './explorer-viewer.component.html',
+  styleUrls: ['./explorer-viewer.component.scss'],
 })
 export class ExplorerViewerComponent implements OnInit, OnChanges {
   @Input() backend!: string;

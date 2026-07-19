@@ -19,11 +19,6 @@
     "test": "ng test",
     "watch": "ng build --watch --configuration development,embed"
   },
-  "overrides": {
-    "esbuild": "^0.25.0",
-    "vite": "^4.5.14",
-    "webpack-dev-server": "^5.2.1"
-  },
   "dependencies": {
     "@angular/animations": "^19.2.25",
     "@angular/cdk": "^19.2.19",
