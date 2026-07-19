@@ -1,0 +1,99 @@
+# AGENT.md - Project Maintenance & Architecture Guide
+
+Welcome to the **rclone-webui-angular** project! This repository contains an Angular-based Web UI for managing [rclone](https://rclone.org/) remote control endpoints (`rclone rcd`).
+
+---
+
+## 1. Project Overview
+
+- **Name**: `rclone-webui-angular`
+- **Current Framework Version**: Angular 16.2.0 (Targeting upgrade to latest Angular)
+- **Primary Purpose**: Managing rclone remotes, backends, file exploration, job transfers, mounts, cron jobs, and serve instances via rclone's HTTP Remote Control API (`rclone rcd`).
+- **Core Technology Stack**:
+  - **Framework**: Angular (Modules / Components / Services / RxJS)
+  - **UI Library**: Angular Material & CDK
+  - **HTTP Communication**: Angular `HttpClient` interacting with `rclone` RC API
+  - **Linting & Formatting**: ESLint, Prettier
+
+---
+
+## 2. Project Directory Structure
+
+```
+rclone-webui-angular/
+├── docs/                      # Documentation assets & guides
+├── src/
+│   ├── app/
+│   │   ├── cores/             # Core singletons and fundamental infrastructure
+│   │   │   ├── not-found/     # 404 handler
+│   │   │   ├── remote-control/# Rclone RC connection & communication services
+│   │   │   └── storage/       # Local storage abstraction
+│   │   ├── features/          # Feature modules
+│   │   │   ├── connection/    # Remote connection editor & list
+│   │   │   ├── dashboard/     # Status dashboard & summary
+│   │   │   └── functions/     # Rclone operations
+│   │   │       ├── backend/   # Backend / remote management
+│   │   │       ├── cron/      # Scheduled tasks
+│   │   │       ├── explorer/  # File browser / transfers
+│   │   │       ├── job/       # Async job monitoring
+│   │   │       ├── mount/     # Remote mount management
+│   │   │       └── serve/     # Serve protocol management
+│   │   └── shared/            # Shared pipes, directives, and utility components
+│   ├── assets/                # Static assets & icons
+│   ├── environments/          # Build environment configs
+│   ├── locale/                # i18n translation files
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss            # Global styling
+├── angular.json               # Angular CLI configuration
+├── package.json               # Project dependencies and npm scripts
+└── tsconfig.json              # TypeScript compilation configuration
+```
+
+---
+
+## 3. Core Architecture & Key Services
+
+1. **`RemoteControlService` (`src/app/cores/remote-control/remote-control.service.ts`)**:
+   - Central HTTP gateway for invoking rclone `rc` endpoints (`/rc/...` or operation routes like `operations/list`).
+   - Responsible for setting basic HTTP authorization headers and parsing response payloads.
+2. **`ConnectionService` (`src/app/cores/remote-control/connection.service.ts`)**:
+   - Manages active and stored rclone connection credentials in local storage (`StorageService`).
+3. **Features Module Breakdown**:
+   - **Backend**: List, inspect, create, and delete rclone remotes/backends.
+   - **Explorer**: Navigate remote file systems, download/upload, copy/move files.
+   - **Job**: Track running rclone asynchronous tasks and execution stats.
+   - **Mount / Serve / Cron**: Interact with `mount/mount`, `serve/...`, and scheduled tasks.
+
+---
+
+## 4. Development Workflow & Scripts
+
+- **Install Dependencies**: `npm install`
+- **Start Dev Server** (Angular only): `npm run start:angular`
+- **Start Dev Server with Local Rclone**: `npm run start` (starts rclone rcd on port 5572 and ng serve)
+- **Build Applications**:
+  - `npm run build:standalone` - Standalone web build
+  - `npm run build:embed` - Embedded rclone GUI build
+  - `npm run build:native` - Native wrapper build
+- **Linting & Formatting**:
+  - `npm run lint` (runs ESLint & Prettier checks)
+  - `npm run lint:eslint`
+  - `npm run lint:prettier`
+- **Testing**: `npm run test`
+
+---
+
+## 5. Ongoing Modernization & Refactoring Goals
+
+1. **Error Handling Architecture**:
+   - Deprecate custom Rust-like `Result<T, E>` (`src/app/shared/result.ts`).
+   - Standardize on JavaScript `Error` throwing, `async/await try-catch`, and RxJS `catchError` operator.
+2. **Framework & Dependencies Upgrade**:
+   - Upgrade Angular from v16 to the latest stable release (v19/latest).
+   - Migrate legacy `@angular/material` components and styles.
+   - Adopt modern Angular features: Standalone Components, New Control Flow (`@if`, `@for`), and Signals where appropriate.
+3. **Code Quality & Architecture Enhancements**:
+   - Improve global error feedback (Notification/Toast system for uncaught UI errors).
+   - Strengthen TypeScript types for rclone API request/response contracts.
+   - Optimize state management across services.
