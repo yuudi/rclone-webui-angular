@@ -1,6 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 import { DirectoryItem } from '../../explorer.model';
 
@@ -8,6 +9,7 @@ import { DirectoryItem } from '../../explorer.model';
   selector: 'app-delete-confirm-dialog',
   templateUrl: './delete-confirm-dialog.component.html',
   styleUrls: ['./delete-confirm-dialog.component.scss'],
+  imports: [CommonModule, MatButtonModule, MatDialogModule],
 })
 export class DeleteConfirmDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DirectoryItem[]) {

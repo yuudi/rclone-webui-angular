@@ -1,11 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-rename-dialog',
   templateUrl: './rename-dialog.component.html',
   styleUrls: ['./rename-dialog.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+  ],
 })
 export class RenameDialogComponent {
   constructor(

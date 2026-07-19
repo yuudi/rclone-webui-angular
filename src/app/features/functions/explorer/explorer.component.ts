@@ -1,13 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { first, lastValueFrom } from 'rxjs';
 
-import { MatDialog } from '@angular/material/dialog';
-import { MatIconRegistry } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { BackendService } from '../backend/backend.service';
+import { ExplorerViewerComponent } from './explorer-viewer/explorer-viewer.component';
 import { RenameDialogComponent } from './explorer-viewer/rename-dialog/rename-dialog.component';
 import { AppClipboard, ExplorerView } from './explorer.model';
 import { ExplorerService } from './explorer.service';
@@ -18,6 +26,18 @@ type ViewsGroup = { tabs: ExplorerView[]; currentTab: number };
   selector: 'app-explorer',
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.scss'],
+  imports: [
+    CommonModule,
+    MatTabsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatBadgeModule,
+    ExplorerViewerComponent,
+  ],
 })
 export class ExplorerComponent implements OnInit {
   viewsGroups: ViewsGroup[] = [{ tabs: [], currentTab: 0 }]; // Initially, there is one group with no view.

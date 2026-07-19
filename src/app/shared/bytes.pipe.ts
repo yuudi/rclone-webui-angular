@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'bytes',
   standalone: true,
 })
-export class BytesPipeStandalone implements PipeTransform {
+export class BytesPipe implements PipeTransform {
   transform(
     value: number,
     fractionDigits = 2,

@@ -1,9 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { Observable, lastValueFrom, of } from 'rxjs';
 
-import { MatDialog } from '@angular/material/dialog';
-
+import { BackendInfoComponent } from './backend-info/backend-info.component';
 import { Backend, BackendUsage } from './backend.model';
 import { BackendService } from './backend.service';
 import { NewBackendNameComponent } from './new-backend-name/new-backend-name.component';
@@ -15,6 +20,15 @@ const Unmeasured = null;
   selector: 'app-backend',
   templateUrl: './backend.component.html',
   styleUrls: ['./backend.component.scss'],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    BackendInfoComponent,
+  ],
 })
 export class BackendComponent implements OnInit {
   backendList: {

@@ -26,7 +26,7 @@
                 multiple="false"
                 (selectionChange)="
                   providerSelectedChanged(
-                    $event.options.values().next().value.value
+                    $any($event).options.values().next().value.value
                   )
                 "
               >

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -8,13 +9,25 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-path-splitter[backend][path]',
   templateUrl: './path-splitter.component.html',
   styleUrls: ['./path-splitter.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+  ],
 })
 export class PathSplitterComponent implements OnInit, OnChanges {
   @Input() backend!: string;

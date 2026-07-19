@@ -28,7 +28,6 @@ const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
 );
 
 @NgModule({
-  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -40,6 +39,7 @@ const serviceWorkerModuleWithProvider = ServiceWorkerModule.register(
     MatButtonModule,
     MatTooltipModule,
     MatMenuModule,
+    AppComponent,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

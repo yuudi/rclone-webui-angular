@@ -1,13 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import {
   AsyncValidatorFn,
   FormBuilder,
+  ReactiveFormsModule,
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 import {
   Connection,
@@ -22,6 +27,14 @@ import { environment } from 'src/environments/environment';
   selector: 'app-connection-editor',
   templateUrl: './connection-editor.component.html',
   styleUrls: ['./connection-editor.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatButtonModule,
+  ],
 })
 export class ConnectionEditorComponent implements OnInit, OnChanges {
   @Input() connection?: Connection;

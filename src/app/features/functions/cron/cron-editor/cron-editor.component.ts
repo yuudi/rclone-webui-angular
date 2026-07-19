@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -9,9 +10,15 @@ import {
 import {
   AsyncValidatorFn,
   FormBuilder,
+  ReactiveFormsModule,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import {
   Subject,
@@ -24,11 +31,22 @@ import {
 } from 'rxjs';
 
 import { CronService, Task } from '../cron.service';
+import { EasyCronComponent } from './easy-cron/easy-cron.component';
 
 @Component({
   selector: 'app-cron-editor',
   templateUrl: './cron-editor.component.html',
   styleUrls: ['./cron-editor.component.scss'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    EasyCronComponent,
+  ],
 })
 export class CronEditorComponent implements OnInit, OnDestroy {
   cronForm = this.fb.nonNullable.group({

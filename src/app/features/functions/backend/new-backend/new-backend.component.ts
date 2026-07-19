@@ -1,12 +1,31 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { AppStorageService } from 'src/app/cores/storage';
+import { SearchPipe } from 'src/app/shared/search.pipe';
 import { SimpleDialogComponent } from 'src/app/shared/simple-dialog/simple-dialog.component';
 import { AppProvider } from './new-backend.model';
 import { NewBackendService } from './new-backend.service';
@@ -15,6 +34,25 @@ import { NewBackendService } from './new-backend.service';
   selector: 'app-new-backend',
   templateUrl: './new-backend.component.html',
   styleUrls: ['./new-backend.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatCardModule,
+    MatListModule,
+    MatAutocompleteModule,
+    SearchPipe,
+  ],
 })
 export class NewBackendComponent implements OnInit {
   stepperSelectedIndex = 0;

@@ -2,8 +2,13 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { MatIconRegistry } from '@angular/material/icon';
-
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 type Theme = 'light' | 'dark' | 'auto';
@@ -12,6 +17,15 @@ type Theme = 'light' | 'dark' | 'auto';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatMenuModule,
+  ],
 })
 export class AppComponent implements OnInit {
   @HostBinding('class') className = '';

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -7,14 +8,19 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { lastValueFrom } from 'rxjs';
 
-import { MatDialog } from '@angular/material/dialog';
-import { MatSelectionList } from '@angular/material/list';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { BytesPipe } from 'src/app/shared/bytes.pipe';
 import { environment } from 'src/environments/environment';
 import { FsInfo } from '../../backend/backend.model';
 import {
@@ -27,6 +33,8 @@ import {
 import { ExplorerService } from '../explorer.service';
 import { CopyDialogComponent } from './copy-dialog/copy-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog/delete-confirm-dialog.component';
+import { FileIconPipe } from './file-icon.pipe';
+import { PathSplitterComponent } from './path-splitter/path-splitter.component';
 import { RenameDialogComponent } from './rename-dialog/rename-dialog.component';
 
 const Loading = undefined;
@@ -36,6 +44,20 @@ type Loading = undefined;
   selector: 'app-explorer-viewer[backend][path]',
   templateUrl: './explorer-viewer.component.html',
   styleUrls: ['./explorer-viewer.component.scss'],
+  imports: [
+    CommonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatListModule,
+    MatDialogModule,
+    PathSplitterComponent,
+    FileIconPipe,
+    BytesPipe,
+  ],
 })
 export class ExplorerViewerComponent implements OnInit, OnChanges {
   @Input() backend!: string;
