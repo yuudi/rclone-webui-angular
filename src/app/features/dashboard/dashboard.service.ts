@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, switchMap, timer } from 'rxjs';
+import { Observable, switchMap, timer } from 'rxjs';
 
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { RcloneVersionInfo, TransferStatus } from './dashboard.model';

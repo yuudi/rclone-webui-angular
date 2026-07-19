@@ -17,10 +17,7 @@ export class ExplorerService {
     return (await this.rc.call<{ os: string }>('core/version')).os;
   }
 
-  async listChildren(
-    backend: string,
-    path: string,
-  ): Promise<DirectoryItem[]> {
+  async listChildren(backend: string, path: string): Promise<DirectoryItem[]> {
     const result = await this.rc.call<{ list: DirectoryItem[] }>(
       'operations/list',
       {
@@ -31,10 +28,7 @@ export class ExplorerService {
     return result.list;
   }
 
-  async createEmptyFolder(
-    backend: string,
-    path: string,
-  ): Promise<void> {
+  async createEmptyFolder(backend: string, path: string): Promise<void> {
     await this.rc.call<EmptyObj>('operations/mkdir', {
       fs: ExplorerService.toFs(backend),
       remote: path,
@@ -57,30 +51,21 @@ export class ExplorerService {
     );
   }
 
-  async deleteFile(
-    backend: string,
-    path: string,
-  ): Promise<void> {
+  async deleteFile(backend: string, path: string): Promise<void> {
     await this.rc.call<EmptyObj>('operations/deletefile', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
   }
 
-  async deleteFolder(
-    backend: string,
-    path: string,
-  ): Promise<void> {
+  async deleteFolder(backend: string, path: string): Promise<void> {
     await this.rc.call<EmptyObj>('operations/purge', {
       fs: ExplorerService.toFs(backend),
       remote: path,
     });
   }
 
-  deleteItem(
-    backend: string,
-    item: DirectoryItem,
-  ): Promise<void> {
+  deleteItem(backend: string, item: DirectoryItem): Promise<void> {
     if (item.IsDir) {
       return this.deleteFolder(backend, item.Path);
     } else {
@@ -104,10 +89,7 @@ export class ExplorerService {
     }
   }
 
-  async generateLink(
-    backend: string,
-    path: string,
-  ): Promise<string> {
+  async generateLink(backend: string, path: string): Promise<string> {
     const result = await this.rc.call<{ url: string }>(
       'operations/publiclink',
       {
