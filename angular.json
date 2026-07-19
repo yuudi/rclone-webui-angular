@@ -217,10 +217,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "rclone-webui-angular:build:production"
+              "buildTarget": "rclone-webui-angular:build:production"
             },
             "development": {
-              "browserTarget": "rclone-webui-angular:build:development,no-localize"
+              "buildTarget": "rclone-webui-angular:build:development,no-localize"
             }
           },
           "defaultConfiguration": "development",
