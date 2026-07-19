@@ -7,11 +7,11 @@ Welcome to the **rclone-webui-angular** project! This repository contains an Ang
 ## 1. Project Overview
 
 - **Name**: `rclone-webui-angular`
-- **Current Framework Version**: Angular 16.2.0 (Targeting upgrade to latest Angular)
+- **Current Framework Version**: Angular 19 (Upgraded from v16, using Standalone Component Architecture)
 - **Primary Purpose**: Managing rclone remotes, backends, file exploration, job transfers, mounts, cron jobs, and serve instances via rclone's HTTP Remote Control API (`rclone rcd`).
 - **Core Technology Stack**:
-  - **Framework**: Angular (Modules / Components / Services / RxJS)
-  - **UI Library**: Angular Material & CDK
+  - **Framework**: Angular 19 (Standalone Components / RxJS)
+  - **UI Library**: Angular Material 19 & CDK
   - **HTTP Communication**: Angular `HttpClient` interacting with `rclone` RC API
   - **Linting & Formatting**: ESLint, Prettier
 
@@ -28,7 +28,7 @@ rclone-webui-angular/
 │   │   │   ├── not-found/     # 404 handler
 │   │   │   ├── remote-control/# Rclone RC connection & communication services
 │   │   │   └── storage/       # Local storage abstraction
-│   │   ├── features/          # Feature modules
+│   │   ├── features/          # Feature standalone components & routes
 │   │   │   ├── connection/    # Remote connection editor & list
 │   │   │   ├── dashboard/     # Status dashboard & summary
 │   │   │   └── functions/     # Rclone operations
@@ -84,16 +84,24 @@ rclone-webui-angular/
 
 ---
 
-## 5. Ongoing Modernization & Refactoring Goals
+## 5. Completed Modernization & Refactoring Milestones
 
-1. **Error Handling Architecture**:
-   - Deprecate custom Rust-like `Result<T, E>` (`src/app/shared/result.ts`).
-   - Standardize on JavaScript `Error` throwing, `async/await try-catch`, and RxJS `catchError` operator.
-2. **Framework & Dependencies Upgrade**:
-   - Upgrade Angular from v16 to the latest stable release (v19/latest).
-   - Migrate legacy `@angular/material` components and styles.
-   - Adopt modern Angular features: Standalone Components, New Control Flow (`@if`, `@for`), and Signals where appropriate.
-3. **Code Quality & Architecture Enhancements**:
-   - Improve global error feedback (Notification/Toast system for uncaught UI errors).
-   - Strengthen TypeScript types for rclone API request/response contracts.
-   - Optimize state management across services.
+1. ✅ **Error Handling Architecture Upgrade**:
+   - Removed custom Rust-like `Result<R, E>` (`src/app/shared/result.ts`).
+   - Standardized on native JavaScript `Error` throwing, `async/await try-catch`, and RxJS error handling.
+2. ✅ **Framework & Dependencies Upgrade**:
+   - Upgraded Angular from v16 -> v17 -> v18 -> **v19 (latest stable)**.
+   - Upgraded `@angular/material` and `@angular/cdk` to v19.
+   - Migrated component architecture to Angular 19 **Standalone Components**.
+   - Upgraded TypeScript to 5.8+.
+
+---
+
+## 6. Future Architecture & Feature Plan
+
+1. **New Control Flow Syntax Migration**:
+   - Migrate Angular templates from `*ngIf` and `*ngFor` to Angular native `@if` and `@for` control flow block syntax for improved performance and readability.
+2. **Global Error Interceptor / Toast Service**:
+   - Create a global `ErrorHandler` / HTTP Interceptor to catch unhandled errors gracefully and display unified error toasts.
+3. **Reactive State with Signals**:
+   - Migrate core state (such as connection status and remote list) to Angular Signals for fine-grained reactivity.
