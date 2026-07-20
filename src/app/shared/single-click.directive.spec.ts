@@ -1,12 +1,18 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { SingleClickDirective } from './single-click.directive';
 import { vi } from 'vitest';
+import { SingleClickDirective } from './single-click.directive';
 
 @Component({
   template: `
-    <button [appSingleClickDelay]="300" (appSingleClick)="onSingleClick($event)">Click Me</button>
+    <button
+      i18n
+      [appSingleClickDelay]="300"
+      (appSingleClick)="onSingleClick($event)"
+    >
+      Click Me
+    </button>
   `,
   imports: [SingleClickDirective],
   standalone: true,

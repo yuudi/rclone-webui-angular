@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ReactiveFormsModule } from '@angular/forms';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ConnectionEditorComponent } from './connection-editor.component';
-import { ConnectionService, NotSaved } from 'src/app/cores/remote-control/connection.service';
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ConnectionEditorComponent } from './connection-editor.component';
 
 describe('ConnectionEditorComponent', () => {
   let component: ConnectionEditorComponent;
@@ -19,7 +19,13 @@ describe('ConnectionEditorComponent', () => {
   beforeEach(async () => {
     mockConnectionService = {
       checkNameExists: vi.fn().mockResolvedValue(false),
-      saveConnection: vi.fn().mockResolvedValue({ id: 'new-id', displayName: 'New Connection', remoteAddress: 'http://127.0.0.1:5572' }),
+      saveConnection: vi
+        .fn()
+        .mockResolvedValue({
+          id: 'new-id',
+          displayName: 'New Connection',
+          remoteAddress: 'http://127.0.0.1:5572',
+        }),
       updateConnection: vi.fn().mockResolvedValue(undefined),
       activateConnection: vi.fn().mockResolvedValue(undefined),
     };
@@ -45,14 +51,12 @@ describe('ConnectionEditorComponent', () => {
         provideNoopAnimations(),
       ],
     })
-    .overrideComponent(ConnectionEditorComponent, {
-      set: {
-        providers: [
-          { provide: MatSnackBar, useValue: mockSnackBar }
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(ConnectionEditorComponent, {
+        set: {
+          providers: [{ provide: MatSnackBar, useValue: mockSnackBar }],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(ConnectionEditorComponent);
     component = fixture.componentInstance;
@@ -75,13 +79,17 @@ describe('ConnectionEditorComponent', () => {
       displayName: 'Existing Connection',
       remoteAddress: 'https://rclone-remote.org',
       isSameOrigin: false,
-      authentication: 'basic-auth-str'
+      authentication: 'basic-auth-str',
     };
     component.ngOnChanges();
     fixture.detectChanges();
 
-    expect(component.connectionForm.value.displayName).toBe('Existing Connection');
-    expect(component.connectionForm.value.remoteAddress).toBe('https://rclone-remote.org');
+    expect(component.connectionForm.value.displayName).toBe(
+      'Existing Connection',
+    );
+    expect(component.connectionForm.value.remoteAddress).toBe(
+      'https://rclone-remote.org',
+    );
   });
 
   it('should validate insecure contexts correctly', () => {
@@ -110,13 +118,17 @@ describe('ConnectionEditorComponent', () => {
     component.connectionForm.patchValue({
       displayName: 'Test',
       remoteAddress: 'http://127.0.0.1:5572',
-      notProtected: true
+      notProtected: true,
     });
 
     await component.testConnectionClicked();
 
     expect(mockRemoteControlService.testConnection).toHaveBeenCalled();
-    expect(mockSnackBar.open).toHaveBeenCalledWith(expect.stringContaining('successful'), 'OK', expect.any(Object));
+    expect(mockSnackBar.open).toHaveBeenCalledWith(
+      expect.stringContaining('successful'),
+      'OK',
+      expect.any(Object),
+    );
   });
 
   it('should add connection, activate, and navigate on connectButtonClicked when new connection', async () => {
@@ -125,7 +137,7 @@ describe('ConnectionEditorComponent', () => {
       displayName: 'New Connection Custom',
       remoteAddress: 'http://127.0.0.1:5572',
       notProtected: true,
-      remember: true
+      remember: true,
     });
 
     await component.connectButtonClicked();
@@ -141,7 +153,7 @@ describe('ConnectionEditorComponent', () => {
       displayName: 'Existing Connection',
       remoteAddress: 'https://rclone-remote.org',
       isSameOrigin: false,
-      authentication: 'basic-auth-str'
+      authentication: 'basic-auth-str',
     };
     component.ngOnChanges();
     fixture.detectChanges();
@@ -149,17 +161,23 @@ describe('ConnectionEditorComponent', () => {
     component.connectionForm.patchValue({
       displayName: 'Updated Connection Name',
       remoteAddress: 'https://rclone-remote-updated.org',
-      notProtected: true
+      notProtected: true,
     });
 
     await component.connectButtonClicked();
 
     expect(mockConnectionService.updateConnection).toHaveBeenCalledWith(
       'existing-id',
-      { displayName: 'Updated Connection Name', remoteAddress: 'https://rclone-remote-updated.org' },
-      undefined
+      {
+        displayName: 'Updated Connection Name',
+        remoteAddress: 'https://rclone-remote-updated.org',
+      },
+      undefined,
     );
-    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith('existing-id', null);
+    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith(
+      'existing-id',
+      null,
+    );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/dashboard']);
   });
 });

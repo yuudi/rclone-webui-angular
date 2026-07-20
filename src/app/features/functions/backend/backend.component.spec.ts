@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { BackendComponent } from './backend.component';
 import { BackendService } from './backend.service';
@@ -18,26 +18,28 @@ describe('BackendComponent', () => {
   beforeEach(async () => {
     mockBackendService = {
       getBackends: vi.fn().mockResolvedValue({
-        'local': { type: 'local' }
+        local: { type: 'local' },
       }),
       getBackendInfo: vi.fn().mockResolvedValue({
-        Features: { About: true }
+        Features: { About: true },
       }),
-      getBackendUsage: vi.fn().mockReturnValue(of({
-        total: 1000,
-        used: 500,
-        free: 500
-      })),
+      getBackendUsage: vi.fn().mockReturnValue(
+        of({
+          total: 1000,
+          used: 500,
+          free: 500,
+        }),
+      ),
       createBackend: vi.fn().mockResolvedValue(undefined),
       deleteBackend: vi.fn().mockResolvedValue(undefined),
     };
 
     mockRouter = {
-      navigate: vi.fn()
+      navigate: vi.fn(),
     };
 
     mockDialog = {
-      open: vi.fn()
+      open: vi.fn(),
     };
 
     await TestBed.configureTestingModule({
@@ -46,7 +48,7 @@ describe('BackendComponent', () => {
         { provide: BackendService, useValue: mockBackendService },
         { provide: Router, useValue: mockRouter },
         { provide: MatDialog, useValue: mockDialog },
-      ]
+      ],
     });
 
     TestBed.overrideComponent(BackendComponent, {
@@ -55,8 +57,8 @@ describe('BackendComponent', () => {
           { provide: BackendService, useValue: mockBackendService },
           { provide: Router, useValue: mockRouter },
           { provide: MatDialog, useValue: mockDialog },
-        ]
-      }
+        ],
+      },
     });
 
     await TestBed.compileComponents();
@@ -78,7 +80,7 @@ describe('BackendComponent', () => {
   it('should browse to backend', () => {
     component.backendBrowse('local');
     expect(mockRouter.navigate).toHaveBeenCalledWith(['rclone', 'explore'], {
-      queryParams: { drive: 'local' }
+      queryParams: { drive: 'local' },
     });
   });
 
@@ -91,26 +93,35 @@ describe('BackendComponent', () => {
 
   it('should duplicate backend when user inputs a name', async () => {
     const dialogRefMock = {
-      afterClosed: () => of('new-local')
+      afterClosed: () => of('new-local'),
     };
     mockDialog.open.mockReturnValue(dialogRefMock);
     component.backendList = [{ id: 'local', config: { type: 'local' } }];
 
-    const result = await component.backendDuplicate({ id: 'local', config: { type: 'local', someOption: 'val' } as any });
+    const result = await component.backendDuplicate({
+      id: 'local',
+      config: { type: 'local', someOption: 'val' } as any,
+    });
     expect(result).toBe(1);
-    expect(mockBackendService.createBackend).toHaveBeenCalledWith('new-local', 'local', { someOption: 'val' });
-    expect(component.backendList.some(b => b.id === 'new-local')).toBe(true);
+    expect(mockBackendService.createBackend).toHaveBeenCalledWith(
+      'new-local',
+      'local',
+      { someOption: 'val' },
+    );
+    expect(component.backendList.some((b) => b.id === 'new-local')).toBe(true);
   });
 
   it('should rename backend by duplicating and deleting', async () => {
     const dialogRefMock = {
-      afterClosed: () => of('new-local')
+      afterClosed: () => of('new-local'),
     };
     mockDialog.open.mockReturnValue(dialogRefMock);
     component.backendList = [{ id: 'local', config: { type: 'local' } }];
 
     // Spy on duplicate and delete
-    const duplicateSpy = vi.spyOn(component, 'backendDuplicate').mockResolvedValue(1);
+    const duplicateSpy = vi
+      .spyOn(component, 'backendDuplicate')
+      .mockResolvedValue(1);
     const deleteSpy = vi.spyOn(component, 'backendDelete').mockResolvedValue();
 
     await component.backendRename({ id: 'local', config: { type: 'local' } });

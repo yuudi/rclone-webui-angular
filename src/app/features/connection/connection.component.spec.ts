@@ -1,13 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { ConnectionComponent } from './connection.component';
-import { ConnectionService, NotSaved } from 'src/app/cores/remote-control/connection.service';
+import {
+  ConnectionService,
+  NotSaved,
+} from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { ConnectionComponent } from './connection.component';
 import { PromptPasswordComponent } from './prompt-password/prompt-password.component';
 
 describe('ConnectionComponent', () => {
@@ -33,7 +36,7 @@ describe('ConnectionComponent', () => {
       remoteAddress: 'http://127.0.0.1:5573',
       isSameOrigin: false,
       authentication: NotSaved,
-    }
+    },
   ];
 
   beforeEach(async () => {
@@ -69,15 +72,15 @@ describe('ConnectionComponent', () => {
         provideNoopAnimations(),
       ],
     })
-    .overrideComponent(ConnectionComponent, {
-      set: {
-        providers: [
-          { provide: MatDialog, useValue: mockDialog },
-          { provide: MatSnackBar, useValue: mockSnackBar }
-        ]
-      }
-    })
-    .compileComponents();
+      .overrideComponent(ConnectionComponent, {
+        set: {
+          providers: [
+            { provide: MatDialog, useValue: mockDialog },
+            { provide: MatSnackBar, useValue: mockSnackBar },
+          ],
+        },
+      })
+      .compileComponents();
 
     fixture = TestBed.createComponent(ConnectionComponent);
     component = fixture.componentInstance;
@@ -103,13 +106,17 @@ describe('ConnectionComponent', () => {
   it('should call deleteConnection on connectDeleted', () => {
     const conn = mockConnections[0];
     component.connectDeleted(conn);
-    expect(mockConnectionService.deleteConnection).toHaveBeenCalledWith(conn.id);
+    expect(mockConnectionService.deleteConnection).toHaveBeenCalledWith(
+      conn.id,
+    );
   });
 
   it('should activate connection and navigate when auth is present', async () => {
     const conn = mockConnections[0];
     await component.connectClicked(conn);
-    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith(conn.id);
+    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith(
+      conn.id,
+    );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['']);
   });
 

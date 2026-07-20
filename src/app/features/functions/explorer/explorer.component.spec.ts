@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExplorerComponent } from './explorer.component';
-import { ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { ExplorerService } from './explorer.service';
-import { BackendService } from '../backend/backend.service';
-import { of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { BackendService } from '../backend/backend.service';
+import { ExplorerComponent } from './explorer.component';
+import { ExplorerService } from './explorer.service';
 
 describe('ExplorerComponent', () => {
   let component: ExplorerComponent;

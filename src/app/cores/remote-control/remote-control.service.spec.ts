@@ -1,8 +1,11 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { RemoteControlService } from './remote-control.service';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { ConnectionService, NoAuthentication } from './connection.service';
+import { RemoteControlService } from './remote-control.service';
 
 describe('RemoteControlService', () => {
   let service: RemoteControlService;
@@ -47,12 +50,16 @@ describe('RemoteControlService', () => {
         authentication: 'dXNlcjpwYXNz',
       });
 
-      const responsePromise = service.call<{ success: boolean }>('noop', { arg: 'val' });
+      const responsePromise = service.call<{ success: boolean }>('noop', {
+        arg: 'val',
+      });
 
       const req = httpMock.expectOne('http://localhost:5572/noop');
       expect(req.request.method).toBe('POST');
       expect(req.request.body).toEqual({ arg: 'val' });
-      expect(req.request.headers.get('Authorization')).toBe('Basic dXNlcjpwYXNz');
+      expect(req.request.headers.get('Authorization')).toBe(
+        'Basic dXNlcjpwYXNz',
+      );
 
       req.flush({ success: true });
 
@@ -69,7 +76,10 @@ describe('RemoteControlService', () => {
       const responsePromise = service.call('noop');
 
       const req = httpMock.expectOne('http://localhost:5572/noop');
-      req.flush({ error: 'invalid password' }, { status: 401, statusText: 'Unauthorized' });
+      req.flush(
+        { error: 'invalid password' },
+        { status: 401, statusText: 'Unauthorized' },
+      );
 
       await expect(responsePromise).rejects.toThrow('invalid password');
     });
@@ -96,7 +106,9 @@ describe('RemoteControlService', () => {
 
       const req = httpMock.expectOne('http://localhost:5572/rc/noop');
       expect(req.request.method).toBe('POST');
-      expect(req.request.headers.get('Authorization')).toBe('Basic dXNlcjpwYXNzd29yZA==');
+      expect(req.request.headers.get('Authorization')).toBe(
+        'Basic dXNlcjpwYXNzd29yZA==',
+      );
       req.flush({}, { status: 200, statusText: 'OK' });
 
       expect(await testPromise).toBe(true);

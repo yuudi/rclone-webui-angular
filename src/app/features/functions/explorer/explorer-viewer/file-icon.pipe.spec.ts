@@ -1,5 +1,5 @@
-import { FileIconPipe } from './file-icon.pipe';
 import { DirectoryItem } from '../explorer.model';
+import { FileIconPipe } from './file-icon.pipe';
 
 describe('FileIconPipe', () => {
   let pipe: FileIconPipe;
@@ -39,20 +39,29 @@ describe('FileIconPipe', () => {
 
   it('should return docs for application document MIME types', () => {
     const pdf = { IsDir: false, MimeType: 'application/pdf' } as DirectoryItem;
-    const doc = { IsDir: false, MimeType: 'application/msword' } as DirectoryItem;
+    const doc = {
+      IsDir: false,
+      MimeType: 'application/msword',
+    } as DirectoryItem;
     expect(pipe.transform(pdf)).toBe('docs');
     expect(pipe.transform(doc)).toBe('docs');
   });
 
   it('should return folder_zip for application archive MIME types', () => {
     const zip = { IsDir: false, MimeType: 'application/zip' } as DirectoryItem;
-    const gzip = { IsDir: false, MimeType: 'application/gzip' } as DirectoryItem;
+    const gzip = {
+      IsDir: false,
+      MimeType: 'application/gzip',
+    } as DirectoryItem;
     expect(pipe.transform(zip)).toBe('folder_zip');
     expect(pipe.transform(gzip)).toBe('folder_zip');
   });
 
   it('should return insert_drive_file for other/unknown MIME types', () => {
-    const unknown = { IsDir: false, MimeType: 'application/octet-stream' } as DirectoryItem;
+    const unknown = {
+      IsDir: false,
+      MimeType: 'application/octet-stream',
+    } as DirectoryItem;
     const random = { IsDir: false, MimeType: 'foo/bar' } as DirectoryItem;
     expect(pipe.transform(unknown)).toBe('insert_drive_file');
     expect(pipe.transform(random)).toBe('insert_drive_file');

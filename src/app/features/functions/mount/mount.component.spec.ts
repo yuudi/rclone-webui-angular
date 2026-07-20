@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MountComponent } from './mount.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { MountService } from './mount.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 import { BackendService } from '../backend/backend.service';
 import { ExplorerService } from '../explorer/explorer.service';
-import { of } from 'rxjs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MountComponent } from './mount.component';
+import { MountService } from './mount.service';
 
 describe('MountComponent', () => {
   let component: MountComponent;

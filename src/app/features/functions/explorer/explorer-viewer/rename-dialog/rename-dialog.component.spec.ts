@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RenameDialogComponent } from './rename-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RenameDialogComponent } from './rename-dialog.component';
 
 describe('RenameDialogComponent', () => {
   let component: RenameDialogComponent;

@@ -1,11 +1,11 @@
-import 'zone.js';
-import 'zone.js/testing';
-import '@angular/localize/init';
 import { getTestBed } from '@angular/core/testing';
+import '@angular/localize/init';
 import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
+import 'zone.js';
+import 'zone.js/testing';
 
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,

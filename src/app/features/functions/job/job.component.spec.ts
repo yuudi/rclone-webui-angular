@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 import { JobComponent } from './job.component';
 import { JobService } from './job.service';
-import { of } from 'rxjs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('JobComponent', () => {
   let component: JobComponent;
@@ -19,9 +19,7 @@ describe('JobComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [JobComponent, NoopAnimationsModule],
-      providers: [
-        { provide: JobService, useValue: mockJobService }
-      ]
+      providers: [{ provide: JobService, useValue: mockJobService }],
     });
     fixture = TestBed.createComponent(JobComponent);
     component = fixture.componentInstance;

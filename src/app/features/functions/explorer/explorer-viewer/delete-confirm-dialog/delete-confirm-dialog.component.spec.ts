@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
 
 describe('DeleteConfirmDialogComponent', () => {
   let component: DeleteConfirmDialogComponent;

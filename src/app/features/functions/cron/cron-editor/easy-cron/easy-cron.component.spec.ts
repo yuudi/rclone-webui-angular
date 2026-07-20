@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 import { EasyCronComponent } from './easy-cron.component';
 
@@ -24,7 +24,7 @@ describe('EasyCronComponent', () => {
 
   it('should emit correct cron expression for hour unit', () => {
     let emittedValue = '';
-    component.valueChange.subscribe((val) => emittedValue = val);
+    component.valueChange.subscribe((val) => (emittedValue = val));
 
     component.fieldEveryUnit = 'hour';
     component.fieldEveryCount = 4;
@@ -37,7 +37,7 @@ describe('EasyCronComponent', () => {
 
   it('should emit correct cron expression for day unit', () => {
     let emittedValue = '';
-    component.valueChange.subscribe((val) => emittedValue = val);
+    component.valueChange.subscribe((val) => (emittedValue = val));
 
     component.fieldEveryUnit = 'day';
     component.fieldEveryCount = 2;

@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { NewBackendService } from './new-backend.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { NewBackendService } from './new-backend.service';
 
 describe('NewBackendService', () => {
   let service: NewBackendService;
@@ -10,14 +10,14 @@ describe('NewBackendService', () => {
 
   beforeEach(() => {
     mockRc = {
-      call: vi.fn()
+      call: vi.fn(),
     };
 
     TestBed.configureTestingModule({
       providers: [
         NewBackendService,
-        { provide: RemoteControlService, useValue: mockRc }
-      ]
+        { provide: RemoteControlService, useValue: mockRc },
+      ],
     });
     service = TestBed.inject(NewBackendService);
   });
@@ -47,7 +47,7 @@ describe('NewBackendService', () => {
     expect(mockRc.call).toHaveBeenCalledWith('config/create', {
       name: 'drive1',
       type: 's3',
-      parameters: { option1: 'val1' }
+      parameters: { option1: 'val1' },
     });
   });
 });

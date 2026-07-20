@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CronComponent } from './cron.component';
 import { CronService } from './cron.service';
@@ -15,34 +15,42 @@ describe('CronComponent', () => {
 
   beforeEach(async () => {
     mockSchedular = {
-      getTasks: vi.fn().mockResolvedValue([
-        { id: '1', active: true, schedule: '* * * * *', operation: 'sync', params: {} }
-      ])
+      getTasks: vi
+        .fn()
+        .mockResolvedValue([
+          {
+            id: '1',
+            active: true,
+            schedule: '* * * * *',
+            operation: 'sync',
+            params: {},
+          },
+        ]),
     };
 
     mockCronService = {
-      getSchedular: vi.fn().mockReturnValue(mockSchedular)
+      getSchedular: vi.fn().mockReturnValue(mockSchedular),
     };
 
     mockSnackBar = {
-      open: vi.fn()
+      open: vi.fn(),
     };
 
     await TestBed.configureTestingModule({
       imports: [CronComponent, BrowserAnimationsModule],
       providers: [
         { provide: CronService, useValue: mockCronService },
-        { provide: MatSnackBar, useValue: mockSnackBar }
-      ]
+        { provide: MatSnackBar, useValue: mockSnackBar },
+      ],
     });
 
     TestBed.overrideComponent(CronComponent, {
       set: {
         providers: [
           { provide: CronService, useValue: mockCronService },
-          { provide: MatSnackBar, useValue: mockSnackBar }
-        ]
-      }
+          { provide: MatSnackBar, useValue: mockSnackBar },
+        ],
+      },
     });
 
     await TestBed.compileComponents();

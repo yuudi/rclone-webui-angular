@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ExplorerService } from './explorer.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { JobService } from '../job/job.service';
+import { ExplorerService } from './explorer.service';
 
 describe('ExplorerService', () => {
   let service: ExplorerService;

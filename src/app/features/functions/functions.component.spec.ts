@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FunctionsComponent } from './functions.component';
 import { provideRouter } from '@angular/router';
+import { FunctionsComponent } from './functions.component';
 
 describe('FunctionsComponent', () => {
   let component: FunctionsComponent;

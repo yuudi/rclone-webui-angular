@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ConnectionService, NoAuthentication, NotSaved } from './connection.service';
-import { AppStorageService } from '../storage/app-storage.service';
 import { of } from 'rxjs';
+import { AppStorageService } from '../storage/app-storage.service';
+import { ConnectionService } from './connection.service';
 
 describe('ConnectionService', () => {
   let service: ConnectionService;
@@ -37,14 +37,14 @@ describe('ConnectionService', () => {
     expect(service).toBeTruthy();
     expect(mockAppStorageService.getObservableItem).toHaveBeenCalledWith(
       'connections',
-      expect.any(Function)
+      expect.any(Function),
     );
   });
 
   it('should save connection and generate uuid', async () => {
     const conn = await service.saveConnection(
       { displayName: 'Local rclone', remoteAddress: 'http://localhost:5572' },
-      { username: 'user', password: 'password' }
+      { username: 'user', password: 'password' },
     );
 
     expect(conn.id).toBeTruthy();
@@ -67,7 +67,10 @@ describe('ConnectionService', () => {
     ];
 
     await expect(
-      service.saveConnection({ displayName: 'DupName', remoteAddress: 'http://another' })
+      service.saveConnection({
+        displayName: 'DupName',
+        remoteAddress: 'http://another',
+      }),
     ).rejects.toThrow('Name already exists');
   });
 
@@ -98,7 +101,11 @@ describe('ConnectionService', () => {
     };
     storageValue = [conn];
 
-    await service.updateConnection('conn-id', { displayName: 'New Name' }, { username: 'foo', password: 'bar' });
+    await service.updateConnection(
+      'conn-id',
+      { displayName: 'New Name' },
+      { username: 'foo', password: 'bar' },
+    );
     expect(storageValue[0].displayName).toBe('New Name');
     expect(storageValue[0].authentication).toBe(btoa('foo:bar'));
   });

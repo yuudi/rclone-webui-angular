@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CopyDialogComponent } from './copy-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CopyDialogComponent } from './copy-dialog.component';
 
 describe('CopyDialogComponent', () => {
   let component: CopyDialogComponent;

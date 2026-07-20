@@ -17,7 +17,9 @@ describe('isElectronGuard', () => {
   });
 
   const runGuard = () => {
-    return TestBed.runInInjectionContext(() => isElectronGuard(null as any, null as any));
+    return TestBed.runInInjectionContext(() =>
+      isElectronGuard(null as any, null as any),
+    );
   };
 
   it('should return true if RWA_DESKTOP is defined', () => {

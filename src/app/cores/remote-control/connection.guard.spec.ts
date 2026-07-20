@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { connectionGuard } from './connection.guard';
-import { ConnectionService, NoAuthentication } from './connection.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { connectionGuard } from './connection.guard';
+import { ConnectionService, NoAuthentication } from './connection.service';
 
 describe('connectionGuard', () => {
   let mockConnectionService: any;
@@ -35,19 +35,26 @@ describe('connectionGuard', () => {
   });
 
   const runGuard = () => {
-    return TestBed.runInInjectionContext(() => connectionGuard(null as any, null as any));
+    return TestBed.runInInjectionContext(() =>
+      connectionGuard(null as any, null as any),
+    );
   };
 
   it('should activate self connection and return true if connectSelf is enabled', async () => {
     environment.connectSelf = true;
     const result = await runGuard();
     expect(result).toBe(true);
-    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith('self', NoAuthentication);
+    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith(
+      'self',
+      NoAuthentication,
+    );
   });
 
   it('should return true if there is an active connection', async () => {
     environment.connectSelf = false;
-    mockConnectionService.getActiveConnection.mockReturnValue({ id: 'active-conn' });
+    mockConnectionService.getActiveConnection.mockReturnValue({
+      id: 'active-conn',
+    });
 
     const result = await runGuard();
     expect(result).toBe(true);
@@ -58,12 +65,14 @@ describe('connectionGuard', () => {
     environment.connectSelf = false;
     mockConnectionService.getActiveConnection.mockReturnValue(null);
     mockConnectionService.getConnectionsValue.mockResolvedValue([
-      { id: 'only-conn', authentication: 'some-auth' }
+      { id: 'only-conn', authentication: 'some-auth' },
     ]);
 
     const result = await runGuard();
     expect(result).toBe(true);
-    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith('only-conn');
+    expect(mockConnectionService.activateConnection).toHaveBeenCalledWith(
+      'only-conn',
+    );
     expect(mockRouter.navigate).not.toHaveBeenCalled();
   });
 

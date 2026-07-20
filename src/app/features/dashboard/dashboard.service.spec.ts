@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { firstValueFrom, take } from 'rxjs';
-import { DashboardService } from './dashboard.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { DashboardService } from './dashboard.service';
 
 describe('DashboardService', () => {
   let service: DashboardService;
@@ -21,14 +21,14 @@ describe('DashboardService', () => {
           return Promise.resolve({ speed: 42, transfers: 1 });
         }
         return Promise.reject(new Error(`Operation not mocked: ${operation}`));
-      })
+      }),
     };
 
     TestBed.configureTestingModule({
       providers: [
         DashboardService,
-        { provide: RemoteControlService, useValue: mockRemoteControlService }
-      ]
+        { provide: RemoteControlService, useValue: mockRemoteControlService },
+      ],
     });
     service = TestBed.inject(DashboardService);
   });
@@ -39,7 +39,9 @@ describe('DashboardService', () => {
 
   it('should call config/listremotes and return backends', async () => {
     const res = await service.getBackends();
-    expect(mockRemoteControlService.call).toHaveBeenCalledWith('config/listremotes');
+    expect(mockRemoteControlService.call).toHaveBeenCalledWith(
+      'config/listremotes',
+    );
     expect(res).toEqual({ remotes: ['drive-mock'] });
   });
 

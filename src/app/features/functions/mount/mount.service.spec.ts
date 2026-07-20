@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { MountService } from './mount.service';
-import { AppStorageService } from 'src/app/cores/storage';
-import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
-import { CronService } from '../cron/cron.service';
 import { of } from 'rxjs';
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
+import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { AppStorageService } from 'src/app/cores/storage';
+import { CronService } from '../cron/cron.service';
+import { MountService } from './mount.service';
 
 describe('MountService', () => {
   let service: MountService;
@@ -33,7 +33,9 @@ describe('MountService', () => {
     };
 
     mockConnectionService = {
-      getActiveConnectionObservable: vi.fn().mockReturnValue(of({ id: 'test-conn' })),
+      getActiveConnectionObservable: vi
+        .fn()
+        .mockReturnValue(of({ id: 'test-conn' })),
     };
 
     mockCronService = {

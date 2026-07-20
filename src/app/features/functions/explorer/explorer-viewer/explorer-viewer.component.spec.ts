@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ExplorerViewerComponent } from './explorer-viewer.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { ExplorerService } from '../explorer.service';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ExplorerViewerComponent } from './explorer-viewer.component';
 
 describe('ExplorerViewerComponent', () => {
   let component: ExplorerViewerComponent;

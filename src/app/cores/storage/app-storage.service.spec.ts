@@ -29,7 +29,9 @@ describe('AppStorageService', () => {
     const item = service.getItem<string>('test_key2', () => 'default');
     item.set('new_value');
     expect(item.get()).toBe('new_value');
-    expect(localStorage.getItem('rwa-test_key2')).toBe(JSON.stringify('new_value'));
+    expect(localStorage.getItem('rwa-test_key2')).toBe(
+      JSON.stringify('new_value'),
+    );
   });
 
   it('should work as observable and notify updates', async () => {

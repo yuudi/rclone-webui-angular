@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { vi, describe, beforeEach, afterEach, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { CronService } from './cron.service';
 
@@ -22,11 +22,11 @@ describe('CronService', () => {
     (globalThis as any)['RWA_DESKTOP'] = {
       version: '1.0.0',
       executeId: vi.fn().mockResolvedValue('123'),
-      schedular: mockSchedular
+      schedular: mockSchedular,
     };
 
     TestBed.configureTestingModule({
-      providers: [CronService]
+      providers: [CronService],
     });
     service = TestBed.inject(CronService);
   });
@@ -71,6 +71,8 @@ describe('CronService', () => {
 
   it('should throw error when toTask is called with invalid expression', async () => {
     mockSchedular.validate.mockResolvedValue(false);
-    await expect(service.toTask('invalid', 'sync', {})).rejects.toThrow('Invalid cron expression');
+    await expect(service.toTask('invalid', 'sync', {})).rejects.toThrow(
+      'Invalid cron expression',
+    );
   });
 });

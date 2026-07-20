@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { BackendService } from './backend.service';
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
 import { AppStorageService } from 'src/app/cores/storage';
+import { BackendService } from './backend.service';
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -16,20 +16,22 @@ describe('BackendService', () => {
 
   beforeEach(() => {
     mockRc = {
-      call: vi.fn()
+      call: vi.fn(),
     };
 
     mockConnectionService = {
-      getActiveConnectionObservable: vi.fn().mockReturnValue(of({ id: 'test-conn' }))
+      getActiveConnectionObservable: vi
+        .fn()
+        .mockReturnValue(of({ id: 'test-conn' })),
     };
 
     mockStorageItem = {
       get: vi.fn().mockResolvedValue({}),
-      set: vi.fn()
+      set: vi.fn(),
     };
 
     mockAppStorageService = {
-      getItem: vi.fn().mockReturnValue(mockStorageItem)
+      getItem: vi.fn().mockReturnValue(mockStorageItem),
     };
 
     TestBed.configureTestingModule({
@@ -38,16 +40,24 @@ describe('BackendService', () => {
         { provide: RemoteControlService, useValue: mockRc },
         { provide: ConnectionService, useValue: mockConnectionService },
         { provide: AppStorageService, useValue: mockAppStorageService },
-      ]
+      ],
     });
     service = TestBed.inject(BackendService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-    expect(mockConnectionService.getActiveConnectionObservable).toHaveBeenCalled();
-    expect(mockAppStorageService.getItem).toHaveBeenCalledWith('test-conn-backendUsageCache', expect.any(Function));
-    expect(mockAppStorageService.getItem).toHaveBeenCalledWith('test-conn-backendInfoCache', expect.any(Function));
+    expect(
+      mockConnectionService.getActiveConnectionObservable,
+    ).toHaveBeenCalled();
+    expect(mockAppStorageService.getItem).toHaveBeenCalledWith(
+      'test-conn-backendUsageCache',
+      expect.any(Function),
+    );
+    expect(mockAppStorageService.getItem).toHaveBeenCalledWith(
+      'test-conn-backendInfoCache',
+      expect.any(Function),
+    );
   });
 
   it('should list backends', async () => {
@@ -79,14 +89,16 @@ describe('BackendService', () => {
     expect(mockRc.call).toHaveBeenCalledWith('config/create', {
       name: 'drive1',
       type: 's3',
-      parameters: { provider: 'aws' }
+      parameters: { provider: 'aws' },
     });
   });
 
   it('should delete backend', async () => {
     mockRc.call.mockResolvedValue(undefined);
     await service.deleteBackend('drive1');
-    expect(mockRc.call).toHaveBeenCalledWith('config/delete', { name: 'drive1' });
+    expect(mockRc.call).toHaveBeenCalledWith('config/delete', {
+      name: 'drive1',
+    });
   });
 
   it('should check if windows drive exists', async () => {
@@ -106,7 +118,9 @@ describe('BackendService', () => {
     mockRc.call.mockResolvedValue(infoData);
 
     const info = await service.getBackendInfo('drive1');
-    expect(mockRc.call).toHaveBeenCalledWith('operations/fsinfo', { fs: 'drive1:' });
+    expect(mockRc.call).toHaveBeenCalledWith('operations/fsinfo', {
+      fs: 'drive1:',
+    });
     expect(info).toEqual(infoData);
     expect(mockStorageItem.set).toHaveBeenCalled();
 
@@ -131,7 +145,9 @@ describe('BackendService', () => {
     });
 
     const result = await resultPromise;
-    expect(mockRc.call).toHaveBeenCalledWith('operations/about', { fs: 'drive1:' });
+    expect(mockRc.call).toHaveBeenCalledWith('operations/about', {
+      fs: 'drive1:',
+    });
     expect(result).toEqual(usageData);
   });
 });

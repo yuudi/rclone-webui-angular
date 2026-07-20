@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { JobService } from './job.service';
-import { AppStorageService } from 'src/app/cores/storage';
-import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
-import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { of } from 'rxjs';
+import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
+import { RemoteControlService } from 'src/app/cores/remote-control/remote-control.service';
+import { AppStorageService } from 'src/app/cores/storage';
+import { JobService } from './job.service';
 
 describe('JobService', () => {
   let service: JobService;
@@ -31,7 +31,9 @@ describe('JobService', () => {
     };
 
     mockConnectionService = {
-      getActiveConnectionObservable: vi.fn().mockReturnValue(of({ id: 'test-conn' })),
+      getActiveConnectionObservable: vi
+        .fn()
+        .mockReturnValue(of({ id: 'test-conn' })),
     };
 
     TestBed.configureTestingModule({

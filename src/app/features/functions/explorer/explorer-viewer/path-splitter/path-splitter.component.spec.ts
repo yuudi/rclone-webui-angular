@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PathSplitterComponent } from './path-splitter.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { PathSplitterComponent } from './path-splitter.component';
 
 describe('PathSplitterComponent', () => {
   let component: PathSplitterComponent;
@@ -15,9 +15,7 @@ describe('PathSplitterComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [PathSplitterComponent, NoopAnimationsModule],
-      providers: [
-        { provide: MatSnackBar, useValue: mockSnackBar },
-      ],
+      providers: [{ provide: MatSnackBar, useValue: mockSnackBar }],
     });
     fixture = TestBed.createComponent(PathSplitterComponent);
     component = fixture.componentInstance;

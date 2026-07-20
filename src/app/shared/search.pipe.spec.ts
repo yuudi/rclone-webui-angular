@@ -31,7 +31,7 @@ describe('SearchPipe', () => {
     expect(pipe.transform(values, 'rc', ['name'])).toEqual([
       { name: 'rclone' },
     ]);
-    
+
     expect(pipe.transform(values, 'ln', ['name'])).toEqual([
       { name: 'rclone' },
       { name: 'clone' },

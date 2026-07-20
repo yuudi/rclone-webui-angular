@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { SimpleDialogComponent } from './simple-dialog.component';
 import { By } from '@angular/platform-browser';
+import { SimpleDialogComponent } from './simple-dialog.component';
 
 describe('SimpleDialogComponent', () => {
   let component: SimpleDialogComponent<string>;
@@ -19,9 +19,7 @@ describe('SimpleDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SimpleDialogComponent, MatDialogModule],
-      providers: [
-        { provide: MAT_DIALOG_DATA, useValue: mockDialogData },
-      ],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: mockDialogData }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SimpleDialogComponent);

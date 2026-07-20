@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { vi, describe, beforeEach, afterEach, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { CronEditorComponent } from './cron-editor.component';
 import { CronService } from '../cron.service';
+import { CronEditorComponent } from './cron-editor.component';
 
 describe('CronEditorComponent', () => {
   let component: CronEditorComponent;
@@ -19,23 +19,23 @@ describe('CronEditorComponent', () => {
         active: true,
         schedule: '* * * * *',
         operation: 'sync/sync',
-        params: {}
-      })
+        params: {},
+      }),
     };
 
     await TestBed.configureTestingModule({
-      imports: [CronEditorComponent, BrowserAnimationsModule, ReactiveFormsModule],
-      providers: [
-        { provide: CronService, useValue: mockCronService }
-      ]
+      imports: [
+        CronEditorComponent,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+      ],
+      providers: [{ provide: CronService, useValue: mockCronService }],
     });
 
     TestBed.overrideComponent(CronEditorComponent, {
       set: {
-        providers: [
-          { provide: CronService, useValue: mockCronService }
-        ]
-      }
+        providers: [{ provide: CronService, useValue: mockCronService }],
+      },
     });
 
     await TestBed.compileComponents();
@@ -58,17 +58,19 @@ describe('CronEditorComponent', () => {
     fixture.detectChanges();
     const expressionControl = component.cronForm.controls.expression;
     expressionControl.setValue('invalid-cron');
-    
+
     expect(expressionControl.pending).toBe(true);
-    
+
     // Fast forward debounce time
     vi.advanceTimersByTime(1000);
-    
+
     // Wait for the validator promise to resolve
     await Promise.resolve();
     await Promise.resolve();
 
-    expect(mockCronService.validateExpression).toHaveBeenCalledWith('invalid-cron');
+    expect(mockCronService.validateExpression).toHaveBeenCalledWith(
+      'invalid-cron',
+    );
   });
 
   it('should emit new task when save is clicked and operation is sync', async () => {
@@ -78,25 +80,25 @@ describe('CronEditorComponent', () => {
       expression: '0 0 * * *',
       type: 'sync',
       from: '/src',
-      to: '/dest'
+      to: '/dest',
     });
 
     let emittedTask: any = null;
-    component.taskChange.subscribe((t) => emittedTask = t);
+    component.taskChange.subscribe((t) => (emittedTask = t));
 
     await component.saveClicked();
 
     expect(mockCronService.toTask).toHaveBeenCalledWith(
       '0 0 * * *',
       'sync/sync',
-      { srcFs: '/src', dstFs: '/dest', createEmptySrcDirs: true }
+      { srcFs: '/src', dstFs: '/dest', createEmptySrcDirs: true },
     );
     expect(emittedTask).toEqual({
       id: 'new-task-id',
       active: true,
       schedule: '* * * * *',
       operation: 'sync/sync',
-      params: {}
+      params: {},
     });
   });
 
@@ -107,7 +109,7 @@ describe('CronEditorComponent', () => {
       expression: '0 0 * * *',
       type: 'copy',
       from: '/src',
-      to: '/dest'
+      to: '/dest',
     });
 
     await component.saveClicked();
@@ -115,7 +117,12 @@ describe('CronEditorComponent', () => {
     expect(mockCronService.toTask).toHaveBeenCalledWith(
       '0 0 * * *',
       'sync/copy',
-      { srcFs: '/src', dstFs: '/dest', createEmptySrcDirs: true, deleteEmptySrcDirs: false }
+      {
+        srcFs: '/src',
+        dstFs: '/dest',
+        createEmptySrcDirs: true,
+        deleteEmptySrcDirs: false,
+      },
     );
   });
 
@@ -126,7 +133,7 @@ describe('CronEditorComponent', () => {
       expression: '0 0 * * *',
       type: 'bisync',
       from: '/src',
-      to: '/dest'
+      to: '/dest',
     });
 
     await component.saveClicked();
@@ -134,7 +141,7 @@ describe('CronEditorComponent', () => {
     expect(mockCronService.toTask).toHaveBeenCalledWith(
       '0 0 * * *',
       'sync/bisync',
-      { path1: '/src', path2: '/dest', resync: true, maxDelete: 100 }
+      { path1: '/src', path2: '/dest', resync: true, maxDelete: 100 },
     );
   });
 });

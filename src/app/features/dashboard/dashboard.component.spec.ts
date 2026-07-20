@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { of } from 'rxjs';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardService } from './dashboard.service';
 
@@ -23,30 +23,40 @@ describe('DashboardComponent', () => {
         arch: 'amd64',
         goVersion: 'go1.20',
         linking: 'static',
-        goTags: 'none'
+        goTags: 'none',
       }),
-      getStat: vi.fn().mockReturnValue(of({
-        bytes: 100,
-        checks: 0,
-        deletes: 0,
-        elapsedTime: 1.5,
-        errors: 0,
-        eta: 0,
-        fatalError: false,
-        lastError: '',
-        renames: 0,
-        retryError: false,
-        speed: 50,
-        totalBytes: 500,
-        totalChecks: 0,
-        totalTransfers: 0,
-        transferTime: 1.5,
-        transfers: 5,
-        checking: [],
-        transferring: [
-          { bytes: 10, eta: 5, name: 'file1.txt', percentage: 20, speed: 2, speedAvg: 2, size: 50 }
-        ]
-      }))
+      getStat: vi.fn().mockReturnValue(
+        of({
+          bytes: 100,
+          checks: 0,
+          deletes: 0,
+          elapsedTime: 1.5,
+          errors: 0,
+          eta: 0,
+          fatalError: false,
+          lastError: '',
+          renames: 0,
+          retryError: false,
+          speed: 50,
+          totalBytes: 500,
+          totalChecks: 0,
+          totalTransfers: 0,
+          transferTime: 1.5,
+          transfers: 5,
+          checking: [],
+          transferring: [
+            {
+              bytes: 10,
+              eta: 5,
+              name: 'file1.txt',
+              percentage: 20,
+              speed: 2,
+              speedAvg: 2,
+              size: 50,
+            },
+          ],
+        }),
+      ),
     };
 
     await TestBed.configureTestingModule({
@@ -66,7 +76,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
     await fixture.whenStable();
     // Allow macro/microtasks to complete
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
@@ -77,11 +87,11 @@ describe('DashboardComponent', () => {
   it('should render backends, version and statistics', async () => {
     fixture.detectChanges();
     await fixture.whenStable();
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    
+
     // Check that backends text is rendered
     expect(compiled.textContent).toContain('2 Backends are connected');
 
@@ -97,12 +107,12 @@ describe('DashboardComponent', () => {
   it('should update goToPath and handle inputs', async () => {
     fixture.detectChanges();
     await fixture.whenStable();
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     fixture.detectChanges();
 
     component.goToPath = 'my-drive:folder';
     fixture.detectChanges();
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;

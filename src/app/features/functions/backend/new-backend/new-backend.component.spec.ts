@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { NewBackendComponent } from './new-backend.component';
-import { NewBackendService } from './new-backend.service';
 import { ConnectionService } from 'src/app/cores/remote-control/connection.service';
 import { AppStorageService } from 'src/app/cores/storage';
+import { NewBackendComponent } from './new-backend.component';
+import { NewBackendService } from './new-backend.service';
 
 describe('NewBackendComponent', () => {
   let component: NewBackendComponent;
@@ -26,36 +26,42 @@ describe('NewBackendComponent', () => {
     mockNewBackendService = {
       getProviders: vi.fn().mockResolvedValue([
         { Name: 'local', Description: 'Local Disk', Options: [] },
-        { Name: 's3', Description: 'Amazon S3', Options: [{ Name: 'token', DefaultStr: '' }] }
+        {
+          Name: 's3',
+          Description: 'Amazon S3',
+          Options: [{ Name: 'token', DefaultStr: '' }],
+        },
       ]),
-      createBackend: vi.fn().mockResolvedValue(undefined)
+      createBackend: vi.fn().mockResolvedValue(undefined),
     };
 
     mockConnectionService = {
-      getActiveConnection: vi.fn().mockReturnValue({ remoteAddress: 'http://localhost:5572' })
+      getActiveConnection: vi
+        .fn()
+        .mockReturnValue({ remoteAddress: 'http://localhost:5572' }),
     };
 
     mockStorageItem = {
       get: vi.fn().mockResolvedValue(true),
-      set: vi.fn()
+      set: vi.fn(),
     };
 
     mockAppStorageService = {
-      getItem: vi.fn().mockReturnValue(mockStorageItem)
+      getItem: vi.fn().mockReturnValue(mockStorageItem),
     };
 
     mockRouter = {
-      navigate: vi.fn()
+      navigate: vi.fn(),
     };
 
     mockSnackBar = {
-      open: vi.fn()
+      open: vi.fn(),
     };
 
     mockDialog = {
       open: vi.fn().mockReturnValue({
-        afterClosed: () => of(1) // 1 = continue
-      })
+        afterClosed: () => of(1), // 1 = continue
+      }),
     };
 
     await TestBed.configureTestingModule({
@@ -67,7 +73,7 @@ describe('NewBackendComponent', () => {
         { provide: Router, useValue: mockRouter },
         { provide: MatSnackBar, useValue: mockSnackBar },
         { provide: MatDialog, useValue: mockDialog },
-      ]
+      ],
     });
 
     TestBed.overrideComponent(NewBackendComponent, {
@@ -79,8 +85,8 @@ describe('NewBackendComponent', () => {
           { provide: Router, useValue: mockRouter },
           { provide: MatSnackBar, useValue: mockSnackBar },
           { provide: MatDialog, useValue: mockDialog },
-        ]
-      }
+        ],
+      },
     });
 
     await TestBed.compileComponents();
@@ -117,8 +123,14 @@ describe('NewBackendComponent', () => {
 
   it('should select remote provider requiring auth and warning dialog if remote connection', () => {
     // Set connection to non-local address
-    mockConnectionService.getActiveConnection.mockReturnValue({ remoteAddress: 'http://example.com:5572' });
-    const provider = { Name: 's3', Description: 'S3', Options: [{ Name: 'token', DefaultStr: '' }] };
+    mockConnectionService.getActiveConnection.mockReturnValue({
+      remoteAddress: 'http://example.com:5572',
+    });
+    const provider = {
+      Name: 's3',
+      Description: 'S3',
+      Options: [{ Name: 'token', DefaultStr: '' }],
+    };
     component.providerSelectedChanged(provider);
     expect(component.providerSelected).toEqual(provider);
     expect(component.providerNeedAuth).toBe(true);
@@ -129,11 +141,19 @@ describe('NewBackendComponent', () => {
 
   it('should save/create backend and navigate back', async () => {
     component.newBackendName.setValue('my-backend');
-    component.providerSelected = { Name: 'local', Description: 'Local', Options: [] };
+    component.providerSelected = {
+      Name: 'local',
+      Description: 'Local',
+      Options: [],
+    };
     component.providerOptions = {};
 
     await component.saveClicked();
-    expect(mockNewBackendService.createBackend).toHaveBeenCalledWith('my-backend', 'local', {});
+    expect(mockNewBackendService.createBackend).toHaveBeenCalledWith(
+      'my-backend',
+      'local',
+      {},
+    );
     expect(mockRouter.navigate).toHaveBeenCalledWith(['rclone', 'drive']);
   });
 });
