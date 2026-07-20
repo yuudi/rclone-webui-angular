@@ -5,6 +5,11 @@ import angular from '@analogjs/vite-plugin-angular';
 
 export default defineConfig({
   plugins: [angular()],
+  resolve: {
+    alias: {
+      src: require('path').resolve(__dirname, './src'),
+    },
+  },
   optimizeDeps: {
     entries: ['src/main.ts', 'src/**/*.spec.ts'],
   },
