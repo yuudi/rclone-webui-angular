@@ -13,8 +13,8 @@
     "lint:eslint": "ng lint --fix",
     "lint:prettier": "prettier ./src --write",
     "ng": "ng",
-    "start": "(npm run start:rclone & npm run start:angular & wait)",
-    "start:angular": "ng serve ${REMOTE_CONTAINERS:+--host 0.0.0.0}",
+    "start": "concurrently 'npm run start:rclone' 'npm run start:angular' -n 'rclone,angular'",
+    "start:angular": "ng serve --host 0.0.0.0",
     "start:rclone": "rclone rcd --rc-addr=127.0.0.1:5572 --rc-no-auth",
     "test": "ng test",
     "watch": "ng build --watch --configuration development,embed"
@@ -57,6 +57,7 @@
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.47.0",
+    "concurrently": "^10.0.3",
     "jasmine-core": "^5.1.0",
     "jest": "^29.6.2",
     "jest-environment-jsdom": "^29.6.2",
