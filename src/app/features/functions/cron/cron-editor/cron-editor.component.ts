@@ -49,10 +49,12 @@ import { EasyCronComponent } from './easy-cron/easy-cron.component';
   ],
 })
 export class CronEditorComponent implements OnInit, OnDestroy {
+  subscriptionGroup = new Subscription();
+
   cronForm = this.fb.nonNullable.group({
     advancedCron: [false],
     expression: ['', [Validators.required], [this.cronExpressionValidator()]],
-    operation: [''],
+    type: [''],
     from: [''],
     to: [''],
   });
@@ -68,8 +70,6 @@ export class CronEditorComponent implements OnInit, OnDestroy {
       this.patchTaskToForm(this.task);
     }
   }
-
-  subscriptionGroup = new Subscription();
 
   ngOnDestroy(): void {
     this.subscriptionGroup.unsubscribe();
@@ -105,7 +105,7 @@ export class CronEditorComponent implements OnInit, OnDestroy {
 
   async saveClicked() {
     const expression = this.cronForm.value.expression;
-    const operation = this.cronForm.value.operation;
+    const operation = this.cronForm.value.type;
     if (!expression || !operation) {
       throw new Error('Invalid cron expression or operation');
     }
@@ -116,7 +116,7 @@ export class CronEditorComponent implements OnInit, OnDestroy {
         dstFs: this.cronForm.value.to,
         createEmptySrcDirs: true,
       };
-    } else if (operation === 'move') {
+    } else if (operation === 'copy') {
       params = {
         srcFs: this.cronForm.value.from,
         dstFs: this.cronForm.value.to,
