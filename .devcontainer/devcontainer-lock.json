@@ -1,0 +1,14 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/angular-cli:2": {
+      "version": "2.0.16",
+      "resolved": "ghcr.io/devcontainers-extra/features/angular-cli@sha256:ce6e5b54a1da409b24f84c624ec8973e6027c6e1bad0385fe65d7fa3e2db5bc8",
+      "integrity": "sha256:ce6e5b54a1da409b24f84c624ec8973e6027c6e1bad0385fe65d7fa3e2db5bc8"
+    },
+    "ghcr.io/devcontainers-extra/features/rclone:1": {
+      "version": "1.0.15",
+      "resolved": "ghcr.io/devcontainers-extra/features/rclone@sha256:51573b14e84a00574bff6f923501d121cfe92c40b5034b2e617382d658e6ba94",
+      "integrity": "sha256:51573b14e84a00574bff6f923501d121cfe92c40b5034b2e617382d658e6ba94"
+    }
+  }
+}
