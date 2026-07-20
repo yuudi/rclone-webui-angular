@@ -6,7 +6,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { JobService } from './job.service';
 
@@ -27,17 +27,42 @@ import { JobService } from './job.service';
 })
 export class JobComponent {
   jobs$ = this.jobService.getJobs();
-  constructor(private jobService: JobService) {}
+  constructor(
+    private jobService: JobService,
+    private snackBar: MatSnackBar,
+  ) {}
 
-  removeJob(jobId: number) {
-    this.jobService.removeJob(jobId);
+  async removeJob(jobId: number) {
+    try {
+      await this.jobService.removeJob(jobId);
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to remove job: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+    }
   }
 
-  killJob(jobId: number) {
-    this.jobService.killJob(jobId);
+  async killJob(jobId: number) {
+    try {
+      await this.jobService.killJob(jobId);
+      this.snackBar.open($localize`Job stop command sent`, $localize`Dismiss`);
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to stop job: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+    }
   }
 
-  removeFinishedJobs() {
-    this.jobService.removeFinishedJobs();
+  async removeFinishedJobs() {
+    try {
+      await this.jobService.removeFinishedJobs();
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to clear finished jobs: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+    }
   }
 }

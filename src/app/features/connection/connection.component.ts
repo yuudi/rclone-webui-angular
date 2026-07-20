@@ -66,7 +66,11 @@ export class ConnectionComponent implements OnInit {
     }
   }
 
-  connectDeleted(connection: Connection) {
-    this.connectionService.deleteConnection(connection.id);
+  async connectDeleted(connection: Connection) {
+    try {
+      await this.connectionService.deleteConnection(connection.id);
+    } catch (err) {
+      this.snackBar.open((err as Error).message, $localize`Dismiss`);
+    }
   }
 }

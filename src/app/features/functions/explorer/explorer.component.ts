@@ -61,11 +61,21 @@ export class ExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.backendService.listBackends().then((list) => {
-      this.backendList = list;
-    });
+    this.backendService.listBackends().then(
+      (list) => {
+        this.backendList = list;
+      },
+      (err) => {
+        this.snackBar.open(
+          $localize`Failed to load backends: ` + (err as Error).message,
+          $localize`Dismiss`,
+        );
+      },
+    );
 
-    this.fetchLocalFsList();
+    this.fetchLocalFsList().catch((err) => {
+      console.error('Failed to fetch local FS list:', err);
+    });
 
     this.route.queryParams.pipe(first()).subscribe((params) => {
       const fullPath = params['path'];

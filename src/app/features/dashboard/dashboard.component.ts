@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -27,6 +28,7 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSnackBarModule,
   ],
 })
 export class DashboardComponent implements OnInit {
@@ -36,10 +38,20 @@ export class DashboardComponent implements OnInit {
   webUIVersion = packageJson.version;
   webUIEnv = environment.environment;
   stat$?: Observable<TransferStatus>;
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private snackBar: MatSnackBar,
+  ) {}
   async ngOnInit() {
-    this.backends = (await this.dashboardService.getBackends()).remotes;
-    this.version = await this.dashboardService.getVersion();
-    this.stat$ = this.dashboardService.getStat();
+    try {
+      this.backends = (await this.dashboardService.getBackends()).remotes;
+      this.version = await this.dashboardService.getVersion();
+      this.stat$ = this.dashboardService.getStat();
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to load dashboard data: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+    }
   }
 }

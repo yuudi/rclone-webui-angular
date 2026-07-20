@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, lastValueFrom, of } from 'rxjs';
 
@@ -27,6 +28,7 @@ const Unmeasured = null;
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSnackBarModule,
     BackendInfoComponent,
   ],
 })
@@ -41,31 +43,45 @@ export class BackendComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private backendService: BackendService,
+    private snackBar: MatSnackBar,
   ) {}
 
   async ngOnInit() {
-    const backends = await this.backendService.getBackends();
-    for (const id in backends) {
-      this.backendList.push({
-        id,
-        config: backends[id],
-      });
-      this.fetchUsage(id);
+    try {
+      const backends = await this.backendService.getBackends();
+      for (const id in backends) {
+        this.backendList.push({
+          id,
+          config: backends[id],
+        });
+        this.fetchUsage(id).catch((err) => {
+          console.error(`Failed to fetch usage for ${id}:`, err);
+        });
+      }
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to load backends: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
     }
   }
 
   async fetchUsage(id: string) {
-    const ref = this.backendList.find((backend) => backend.id === id);
-    if (!ref) {
-      console.error(`Backend ${id} not found!`);
-      return;
+    try {
+      const ref = this.backendList.find((backend) => backend.id === id);
+      if (!ref) {
+        console.error(`Backend ${id} not found!`);
+        return;
+      }
+      const info = await this.backendService.getBackendInfo(id);
+      if (!info.Features.About) {
+        ref.usage$ = of(Unmeasured);
+        return;
+      }
+      ref.usage$ = this.backendService.getBackendUsage(id);
+    } catch (err) {
+      console.error(`Failed to fetch usage for ${id}:`, err);
     }
-    const info = await this.backendService.getBackendInfo(id);
-    if (!info.Features.About) {
-      ref.usage$ = of(Unmeasured);
-      return;
-    }
-    ref.usage$ = this.backendService.getBackendUsage(id);
   }
 
   backendBrowse(id: string) {
@@ -76,9 +92,16 @@ export class BackendComponent implements OnInit {
 
   async backendRename(backend: { id: string; config: Backend }) {
     // there is no API to rename, just to create a new one and delete old one
-    const copied = await this.backendDuplicate(backend);
-    if (copied) {
-      await this.backendDelete(backend.id);
+    try {
+      const copied = await this.backendDuplicate(backend);
+      if (copied) {
+        await this.backendDelete(backend.id);
+      }
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to rename backend: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
     }
   }
 
@@ -91,14 +114,31 @@ export class BackendComponent implements OnInit {
       return 0;
     }
     const { type, ...options } = backend.config;
-    await this.backendService.createBackend(newName, type, options);
-    this.backendList.push({ ...backend, id: newName });
-    return 1;
+    try {
+      await this.backendService.createBackend(newName, type, options);
+      this.backendList.push({ ...backend, id: newName });
+      return 1;
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to duplicate backend: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+      return 0;
+    }
   }
 
   async backendDelete(id: string) {
-    await this.backendService.deleteBackend(id);
-    const index = this.backendList.findIndex((backend) => backend.id === id);
-    this.backendList.splice(index, 1);
+    try {
+      await this.backendService.deleteBackend(id);
+      const index = this.backendList.findIndex((backend) => backend.id === id);
+      if (index !== -1) {
+        this.backendList.splice(index, 1);
+      }
+    } catch (err) {
+      this.snackBar.open(
+        $localize`Failed to delete backend: ` + (err as Error).message,
+        $localize`Dismiss`,
+      );
+    }
   }
 }
