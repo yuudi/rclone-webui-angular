@@ -10,8 +10,9 @@ export interface AwaitableStorageItem<T> {
   set(v: T): void;
 }
 
-export interface ObservableAwaitableStorageItem<T>
-  extends AwaitableStorageItem<T> {
+export interface ObservableAwaitableStorageItem<
+  T,
+> extends AwaitableStorageItem<T> {
   asObservable(): Observable<T>;
   destructor(): void;
 }

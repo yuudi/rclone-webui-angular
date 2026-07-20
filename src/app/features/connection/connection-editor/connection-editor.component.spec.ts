@@ -19,13 +19,11 @@ describe('ConnectionEditorComponent', () => {
   beforeEach(async () => {
     mockConnectionService = {
       checkNameExists: vi.fn().mockResolvedValue(false),
-      saveConnection: vi
-        .fn()
-        .mockResolvedValue({
-          id: 'new-id',
-          displayName: 'New Connection',
-          remoteAddress: 'http://127.0.0.1:5572',
-        }),
+      saveConnection: vi.fn().mockResolvedValue({
+        id: 'new-id',
+        displayName: 'New Connection',
+        remoteAddress: 'http://127.0.0.1:5572',
+      }),
       updateConnection: vi.fn().mockResolvedValue(undefined),
       activateConnection: vi.fn().mockResolvedValue(undefined),
     };

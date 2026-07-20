@@ -32,6 +32,4 @@ interface ErrorJobInfo extends BaseJobInfo {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type JobInfo<R = any> =
-  | PendingJobInfo
-  | SuccessJobInfo<R>
-  | ErrorJobInfo;
+  PendingJobInfo | SuccessJobInfo<R> | ErrorJobInfo;

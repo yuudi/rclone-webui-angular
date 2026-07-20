@@ -15,17 +15,15 @@ describe('CronComponent', () => {
 
   beforeEach(async () => {
     mockSchedular = {
-      getTasks: vi
-        .fn()
-        .mockResolvedValue([
-          {
-            id: '1',
-            active: true,
-            schedule: '* * * * *',
-            operation: 'sync',
-            params: {},
-          },
-        ]),
+      getTasks: vi.fn().mockResolvedValue([
+        {
+          id: '1',
+          active: true,
+          schedule: '* * * * *',
+          operation: 'sync',
+          params: {},
+        },
+      ]),
     };
 
     mockCronService = {

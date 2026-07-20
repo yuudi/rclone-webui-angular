@@ -107,16 +107,15 @@ describe('DashboardComponent', () => {
   it('should update goToPath and handle inputs', async () => {
     fixture.detectChanges();
     await fixture.whenStable();
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    fixture.detectChanges();
-
-    component.goToPath = 'my-drive:folder';
-    fixture.detectChanges();
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
     const input = compiled.querySelector('input') as HTMLInputElement;
+    input.value = 'my-drive:folder';
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(component.goToPath).toBe('my-drive:folder');
     expect(input.value).toBe('my-drive:folder');
   });
 });
