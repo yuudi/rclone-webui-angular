@@ -1,17 +1,34 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
-
 import { isElectronGuard } from './is-electron.guard';
 
 describe('isElectronGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => isElectronGuard(...guardParameters));
+  let originalRwaDesktop: any;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    originalRwaDesktop = (globalThis as any)['RWA_DESKTOP'];
   });
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  afterEach(() => {
+    if (originalRwaDesktop === undefined) {
+      delete (globalThis as any)['RWA_DESKTOP'];
+    } else {
+      (globalThis as any)['RWA_DESKTOP'] = originalRwaDesktop;
+    }
+  });
+
+  const runGuard = () => {
+    return TestBed.runInInjectionContext(() => isElectronGuard(null as any, null as any));
+  };
+
+  it('should return true if RWA_DESKTOP is defined', () => {
+    (globalThis as any)['RWA_DESKTOP'] = {};
+    const result = runGuard();
+    expect(result).toBe(true);
+  });
+
+  it('should return false if RWA_DESKTOP is undefined', () => {
+    delete (globalThis as any)['RWA_DESKTOP'];
+    const result = runGuard();
+    expect(result).toBe(false);
   });
 });

@@ -2,9 +2,15 @@
 
 import { defineConfig } from 'vitest/config';
 import angular from '@analogjs/vite-plugin-angular';
+import { fileURLToPath } from 'url';
 
 export default defineConfig({
   plugins: [angular()],
+  resolve: {
+    alias: {
+      src: fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
   optimizeDeps: {
     entries: ['src/main.ts', 'src/**/*.spec.ts'],
   },
