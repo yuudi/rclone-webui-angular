@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ConnectionComponent } from './connection.component';
 import { ConnectionEditorComponent } from './connection-editor/connection-editor.component';
+import { ConnectionComponent } from './connection.component';
 
 export const CONNECTION_ROUTES: Routes = [
   {

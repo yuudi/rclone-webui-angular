@@ -1,13 +1,16 @@
-import { ApplicationConfig, isDevMode } from '@angular/core';
 import {
-  PreloadAllModules,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { ApplicationConfig, isDevMode } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {
   NoPreloading,
+  PreloadAllModules,
   provideRouter,
   withHashLocation,
   withPreloading,
 } from '@angular/router';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { routes } from './app.routes';

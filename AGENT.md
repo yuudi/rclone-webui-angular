@@ -7,12 +7,13 @@ Welcome to the **rclone-webui-angular** project! This repository contains an Ang
 ## 1. Project Overview
 
 - **Name**: `rclone-webui-angular`
-- **Current Framework Version**: Angular 19 (Upgraded from v16, using Standalone Component Architecture)
+- **Current Framework Version**: Angular 22 (Upgraded from v16, using Standalone Component & API Architecture)
 - **Primary Purpose**: Managing rclone remotes, backends, file exploration, job transfers, mounts, cron jobs, and serve instances via rclone's HTTP Remote Control API (`rclone rcd`).
 - **Core Technology Stack**:
-  - **Framework**: Angular 19 (Standalone Components / RxJS)
-  - **UI Library**: Angular Material 19 & CDK
+  - **Framework**: Angular 22 (Standalone APIs / RxJS)
+  - **UI Library**: Angular Material 22 & CDK
   - **HTTP Communication**: Angular `HttpClient` interacting with `rclone` RC API
+  - **Testing**: Vitest + jsdom (Migrated from Karma/Jasmine)
   - **Linting & Formatting**: ESLint, Prettier
 
 ---
@@ -29,25 +30,28 @@ rclone-webui-angular/
 │   │   │   ├── remote-control/# Rclone RC connection & communication services
 │   │   │   └── storage/       # Local storage abstraction
 │   │   ├── features/          # Feature standalone components & routes
-│   │   │   ├── connection/    # Remote connection editor & list
+│   │   │   ├── connection/    # Remote connection editor, list, and routes
 │   │   │   ├── dashboard/     # Status dashboard & summary
-│   │   │   └── functions/     # Rclone operations
-│   │   │       ├── backend/   # Backend / remote management
+│   │   │   └── functions/     # Rclone operations & sub-routes
+│   │   │       ├── backend/   # Backend / remote management & routes
 │   │   │       ├── cron/      # Scheduled tasks
 │   │   │       ├── explorer/  # File browser / transfers
 │   │   │       ├── job/       # Async job monitoring
 │   │   │       ├── mount/     # Remote mount management
 │   │   │       └── serve/     # Serve protocol management
-│   │   └── shared/            # Shared pipes, directives, and utility components
+│   │   ├── shared/            # Shared pipes, directives, and utility components
+│   │   ├── app.config.ts      # Global application providers
+│   │   └── app.routes.ts      # Global standalone application routes
 │   ├── assets/                # Static assets & icons
 │   ├── environments/          # Build environment configs
 │   ├── locale/                # i18n translation files
 │   ├── index.html
-│   ├── main.ts
+│   ├── main.ts                # Application standalone bootstrap
 │   └── styles.scss            # Global styling
 ├── angular.json               # Angular CLI configuration
 ├── package.json               # Project dependencies and npm scripts
-└── tsconfig.json              # TypeScript compilation configuration
+├── tsconfig.json              # TypeScript compilation configuration
+└── vitest.config.ts           # Vitest testing configuration
 ```
 
 ---
@@ -59,7 +63,7 @@ rclone-webui-angular/
    - Responsible for setting basic HTTP authorization headers and parsing response payloads.
 2. **`ConnectionService` (`src/app/cores/remote-control/connection.service.ts`)**:
    - Manages active and stored rclone connection credentials in local storage (`StorageService`).
-3. **Features Module Breakdown**:
+3. **Features Breakdown**:
    - **Backend**: List, inspect, create, and delete rclone remotes/backends.
    - **Explorer**: Navigate remote file systems, download/upload, copy/move files.
    - **Job**: Track running rclone asynchronous tasks and execution stats.
@@ -80,7 +84,7 @@ rclone-webui-angular/
   - `npm run lint` (runs ESLint & Prettier checks)
   - `npm run lint:eslint`
   - `npm run lint:prettier`
-- **Testing**: `npm run test`
+- **Testing**: `npm run test` (Runs tests via Vitest)
 
 ---
 
@@ -89,11 +93,18 @@ rclone-webui-angular/
 1. ✅ **Error Handling Architecture Upgrade**:
    - Removed custom Rust-like `Result<R, E>` (`src/app/shared/result.ts`).
    - Standardized on native JavaScript `Error` throwing, `async/await try-catch`, and RxJS error handling.
+   - Fixed multiple components (`connection`, `dashboard`, `backend`, `explorer`, `job`) to properly catch promise rejections and present errors via `MatSnackBar` notifications rather than letting them fail silently.
 2. ✅ **Framework & Dependencies Upgrade**:
-   - Upgraded Angular from v16 -> v17 -> v18 -> **v19 (latest stable)**.
-   - Upgraded `@angular/material` and `@angular/cdk` to v19.
-   - Migrated component architecture to Angular 19 **Standalone Components**.
-   - Upgraded TypeScript to 5.8+.
+   - Upgraded Angular from v16 -> v17 -> v18 -> v19 -> **v22 (latest stable)**.
+   - Upgraded `@angular/material` and `@angular/cdk` to v22.
+   - Upgraded typescript to 6.0+ and eslint to 9.21+.
+   - Cleaned up `.npmrc` by removing `legacy-peer-deps=true` and resolving all peer dependency conflicts.
+3. ✅ **Full Standalone API Migration**:
+   - Migrated all components to standalone components.
+   - Eliminated `AppModule`, `AppRoutingModule`, and all feature/routing `*.module.ts` files (21 NgModules removed in total).
+   - Replaced routing with modern `provideRouter()` in [app.config.ts](file:///home/yu/rclone-webui-angular/src/app/app.config.ts) and defined lazy-loaded standalone routing configurations using `Routes` in `*.routes.ts` files.
+4. ✅ **Vitest Test Suite Migration**:
+   - Migrated testing framework from Karma/Jasmine to Vitest, successfully running all 129 tests in headless mode.
 
 ---
 
