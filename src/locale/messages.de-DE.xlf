@@ -516,10 +516,6 @@
         <source>view is not ready</source>
         <target state="translated">Ansicht ist nicht bereit</target>
       </trans-unit>
-      <trans-unit id="1297075260734626852" datatype="html">
-        <source>Tasks Created Successfully</source>
-        <target state="translated">Aufgaben erfolgreich erstellt</target>
-      </trans-unit>
       <trans-unit id="3981693023798866214" datatype="html">
         <source>Item Added to Clipboard, now go to destination and paste</source>
         <target state="translated">Element zur Zwischenablage hinzugefügt. Gehen Sie nun zum Ziel und fügen Sie es ein</target>

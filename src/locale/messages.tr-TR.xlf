@@ -516,10 +516,6 @@
         <source>view is not ready</source>
         <target state="translated">Görünüm hazır değil</target>
       </trans-unit>
-      <trans-unit id="1297075260734626852" datatype="html">
-        <source>Tasks Created Successfully</source>
-        <target state="translated">Görevler Başarıyla Oluşturuldu</target>
-      </trans-unit>
       <trans-unit id="3981693023798866214" datatype="html">
         <source>Item Added to Clipboard, now go to destination and paste</source>
         <target state="translated">Öğe panoya eklendi, şimdi hedefe gidin ve yapıştırın</target>

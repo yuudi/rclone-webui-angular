@@ -524,10 +524,6 @@
         <source>Item Added to Clipboard, now go to destination and paste</source>
         <target state="translated">项目已添加到剪贴板，现在可前往目的地并粘贴</target>
       </trans-unit>
-      <trans-unit id="1297075260734626852" datatype="html">
-        <source>Tasks Created Successfully</source>
-        <target state="translated">任务创建成功</target>
-      </trans-unit>
       <trans-unit id="4366763205960752449" datatype="html">
         <source>move</source>
         <target state="translated">移动</target>
